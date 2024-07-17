@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %> 
+</head>
+<body>
+    <%- include('partials/navbar_food') %>
+    <section id="share-food">
+        <div class="container">
+            <h2>Share Food</h2>
+            <form action="/food/share" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="food-name">Food Name:</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter food name">
+                </div>
+                <div class="form-group">
+                    <label for="food-image">Food Image:</label>
+                    <input type="file" class="form-control-file" id="image" name="image">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter location">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Enter Description of Food">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
