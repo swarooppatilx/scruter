@@ -14,7 +14,9 @@
               <% cards.forEach(card => { %>
                 <div class="col-md-4 mb-4">
                   <div class="card">
+
                     <img src="http://<%=domain%>/<%= card.image %>" class="card-img-top" alt="<%= card.title %> Image" height="auto" width="300px">
+                    
                     <div class="card-body">
                       <h5 class="card-title"><%= card.title %></h5>
                       <p class="card-text"><%= card.location %></p>
