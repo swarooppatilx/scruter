@@ -4,30 +4,52 @@
     <%- include('partials/head') %> 
 </head>
 <body>
-    <%- include('partials/navbar_market') %>
-    <section id="share-food">
+    <%- include('partials/navbar') %>
+    
+    <section id="market-sell" class="d-flex align-items-center justify-content-center min-vh-100">
         <div class="container">
-            <h2>Post Item for Sale</h2>
-            <form action="/market/sell" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="food-name">Item Name:</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter Item name">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h2 class="text-center mb-4">Sell Item</h2>
+                  <form action="/market-sell" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <label for="title" class="form-label">
+                        <i class="fa-solid fa-cart-shopping me-2"></i>Item Name:
+                      </label>
+                      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Item Name">
+                    </div>
+                    <div class="mb-3">
+                      <label for="image" class="form-label">
+                        <i class="fa-solid fa-image me-2"></i>Item Image:
+                      </label>
+                      <input type="file" class="form-control" id="image" name="image">
+                    </div>
+                    <div class="mb-3">
+                      <label for="location" class="form-label">
+                        <i class="fa-solid fa-map-marker-alt me-2"></i>Location:
+                      </label>
+                      <input type="text" class="form-control" id="location" name="location" placeholder="Enter Location">
+                    </div>
+                    <div class="mb-3">
+                      <label for="description" class="form-label">
+                        <i class="fa-solid fa-align-left me-2"></i>Description:
+                      </label>
+                      <input type="text" class="form-control" id="description" name="description" placeholder="Enter Description of Item">
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-paper-plane me-2"></i>Submit
+                      </button>
+                    </div>
+                  </form>
                 </div>
-                <div class="form-group">
-                    <label for="food-image">Item Image:</label>
-                    <input type="file" class="form-control-file" id="image" name="image">
-                </div>
-                <div class="form-group">
-                    <label for="location">Location:</label>
-                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter location">
-                </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <input type="text" class="form-control" id="description" name="description" placeholder="Enter Description of Item">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
+
 </body>
 </html>

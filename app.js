@@ -8,6 +8,7 @@ const multer = require('multer');
 // Middleware to parse JSON and form data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'))
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.set("views",path.resolve(__dirname,"views"));
@@ -66,21 +67,17 @@ const upload = multer({ storage: storage });
 app.get('/',(req,res)=>{
     res.render('index');
 });
-app.get('/food',(req,res)=>{
-  res.render('food_index');
-});
 
-app.get('/house',(req,res)=>{
-  res.render('house_index');
-});
-app.get('/house/find', async (req, res) => {
+
+app.get('/house', async (req, res) => {
   //All
    try {
+    const domain = req.get('host');
      // Fetch data from MongoDB
      const cards = await House.find();
  
      // Render the view with the fetched data
-     res.render('house_find', {cards});
+     res.render('house_find', {cards, domain});
    } catch (error) {
      console.error('Error fetching posts:', error);
      res.status(500).send('Internal Server Error');
@@ -102,7 +99,7 @@ const newHouse = new House(req.body);
 
 newHouse.save()
 .then((savedHouse) => {
-  res.redirect('/house/find');
+  res.redirect('/house');
   console.log('House saved:', savedHouse, "Img path", imagePath);
 })
 .catch((error) => {
@@ -112,24 +109,22 @@ newHouse.save()
 });
 
 
-
-app.get('/market',(req,res)=>{
-  res.render('market_index');
-});
-app.get('/market/buy', async (req, res) => {
+app.get('/market', async (req, res) => {
   //All
    try {
      // Fetch data from MongoDB
+     const domain = req.get('host');
      const cards = await Market.find();
  
      // Render the view with the fetched data
-     res.render('market_buy', {cards});
+     res.render('market_buy', {cards, domain});
    } catch (error) {
      console.error('Error fetching posts:', error);
      res.status(500).send('Internal Server Error');
    }
  
  });
+
 app.get('/market/sell',(req,res)=>{
   res.render('market_sell');
 });
@@ -145,7 +140,7 @@ const newMarket = new Market(req.body);
 
 newMarket.save()
 .then((savedMarket) => {
-  res.redirect('/market/buy');
+  res.redirect('/market');
   console.log('Market saved:', savedMarket, "Img path", imagePath);
 })
 .catch((error) => {
@@ -156,14 +151,15 @@ newMarket.save()
 
 
 
-app.get('/food/find', async (req, res) => {
+app.get('/food', async (req, res) => {
  //All
   try {
+    const domain = req.get('host');
     // Fetch data from MongoDB
     const cards = await Food.find();
 
     // Render the view with the fetched data
-    res.render('food_find', {cards});
+    res.render('food_find', {cards, domain});
   } catch (error) {
     console.error('Error fetching posts:', error);
     res.status(500).send('Internal Server Error');
@@ -174,6 +170,7 @@ app.get('/food/find', async (req, res) => {
 app.get('/food/share',(req,res)=>{
     res.render('food_share');
 });
+
 app.post('/food/share',upload.single('image'), (req,res)=>{
  
     // Save the file path to MongoDB
@@ -185,7 +182,7 @@ const newFood = new Food(req.body);
 
 newFood.save()
   .then((savedFood) => {
-    res.redirect('/food/find');
+    res.redirect('/food');
     console.log('Food saved:', savedFood, "Img path", imagePath);
   })
   .catch((error) => {
@@ -193,9 +190,7 @@ newFood.save()
   });
 
 });
-app.get('/food/farmers',(req,res)=>{
-    res.render('food_farmers');
-});
+
 
 app.use((req,res)=>{
     res.status(404).send("Oops! The requested page was not found")

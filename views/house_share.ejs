@@ -4,30 +4,52 @@
     <%- include('partials/head') %> 
 </head>
 <body>
-    <%- include('partials/navbar_house') %>
-    <section id="share-food">
+    <%- include('partials/navbar') %>
+    
+    <section id="share-house" class="d-flex align-items-center justify-content-center min-vh-100">
         <div class="container">
-            <h2>Post House Ad</h2>
-            <form action="/house/share" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="food-name">House Name:</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter House name">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h2 class="text-center mb-4">Post House Ad</h2>
+                  <form action="/house/share" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <label for="title" class="form-label">
+                        <i class="fa-solid fa-house-user me-2"></i>House Name:
+                      </label>
+                      <input type="text" class="form-control" id="title" name="title" placeholder="Enter House Name">
+                    </div>
+                    <div class="mb-3">
+                      <label for="image" class="form-label">
+                        <i class="fa-solid fa-image me-2"></i>House Image:
+                      </label>
+                      <input type="file" class="form-control" id="image" name="image">
+                    </div>
+                    <div class="mb-3">
+                      <label for="location" class="form-label">
+                        <i class="fa-solid fa-map-marker-alt me-2"></i>Location:
+                      </label>
+                      <input type="text" class="form-control" id="location" name="location" placeholder="Enter Location">
+                    </div>
+                    <div class="mb-3">
+                      <label for="description" class="form-label">
+                        <i class="fa-solid fa-align-left me-2"></i>Description:
+                      </label>
+                      <input type="text" class="form-control" id="description" name="description" placeholder="Enter Description of House">
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-paper-plane me-2"></i>Submit
+                      </button>
+                    </div>
+                  </form>
                 </div>
-                <div class="form-group">
-                    <label for="food-image">House Image:</label>
-                    <input type="file" class="form-control-file" id="image" name="image">
-                </div>
-                <div class="form-group">
-                    <label for="location">Location:</label>
-                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter location">
-                </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <input type="text" class="form-control" id="description" name="description" placeholder="Enter Description of House">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
+
 </body>
 </html>

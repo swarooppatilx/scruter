@@ -1,21 +1,37 @@
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">BuzzList</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-light sticky-top p-2 navbar-expand-sm" style="background-color: white;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="/bootstrap-logo.svg" alt="BuzzList Logo" width="30" height="24" class="d-inline-block align-text-top">
+      BuzzList
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/"><i class="fa-solid fa-backward me-2"></i>Home Page</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/house"><i class="fa-solid fa-house me-2"></i>Housing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/food"><i class="fa-solid fa-utensils me-2"></i>Food</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/market"><i class="fa-solid fa-cart-shopping me-2"></i>For Sale</a>
+        </li>
+      </ul>
+      <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-marker me-2"></i>Create Post
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/food">Food</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/house">House</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/market">Buy and Sell</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    </header>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="/house/share">House</a></li>
+          <li><a class="dropdown-item" href="/food/share">Food</a></li>
+          <li><a class="dropdown-item" href="/market/sell">For Sale</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
