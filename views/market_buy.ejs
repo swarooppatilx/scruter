@@ -4,24 +4,16 @@
     <%- include('partials/head') %> 
 </head>
 <body>
-    <%- include('partials/navbar_market') %>
+    <%- include('partials/navbar') %>
     <section id="find-food">
-        <div class="container">
-            <h2>Find Stuff Nearby</h2>
-            <form>
-                <div class="form-group">
-                    <label for="location">Location:</label>
-                    <input type="text" class="form-control" id="location" placeholder="Enter location">
-                </div>
-                <button type="submit" class="btn btn-primary">Search</button>
-      
-
+      <div class="justify-content-center"><img src="/market.jpg" style="width: 100%; height: auto;" class="img-fluid"></div>
+      <%- include('partials/search_bar') %>
         <div class="container mt-5">
             <div class="row">
               <% cards.forEach(card => { %>
                 <div class="col-md-4 mb-4">
                   <div class="card">
-                    <img src="http://localhost:8080/<%= card.image %>" class="card-img-top" alt="<%= card.title %> Image" height="300px" width="300px">
+                    <img src="http://<%=domain%>/<%= card.image %>" class="card-img-top" alt="<%= card.title %> Image" height="auto" width="300px">
                     <div class="card-body">
                       <h5 class="card-title"><%= card.title %></h5>
                       <p class="card-text"><%= card.location %></p>
