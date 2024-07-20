@@ -75,6 +75,15 @@ const upload = multer({ storage: storage });
 app.get('/',(req,res)=>{
     res.render('index');
 });
+app.get('/house/form',(req,res)=>{
+  res.render('house');
+});
+app.get('/food/form',(req,res)=>{
+  res.render('food');
+});
+app.get('/market/form',(req,res)=>{
+  res.render('market');
+});
 
 
 app.get('/house', async (req, res) => {
@@ -92,11 +101,8 @@ app.get('/house', async (req, res) => {
    }
  
  });
-app.get('/house/share',(req,res)=>{
-  res.render('house_share');
-});
 
-app.post('/house/share',upload.single('image'), (req,res)=>{
+app.post('/house',upload.single('image'), (req,res)=>{
  
   // Save the file path to MongoDB
   const imagePath = 'uploads/' + req.file.filename; // Adjust the path accordingly
@@ -133,9 +139,7 @@ app.get('/market', async (req, res) => {
  
  });
 
-app.get('/market/sell',(req,res)=>{
-  res.render('market_sell');
-});
+
 
 app.post('/market',upload.single('image'), (req,res)=>{
  
@@ -175,11 +179,9 @@ app.get('/food', async (req, res) => {
 
 });
 
-app.get('/food/share',(req,res)=>{
-    res.render('food_share');
-});
 
-app.post('/food/share',upload.single('image'), (req,res)=>{
+
+app.post('/food',upload.single('image'), (req,res)=>{
  
     // Save the file path to MongoDB
     const imagePath = 'uploads/' + req.file.filename; // Adjust the path accordingly
@@ -201,7 +203,7 @@ newFood.save()
 
 
 app.use((req,res)=>{
-    res.status(404).send("Oops! The requested page was not found")
+    res.status(404).render('404');
 });
 app.listen(8080, ()=>{
     console.log('Server listening on port 8080...')
