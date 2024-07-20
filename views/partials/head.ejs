@@ -2,6 +2,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BuzzList</title>
+  <link rel="icon" type="image/x-icon" href="/bootstrap-logo.svg">
   <!-- Bootstrap CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   <!-- jQuery -->
@@ -28,12 +29,28 @@
         margin-left: 10px;
         margin-right: 10px;
       }
+      #search-bar {
+        width: 40%;
+      }
     }
     @media (min-width: 992px) {
       /* Desktops and above */
       .nav-link {
         margin-left: 30px;
         margin-right: 30px;
+      }
+      #search-bar {
+        width: 40%;
+      }
+    }
+    @media (max-width: 576px) {
+      /* Mobile */
+      .nav-link {
+        margin-left: 30px;
+        margin-right: 30px;
+      }
+      #search-bar {
+        width: 80%;
       }
     }
     .nav-link:hover {

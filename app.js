@@ -25,6 +25,8 @@ const foodSchema = new mongoose.Schema({
   title: String,
   image: String,
   location: String,
+  latitude: String,
+  longitude: String,
   description: String
 });
 const Food = mongoose.model('Food', foodSchema);
@@ -33,6 +35,9 @@ const houseSchema = new mongoose.Schema({
   title: String,
   image: String,
   location: String,
+  rent: Number,
+  latitude: String,
+  longitude: String,
   description: String
 });
 const House = mongoose.model('House', houseSchema);
@@ -41,6 +46,9 @@ const marketSchema = new mongoose.Schema({
   title: String,
   image: String,
   location: String,
+  price: Number,
+  latitude: String,
+  longitude: String,
   description: String
 });
 const Market = mongoose.model('Market', marketSchema);
@@ -77,7 +85,7 @@ app.get('/house', async (req, res) => {
      const cards = await House.find();
  
      // Render the view with the fetched data
-     res.render('house_find', {cards, domain});
+     res.render('display', {cards, domain, imagepath: "/house.jpg"});
    } catch (error) {
      console.error('Error fetching posts:', error);
      res.status(500).send('Internal Server Error');
@@ -117,7 +125,7 @@ app.get('/market', async (req, res) => {
      const cards = await Market.find();
  
      // Render the view with the fetched data
-     res.render('market_buy', {cards, domain});
+     res.render('display', {cards, domain, imagepath: "/market.jpg"});
    } catch (error) {
      console.error('Error fetching posts:', error);
      res.status(500).send('Internal Server Error');
@@ -129,7 +137,7 @@ app.get('/market/sell',(req,res)=>{
   res.render('market_sell');
 });
 
-app.post('/market/sell',upload.single('image'), (req,res)=>{
+app.post('/market',upload.single('image'), (req,res)=>{
  
   // Save the file path to MongoDB
   const imagePath = 'uploads/' + req.file.filename; // Adjust the path accordingly
@@ -159,7 +167,7 @@ app.get('/food', async (req, res) => {
     const cards = await Food.find();
 
     // Render the view with the fetched data
-    res.render('food_find', {cards, domain});
+    res.render('display', {cards, domain, imagepath: "/food.jpg"});
   } catch (error) {
     console.error('Error fetching posts:', error);
     res.status(500).send('Internal Server Error');

@@ -13,7 +13,7 @@
               <div class="card shadow-sm">
                 <div class="card-body">
                   <h2 class="text-center mb-4">Sell Item</h2>
-                  <form action="/market-sell" method="post" enctype="multipart/form-data">
+                  <form action="/market" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                       <label for="title" class="form-label">
                         <i class="fa-solid fa-cart-shopping me-2"></i>Item Name:
@@ -24,20 +24,33 @@
                       <label for="image" class="form-label">
                         <i class="fa-solid fa-image me-2"></i>Item Image:
                       </label>
-                      <input type="file" class="form-control" id="image" name="image">
+                      <input type="file" class="form-control" id="image" name="image" onchange="previewImage()">
+                      <img id="img-preview" class="img-fluid d-none mt-3" style="max-width: 200px;"/>
                     </div>
                     <div class="mb-3">
                       <label for="location" class="form-label">
                         <i class="fa-solid fa-map-marker-alt me-2"></i>Location:
                       </label>
-                      <input type="text" class="form-control" id="location" name="location" placeholder="Enter Location">
+                      <div class="input-group mb-3 position-relative">
+                        <input type="text" class="form-control" id="location" name="location" placeholder="Enter Location">
+                        <button type="button" class="btn btn-primary" onclick="useCurrentLocation()"><i class="fa-solid fa-location-crosshairs me-2"></i>Use Current Location</button>
+                      </div>
+                      <input type="hidden" id="latitude" name="latitude">
+                      <input type="hidden" id="longitude" name="longitude">
+                    </div>
+                    <div class="mb-3">
+                      <label for="price" class="form-label">
+                        <i class="fa-solid fa-indian-rupee-sign me-2"></i>Item Price:
+                      </label>
+                      <input type="number" class="form-control" id="price" name="price" placeholder="Enter Item Price">
                     </div>
                     <div class="mb-3">
                       <label for="description" class="form-label">
                         <i class="fa-solid fa-align-left me-2"></i>Description:
                       </label>
-                      <input type="text" class="form-control" id="description" name="description" placeholder="Enter Description of Item">
+                      <textarea class="form-control" id="description" name="description" placeholder="Enter Description of Item"></textarea>
                     </div>
+
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary">
                         <i class="fa-solid fa-paper-plane me-2"></i>Submit
@@ -49,7 +62,7 @@
             </div>
           </div>
         </div>
-      </section>
-
+    </section>
+    <script src="/search-auto.js"></script>
 </body>
 </html>

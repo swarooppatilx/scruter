@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+    <style>
+        .modal-dialog-centered-scrollable {
+            display: flex;
+            align-items: center;
+            min-height: calc(100% - (.5rem * 2));
+        }
+
+        .modal-dialog-centered-scrollable .modal-content {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+        }
+        .card:hover {
+    cursor: pointer;
+  }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <section>
+        <div class="justify-content-center">
+            <img src="<%= imagepath %>" style="width: 100%; height: auto;" class="img-fluid">
+        </div>
+        <%- include('partials/search_bar') %>      
+        <div class="container mt-5">
+            <div class="row">
+                <% cards.forEach(card => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="height: 440px;" data-bs-toggle="modal" data-bs-target="#modal<%= card.id %>">
+                        <img src="http://<%= domain %>/<%= card.image %>" class="card-img-top" alt="<%= card.title %> Image">
+                        <div class="card-body" >
+                            <h5 class="card-title"><%= card.title %></h5>
+                            <p class="card-text">
+                                <a href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>">
+                                    <i class="fa-solid fa-location-dot me-2"></i><%= card.location.length > 40 ? card.location.substring(0, 40) + '...' : card.location %>
+                                </a>
+                            </p>
+                            <% if (card.price){ %>
+                                <p class="card-text"><b>Price: <%= card.price %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b></p>
+                                <% } %>
+                                <% if (card.rent){ %>
+                                    <p class="card-text"><b>Rent: <%= card.rent %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b></p>
+                             <% } %>
+                            <p class="card-text"><%- card.description.length > 60 ? card.description.substring(0, 60) + ' <i class="text-primary">...Read more</i>' : card.description %></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal for each card -->
+                <div class="modal fade" id="modal<%= card.id %>" tabindex="-1" aria-labelledby="modalLabel<%= card.id %>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel<%= card.id %>"><%= card.title %></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="http://<%= domain %>/<%= card.image %>" class="img-fluid mb-3" alt="<%= card.title %> Image">
+                                <h5><%= card.title %></h5>
+                                <p class="card-text">
+                                    <a href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>">
+                                        <i class="fa-solid fa-location-dot me-2"></i><%= card.location %>
+                                    </a>
+                                </p>
+                                <% if (card.price){ %>
+                                    <p class="card-text"><b>Price: <%= card.price %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b></p>
+                                    <% } %>
+                                    <% if (card.rent){ %>
+                                        <p class="card-text"><b>Rent: <%= card.rent %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b></p>
+                                    <% } %>
+                                <p><%= card.description %></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
