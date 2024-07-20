@@ -40,7 +40,7 @@
                             <h5 class="card-title"><%= card.title %></h5>
                             <p class="card-text">
                                 <a href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>">
-                                    <i class="fa-solid fa-location-dot me-2"></i><%= card.location.length > 40 ? card.location.substring(0, 40) + '...' : card.location %>
+                                    <i class="fa-solid fa-location-dot me-2"></i><%= card.location.length > 35 ? card.location.substring(0, 35) + '...' : card.location %>
                                 </a>
                             </p>
                             <% if (card.price){ %>
@@ -49,7 +49,7 @@
                                 <% if (card.rent){ %>
                                     <p class="card-text"><b>Rent: <%= card.rent %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b></p>
                              <% } %>
-                            <p class="card-text"><%- card.description.length > 60 ? card.description.substring(0, 60) + ' <i class="text-primary">...Read more</i>' : card.description %></p>
+                            <p class="card-text"><%- card.description.length > 50 ? card.description.substring(0, 50) + ' <i class="text-primary">...Read more</i>' : card.description %></p>
                         </div>
                     </div>
                 </div>
