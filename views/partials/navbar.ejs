@@ -22,6 +22,7 @@
           <a class="nav-link text-dark" href="/market"><i class="fa-solid fa-cart-shopping me-2"></i>For Sale</a>
         </li>
       </ul>
+      <% if (user) { %>
       <div class="dropdown">
         <button class="btn btn-success dropdown-toggle text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fa-solid fa-marker me-2"></i>Create Post
@@ -32,6 +33,12 @@
           <li><a class="dropdown-item" href="/market/form">For Sale</a></li>
         </ul>
       </div>
+      <span class="navbar-text ms-3">Welcome, <%= user.username %>!</span>
+      <a class="btn btn-outline-dark ms-2" href="/logout">Logout</a>
+      <% } else { %>
+      <a class="btn btn-outline-dark ms-2" href="/auth?action=login">Login</a>
+      <a class="btn btn-outline-dark ms-2" href="/auth?action=signup">Sign Up</a>
+      <% } %>
     </div>
   </div>
 </nav>
