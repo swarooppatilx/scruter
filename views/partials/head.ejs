@@ -60,9 +60,16 @@
       #search-bar {
         width: 80%; /* More narrow on desktops */
       }
+      <% if (user) { %>
       #navbar-links {
         padding-left: 180px;
       }
+      <% } else { %>
+        #navbar-links {
+        padding-right: 110px;
+      }
+      <% } %>
+      
     }
 
     
