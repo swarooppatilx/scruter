@@ -10,16 +10,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul id="navbar-links" class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link text-dark" href="/"><i class="fa-solid fa-backward me-2"></i>Home Page</a>
+          <a class="nav-link text-dark <%= activeLink === 'home' ? 'active' : '' %>" href="/"><i class="fa-solid fa-backward me-2"></i>Home Page</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="/house"><i class="fa-solid fa-house me-2"></i>Housing</a>
+          <a class="nav-link text-dark <%= activeLink === 'house' ? 'active' : '' %>" href="/house"><i class="fa-solid fa-house me-2"></i>Housing</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="/food"><i class="fa-solid fa-utensils me-2"></i>Food</a>
+          <a class="nav-link text-dark <%= activeLink === 'food' ? 'active' : '' %>" href="/food"><i class="fa-solid fa-utensils me-2"></i>Food</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="/market"><i class="fa-solid fa-cart-shopping me-2"></i>For Sale</a>
+          <a class="nav-link text-dark <%= activeLink === 'market' ? 'active' : '' %>" href="/market"><i class="fa-solid fa-cart-shopping me-2"></i>For Sale</a>
         </li>
       </ul>
       <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center mt-3 mt-lg-0">

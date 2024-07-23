@@ -104,14 +104,15 @@ app.get('/', (req, res) => {
   res.render('index', {
     searchAction: '/food', // URL to handle the search
     selectedType: req.query.type || 'food', // Default type
-    query: req.query.query || '' // Default query
+    query: req.query.query || '', // Default query
+    activeLink: 'home'
   });
 });
 
 // Render authentication page
 app.get('/auth', (req, res) => {
   const action = req.query.action || 'login'; // Default to 'login' if no action is provided
-  res.render('auth', { action, errors: [] });
+  res.render('auth', { action, errors: [], activeLink: ''});
 });
 
 // Handle login form submission
@@ -200,15 +201,15 @@ app.get('/logout', (req, res) => {
 
 // Render form pages with authentication check
 app.get('/food/form', ensureAuthenticated, (req, res) => {
-  res.render('form', { routeName: 'food', errors: [] });
+  res.render('form', { routeName: 'food', errors: [], activeLink: 'food'});
 });
 
 app.get('/house/form', ensureAuthenticated, (req, res) => {
-  res.render('form', { routeName: 'house', errors: [] });
+  res.render('form', { routeName: 'house', errors: [] ,activeLink: 'house'});
 });
 
 app.get('/market/form', ensureAuthenticated, (req, res) => {
-  res.render('form', { routeName: 'market', errors: [] });
+  res.render('form', { routeName: 'market', errors: [], activeLink: 'market'});
 });
 
 // Handle search and display for houses
@@ -227,7 +228,7 @@ app.get('/house', async (req, res) => {
       ]
     });
 
-    res.render('display', { cards: houses, domain, imagepath: "/house.jpg", query, selectedType: 'house', searchAction: '/house' });
+    res.render('display', { cards: houses, domain, imagepath: "/house.jpg", query, selectedType: 'house', searchAction: '/house', activeLink: 'house'});
   } catch (error) {
     console.error('Error fetching houses:', error);
     res.status(500).send('Internal Server Error');
@@ -277,7 +278,7 @@ app.get('/market', async (req, res) => {
       ]
     });
 
-    res.render('display', { cards: markets, domain, imagepath: "/market.jpg", query, selectedType: 'market', searchAction: '/market' });
+    res.render('display', { cards: markets, domain, imagepath: "/market.jpg", query, selectedType: 'market', searchAction: '/market', activeLink: 'market'});
   } catch (error) {
     console.error('Error fetching markets:', error);
     res.status(500).send('Internal Server Error');
@@ -327,7 +328,7 @@ app.get('/food', async (req, res) => {
       ]
     });
 
-    res.render('display', { cards: foods, domain, imagepath: "/food.jpg", query, selectedType: 'food', searchAction: '/food' });
+    res.render('display', { cards: foods, domain, imagepath: "/food.jpg", query, selectedType: 'food', searchAction: '/food', activeLink: 'food'});
   } catch (error) {
     console.error('Error fetching foods:', error);
     res.status(500).send('Internal Server Error');
