@@ -99,6 +99,13 @@
                                         <% } %>
                                         <p><%= card.description %></p>
                                     </div>
+                                    <% if (user && user.username === card.username || user && user.username === "admin") { %>
+                                        <div class="modal-footer">
+                                            <form action="/delete/<%= selectedType %>/<%= card._id %>" method="POST" style="display: inline;">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>

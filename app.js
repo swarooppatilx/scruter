@@ -53,7 +53,8 @@ const foodSchema = new mongoose.Schema({
   location: String,
   latitude: String,
   longitude: String,
-  description: String
+  description: String,
+  username: { type: String, required: true } // Added username field
 });
 const Food = mongoose.model('Food', foodSchema);
 
@@ -64,7 +65,8 @@ const houseSchema = new mongoose.Schema({
   rent: Number,
   latitude: String,
   longitude: String,
-  description: String
+  description: String,
+  username: { type: String, required: true } // Added username field
 });
 const House = mongoose.model('House', houseSchema);
 
@@ -75,7 +77,8 @@ const marketSchema = new mongoose.Schema({
   price: Number,
   latitude: String,
   longitude: String,
-  description: String
+  description: String,
+  username: { type: String, required: true } // Added username field
 });
 const Market = mongoose.model('Market', marketSchema);
 
@@ -183,7 +186,6 @@ app.post('/signup', [
   }
 });
 
-
 // Handle logout
 app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
@@ -249,7 +251,8 @@ app.post('/house', upload.single('image'), [
   try {
     const { title, location, rent, latitude, longitude, description } = req.body;
     const image = req.file ? 'uploads/' + req.file.filename : '';
-    const newHouse = new House({ title, image, location, rent, latitude, longitude, description });
+    const username = req.session.user.username; // Get the username from session
+    const newHouse = new House({ title, image, location, rent, latitude, longitude, description, username });
     await newHouse.save();
     res.redirect('/house');
   } catch (error) {
@@ -298,7 +301,8 @@ app.post('/market', upload.single('image'), [
   try {
     const { title, location, price, latitude, longitude, description } = req.body;
     const image = req.file ? 'uploads/' + req.file.filename : '';
-    const newMarket = new Market({ title, image, location, price, latitude, longitude, description });
+    const username = req.session.user.username; // Get the username from session
+    const newMarket = new Market({ title, image, location, price, latitude, longitude, description, username });
     await newMarket.save();
     res.redirect('/market');
   } catch (error) {
@@ -346,7 +350,8 @@ app.post('/food', upload.single('image'), [
   try {
     const { title, location, latitude, longitude, description } = req.body;
     const image = req.file ? 'uploads/' + req.file.filename : '';
-    const newFood = new Food({ title, image, location, latitude, longitude, description });
+    const username = req.session.user.username; // Get the username from session
+    const newFood = new Food({ title, image, location, latitude, longitude, description, username });
     await newFood.save();
     res.redirect('/food');
   } catch (error) {
@@ -354,6 +359,49 @@ app.post('/food', upload.single('image'), [
     res.status(500).send('Internal Server Error');
   }
 });
+
+// Handle deleting a post
+app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
+  const { type, id } = req.params;
+  const { username } = req.session.user;
+
+  try {
+    let Model;
+
+    switch (type) {
+      case 'food':
+        Model = Food;
+        break;
+      case 'house':
+        Model = House;
+        break;
+      case 'market':
+        Model = Market;
+        break;
+      default:
+        return res.status(400).send('Invalid type');
+    }
+
+    // Check if the user is "admin"
+    if (username === "admin") {
+      await Model.deleteOne({ _id: id });
+      return res.redirect(`/${type}`);
+    }
+
+    // Check if the item belongs to the user
+    const item = await Model.findOne({ _id: id, username });
+    if (!item) {
+      return res.status(404).send('Item not found or you do not have permission to delete it');
+    }
+
+    await Model.deleteOne({ _id: id });
+    res.redirect(`/${type}`);
+  } catch (error) {
+    console.error(`Error deleting ${type}:`, error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 // 404 handler
 app.use((req, res) => {
