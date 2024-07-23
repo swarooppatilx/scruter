@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul id="navbar-links" class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link text-dark <%= activeLink === 'home' ? 'active' : '' %>" href="/"><i class="fa-solid fa-backward me-2"></i>Home Page</a>
+          <a class="nav-link text-dark <%= activeLink === 'home' ? 'active' : '' %>" href="/"><i class="fa-solid fa-right-from-bracket me-2"></i>Home Page</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-dark <%= activeLink === 'house' ? 'active' : '' %>" href="/house"><i class="fa-solid fa-house me-2"></i>Housing</a>
@@ -25,7 +25,7 @@
       <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center mt-3 mt-lg-0">
         <% if (user) { %>
           <span class="navbar-text mb-2 mb-lg-0 me-lg-3">Welcome, <%= user.username %>!</span>
-          <a class="btn btn-outline-dark mb-2 mb-lg-0 me-lg-2" href="/logout">Logout</a>
+          <a class="btn btn-outline-danger mb-2 mb-lg-0 me-lg-2" href="/logout"><i class="fa-solid fa-user me-2"></i>Logout</a>
           <div class="dropdown">
             <button class="btn btn-success dropdown-toggle text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-marker me-2"></i>Create Post
@@ -37,7 +37,7 @@
             </ul>
           </div>
         <% } else { %>
-          <a class="btn btn-outline-dark" href="/auth?action=login">Login</a>
+          <a class="btn btn-outline-success" href="/auth?action=login"><i class="fa-solid fa-user me-2"></i>Login</a>
         <% } %>
       </div>
     </div>

@@ -136,7 +136,7 @@ app.post('/login', [
     }
   } catch (error) {
     console.error('Error during login:', error);
-    res.status(500).send('Internal Server Error');
+    rres.status(500).render('500');
   }
 });
 
@@ -192,7 +192,7 @@ app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error('Error during logout:', err);
-      res.status(500).send('Internal Server Error');
+      rres.status(500).render('500');
     } else {
       res.redirect('/');
     }
@@ -231,7 +231,7 @@ app.get('/house', async (req, res) => {
     res.render('display', { cards: houses, domain, imagepath: "/house.jpg", query, selectedType: 'house', searchAction: '/house', activeLink: 'house'});
   } catch (error) {
     console.error('Error fetching houses:', error);
-    res.status(500).send('Internal Server Error');
+    rres.status(500).render('500');
   }
 });
 
@@ -258,7 +258,7 @@ app.post('/house', upload.single('image'), [
     res.redirect('/house');
   } catch (error) {
     console.error('Error saving House:', error);
-    res.status(500).send('Internal Server Error');
+    rres.status(500).render('500');
   }
 });
 
@@ -281,7 +281,7 @@ app.get('/market', async (req, res) => {
     res.render('display', { cards: markets, domain, imagepath: "/market.jpg", query, selectedType: 'market', searchAction: '/market', activeLink: 'market'});
   } catch (error) {
     console.error('Error fetching markets:', error);
-    res.status(500).send('Internal Server Error');
+    rres.status(500).render('500');
   }
 });
 
@@ -308,7 +308,7 @@ app.post('/market', upload.single('image'), [
     res.redirect('/market');
   } catch (error) {
     console.error('Error saving Market:', error);
-    res.status(500).send('Internal Server Error');
+    rres.status(500).render('500');
   }
 });
 
@@ -331,7 +331,7 @@ app.get('/food', async (req, res) => {
     res.render('display', { cards: foods, domain, imagepath: "/food.jpg", query, selectedType: 'food', searchAction: '/food', activeLink: 'food'});
   } catch (error) {
     console.error('Error fetching foods:', error);
-    res.status(500).send('Internal Server Error');
+    rres.status(500).render('500');
   }
 });
 
@@ -357,7 +357,7 @@ app.post('/food', upload.single('image'), [
     res.redirect('/food');
   } catch (error) {
     console.error('Error saving Food:', error);
-    res.status(500).send('Internal Server Error');
+    rres.status(500).render('500');
   }
 });
 
@@ -399,7 +399,7 @@ app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
     res.redirect(`/${type}`);
   } catch (error) {
     console.error(`Error deleting ${type}:`, error);
-    res.status(500).send('Internal Server Error');
+    rres.status(500).render('500');
   }
 });
 
