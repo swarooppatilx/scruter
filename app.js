@@ -66,18 +66,18 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Routes
-app.get('/', (req, res) => {
-  res.render('index');
-});
-app.get('/house/form', (req, res) => {
-  res.render('house');
-});
 app.get('/food/form', (req, res) => {
-  res.render('food');
+  res.render('form', { routeName: 'food' });
 });
+
+app.get('/house/form', (req, res) => {
+  res.render('form', { routeName: 'house' });
+});
+
 app.get('/market/form', (req, res) => {
-  res.render('market');
+  res.render('form', { routeName: 'market' });
 });
+
 
 // Fetch and display house posts
 app.get('/house', async (req, res) => {

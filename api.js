@@ -1,9 +1,9 @@
-// api.js
 const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 const dotenv = require('dotenv').config();
+const { body, validationResult } = require('express-validator');
 
 const app = express();
 
@@ -57,7 +57,18 @@ const marketSchema = new mongoose.Schema({
 const Market = mongoose.model('Market', marketSchema);
 
 // Create
-app.post('/food', upload.single('image'), async (req, res) => {
+app.post('/food', upload.single('image'), [
+  body('title').notEmpty().withMessage('Title is required'),
+  body('location').notEmpty().withMessage('Location is required'),
+  body('latitude').isFloat().withMessage('Latitude must be a valid number'),
+  body('longitude').isFloat().withMessage('Longitude must be a valid number'),
+  body('description').notEmpty().withMessage('Description is required')
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  
   try {
     const { title, location, latitude, longitude, description } = req.body;
     const image = req.file ? 'uploads/' + req.file.filename : '';
@@ -69,7 +80,19 @@ app.post('/food', upload.single('image'), async (req, res) => {
   }
 });
 
-app.post('/house', upload.single('image'), async (req, res) => {
+app.post('/house', upload.single('image'), [
+  body('title').notEmpty().withMessage('Title is required'),
+  body('location').notEmpty().withMessage('Location is required'),
+  body('rent').isFloat().withMessage('Rent must be a valid number'),
+  body('latitude').isFloat().withMessage('Latitude must be a valid number'),
+  body('longitude').isFloat().withMessage('Longitude must be a valid number'),
+  body('description').notEmpty().withMessage('Description is required')
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  
   try {
     const { title, location, rent, latitude, longitude, description } = req.body;
     const image = req.file ? 'uploads/' + req.file.filename : '';
@@ -81,7 +104,19 @@ app.post('/house', upload.single('image'), async (req, res) => {
   }
 });
 
-app.post('/market', upload.single('image'), async (req, res) => {
+app.post('/market', upload.single('image'), [
+  body('title').notEmpty().withMessage('Title is required'),
+  body('location').notEmpty().withMessage('Location is required'),
+  body('price').isFloat().withMessage('Price must be a valid number'),
+  body('latitude').isFloat().withMessage('Latitude must be a valid number'),
+  body('longitude').isFloat().withMessage('Longitude must be a valid number'),
+  body('description').notEmpty().withMessage('Description is required')
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  
   try {
     const { title, location, price, latitude, longitude, description } = req.body;
     const image = req.file ? 'uploads/' + req.file.filename : '';
@@ -153,7 +188,18 @@ app.get('/market/:id', async (req, res) => {
 });
 
 // Update
-app.put('/food/:id', upload.single('image'), async (req, res) => {
+app.put('/food/:id', upload.single('image'), [
+  body('title').notEmpty().withMessage('Title is required'),
+  body('location').notEmpty().withMessage('Location is required'),
+  body('latitude').isFloat().withMessage('Latitude must be a valid number'),
+  body('longitude').isFloat().withMessage('Longitude must be a valid number'),
+  body('description').notEmpty().withMessage('Description is required')
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  
   try {
     const { title, location, latitude, longitude, description } = req.body;
     const image = req.file ? 'uploads/' + req.file.filename : undefined;
@@ -169,7 +215,19 @@ app.put('/food/:id', upload.single('image'), async (req, res) => {
   }
 });
 
-app.put('/house/:id', upload.single('image'), async (req, res) => {
+app.put('/house/:id', upload.single('image'), [
+  body('title').notEmpty().withMessage('Title is required'),
+  body('location').notEmpty().withMessage('Location is required'),
+  body('rent').isFloat().withMessage('Rent must be a valid number'),
+  body('latitude').isFloat().withMessage('Latitude must be a valid number'),
+  body('longitude').isFloat().withMessage('Longitude must be a valid number'),
+  body('description').notEmpty().withMessage('Description is required')
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  
   try {
     const { title, location, rent, latitude, longitude, description } = req.body;
     const image = req.file ? 'uploads/' + req.file.filename : undefined;
@@ -185,7 +243,19 @@ app.put('/house/:id', upload.single('image'), async (req, res) => {
   }
 });
 
-app.put('/market/:id', upload.single('image'), async (req, res) => {
+app.put('/market/:id', upload.single('image'), [
+  body('title').notEmpty().withMessage('Title is required'),
+  body('location').notEmpty().withMessage('Location is required'),
+  body('price').isFloat().withMessage('Price must be a valid number'),
+  body('latitude').isFloat().withMessage('Latitude must be a valid number'),
+  body('longitude').isFloat().withMessage('Longitude must be a valid number'),
+  body('description').notEmpty().withMessage('Description is required')
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  
   try {
     const { title, location, price, latitude, longitude, description } = req.body;
     const image = req.file ? 'uploads/' + req.file.filename : undefined;
@@ -197,7 +267,7 @@ app.put('/market/:id', upload.single('image'), async (req, res) => {
     if (!updatedMarket) return res.status(404).json({ error: 'Market item not found' });
     res.status(200).json(updatedMarket);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status{500}.json({ error: error.message });
   }
 });
 
