@@ -121,29 +121,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
-function previewImage() {
-    const file = document.getElementById('image').files[0];
-    const preview = document.getElementById('img-preview');
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            preview.src = e.target.result;
-            preview.classList.remove('d-none');
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-function useCurrentLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            document.getElementById('latitude').value = position.coords.latitude;
-            document.getElementById('longitude').value = position.coords.longitude;
-        }, () => {
-            alert('Unable to retrieve your location');
-        });
-    } else {
-        alert('Geolocation is not supported by this browser');
-    }
-}

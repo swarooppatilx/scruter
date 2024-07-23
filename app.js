@@ -25,6 +25,7 @@ app.use(session({
   cookie: { secure: false } // Set to true if using HTTPS
 }));
 
+
 // Middleware to set user object for views
 app.use((req, res, next) => {
   res.locals.user = req.session.user; // Make user object available in views
@@ -122,7 +123,7 @@ app.post('/login', [
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render('auth', { action: 'login', errors: errors.array() });
+    return res.status(400).render('auth', { action: 'login', errors: errors.array(), activeLink: ''});
   }
 
   const { username, password } = req.body;
@@ -132,7 +133,7 @@ app.post('/login', [
       req.session.user = user;
       res.redirect('/');
     } else {
-      res.status(400).render('auth', { action: 'login', errors: [{ msg: 'Invalid credentials' }] });
+      res.status(400).render('auth', { action: 'login', errors: [{ msg: 'Invalid credentials' }], activeLink: '' });
     }
   } catch (error) {
     console.error('Error during login:', error);
@@ -149,14 +150,14 @@ app.post('/signup', [
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render('auth', { action: 'signup', errors: errors.array() });
+    return res.status(400).render('auth', { action: 'signup', errors: errors.array(), activeLink: ''});
   }
 
   const { username, email, password, confirmPassword } = req.body;
   
   // Check if passwords match
   if (password !== confirmPassword) {
-    return res.status(400).render('auth', { action: 'signup', errors: [{ msg: 'Passwords do not match' }] });
+    return res.status(400).render('auth', { action: 'signup', errors: [{ msg: 'Passwords do not match' }], activeLink: ''});
   }
 
   try {
@@ -170,7 +171,7 @@ app.post('/signup', [
       if (existingUser.email === email) {
         errors.push({ msg: 'Email is already registered' });
       }
-      return res.status(400).render('auth', { action: 'signup', errors });
+      return res.status(400).render('auth', { action: 'signup', errors, activeLink: '' });
     }
 
     // Hash the password and create a new user
@@ -183,7 +184,7 @@ app.post('/signup', [
     res.redirect('/');
   } catch (error) {
     console.error('Error during signup:', error);
-    res.status(500).render('auth', { action: 'signup', errors: [{ msg: 'Internal Server Error' }] });
+    res.status(500).render('auth', { action: 'signup', errors: [{ msg: 'Internal Server Error' }], activeLink: '' });
   }
 });
 
@@ -192,7 +193,7 @@ app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error('Error during logout:', err);
-      rres.status(500).render('500');
+      res.status(500).render('500');
     } else {
       res.redirect('/');
     }
@@ -246,7 +247,7 @@ app.post('/house', upload.single('image'), [
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render('form', { errors: errors.array(), routeName: 'house' });
+    return res.status(400).render('form', { errors: errors.array(), routeName: 'house' , activeLink: 'house'});
   }
   
   try {
@@ -296,7 +297,7 @@ app.post('/market', upload.single('image'), [
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render('form', { errors: errors.array(), routeName: 'market' });
+    return res.status(400).render('form', { errors: errors.array(), routeName: 'market' , activeLink: 'market'});
   }
   
   try {
@@ -345,7 +346,7 @@ app.post('/food', upload.single('image'), [
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render('form', { errors: errors.array(), routeName: 'food' });
+    return res.status(400).render('form', { errors: errors.array(), routeName: 'food', activeLink: 'food'});
   }
   
   try {
