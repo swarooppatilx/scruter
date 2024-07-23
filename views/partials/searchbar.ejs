@@ -1,0 +1,28 @@
+<!-- Custom Search Bar -->
+<div id="search-bar" class="container mx-auto bg-light m-3">
+  <form id="search-form" method="GET" action="<%= searchAction %>">
+    <div class="d-flex align-items-center">
+      <!-- Search Input -->
+      <input type="text" class="form-control me-2" id="search-input" name="query" placeholder="Search" value="<%= query %>">  
+      
+      <!-- Inline Dropdown for Search Action -->
+      <select class="form-select me-2 w-25" id="search-action" name="type">
+        <option value="food" <%= selectedType === 'food' ? 'selected' : '' %>>Food</option>
+        <option value="house" <%= selectedType === 'house' ? 'selected' : '' %>>House</option>
+        <option value="market" <%= selectedType === 'market' ? 'selected' : '' %>>Market</option>
+      </select>
+      
+      <!-- Search Button -->
+      <button class="btn btn-dark text-light" type="submit">Search</button>
+    </div>
+  </form>
+</div>
+
+<!-- JavaScript to Update Form Action -->
+<script>
+  document.getElementById('search-action').addEventListener('change', function() {
+    const form = document.getElementById('search-form');
+    const selectedType = this.value;
+    form.action = `/${selectedType}?type=${selectedType}`;
+  });
+</script>

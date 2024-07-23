@@ -5,13 +5,13 @@ const path = require('path');
 const dotenv = require('dotenv').config();
 const { body, validationResult } = require('express-validator');
 
-const app = express();
+const router = express.Router();  // Use router instead of app
 
 // Middleware to parse JSON and form data
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+router.use(express.static('public'));
+router.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Multer storage configuration
 const storage = multer.diskStorage({
@@ -57,7 +57,7 @@ const marketSchema = new mongoose.Schema({
 const Market = mongoose.model('Market', marketSchema);
 
 // Create
-app.post('/food', upload.single('image'), [
+router.post('/food', upload.single('image'), [
   body('title').notEmpty().withMessage('Title is required'),
   body('location').notEmpty().withMessage('Location is required'),
   body('latitude').isFloat().withMessage('Latitude must be a valid number'),
@@ -80,7 +80,7 @@ app.post('/food', upload.single('image'), [
   }
 });
 
-app.post('/house', upload.single('image'), [
+router.post('/house', upload.single('image'), [
   body('title').notEmpty().withMessage('Title is required'),
   body('location').notEmpty().withMessage('Location is required'),
   body('rent').isFloat().withMessage('Rent must be a valid number'),
@@ -104,7 +104,7 @@ app.post('/house', upload.single('image'), [
   }
 });
 
-app.post('/market', upload.single('image'), [
+router.post('/market', upload.single('image'), [
   body('title').notEmpty().withMessage('Title is required'),
   body('location').notEmpty().withMessage('Location is required'),
   body('price').isFloat().withMessage('Price must be a valid number'),
@@ -129,7 +129,7 @@ app.post('/market', upload.single('image'), [
 });
 
 // Read all
-app.get('/food', async (req, res) => {
+router.get('/food', async (req, res) => {
   try {
     const foods = await Food.find();
     res.status(200).json(foods);
@@ -138,7 +138,7 @@ app.get('/food', async (req, res) => {
   }
 });
 
-app.get('/house', async (req, res) => {
+router.get('/house', async (req, res) => {
   try {
     const houses = await House.find();
     res.status(200).json(houses);
@@ -147,7 +147,7 @@ app.get('/house', async (req, res) => {
   }
 });
 
-app.get('/market', async (req, res) => {
+router.get('/market', async (req, res) => {
   try {
     const markets = await Market.find();
     res.status(200).json(markets);
@@ -157,7 +157,7 @@ app.get('/market', async (req, res) => {
 });
 
 // Read one
-app.get('/food/:id', async (req, res) => {
+router.get('/food/:id', async (req, res) => {
   try {
     const food = await Food.findById(req.params.id);
     if (!food) return res.status(404).json({ error: 'Food not found' });
@@ -167,7 +167,7 @@ app.get('/food/:id', async (req, res) => {
   }
 });
 
-app.get('/house/:id', async (req, res) => {
+router.get('/house/:id', async (req, res) => {
   try {
     const house = await House.findById(req.params.id);
     if (!house) return res.status(404).json({ error: 'House not found' });
@@ -177,7 +177,7 @@ app.get('/house/:id', async (req, res) => {
   }
 });
 
-app.get('/market/:id', async (req, res) => {
+router.get('/market/:id', async (req, res) => {
   try {
     const market = await Market.findById(req.params.id);
     if (!market) return res.status(404).json({ error: 'Market item not found' });
@@ -188,7 +188,7 @@ app.get('/market/:id', async (req, res) => {
 });
 
 // Update
-app.put('/food/:id', upload.single('image'), [
+router.put('/food/:id', upload.single('image'), [
   body('title').notEmpty().withMessage('Title is required'),
   body('location').notEmpty().withMessage('Location is required'),
   body('latitude').isFloat().withMessage('Latitude must be a valid number'),
@@ -215,7 +215,7 @@ app.put('/food/:id', upload.single('image'), [
   }
 });
 
-app.put('/house/:id', upload.single('image'), [
+router.put('/house/:id', upload.single('image'), [
   body('title').notEmpty().withMessage('Title is required'),
   body('location').notEmpty().withMessage('Location is required'),
   body('rent').isFloat().withMessage('Rent must be a valid number'),
@@ -243,7 +243,7 @@ app.put('/house/:id', upload.single('image'), [
   }
 });
 
-app.put('/market/:id', upload.single('image'), [
+router.put('/market/:id', upload.single('image'), [
   body('title').notEmpty().withMessage('Title is required'),
   body('location').notEmpty().withMessage('Location is required'),
   body('price').isFloat().withMessage('Price must be a valid number'),
@@ -267,12 +267,12 @@ app.put('/market/:id', upload.single('image'), [
     if (!updatedMarket) return res.status(404).json({ error: 'Market item not found' });
     res.status(200).json(updatedMarket);
   } catch (error) {
-    res.status{500}.json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
 
 // Delete
-app.delete('/food/:id', async (req, res) => {
+router.delete('/food/:id', async (req, res) => {
   try {
     const deletedFood = await Food.findByIdAndDelete(req.params.id);
     if (!deletedFood) return res.status(404).json({ error: 'Food not found' });
@@ -282,7 +282,7 @@ app.delete('/food/:id', async (req, res) => {
   }
 });
 
-app.delete('/house/:id', async (req, res) => {
+router.delete('/house/:id', async (req, res) => {
   try {
     const deletedHouse = await House.findByIdAndDelete(req.params.id);
     if (!deletedHouse) return res.status(404).json({ error: 'House not found' });
@@ -292,7 +292,7 @@ app.delete('/house/:id', async (req, res) => {
   }
 });
 
-app.delete('/market/:id', async (req, res) => {
+router.delete('/market/:id', async (req, res) => {
   try {
     const deletedMarket = await Market.findByIdAndDelete(req.params.id);
     if (!deletedMarket) return res.status(404).json({ error: 'Market item not found' });
@@ -303,8 +303,7 @@ app.delete('/market/:id', async (req, res) => {
 });
 
 // 404 handler
-app.use((req, res) => res.status(404).send('Not Found'));
+router.use((req, res) => res.status(404).send('Not Found'));
 
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+// Export the router
+module.exports = router;
