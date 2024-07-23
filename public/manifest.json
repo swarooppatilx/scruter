@@ -1,0 +1,17 @@
+{
+    "lang": "en-us",
+    "name": "BuzzList",
+    "short_name": "BuzzList",
+    "description": "BuzzList",
+    "start_url": "/",
+    "background_color": "#2f3d58",
+    "theme_color": "#2f3d58",
+    "orientation": "any",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "/icon.png",
+            "sizes": "512x512"
+        }
+    ]
+}
