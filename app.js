@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require('body-parser');
+const fs = require('fs');
 const path = require("path");
 const multer = require('multer');
 const mongoose = require('mongoose');
@@ -43,7 +44,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Connect to MongoDB
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DB_URL)
   .then(() => console.log('Connected to MongoDB'))
   .catch(error => console.error('Error connecting to MongoDB:', error));
 
@@ -362,13 +363,14 @@ app.post('/food', upload.single('image'), [
   }
 });
 
-// Handle deleting a post
+
 app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
   const { type, id } = req.params;
   const { username } = req.session.user;
 
   try {
     let Model;
+    let item;
 
     switch (type) {
       case 'food':
@@ -384,25 +386,36 @@ app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
         return res.status(400).send('Invalid type');
     }
 
-    // Check if the user is "admin"
-    if (username === "admin") {
+    // Find the item to delete
+    item = await Model.findOne({ _id: id });
+    if (!item) {
+      return res.status(404).send('Item not found');
+    }
+
+    // Check if the user is "admin" or owns the item
+    if (username === "admin" || item.username === username) {
+      // If there's a file associated with the item, delete it
+      if (item.image) {
+        const fileToDelete = path.join(__dirname, item.image);
+        fs.unlink(fileToDelete, (err) => {
+          if (err) {
+            console.error(`Error deleting file: ${err}`);
+          }
+        });
+      }
+
+      // Delete the item from the database
       await Model.deleteOne({ _id: id });
       return res.redirect(`/${type}`);
+    } else {
+      return res.status(403).send('You do not have permission to delete this item');
     }
-
-    // Check if the item belongs to the user
-    const item = await Model.findOne({ _id: id, username });
-    if (!item) {
-      return res.status(404).send('Item not found or you do not have permission to delete it');
-    }
-
-    await Model.deleteOne({ _id: id });
-    res.redirect(`/${type}`);
   } catch (error) {
     console.error(`Error deleting ${type}:`, error);
-    rres.status(500).render('500');
+    res.status(500).render('500');
   }
 });
+
 
 
 // 404 handler
