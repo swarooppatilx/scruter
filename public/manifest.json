@@ -1,11 +1,11 @@
 {
     "lang": "en-us",
-    "name": "Buzzlist",
+    "name": "Scruter",
     "short_name": "Scruter",
-    "description": "Buzzlist",
+    "description": "Scruter",
     "start_url": "/",
-    "background_color": "#ffffff",
-    "theme_color": "#ffffff",
+    "background_color": "#000000",
+    "theme_color": "#000000",
     "orientation": "any",
     "display": "standalone",
 
