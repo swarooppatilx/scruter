@@ -14,13 +14,13 @@
           <a class="nav-link nav-link-b text-dark <%= activeLink === 'market' ? 'active' : '' %>" href="/market"><i class="fa-solid fa-cart-shopping"></i></a>
         </li>
         <li class="nav-item dropup">
-            <a class="nav-link nav-link-b dropdown-toggle" href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link nav-link-b dropdown-toggle " href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fa-solid fa-user"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-b" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="/house/form">House</a></li>
-              <li><a class="dropdown-item" href="/food/form">Food</a></li>
-              <li><a class="dropdown-item" href="/market/form">For Sale</a></li>
+              <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
+              <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
+              <li><a class="dropdown-item" href="/market/form">For Sale Ad</a></li>
               <li>
                 <% if (user) { %>
                   <a class="dropdown-item" href="/logout">Logout</a>
