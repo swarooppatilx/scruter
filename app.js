@@ -111,6 +111,17 @@ app.get('/', (req, res) => {
   });
 });
 
+// Team route
+app.get('/team', (req, res) => {
+  res.render('team', {
+    searchAction: '/food', // URL to handle the search
+    selectedType: req.query.type || 'food', // Default type
+    query: req.query.query || '', // Default query
+    activeLink: ''
+  });
+});
+
+
 // Render authentication page
 app.get('/login', (req, res) => {
   const action = req.query.action || 'login'; // Default to 'login' if no action is provided

@@ -2,10 +2,10 @@
     "lang": "en-us",
     "name": "Scruter",
     "short_name": "Scruter",
-    "description": "Scruter",
+    "description": "Scruter is a local classifieds and community site designed to bring people together for buying, selling, and exchanging goods and services.",
     "start_url": "/",
     "background_color": "#ffffff",
-    "theme_color": "#ffffff",
+    "theme_color": "#000000",
     "orientation": "any",
     "display": "standalone",
 
