@@ -1,72 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>500 - Internal Server Error</title>
-    <style>
-        body {
-            background-color: #0078d7;
-            color: white;
-            font-family: Segoe UI, Arial, sans-serif;
-            padding: 50px;
-            margin: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .sad-face {
-            font-size: 80px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            font-size: 28px;
-            font-weight: normal;
-            margin-bottom: 30px;
-        }
-        p {
-            font-size: 18px;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-        .progress {
-            width: 100%;
-            background-color: #005a9e;
-            height: 30px;
-            margin: 30px 0;
-        }
-        .progress-bar {
-            width: 20%;
-            height: 100%;
-            background-color: white;
-        }
-        .qr-code {
-            width: 150px;
-            height: 150px;
-            background-color: white;
-            margin-top: 30px;
-        }
-        .small-text {
-            font-size: 14px;
-            margin-top: 30px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oops - something went wrong</title>
+<style>
+body {
+    background-color: #0078D7;
+    color: white;
+    font-family: 'Segoe UI', 'Microsoft Sans Serif', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+h1 {
+    font-size: 44px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+p {
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+.footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 48px;
+}
+.refresh-icon {
+    width: 24px;
+    height: 24px;
+    border: 2px solid white;
+    border-radius: 50%;
+    position: relative;
+}
+.refresh-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.next-button {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 8px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="sad-face">:(</div>
-        <h1>Your page ran into a problem and couldn't be found.</h1>
-        <p>We're just collecting some error info, and then we'll redirect you to our homepage.</p>
-        <div class="progress">
-            <div class="progress-bar"></div>
-        </div>
-        <p>20% complete</p>
-        <img class="qr-code" src="/qr.png">
-        <p>For more information about this issue and possible fixes, visit<br>https://github.com/swarooppatilx</p>
-        <p class="small-text">If you call a support person, give them this info:<br>
-        Stop code: INTERNAL_SERVER_ERROR<br>
-        What failed: backend_server</p>
-    </div>
+<div class="container">
+    <h1>Oops - something went wrong</h1>
+    <p>This service isn't available at the moment, please try again later.</p>
+</div>
+<div class="footer">
+    <a href="/"><div class="refresh-icon"></div></a>
+    <a href="/"><button class="next-button">Next</button></a>
+</div>
 </body>
 </html>

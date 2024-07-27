@@ -112,6 +112,13 @@ app.get('/', (req, res) => {
 });
 
 // Render authentication page
+app.get('/login', (req, res) => {
+  const action = req.query.action || 'login'; // Default to 'login' if no action is provided
+  res.render('auth', { action, errors: [], activeLink: ''});
+});
+
+
+// Render authentication page
 app.get('/auth', (req, res) => {
   const action = req.query.action || 'login'; // Default to 'login' if no action is provided
   res.render('auth', { action, errors: [], activeLink: ''});
@@ -138,7 +145,7 @@ app.post('/login', [
     }
   } catch (error) {
     console.error('Error during login:', error);
-    rres.status(500).render('500');
+    res.status(500).render('500');
   }
 });
 
@@ -233,7 +240,7 @@ app.get('/house', async (req, res) => {
     res.render('display', { cards: houses, domain, imagepath: "/house.jpg", query, selectedType: 'house', searchAction: '/house', activeLink: 'house'});
   } catch (error) {
     console.error('Error fetching houses:', error);
-    rres.status(500).render('500');
+    res.status(500).render('500');
   }
 });
 
@@ -260,7 +267,7 @@ app.post('/house', upload.single('image'), [
     res.redirect('/house');
   } catch (error) {
     console.error('Error saving House:', error);
-    rres.status(500).render('500');
+    res.status(500).render('500');
   }
 });
 
@@ -283,7 +290,7 @@ app.get('/market', async (req, res) => {
     res.render('display', { cards: markets, domain, imagepath: "/market.jpg", query, selectedType: 'market', searchAction: '/market', activeLink: 'market'});
   } catch (error) {
     console.error('Error fetching markets:', error);
-    rres.status(500).render('500');
+    res.status(500).render('500');
   }
 });
 
@@ -310,7 +317,7 @@ app.post('/market', upload.single('image'), [
     res.redirect('/market');
   } catch (error) {
     console.error('Error saving Market:', error);
-    rres.status(500).render('500');
+    res.status(500).render('500');
   }
 });
 
@@ -333,7 +340,7 @@ app.get('/food', async (req, res) => {
     res.render('display', { cards: foods, domain, imagepath: "/food.jpg", query, selectedType: 'food', searchAction: '/food', activeLink: 'food'});
   } catch (error) {
     console.error('Error fetching foods:', error);
-    rres.status(500).render('500');
+    res.status(500).render('500');
   }
 });
 
@@ -359,7 +366,7 @@ app.post('/food', upload.single('image'), [
     res.redirect('/food');
   } catch (error) {
     console.error('Error saving Food:', error);
-    rres.status(500).render('500');
+    res.status(500).render('500');
   }
 });
 
@@ -383,13 +390,13 @@ app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
         Model = Market;
         break;
       default:
-        return res.status(400).send('Invalid type');
+        res.status(500).render('500');
     }
 
     // Find the item to delete
     item = await Model.findOne({ _id: id });
     if (!item) {
-      return res.status(404).send('Item not found');
+      res.status(500).render('500');
     }
 
     // Check if the user is "admin" or owns the item
@@ -408,7 +415,7 @@ app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
       await Model.deleteOne({ _id: id });
       return res.redirect(`/${type}`);
     } else {
-      return res.status(403).send('You do not have permission to delete this item');
+      res.status(500).render('500');
     }
   } catch (error) {
     console.error(`Error deleting ${type}:`, error);
@@ -416,6 +423,9 @@ app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
   }
 });
 
+app.get("/500", (req, res) => {
+  res.status(500).render('500');
+});
 
 
 // 404 handler
