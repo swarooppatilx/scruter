@@ -1,0 +1,35 @@
+ <nav class="navbar navbar-b fixed-bottom navbar-light bg-light d-block d-md-none">
+    <div class="container-fluid">
+      <ul class="nav justify-content-around w-100">
+        <li class="nav-item">
+          <a class="nav-link nav-link-b text-dark <%= activeLink === 'home' ? 'active' : '' %>" href="/"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-b text-dark <%= activeLink === 'house' ? 'active' : '' %>" href="/house"><i class="fa-solid fa-house"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-b text-dark <%= activeLink === 'food' ? 'active' : '' %>" href="/food"><i class="fa-solid fa-utensils"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-b text-dark <%= activeLink === 'market' ? 'active' : '' %>" href="/market"><i class="fa-solid fa-cart-shopping"></i></a>
+        </li>
+        <li class="nav-item dropup">
+            <a class="nav-link nav-link-b dropdown-toggle" href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-user"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-b" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="/house/form">House</a></li>
+              <li><a class="dropdown-item" href="/food/form">Food</a></li>
+              <li><a class="dropdown-item" href="/market/form">For Sale</a></li>
+              <li>
+                <% if (user) { %>
+                  <a class="dropdown-item" href="/logout">Logout</a>
+                <% } else { %>
+                <a class="dropdown-item" href="/auth?action=login">Login</a>
+                <% } %>
+              </li>
+            </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
