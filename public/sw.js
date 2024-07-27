@@ -1,6 +1,5 @@
-const CACHE_NAME = 'buzzlist-v1';
+const CACHE_NAME = 'scruter-v1';
 const urlsToCache = [
-  '/icon.png',
   '/offline.html'  // Add your offline page here
 ];
 
