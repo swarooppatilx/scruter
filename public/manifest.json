@@ -4,8 +4,8 @@
     "short_name": "Scruter",
     "description": "Scruter",
     "start_url": "/",
-    "background_color": "#000000",
-    "theme_color": "#000000",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
     "orientation": "any",
     "display": "standalone",
 
