@@ -1,6 +1,7 @@
 const CACHE_NAME = 'buzzlist-v1';
 const urlsToCache = [
-  '/icon.png'
+  '/icon.png',
+  '/offline.html'  // Add your offline page here
 ];
 
 self.addEventListener('install', (event) => {
@@ -16,7 +17,16 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        return response || fetch(event.request);
+        // Return the cached response if available
+        if (response) {
+          return response;
+        }
+        
+        // Fetch the resource from the network
+        return fetch(event.request).catch(() => {
+          // If both cache and network are unavailable, show the offline page
+          return caches.match('/offline.html');
+        });
       })
   );
 });

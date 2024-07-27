@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oops - something went wrong</title>
+<style>
+body {
+    background-color: #0078D7;
+    color: white;
+    font-family: 'Segoe UI', 'Microsoft Sans Serif', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 24px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+h1 {
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+.footer {
+    display: flex;
+    justify-content: center;
+    padding: 24px 24px;
+}
+.refresh-icon {
+    width: 48px;
+    height: 48px;
+    margin-right: 16px;
+}
+.next-button {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 8px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Oops - something went wrong</h1>
+    <p>You are offline!<br> Please connect to the Internet.</p>
+</div>
+<div class="footer">
+    <a href="/"><button class="next-button">Retry</button></a>
+</div>
+</body>
+</html>
