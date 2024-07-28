@@ -42,16 +42,19 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Cloudinary storage configuration
+// Configure CloudinaryStorage
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'uploads',
-    format: async (req, file) => 'jpeg', // supports promises as well
-    public_id: (req, file) => Date.now() + '-' + file.originalname,
+      folder: 'uploads',
+      format: async (req, file) => 'jpeg', // Supports promises as well
+      public_id: (req, file) => Date.now() + '-' + file.originalname.replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 100),
   },
 });
+
+// Initialize multer with the Cloudinary storage
 const upload = multer({ storage });
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_URL)
