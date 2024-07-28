@@ -6,7 +6,7 @@
     "start_url": "/",
     "background_color": "#ffffff",
     "theme_color": "#000000",
-    "orientation": "any",
+    "orientation": "portrait",
     "display": "standalone",
 
     "icons": [

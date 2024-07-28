@@ -64,9 +64,12 @@
                                     <textarea class="form-control" id="description" name="description" placeholder="Enter Description" required></textarea>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" id="submitButton">
                                         <i class="fa-solid fa-paper-plane me-2"></i>Submit
                                     </button>
+                                    <div class="spinner-border text-primary d-none mt-3" role="status" id="loadingSpinner">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
                                 </div>
                             </form>
                         </div>

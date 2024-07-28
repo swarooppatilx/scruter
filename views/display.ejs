@@ -56,7 +56,7 @@
                     <% cards.forEach(card => { %>
                         <div class="col-md-4 mb-4">
                             <div class="card" style="height: 440px;" data-bs-toggle="modal" data-bs-target="#modal<%= card._id %>">
-                                <img src="http://<%= domain %>/<%= card.image %>" class="card-img-top" alt="<%= card.title %> Image">
+                                <img src="<%= card.image %>" class="card-img-top" alt="<%= card.title %> Image">
                                 <div class="card-body">
                                     <h5 class="card-title"><%= card.title %></h5>
                                     <p class="card-text">
@@ -84,7 +84,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="http://<%= domain %>/<%= card.image %>" class="img-fluid mb-3" alt="<%= card.title %> Image">
+                                        <img src="<%= card.image %>" class="img-fluid mb-3" alt="<%= card.title %> Image">
                                         <h5><%= card.title %></h5>
                                         <p class="card-text">
                                             <a href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>">

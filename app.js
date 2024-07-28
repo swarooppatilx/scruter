@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require('body-parser');
-const fs = require('fs');
 const path = require("path");
 const multer = require('multer');
 const mongoose = require('mongoose');
@@ -9,13 +8,14 @@ const { body, validationResult } = require('express-validator');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const bcrypt = require('bcrypt');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const app = express();
 
 // Middleware to parse JSON and form data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // Serve static files from 'public' directory
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded files
 
 // Session setup
 app.use(session({
@@ -26,7 +26,6 @@ app.use(session({
   cookie: { secure: false } // Set to true if using HTTPS
 }));
 
-
 // Middleware to set user object for views
 app.use((req, res, next) => {
   res.locals.user = req.session.user; // Make user object available in views
@@ -36,10 +35,21 @@ app.use((req, res, next) => {
 app.set("views", path.resolve(__dirname, "views"));
 app.set("view engine", "ejs");
 
-// Multer storage configuration
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'uploads/'),
-  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname),
+// Cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Cloudinary storage configuration
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'uploads',
+    format: async (req, file) => 'jpeg', // supports promises as well
+    public_id: (req, file) => Date.now() + '-' + file.originalname,
+  },
 });
 const upload = multer({ storage });
 
@@ -56,7 +66,7 @@ const foodSchema = new mongoose.Schema({
   latitude: String,
   longitude: String,
   description: String,
-  username: { type: String, required: true } // Added username field
+  username: { type: String, required: true }
 });
 const Food = mongoose.model('Food', foodSchema);
 
@@ -68,7 +78,7 @@ const houseSchema = new mongoose.Schema({
   latitude: String,
   longitude: String,
   description: String,
-  username: { type: String, required: true } // Added username field
+  username: { type: String, required: true }
 });
 const House = mongoose.model('House', houseSchema);
 
@@ -80,7 +90,7 @@ const marketSchema = new mongoose.Schema({
   latitude: String,
   longitude: String,
   description: String,
-  username: { type: String, required: true } // Added username field
+  username: { type: String, required: true }
 });
 const Market = mongoose.model('Market', marketSchema);
 
@@ -104,9 +114,9 @@ const ensureAuthenticated = (req, res, next) => {
 // Home route
 app.get('/', (req, res) => {
   res.render('index', {
-    searchAction: '/food', // URL to handle the search
-    selectedType: req.query.type || 'food', // Default type
-    query: req.query.query || '', // Default query
+    searchAction: '/food',
+    selectedType: req.query.type || 'food',
+    query: req.query.query || '',
     activeLink: 'home'
   });
 });
@@ -114,25 +124,23 @@ app.get('/', (req, res) => {
 // Team route
 app.get('/team', (req, res) => {
   res.render('team', {
-    searchAction: '/food', // URL to handle the search
-    selectedType: req.query.type || 'food', // Default type
-    q: req.query.q || '', // Default query
+    searchAction: '/food',
+    selectedType: req.query.type || 'food',
+    q: req.query.q || '',
     activeLink: ''
   });
 });
 
-
 // Render authentication page
 app.get('/login', (req, res) => {
-  const action = req.query.action || 'login'; // Default to 'login' if no action is provided
-  res.render('auth', { action, errors: [], activeLink: ''});
+  const action = req.query.action || 'login';
+  res.render('auth', { action, errors: [], activeLink: '' });
 });
-
 
 // Render authentication page
 app.get('/auth', (req, res) => {
-  const action = req.query.action || 'login'; // Default to 'login' if no action is provided
-  res.render('auth', { action, errors: [], activeLink: ''});
+  const action = req.query.action || 'login';
+  res.render('auth', { action, errors: [], activeLink: '' });
 });
 
 // Handle login form submission
@@ -142,7 +150,7 @@ app.post('/login', [
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render('auth', { action: 'login', errors: errors.array(), activeLink: ''});
+    return res.status(400).render('auth', { action: 'login', errors: errors.array(), activeLink: '' });
   }
 
   const { username, password } = req.body;
@@ -169,18 +177,16 @@ app.post('/signup', [
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render('auth', { action: 'signup', errors: errors.array(), activeLink: ''});
+    return res.status(400).render('auth', { action: 'signup', errors: errors.array(), activeLink: '' });
   }
 
   const { username, email, password, confirmPassword } = req.body;
-  
-  // Check if passwords match
+
   if (password !== confirmPassword) {
-    return res.status(400).render('auth', { action: 'signup', errors: [{ msg: 'Passwords do not match' }], activeLink: ''});
+    return res.status(400).render('auth', { action: 'signup', errors: [{ msg: 'Passwords do not match' }], activeLink: '' });
   }
 
   try {
-    // Check if username or email already exists
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
       const errors = [];
@@ -193,12 +199,10 @@ app.post('/signup', [
       return res.status(400).render('auth', { action: 'signup', errors, activeLink: '' });
     }
 
-    // Hash the password and create a new user
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
-    
-    // Log the user in and redirect to home
+
     req.session.user = newUser;
     res.redirect('/');
   } catch (error) {
@@ -221,25 +225,24 @@ app.get('/logout', (req, res) => {
 
 // Render form pages with authentication check
 app.get('/food/form', ensureAuthenticated, (req, res) => {
-  res.render('form', { routeName: 'food', errors: [], activeLink: 'food'});
+  res.render('form', { routeName: 'food', errors: [], activeLink: 'food' });
 });
 
 app.get('/house/form', ensureAuthenticated, (req, res) => {
-  res.render('form', { routeName: 'house', errors: [] ,activeLink: 'house'});
+  res.render('form', { routeName: 'house', errors: [], activeLink: 'house' });
 });
 
 app.get('/market/form', ensureAuthenticated, (req, res) => {
-  res.render('form', { routeName: 'market', errors: [], activeLink: 'market'});
+  res.render('form', { routeName: 'market', errors: [], activeLink: 'market' });
 });
 
 // Handle search and display for houses
 app.get('/house', async (req, res) => {
   try {
     const domain = req.get('host');
-    const query = req.query.query || ''; // Retrieve the query from the request
-    const searchRegex = new RegExp(query, 'i'); // Create a regex for case-insensitive search
+    const query = req.query.query || '';
+    const searchRegex = new RegExp(query, 'i');
 
-    // Find all items if no query is provided, otherwise filter based on the query
     const houses = await House.find({
       $or: [
         { title: searchRegex },
@@ -248,7 +251,7 @@ app.get('/house', async (req, res) => {
       ]
     });
 
-    res.render('display', { cards: houses, domain, imagepath: "/house.jpg", query, selectedType: 'house', searchAction: '/house', activeLink: 'house'});
+    res.render('display', { cards: houses, domain, imagepath: "/house.jpg", query, selectedType: 'house', searchAction: '/house', activeLink: 'house' });
   } catch (error) {
     console.error('Error fetching houses:', error);
     res.status(500).render('500');
@@ -259,37 +262,47 @@ app.get('/house', async (req, res) => {
 app.post('/house', upload.single('image'), [
   body('title').notEmpty().withMessage('Title is required'),
   body('location').notEmpty().withMessage('Location is required'),
-  body('rent').isFloat().withMessage('Rent must be a valid number'),
-  body('latitude').isFloat().withMessage('Latitude must be a valid number'),
-  body('longitude').isFloat().withMessage('Longitude must be a valid number'),
+  body('rent').isNumeric().withMessage('Rent must be a number'),
+  body('latitude').notEmpty().withMessage('Latitude is required'),
+  body('longitude').notEmpty().withMessage('Longitude is required'),
   body('description').notEmpty().withMessage('Description is required')
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render('form', { errors: errors.array(), routeName: 'house' , activeLink: 'house'});
+    return res.status(400).render('form', { routeName: 'house', errors: errors.array(), activeLink: 'house' });
   }
-  
+
+  const { title, location, rent, latitude, longitude, description } = req.body;
+  const username = req.session.user.username;
+
   try {
-    const { title, location, rent, latitude, longitude, description } = req.body;
-    const image = req.file ? 'uploads/' + req.file.filename : '';
-    const username = req.session.user.username; // Get the username from session
-    const newHouse = new House({ title, image, location, rent, latitude, longitude, description, username });
-    await newHouse.save();
+    const result = await cloudinary.uploader.upload(req.file.path);
+    const house = new House({
+      title,
+      location,
+      rent,
+      latitude,
+      longitude,
+      description,
+      image: result.secure_url,
+      username
+    });
+
+    await house.save();
     res.redirect('/house');
   } catch (error) {
-    console.error('Error saving House:', error);
-    res.status(500).render('500');
+    console.error('Error saving house:', error);
+    res.status(500).render('form', { routeName: 'house', errors: [{ msg: 'Internal Server Error' }], activeLink: 'house' });
   }
 });
 
-// Handle search and display for markets
+// Handle search and display for market
 app.get('/market', async (req, res) => {
   try {
     const domain = req.get('host');
-    const query = req.query.query || ''; // Retrieve the query from the request
-    const searchRegex = new RegExp(query, 'i'); // Create a regex for case-insensitive search
+    const query = req.query.query || '';
+    const searchRegex = new RegExp(query, 'i');
 
-    // Find all items if no query is provided, otherwise filter based on the query
     const markets = await Market.find({
       $or: [
         { title: searchRegex },
@@ -298,48 +311,58 @@ app.get('/market', async (req, res) => {
       ]
     });
 
-    res.render('display', { cards: markets, domain, imagepath: "/market.jpg", query, selectedType: 'market', searchAction: '/market', activeLink: 'market'});
+    res.render('display', { cards: markets, domain, imagepath: "/market.jpg", query, selectedType: 'market', searchAction: '/market', activeLink: 'market' });
   } catch (error) {
     console.error('Error fetching markets:', error);
     res.status(500).render('500');
   }
 });
 
-// Handle form submission for markets
+// Handle form submission for market
 app.post('/market', upload.single('image'), [
   body('title').notEmpty().withMessage('Title is required'),
   body('location').notEmpty().withMessage('Location is required'),
-  body('price').isFloat().withMessage('Price must be a valid number'),
-  body('latitude').isFloat().withMessage('Latitude must be a valid number'),
-  body('longitude').isFloat().withMessage('Longitude must be a valid number'),
+  body('price').isNumeric().withMessage('Price must be a number'),
+  body('latitude').notEmpty().withMessage('Latitude is required'),
+  body('longitude').notEmpty().withMessage('Longitude is required'),
   body('description').notEmpty().withMessage('Description is required')
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render('form', { errors: errors.array(), routeName: 'market' , activeLink: 'market'});
+    return res.status(400).render('form', { routeName: 'market', errors: errors.array(), activeLink: 'market' });
   }
-  
+
+  const { title, location, price, latitude, longitude, description } = req.body;
+  const username = req.session.user.username;
+
   try {
-    const { title, location, price, latitude, longitude, description } = req.body;
-    const image = req.file ? 'uploads/' + req.file.filename : '';
-    const username = req.session.user.username; // Get the username from session
-    const newMarket = new Market({ title, image, location, price, latitude, longitude, description, username });
-    await newMarket.save();
+    const result = await cloudinary.uploader.upload(req.file.path);
+    const market = new Market({
+      title,
+      location,
+      price,
+      latitude,
+      longitude,
+      description,
+      image: result.secure_url,
+      username
+    });
+
+    await market.save();
     res.redirect('/market');
   } catch (error) {
-    console.error('Error saving Market:', error);
-    res.status(500).render('500');
+    console.error('Error saving market item:', error);
+    res.status(500).render('form', { routeName: 'market', errors: [{ msg: 'Internal Server Error' }], activeLink: 'market' });
   }
 });
 
-// Handle search and display for foods
+// Handle search and display for food
 app.get('/food', async (req, res) => {
   try {
     const domain = req.get('host');
-    const query = req.query.query || ''; // Retrieve the query from the request
-    const searchRegex = new RegExp(query, 'i'); // Create a regex for case-insensitive search
+    const query = req.query.query || '';
+    const searchRegex = new RegExp(query, 'i');
 
-    // Find all items if no query is provided, otherwise filter based on the query
     const foods = await Food.find({
       $or: [
         { title: searchRegex },
@@ -348,36 +371,46 @@ app.get('/food', async (req, res) => {
       ]
     });
 
-    res.render('display', { cards: foods, domain, imagepath: "/food.jpg", query, selectedType: 'food', searchAction: '/food', activeLink: 'food'});
+    res.render('display', { cards: foods, domain, imagepath: "/food.jpg", query, selectedType: 'food', searchAction: '/food', activeLink: 'food' });
   } catch (error) {
     console.error('Error fetching foods:', error);
     res.status(500).render('500');
   }
 });
 
-// Handle form submission for foods
+// Handle form submission for food
 app.post('/food', upload.single('image'), [
   body('title').notEmpty().withMessage('Title is required'),
   body('location').notEmpty().withMessage('Location is required'),
-  body('latitude').isFloat().withMessage('Latitude must be a valid number'),
-  body('longitude').isFloat().withMessage('Longitude must be a valid number'),
+  body('latitude').notEmpty().withMessage('Latitude is required'),
+  body('longitude').notEmpty().withMessage('Longitude is required'),
   body('description').notEmpty().withMessage('Description is required')
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).render('form', { errors: errors.array(), routeName: 'food', activeLink: 'food'});
+    return res.status(400).render('form', { routeName: 'food', errors: errors.array(), activeLink: 'food' });
   }
-  
+
+  const { title, location, latitude, longitude, description } = req.body;
+  const username = req.session.user.username;
+
   try {
-    const { title, location, latitude, longitude, description } = req.body;
-    const image = req.file ? 'uploads/' + req.file.filename : '';
-    const username = req.session.user.username; // Get the username from session
-    const newFood = new Food({ title, image, location, latitude, longitude, description, username });
-    await newFood.save();
+    const result = await cloudinary.uploader.upload(req.file.path);
+    const food = new Food({
+      title,
+      location,
+      latitude,
+      longitude,
+      description,
+      image: result.secure_url,
+      username
+    });
+
+    await food.save();
     res.redirect('/food');
   } catch (error) {
-    console.error('Error saving Food:', error);
-    res.status(500).render('500');
+    console.error('Error saving food item:', error);
+    res.status(500).render('form', { routeName: 'food', errors: [{ msg: 'Internal Server Error' }], activeLink: 'food' });
   }
 });
 
@@ -412,15 +445,6 @@ app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
 
     // Check if the user is "admin" or owns the item
     if (username === "admin" || item.username === username) {
-      // If there's a file associated with the item, delete it
-      if (item.image) {
-        const fileToDelete = path.join(__dirname, item.image);
-        fs.unlink(fileToDelete, (err) => {
-          if (err) {
-            console.error(`Error deleting file: ${err}`);
-          }
-        });
-      }
 
       // Delete the item from the database
       await Model.deleteOne({ _id: id });
@@ -434,17 +458,20 @@ app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
   }
 });
 
-app.get("/500", (req, res) => {
-  res.status(500).render('500');
-});
 
-
-// 404 handler
+// 404 Error Handler
 app.use((req, res) => {
   res.status(404).render('404');
 });
 
-// Start server
-app.listen(8080, () => {
-  console.log('Server listening on port 8080...');
+// 500 Error Handler
+app.use((err, req, res, next) => {
+  console.error('Internal Server Error:', err);
+  res.status(500).render('500');
+});
+
+// Start the server
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

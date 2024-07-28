@@ -118,6 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (hasErrors) {
             event.preventDefault();
+        } else {
+            document.getElementById('submitButton').classList.add('d-none');
+            document.getElementById('loadingSpinner').classList.remove('d-none');
         }
     });
 });

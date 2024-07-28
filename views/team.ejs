@@ -35,9 +35,9 @@
             </div>
           </div>
           <div class="col-md-4 mb-4">
-            <img src="/chinmay.jpg" id="chinmay" class="rounded-circle img-fluid mb-3" alt="Team Member 3" onclick="change_photo()">
+            <img src="/chinmay.jpg" id="chinmay-photo" class="rounded-circle img-fluid mb-3" alt="Team Member 3">
             <h4>Chinmay Nakwa</h4>
-            <p>Search Engine Optimization</p>
+            <p id="chinmay-role">AI & ML</p>
             <div class="social-icons">
               <a href="https://instagram.com/chinmay._.29/"><i class="fab fa-instagram"></i></a>
               <a href="#"><i class="fab fa-x-twitter"></i></a>
@@ -59,7 +59,7 @@
           <div class="col-md-4 mb-4">
             <img src="/hrikesh.jpg" class="rounded-circle img-fluid mb-3" alt="Team Member 5">
             <h4>Hrikesh Wadhile</h4>
-            <p>QA</p>
+            <p>QA & Cross Platform</p>
             <div class="social-icons">
               <a href="https://instagram.com/hrishikesh_wadile"><i class="fab fa-instagram"></i></a>
               <a href="#"><i class="fab fa-x-twitter"></i></a>
@@ -82,9 +82,10 @@
       </div>
     </section>
     <script>
-      function change_photo(){
-      document.getElementById("chinmay").setAttribute("src","/chinmay2.jpg");
-      }
+      document.querySelector("#chinmay-photo").addEventListener("click", function(){
+        document.querySelector("#chinmay-photo").setAttribute("src", "/chinmay2.jpg");
+        document.querySelector("#chinmay-role").setHTMLUnsafe("AI Jargon Expert");
+      });
     </script>
 
     <%- include('partials/bottom_nav') %>
