@@ -116,7 +116,7 @@ app.get('/team', (req, res) => {
   res.render('team', {
     searchAction: '/food', // URL to handle the search
     selectedType: req.query.type || 'food', // Default type
-    query: req.query.query || '', // Default query
+    q: req.query.q || '', // Default query
     activeLink: ''
   });
 });

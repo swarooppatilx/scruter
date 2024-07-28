@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="col-md-4 mb-4">
-            <img src="/chinmay.jpg" class="rounded-circle img-fluid mb-3" alt="Team Member 3">
+            <img src="/chinmay.jpg" id="chinmay" class="rounded-circle img-fluid mb-3" alt="Team Member 3" onclick="change_photo()">
             <h4>Chinmay Nakwa</h4>
             <p>Search Engine Optimization</p>
             <div class="social-icons">
@@ -81,6 +81,11 @@
         </div>
       </div>
     </section>
+    <script>
+      function change_photo(){
+      document.getElementById("chinmay").setAttribute("src","/chinmay2.jpg");
+      }
+    </script>
 
     <%- include('partials/bottom_nav') %>
 </body>
