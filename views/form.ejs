@@ -41,33 +41,22 @@
                                     <input type="hidden" id="latitude" name="latitude" required>
                                     <input type="hidden" id="longitude" name="longitude" required>
                                 </div>
+                                <% if (routeName === 'house') { %>
                                 <div class="mb-3">
-                                    <label for="type" class="form-label">
-                                        <i class="fa-solid fa-tag me-2"></i>Type:
-                                    </label>
-                                    <select class="form-select" id="type" name="type" onchange="togglePriceRentFields()" required>
-                                        <option value="">Select Type</option>
-                                        <% if (routeName == 'food'){%>
-                                        <option value="free">Free</option>
-                                        <% } %>
-                                        <% if (routeName !== 'food'){%>
-                                        <option value="rent">Rent</option>
-                                        <% } %>
-                                        <option value="price">Price</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3 d-none" id="rentField">
                                     <label for="rent" class="form-label">
-                                        <i class="fa-solid fa-indian-rupee-sign me-2"></i>Rent:
+                                        <i class="fa-solid fa-indian-rupee-sign me-2"></i>House Rent:
                                     </label>
-                                    <input type="number" class="form-control" id="rent" name="rent" placeholder="Enter Rent">
+                                    <input type="number" class="form-control" id="rent" name="rent" placeholder="Enter Rent" required>
                                 </div>
-                                <div class="mb-3 d-none" id="priceField">
+                                <% } %>
+                                <% if (routeName === 'market') { %>
+                                <div class="mb-3">
                                     <label for="price" class="form-label">
-                                        <i class="fa-solid fa-indian-rupee-sign me-2"></i>Price:
+                                        <i class="fa-solid fa-indian-rupee-sign me-2"></i>Item Price:
                                     </label>
-                                    <input type="number" class="form-control" id="price" name="price" placeholder="Enter Item Price">
+                                    <input type="number" class="form-control" id="price" name="price" placeholder="Enter Item Price" required>
                                 </div>
+                                <% } %>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">
                                         <i class="fa-solid fa-align-left me-2"></i>Description:
