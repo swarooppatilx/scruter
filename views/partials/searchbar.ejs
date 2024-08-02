@@ -7,9 +7,9 @@
       
       <!-- Inline Dropdown for Search Action -->
       <select class="form-select me-2" id="search-action" name="type" style="width: 100px;">
-        <option value="food" <%= selectedType === 'food' ? 'selected' : '' %>>Food</option>
-        <option value="house" <%= selectedType === 'house' ? 'selected' : '' %>>House</option>
-        <option value="market" <%= selectedType === 'market' ? 'selected' : '' %>>Market</option>
+        <option value="food" <%= activeLink === 'food' ? 'selected' : '' %>>Food</option>
+        <option value="house" <%= activeLink === 'house' ? 'selected' : '' %>>House</option>
+        <option value="market" <%= activeLink === 'market' ? 'selected' : '' %>>Market</option>
       </select>
       
       <!-- Search Button -->
@@ -22,7 +22,7 @@
 <script>
   document.getElementById('search-action').addEventListener('change', function() {
     const form = document.getElementById('search-form');
-    const selectedType = this.value;
-    form.action = `/${selectedType}?type=${selectedType}`;
+    const activeLink = this.value;
+    form.action = `/${activeLink}?type=${activeLink}`;
   });
 </script>

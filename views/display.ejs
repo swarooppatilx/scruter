@@ -40,7 +40,7 @@
     <%- include('partials/navbar') %>
     <section>
         <div class="justify-content-center">
-            <img src="<%= imagepath %>" style="width: 100%; height: auto;" class="img-fluid">
+            <img src="<%= searchAction %>.jpg" style="width: 100%; height: auto;" class="img-fluid">
         </div>
         
         <!-- Search Bar -->
@@ -66,9 +66,10 @@
                                     </p>
                                     <% if (card.price) { %>
                                         <p class="card-text"><b>Price: <%= card.price %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b></p>
-                                    <% } %>
-                                    <% if (card.rent) { %>
+                                    <% } else if (card.rent) { %>
                                         <p class="card-text"><b>Rent: <%= card.rent %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b></p>
+                                    <% } else { %>
+                                        <p class="card-text"><b>Free</b></p>
                                     <% } %>
                                     <p class="card-text"><%- card.description.length > 50 ? card.description.substring(0, 50) + ' <i class="text-primary">...Read more</i>' : card.description %></p>
                                 </div>
@@ -91,21 +92,25 @@
                                                 <i class="fa-solid fa-location-dot me-2"></i><%= card.location %>
                                             </a>
                                         </p>
-                                        <% if (card.price) { %>
+                                        <% if (card.type === "price") { %>
                                             <p class="card-text"><b>Price: <%= card.price %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b></p>
-                                        <% } %>
-                                        <% if (card.rent) { %>
+                                        <% } else if (card.type === "rent") { %>
                                             <p class="card-text"><b>Rent: <%= card.rent %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b></p>
+                                        <% } else { %>
+                                            <p class="card-text"><b>Free</b></p>
                                         <% } %>
                                         <p><%= card.description %></p>
                                     </div>
+                                    <div class="modal-footer">
                                     <% if (user && user.username === card.username || user && user.username === "admin") { %>
-                                        <div class="modal-footer">
-                                            <form action="/delete/<%= selectedType %>/<%= card._id %>" method="POST" style="display: inline;">
+                                                <a href="/<%= activeLink %>/edit/<%= card._id %>"><button type="submit" class="btn btn-primary">Edit</button></a>
+                                    <% } %>
+                                    <% if (user && user.username === card.username || user && user.username === "admin") { %>
+                                            <form action="/<%= activeLink %>/delete/<%= card._id %>" method="POST" style="display: inline;">
                                                 <button type="submit" class="btn btn-danger">Delete</button>
                                             </form>
-                                        </div>
                                     <% } %>
+                                   </div>
                                 </div>
                             </div>
                         </div>

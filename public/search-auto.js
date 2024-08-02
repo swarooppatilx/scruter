@@ -119,6 +119,22 @@ async function useCurrentLocation() {
         alert('Geolocation is not supported by this browser.');
     }
 }
+function togglePriceRentFields() {
+    const typeSelect = document.getElementById('type');
+    const rentField = document.getElementById('rentField');
+    const priceField = document.getElementById('priceField');
+
+    if (typeSelect.value === 'rent') {
+        rentField.classList.remove('d-none');
+        priceField.classList.add('d-none');
+    } else if (typeSelect.value === 'price') {
+        priceField.classList.remove('d-none');
+        rentField.classList.add('d-none');
+    } else {
+        rentField.classList.add('d-none');
+        priceField.classList.add('d-none');
+    }
+}
 
 
 document.addEventListener("DOMContentLoaded", function () {
