@@ -61,7 +61,7 @@
                                     <h5 class="card-title"><%= card.title %></h5>
                                     <p class="card-text">
                                         <a href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>">
-                                            <i class="fa-solid fa-location-dot me-2"></i><%= card.location.length > 35 ? card.location.substring(0, 35) + '...' : card.location %>
+                                            <i class="fa-solid fa-location-dot me-2"></i><%= card.location.length > 30 ? card.location.substring(0, 30) + '...' : card.location %>
                                         </a>
                                     </p>
                                     <% if (card.price) { %>
