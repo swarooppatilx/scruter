@@ -47,7 +47,9 @@
                                     </label>
                                     <select class="form-select" id="type" name="type" onchange="togglePriceRentFields()" required>
                                         <option value="">Select Type</option>
+                                        <% if (routeName == 'food'){%>
                                         <option value="free">Free</option>
+                                        <% } %>
                                         <% if (routeName !== 'food'){%>
                                         <option value="rent">Rent</option>
                                         <% } %>
