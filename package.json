@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx nodemon app.js"
+    "test": "npx nodemon app.js",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",

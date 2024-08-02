@@ -1,0 +1,130 @@
+:root {
+    --primary-color: #1e263a;
+    --secondary-color: #122b71;
+    --text-color: #333;
+    --border-color: rgb(153, 157, 158);
+    --focus-color: rgb(89, 53, 180);
+    --box-shadow: 2px 2px 15px 2px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: var(--text-color);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+.box {
+    width: 100%;
+    max-width: 450px;
+    background: #fff;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: var(--box-shadow);
+    z-index: 10;
+}
+
+.wrapper {
+    position: absolute;
+    width: 455px;
+    height: 500px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.53);
+    box-shadow: var(--box-shadow);
+    transform: rotate(5deg);
+}
+
+.header {
+    margin-bottom: 50px;
+}
+
+.header p {
+    font-size: 25px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    position: relative;
+}
+
+.input-box i {
+    font-size: 22px;
+    position: absolute;
+    top: 35px;
+    right: 12px;
+    color: #595b5e;
+}
+
+.input-field {
+    height: 40px;
+    border: 2px solid var(--border-color);
+    border-radius: 7px;
+    margin: 7px 0;
+    outline: none;
+    font-weight: 500;
+    padding: 0 10px;
+    font-size: 17px;
+    background: transparent;
+    transition: all .3s ease-in-out;
+}
+
+.input-field:focus {
+    border-color: var(--focus-color);
+}
+
+.input-field:focus ~ i {
+    color: var(--focus-color);
+}
+
+.input-submit {
+    margin-top: 20px;
+    background: var(--primary-color);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.input-submit:hover {
+    background: var(--secondary-color);
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.bottom a {
+    color: #727374;
+    text-decoration: none;
+}
+
+.bottom a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .box {
+        padding: 20px;
+    }
+
+    .wrapper {
+        display: none;
+    }
+}

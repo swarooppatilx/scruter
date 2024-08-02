@@ -2,89 +2,77 @@
 <html lang="en">
 <head>
     <%- include('partials/head') %> 
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="formstyle.css">
+    <script src="/client-validation.js" defer></script>
 </head>
 <body>
     <%- include('partials/navbar') %>
-    
-    <section id="auth-form" class="d-flex align-items-center justify-content-center min-vh-100">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <h2 class="text-center mb-2">
-                                <%= action === 'login' ? 'Login' : 'Sign Up' %>
-                            </h2>
-                            <% if (errors && errors.length > 0) { %>
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        <% errors.forEach(function(error) { %>
-                                            <li><%= error.msg %></li>
-                                        <% }); %>
-                                    </ul>
-                                </div>
-                            <% } %>
-                            <form action="/<%= action %>" method="post" id="authForm">
-                                <% if (action === 'signup') { %>
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label">
-                                            <i class="fa-solid fa-user me-2"></i>Username:
-                                        </label>
-                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">
-                                            <i class="fa-solid fa-envelope me-2"></i>Email:
-                                        </label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">
-                                            <i class="fa-solid fa-lock me-2"></i>Password:
-                                        </label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="confirmPassword" class="form-label">
-                                            <i class="fa-solid fa-lock me-2"></i>Confirm Password:
-                                        </label>
-                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
-                                    </div>
-                                <% } else { %>
-                                    <div class="mb-3">
-                                        <label for="username" class="form-label">
-                                            <i class="fa-solid fa-user me-2"></i>Username:
-                                        </label>
-                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">
-                                            <i class="fa-solid fa-lock me-2"></i>Password:
-                                        </label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
-                                    </div>
-                                <% } %>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fa-solid fa-paper-plane me-2"></i><%= action === 'login' ? 'Login' : 'Sign Up' %>
-                                    </button>
-                                </div>
-                            </form>
-                            <div class="text-center mt-3">
-                                <p>
-                                    <%= action === 'login' ? "Don't have an account? " : "Already have an account? " %>
-                                    <a href="/auth?<%= action === 'login' ? 'action=signup' : 'action=login' %>">
-                                        <%= action === 'login' ? 'Sign up' : 'Log in' %>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+
+    <div class="container">
+        <div class="box">
+            <div class="header">
+                <p><%= action === 'login' ? 'Log In' : 'Sign Up' %></p>
+            </div>
+            <% if (errors && errors.length > 0) { %>
+                <div class="alert alert-danger">
+                    <ul>
+                        <% errors.forEach(function(error) { %>
+                            <li><%= error.msg %></li>
+                        <% }); %>
+                    </ul>
                 </div>
+            <% } %>
+            <form action="/<%= action %>" method="post" id="authForm">
+                <% if (action === 'signup') { %>
+                    <div class="input-box">
+                        <label for="username">Username</label>
+                        <input type="text" class="input-field" id="username" name="username" placeholder="Enter Username" required>
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <label for="email">Email</label>
+                        <input type="email" class="input-field" id="email" name="email" placeholder="Enter Email" required>
+                        <i class="bx bx-envelope"></i>
+                    </div>
+                    <div class="input-box">
+                        <label for="password">Password</label>
+                        <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
+                        <i class="bx bx-lock"></i>
+                    </div>
+                    <div class="input-box">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" class="input-field" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                        <i class="bx bx-lock"></i>
+                    </div>
+                <% } else { %>
+                    <div class="input-box">
+                        <label for="username">Username</label>
+                        <input type="text" class="input-field" id="username" name="username" placeholder="Enter Username" required>
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <label for="password">Password</label>
+                        <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
+                        <i class="bx bx-lock"></i>
+                    </div>
+                <% } %>
+                <div class="input-box">
+                    <input type="submit" class="input-submit" value="<%= action === 'login' ? 'SIGN IN' : 'SIGN UP' %>">
+                </div>
+            </form>
+            <div class="bottom">
+                <span>
+                    <a href="/auth?<%= action === 'login' ? 'action=signup' : 'action=login' %>">
+                        <%= action === 'login' ? 'Sign Up' : 'Log in' %>
+                    </a>
+                </span>
+                <span><a href="#">Forgot Password?</a></span>
             </div>
         </div>
-    </section>
-    <script src="/client-validation.js"></script>
+        <div class="wrapper"></div>
+    </div>
+
     <%- include('partials/bottom_nav') %>
 </body>
 </html>

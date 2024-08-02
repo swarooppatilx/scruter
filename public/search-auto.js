@@ -95,25 +95,31 @@ function previewImage() {
         imgPreview.classList.add('d-none');
     }
 }
+
 async function useCurrentLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(async function(position) {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-            document.getElementById('latitude').value = lat;
-            document.getElementById('longitude').value = lng;
+        navigator.geolocation.getCurrentPosition(
+            async function(position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                document.getElementById('latitude').value = lat;
+                document.getElementById('longitude').value = lng;
 
-            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
-            const data = await response.json();
-            document.getElementById('location').value = "Near "+data.display_name;
-        }, function(error) {
-            console.error('Geolocation error:', error);
-            alert('Geolocation error: ' + error.message);
-        });
+                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
+                const data = await response.json();
+                document.getElementById('location').value = "Near " + data.display_name;
+            },
+            function(error) {
+                console.error('Geolocation error:', error);
+                alert('Geolocation error: ' + error.message);
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        );
     } else {
         alert('Geolocation is not supported by this browser.');
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
     createAutocomplete(document.getElementById("location"));
