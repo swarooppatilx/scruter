@@ -6,7 +6,7 @@ Scruter is a local classifieds and community site designed to bring people toget
 
 Access the live version of Scruter at [scruter.onrender.com](https://scruter.onrender.com).
 
-![Scruter Preview](/blob/main/public/screenshot.png)
+![Scruter Preview](/public/screenshot.png)
 
 ## Features
 
@@ -114,5 +114,5 @@ Go to the original repository and click on the "Pull Request" button to submit y
 
 **License**
 
-This project is licensed under the [GPL-3.0 License](/blob/main/LICENSE).
+This project is licensed under the [GPL-3.0 License](/LICENSE).
 
