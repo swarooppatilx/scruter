@@ -98,6 +98,11 @@ cd scruter
 git checkout -b feature-branch-name
 ```
 
+**Add your changes**
+```bash
+git add .
+```
+
 **Make your changes and commit them**
 ```bash
 git commit -m 'Add some feature'
