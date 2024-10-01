@@ -4,7 +4,7 @@ Scruter is a local classifieds and community site designed to bring people toget
 
 ## Live Demo
 
-Access the live version of Scruter at [scruter.onrender.com](https://scruter.vercel.app).
+Access the live version of Scruter at [scruter.vercel.app](https://scruter.vercel.app).
 
 ![Scruter Preview](/public/screenshot.png)
 
@@ -42,7 +42,6 @@ npm install
 In the project root, create a .env file and add the following environment variables
 
 ```bash
-[label .env ]
 DB_URL=your_mongo_db_url
 SESSION_SECRET=your_session_secret
 CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
