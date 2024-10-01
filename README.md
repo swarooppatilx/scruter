@@ -6,7 +6,7 @@ Scruter is a local classifieds and community site designed to bring people toget
 
 Access the live version of Scruter at [scruter.vercel.app](https://scruter.vercel.app).
 
-![Scruter Preview](/public/screenshot.png)
+![Scruter Preview](/public/screenshot.webp)
 
 ## Features
 

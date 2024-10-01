@@ -254,7 +254,7 @@ app.get('/house', async (req, res) => {
       ]
     });
 
-    res.render('display', { cards: houses, domain, imagepath: "/house.jpg", query, selectedType: 'house', searchAction: '/house', activeLink: 'house' });
+    res.render('display', { cards: houses, domain, imagepath: "/house.webp", query, selectedType: 'house', searchAction: '/house', activeLink: 'house' });
   } catch (error) {
     console.error('Error fetching houses:', error);
     res.status(500).render('500');
@@ -306,7 +306,7 @@ app.get('/market', async (req, res) => {
     const query = req.query.query || '';
     const searchRegex = new RegExp(query, 'i');
 
-    const markets = await Market.find({
+    const markets = await find({
       $or: [
         { title: searchRegex },
         { location: searchRegex },
@@ -314,7 +314,7 @@ app.get('/market', async (req, res) => {
       ]
     });
 
-    res.render('display', { cards: markets, domain, imagepath: "/market.jpg", query, selectedType: 'market', searchAction: '/market', activeLink: 'market' });
+    res.render('display', { cards: markets, domain, imagepath: "/market.webp", query, selectedType: 'market', searchAction: '/market', activeLink: 'market' });
   } catch (error) {
     console.error('Error fetching markets:', error);
     res.status(500).render('500');
@@ -374,7 +374,7 @@ app.get('/food', async (req, res) => {
       ]
     });
 
-    res.render('display', { cards: foods, domain, imagepath: "/food.jpg", query, selectedType: 'food', searchAction: '/food', activeLink: 'food' });
+    res.render('display', { cards: foods, domain, imagepath: "/food.webp", query, selectedType: 'food', searchAction: '/food', activeLink: 'food' });
   } catch (error) {
     console.error('Error fetching foods:', error);
     res.status(500).render('500');
