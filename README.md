@@ -2,6 +2,9 @@
 
 Scruter is a local classifieds and community site designed to bring people together for buying, selling, and exchanging goods and services.
 
+## This is stable branch and should not be updated.
+
+
 ## Live Demo
 
 Access the live version of Scruter at [scruter.onrender.com](https://scruter.onrender.com).
