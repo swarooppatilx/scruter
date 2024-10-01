@@ -1,18 +1,24 @@
 {
+  "name": "express-website",
   "version": 2,
+  "public": true,
   "builds": [
     {
       "src": "app.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/((?!.*\\.\\w+$).*)",
       "dest": "/app.js"
     },
     {
-      "src": "/public/(.*)",
+      "src": "/(.+\\.[a-z]+)$",
       "dest": "/public/$1"
     }
   ]
