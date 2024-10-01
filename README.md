@@ -4,10 +4,7 @@ Scruter is a local classifieds and community site designed to bring people toget
 
 ## Live Demo
 
-Access the live version of Scruter at [scruter.onrender.com](https://scruter.onrender.com).
-
-If above link is not working try this
- [scruter2.onrender.com](https://scruter2.onrender.com).
+Access the live version of Scruter at [scruter.onrender.com](https://scruter.vercel.app).
 
 ![Scruter Preview](/public/screenshot.png)
 
