@@ -79,7 +79,9 @@ Scruter is built using the following technologies:
     
 ## Contributing
 
-Contributions are welcome! Follow these steps to contribute:
+Contributions are welcome! 
+
+Follow these steps to contribute:
 
 Fork the repository
 
@@ -115,6 +117,8 @@ git push origin feature-branch-name
 **Submit a pull request**
 
 Go to the original repository and click on the "Pull Request" button to submit your changes.
+
+**Please refer to the [Contributing.md](Contributing.md) file for detailed guidelines on how to contribute to this project.**
 
 **License**
 
