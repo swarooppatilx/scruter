@@ -14,44 +14,90 @@
   }
 </script>
     <%- include('partials/head') %>
-  </head>
+    <style>
+        .icon-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            transition: background-color 0.3s, box-shadow 0.3s; /* Add transition for shadow */
+        }
+
+        .icon-circle:hover {
+            background-color: #eeeeee; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+        }
+
+        .icon-circle i {
+            color: #333; /* Change to desired icon color */
+            font-size: 24px; /* Adjust icon size as needed */
+        }
+    </style>
+</head>
 <body>
     <%- include('partials/navbar') %>
     <div class="justify-content-center mb-3"><img src="/background.jpg" style="width: 100%; height: auto;" class="img-fluid"></div>
 
-     <!-- Search Bar -->
+    <!-- Search Bar -->
     <%- include('partials/searchbar') %>
 
- <!-- Mission Section -->
-<section class="mission-section text-center">
-  <div class="container">
-    <h2 class="mb-4">Welcome to Scruter</h2>
-    <p class="lead">Your go-to platform for buying, selling, and finding everything you need locally.</p>
-    <p>Connecting communities and making local commerce easy and accessible for everyone.</p>
-<% if(!user) { %>
-    <a href="/auth" class="btn btn-lg cta-button btn-outline-success mx-2">Join Now</a>
-<% } %>
-    <a href="/team" class="btn btn-lg cta-button btn-outline-success">Our Team</a>
-  </div>
-</section>
+    <!-- Mission Section -->
+    <section class="mission-section text-center">
+        <div class="container">
+            <h2 class="mb-4">Welcome to Scruter</h2>
+            <p class="lead">Your go-to platform for buying, selling, and finding everything you need locally.</p>
+            <p>Connecting communities and making local commerce easy and accessible for everyone.</p>
+            <% if(!user) { %>
+                <a href="/auth" class="btn btn-lg cta-button btn-outline-success mx-2">Join Now</a>
+            <% } %>
+            <a href="/team" class="btn btn-lg cta-button btn-outline-success">Our Team</a>
+        </div>
+    </section>
 
-<!-- Information Section -->
-<section class="container mt-5 mb-5 pb-5">
-  <div class="row">
-    <div class="col-md-4">
-      <h3>What is Scruter?</h3>
-      <p>Scruter is a local classifieds and community site designed to bring people together for buying, selling, and exchanging goods and services.</p>
-    </div>
-    <div class="col-md-4">
-      <h3>How It Works</h3>
-      <p>Post ads, browse listings, and connect with others in your community. Whether you're looking for food, a place to live, or something to buy, Scruter has it all.</p>
-    </div>
-    <div class="col-md-4">
-      <h3>Get Started</h3>
-      <p>Creating an account is easy and free. Start posting your ads and discover what your community has to offer today!</p>
-    </div>
-  </div>
-</section>
-<%- include('partials/bottom_nav') %>
+    <!-- Information Section -->
+    <section class="container mt-5 mb-5 pb-5">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>What is Scruter?</h3>
+                <p>Scruter is a local classifieds and community site designed to bring people together for buying, selling, and exchanging goods and services.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>How It Works</h3>
+                <p>Post ads, browse listings, and connect with others in your community. Whether you're looking for food, a place to live, or something to buy, Scruter has it all.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Get Started</h3>
+                <p>Creating an account is easy and free. Start posting your ads and discover what your community has to offer today!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Follow Us Section -->
+    <section class="text-center mb-4">
+        <h3>Follow Us On Social</h3>
+        <p>Looking for industry insights and updates? Stay connected with us on social media!</p>
+        <div class="d-flex justify-content-center mt-3">
+            <div class="icon-circle mx-2">
+                <a href="https://facebook.com" target="_blank">
+                    <i class="fa-brands fa-meta fa-lg"></i>
+                </a>
+            </div>
+            <div class="icon-circle mx-2">
+                <a href="https://twitter.com" target="_blank">
+                    <i class="fa-brands fa-x-twitter fa-lg"></i>
+                </a>
+            </div>
+            <div class="icon-circle mx-2">
+                <a href="https://instagram.com" target="_blank">
+                    <i class="fa-brands fa-instagram fa-lg"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <%- include('partials/bottom_nav') %>
 </body>
 </html>
