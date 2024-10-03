@@ -15,26 +15,68 @@
 </script>
     <%- include('partials/head') %>
     <style>
-        .icon-circle {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px; 
-            height: 40px;
-            border-radius: 50%;
-            background-color: #ffffff;
-            transition: background-color 0.3s, box-shadow 0.3s; /* Add transition for shadow */
-        }
+   
+   .social-section {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
 
-        .icon-circle:hover {
-            background-color: #eeeeee; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
-        }
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-        .icon-circle i {
-            color: #333; /* Change to desired icon color */
-            font-size: 24px; /* Adjust icon size as needed */
-        }
+.icon-circle:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.d-flex {
+    display: flex;
+    flex-direction: row; /* Ensure items are in a row */
+    justify-content: center; /* Center items horizontally */
+}
+
+.mx-2 {
+    margin-left: 0.5rem; /* Adjust horizontal spacing */
+    margin-right: 0.5rem; /* Adjust horizontal spacing */
+}
+
+.email-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-right: 10px;
+    width: 250px; /* Adjust width as needed */
+}
+
+.subscribe-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.subscribe-btn:hover {
+    background-color: #0056b3;
+}
+
+
+
     </style>
 </head>
 <body>
@@ -76,27 +118,37 @@
     </section>
 
     <!-- Follow Us Section -->
-    <section class="text-center mb-4">
-        <h3>Follow Us On Social</h3>
+    <section class="text-center mb-4 social-section">
+        <h3>Follow Us On Social Media</h3>
         <p>Looking for industry insights and updates? Stay connected with us on social media!</p>
+        
         <div class="d-flex justify-content-center mt-3">
             <div class="icon-circle mx-2">
-                <a href="https://facebook.com" target="_blank">
-                    <i class="fa-brands fa-meta fa-lg"></i>
+                <a href="https://facebook.com" target="_blank" aria-label="Follow us on Facebook">
+                    <i class="fa-brands fa-facebook fa-lg"></i>
                 </a>
             </div>
             <div class="icon-circle mx-2">
-                <a href="https://twitter.com" target="_blank">
-                    <i class="fa-brands fa-x-twitter fa-lg"></i>
+                <a href="https://twitter.com" target="_blank" aria-label="Follow us on Twitter">
+                    <i class="fa-brands fa-twitter fa-lg"></i>
                 </a>
             </div>
             <div class="icon-circle mx-2">
-                <a href="https://instagram.com" target="_blank">
+                <a href="https://instagram.com" target="_blank" aria-label="Follow us on Instagram">
                     <i class="fa-brands fa-instagram fa-lg"></i>
                 </a>
             </div>
         </div>
+        
+        <div class="mt-4">
+            <h4>Subscribe to Our Newsletter</h4>
+            <form id="subscribeForm" class="d-flex justify-content-center">
+                <input type="email" placeholder="Enter your email" required class="email-input" aria-label="Email address">
+                <button type="submit" class="subscribe-btn">Subscribe</button>
+            </form>
+        </div>
     </section>
+    
 
     <%- include('partials/bottom_nav') %>
 </body>
