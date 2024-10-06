@@ -4,36 +4,55 @@
     <%- include('partials/head') %>
     <style>
         .modal-dialog-centered-scrollable {
-            display: flex;
-            align-items: center;
-            min-height: calc(100% - (.5rem * 2));
-        }
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - (.5rem * 2));
+}
 
-        .modal-dialog-centered-scrollable .modal-content {
-            max-height: 80vh;
-            overflow-y: auto;
-        }
+.modal-dialog-centered-scrollable .modal-content {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+.location-link {
+    display: none;
+}
 
-        .card-img-top {
-            height: 250px;
-            object-fit: cover;
-        }
+.location-link:hover {
+    text-decoration: underline; /* Optional: Add underline back on hover if desired */
+}
 
-        .card:hover {
-            cursor: pointer;
-        }
 
-        .search-bar {
-            margin: 20px 0;
-        }
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+}
 
-        .search-bar .form-control {
-            border-radius: 0;
-        }
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Add box shadow to the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Default shadow */
+}
 
-        .search-bar .btn {
-            border-radius: 0;
-        }
+.card:hover {
+    cursor: pointer;
+    /* Add a larger shadow on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    /* Slightly increase the card size on hover */
+    transform: scale(1.05);
+}
+
+.search-bar {
+    margin: 20px 0;
+}
+
+.search-bar .form-control {
+    border-radius: 0;
+}
+
+.search-bar .btn {
+    border-radius: 0;
+}
+
     </style>
 </head>
 <body>
@@ -55,14 +74,17 @@
                 <% } else { %>
                     <% cards.forEach(card => { %>
                         <div class="col-md-4 mb-4">
-                            <div class="card" style="height: 440px;" data-bs-toggle="modal" data-bs-target="#modal<%= card._id %>">
+                            <div class="card" style="height: 440px;" data-bs-toggle="modal" data-bs-target="#modal<%= card._id %>" >
                                 <img src="<%= card.image %>" class="card-img-top" alt="<%= card.title %> Image">
                                 <div class="card-body">
                                     <h5 class="card-title"><%= card.title %></h5>
                                     <p class="card-text">
-                                        <a href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>">
-                                            <i class="fa-solid fa-location-dot me-2"></i><%= card.location.length > 30 ? card.location.substring(0, 30) + '...' : card.location %>
+                                        <a href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>"
+                                            class="location-link">
+                                            <i class="fa-solid fa-location-dot me-2"></i>
+                                            <%= card.location.length> 30 ? card.location.substring(0, 30) + '...' : card.location %>
                                         </a>
+
                                     </p>
                                     <% if (card.price) { %>
                                         <p class="card-text"><b>Price: <%= card.price %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b></p>
