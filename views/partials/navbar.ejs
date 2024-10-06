@@ -1,43 +1,145 @@
-<nav class="navbar navbar-light sticky-top p-2 navbar-expand-lg" style="background-color: white;">
+<nav
+  class="navbar navbar-light sticky-top p-2 navbar-expand-lg shadow-sm"
+  style="background-color: white; transition: all 0.3s ease"
+>
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <img src="/banner.png" alt="Scruter Logo" width="90" height="30" class="d-inline-block align-text-top"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <img
+        src="/banner.png"
+        alt="Scruter Logo"
+        width="90"
+        height="30"
+        class="d-inline-block align-text-top"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul id="navbar-links" class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link text-dark <%= activeLink === 'home' ? 'active' : '' %>" href="/"><i class="fa-solid fa-right-from-bracket me-2"></i>Home Page</a>
+          <a
+            class="nav-link text-dark <%= activeLink === 'home' ? 'active-link' : '' %>"
+            href="/"
+            ><i class="fa-solid fa-right-from-bracket me-2"></i>Home Page</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark <%= activeLink === 'house' ? 'active' : '' %>" href="/house"><i class="fa-solid fa-house me-2"></i>Housing</a>
+          <a
+            class="nav-link text-dark <%= activeLink === 'house' ? 'active-link' : '' %>"
+            href="/house"
+            ><i class="fa-solid fa-house me-2"></i>Housing</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark <%= activeLink === 'food' ? 'active' : '' %>" href="/food"><i class="fa-solid fa-utensils me-2"></i>Food</a>
+          <a
+            class="nav-link text-dark <%= activeLink === 'food' ? 'active-link' : '' %>"
+            href="/food"
+            ><i class="fa-solid fa-utensils me-2"></i>Food</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark <%= activeLink === 'market' ? 'active' : '' %>" href="/market"><i class="fa-solid fa-cart-shopping me-2"></i>For Sale</a>
+          <a
+            class="nav-link text-dark <%= activeLink === 'market' ? 'active-link' : '' %>"
+            href="/market"
+            ><i class="fa-solid fa-cart-shopping me-2"></i>For Sale</a
+          >
         </li>
       </ul>
-      <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center mt-3 mt-lg-0">
+      <div
+        class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center mt-3 mt-lg-0"
+      >
         <% if (user) { %>
-          <span class="navbar-text mb-2 mb-lg-0 me-lg-3">Welcome, <%= user.username %>!</span>
-          <a class="btn btn-outline-danger mb-2 mb-lg-0 me-lg-2" href="/logout"><i class="fa-solid fa-user me-2"></i>Logout</a>
-          <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-solid fa-marker me-2"></i>Create Post
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
-              <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
-              <li><a class="dropdown-item" href="/market/form">For Sale Ad</a></li>
-            </ul>
-          </div>
+        <span class="navbar-text mb-2 mb-lg-0 me-lg-3"
+          >Welcome, <%= user.username %>!</span
+        >
+        <a class="btn btn-outline-danger mb-2 mb-lg-0 me-lg-2" href="/logout"
+          ><i class="fa-solid fa-user me-2"></i>Logout</a
+        >
+        <div class="dropdown">
+          <button
+            class="btn btn-success dropdown-toggle text-light"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-marker me-2"></i>Create Post
+          </button>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="dropdownMenuButton1"
+          >
+            <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
+            <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
+            <li>
+              <a class="dropdown-item" href="/market/form">For Sale Ad</a>
+            </li>
+          </ul>
+        </div>
         <% } else { %>
-          <a class="btn btn-outline-success" href="/auth?action=login"><i class="fa-solid fa-user me-2"></i>Login</a>
+        <a class="btn btn-outline-success" href="/auth?action=login"
+          ><i class="fa-solid fa-user me-2"></i>Login</a
+        >
         <% } %>
       </div>
     </div>
   </div>
 </nav>
+
+<style>
+  /* Enhanced Styling for Active Links */
+  .active-link {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+
+  .navbar-nav .nav-link:hover {
+    background-color: #e2e6ea;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Navbar shadow on scroll */
+  .sticky-top {
+    box-shadow: none;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .sticky-top.scrolled {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+<script>
+  // Add shadow to navbar on scroll
+  window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".sticky-top");
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+
+  // Hover functionality for dropdown
+  const dropdown = document.querySelector(".dropdown");
+  dropdown.addEventListener("mouseenter", () => {
+    const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+    dropdownMenu.classList.add("show");
+  });
+
+  dropdown.addEventListener("mouseleave", () => {
+    const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+    dropdownMenu.classList.remove("show");
+  });
+</script>

@@ -13,7 +13,7 @@
     "cloudinary": "^1.41.3",
     "connect-mongo": "^5.1.0",
     "dotenv": "^16.4.5",
-    "ejs": "^3.1.9",
+    "ejs": "^3.1.10",
     "express": "^4.21.0",
     "express-session": "^1.18.0",
     "express-validator": "^7.1.0",
@@ -21,7 +21,8 @@
     "mongoose": "^8.7.0",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "scruter": "file:"
   },
   "description": "Scruter is a local classifieds and community site designed to bring people together for buying, selling, and exchanging goods and services.",
   "keywords": []
