@@ -92,12 +92,14 @@ body {
 }
 
 .input-submit {
+    height: 30px;
     margin-top: 20px;
     background: var(--primary-color);
     border: none;
     color: #fff;
     cursor: pointer;
     transition: all .3s ease-in-out;
+    border-radius: 9px;
 }
 
 .input-submit:hover {
