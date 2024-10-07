@@ -65,8 +65,9 @@ body {
 .input-box i {
     font-size: 22px;
     position: absolute;
-    top: 35px;
+    top: 40px;
     right: 12px;
+    cursor: pointer; 
     color: #595b5e;
 }
 
@@ -77,7 +78,7 @@ body {
     margin: 7px 0;
     outline: none;
     font-weight: 500;
-    padding: 0 10px;
+    padding: 0 40px 0 10px;    
     font-size: 17px;
     background: transparent;
     transition: all .3s ease-in-out;
@@ -95,6 +96,7 @@ body {
     margin-top: 20px;
     background: var(--primary-color);
     border: none;
+    border-radius: 10px;
     color: #fff;
     cursor: pointer;
     transition: all .3s ease-in-out;
