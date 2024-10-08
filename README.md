@@ -1,36 +1,41 @@
 # <p align="center" id="top">📦 Scruter 🛒</p>
 
-<p align="center"> 
-    <div align="center"> 
-        <img src="https://readme-typing-svg.herokuapp.com?color=45ffaa&center=true&vCenter=true&size=40&width=900&height=80&lines=Welcome+to+Scruter!"/> 
-    </div> 
-    
-<h2>Hi there,<img src="https://raw.githubusercontent.com/nixin72/nixin72/master/wave.gif" height="40"width="40" /> Enjoy the World of Open source contribution <img src='https://raw.githubusercontent.com/ShahriarShafin/ShahriarShafin/main/Assets/handshake.gif' width="60px" height="35"> 
-</h2>
+<div align="center">
+    <img src="https://readme-typing-svg.herokuapp.com?color=45ffaa&center=true&vCenter=true&size=40&width=900&height=80&lines=Welcome+to+Scruter!"/>
+</div>
 
-<p>Scruter is a local classifieds and community platform where people can connect, buy, sell, and exchange services.</p>
+<h2 align="center">Hi there,<img src="https://raw.githubusercontent.com/nixin72/nixin72/master/wave.gif" height="40"width="40" /> Enjoy the World of Open Source Contribution <img src="https://raw.githubusercontent.com/ShahriarShafin/ShahriarShafin/main/Assets/handshake.gif" width="60px" height="35"/></h2>
 
-<!--Line--> <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
+<p align="center">
+Scruter is a local classifieds and community platform where people can connect, buy, sell, and exchange services.
+</p>
 
-## Overview📌
+<!--Line-->
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
+</div>
+
+## <div align="center">Overview 📌</div>
+
 <ul> 
     <li>📦 Scruter helps you discover local services, post ads, and interact with your community.</li> 
     <li>🛒 A platform for local commerce, perfect for buying and selling goods and services within your area.</li> 
     <li>🚀 Explore the live demo and see what Scruter has to offer!</li> 
     <li>💻 Contributions are welcome to make this project even better for the community.</li> 
-</ul> 
+</ul>
 
-<p align="center">
+<!-- Screenshot Section -->
+<div align="center">
     <img src="/public/screenshot.png" alt="Scruter Preview" width="900" />
-</p> 
+</div>
 
-## Live Demo 🎥
+## <div align="center">Live Demo 🎥</div>
 
-Access the live version of Scruter at [scruter.vercel.app](https://scruter.vercel.app).
+<p align="center">Access the live version of Scruter at <a href="https://scruter.vercel.app" target="_blank">scruter.vercel.app</a></p>
 
+<!-- Technologies Used Section with Animation -->
+<h2><img src="https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width="30" height="38"> Technologies Used</h2>
 
-<h2><img src = "https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width = 30px height="38"> Technologies Used</h2>
-    
 Scruter is built using the following technologies:
 
 - **Node.js**
@@ -38,8 +43,9 @@ Scruter is built using the following technologies:
 - **MongoDB**
 - **EJS (Embedded JavaScript templating)**
 - **Cloudinary (Image hosting)**
-- **Bootstrap (CSS framework)** 
+- **Bootstrap (CSS framework)**
 
+<!-- Prerequisites Section -->
 ## Prerequisites 👈🏻
 
 Before setting up the project, ensure you have the following installed:
@@ -48,13 +54,16 @@ Before setting up the project, ensure you have the following installed:
 - **MongoDB**: Set up an account at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 - **Cloudinary Account**: Sign up at [Cloudinary](https://cloudinary.com/).
 
-<!--Line--> <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
+<!--Line-->
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
+</div>
 
-<p align="right"><a href="#top"><img src="https://img.shields.io/badge/Move%20to%20top-Blue?style=plastic" alt="Back To Top"></a></p>
-
-## Installation 🛠️
+<!-- Installation Section -->
+## <div align="center">Installation 🛠️</div>
 
 Follow these steps to set up Scruter locally:
+
 1. **Clone the repository**
 
 ```bash
@@ -95,49 +104,48 @@ Nodemon automatically restarts the server upon detecting file changes:
 ```bash
 npm test
 ```
-    
-## Contributing 🌟
+
+## <div align="center">Contributing 🌟</div>
 
 Contributions are welcome! Follow these steps to contribute:
 
-Fork the repository
+- **Fork the repository**  
+  Click the "Fork" button at the top-right corner of the repository page to create a personal copy.
 
-Click the "Fork" button at the top-right corner of the repository page to create a personal copy.
-    
-**Clone your forked repository**
+- **Clone your forked repository**
+    ```bash
+    git clone https://github.com/your-username/scruter.git
+    cd scruter
+    ```
 
-```bash
-git clone https://github.com/your-username/scruter.git
-cd scruter
-```
+- **Create a new branch**
+    ```bash
+    git checkout -b feature-branch-name
+    ```
 
-**Create a new branch**
-```bash
-git checkout -b feature-branch-name
-```
+- **Add your changes**
+    ```bash
+    git add .
+    ```
 
-**Add your changes**
-```bash
-git add .
-```
+- **Make your changes and commit them**
+    ```bash
+    git commit -m 'Add some feature'
+    ```
 
-**Make your changes and commit them**
-```bash
-git commit -m 'Add some feature'
-```
+- **Push to the branch**
+    ```bash
+    git push origin feature-branch-name
+    ```
 
-**Push to the branch**
-```bash
-git push origin feature-branch-name
-```
+- **Submit a pull request**  
+  Go to the original repository and click on the "Pull Request" button to submit your changes.
 
-**Submit a pull request**
+For detailed guidelines on how to contribute to this project, please refer to the [Contributing.md](Contributing.md) file.
 
-Go to the original repository and click on the "Pull Request" button to submit your changes.
+---
 
-**Please refer to the [Contributing.md](Contributing.md) file for detailed guidelines on how to contribute to this project.**
-
-<h2>License 📜</h2>
+## <div align="center">License 📜</div>
 
 This project is licensed under the [GPL-3.0 License](/LICENSE).
 
@@ -151,8 +159,51 @@ This project is licensed under the [GPL-3.0 License](/LICENSE).
     </tr> 
 </table> 
 
+## <div align="center">Additional Tips 🔍</div>
+
+Here are a few tips to ensure a smooth contribution process:
+
+1. **Stay Updated**  
+   Keep your forked repository up-to-date by syncing it with the original repository:
+    ```bash
+    git fetch upstream
+    git checkout main
+    git merge upstream/main
+    ```
+
+2. **Test Thoroughly**  
+   Make sure to test your changes thoroughly before submitting them. You can do this by running the project locally:
+    ```bash
+    npm start
+    ```
+   If you're making significant changes, consider writing tests or ensuring existing tests pass by running:
+    ```bash
+    npm test
+    ```
+
+3. **Follow the Code Style Guidelines**  
+   Adhering to the project's code style guidelines is crucial. If available, use the provided linting tools to ensure consistent code style:
+    ```bash
+    npm run lint
+    ```
+
+4. **Write Clear Commit Messages**  
+   Always use clear and concise commit messages. A good format could be:
+    ```bash
+    [feature] Add feature to enhance user dashboard
+    ```
+
+5. **Engage in Discussions**  
+   If you're unsure about a feature or want to suggest improvements, engage with the maintainers via the [Discussions](https://github.com/swarooppatilx/scruter/discussions) section.
+
 <div><h2><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Red%20Heart.png" width="35" height="35"> Contributors</h2></div>
 
 Big thanks to all the contributors who have helped make Scruter a better platform! 🎉
 
 <a href="https://github.com/swarooppatilx/scruter/graphs/contributors"> <img align="center" src="https://contrib.rocks/image?max=100&repo=swarooppatilx/scruter" /> </a> <p align="right"><a href="#top"><img src="https://img.shields.io/badge/Move%20to%20top-Blue?style=plastic" alt="Back To Top"></a></p>
+
+
+<p align="center">
+    <img src="https://media.giphy.com/media/Ll22OhMLAlVDb8UQWe/giphy.gif" width="60" height="60"/>
+</p>
+<p align="center">Happy coding and thanks for your contributions! 🎉</p>
