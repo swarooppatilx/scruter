@@ -1,3 +1,102 @@
+<style>
+ /* Base Nav-Link Styles */
+.nav-link {
+    position: relative;
+    overflow: hidden;
+    color: black; /* Default link color */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Underline Animation */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+/* Special styling for first nav item */
+.nav-item:first-child .nav-link::after {
+    background-color: #0078d7;
+}
+
+/* Hover state for underline animation */
+.nav-link:hover::after {
+    transform: translateX(0);
+}
+
+/* Hover state to change link color */
+.nav-link:hover {
+    color: #2098D1;
+}
+
+/* Ensure all links except the first are black */
+.nav-link:not(:first-child) {
+    color: black;
+}
+
+/* Grow effect for hover */
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    transition: transform 0.3s ease;
+}
+
+.hvr-grow:hover {
+    transform: scale(1.1);
+}
+
+/* General hover button/link styling */
+[class^="hvr-"] {
+    margin: 0.4em;
+    padding: 1em;
+    cursor: pointer;
+    background: #e1e1e1;
+    text-decoration: none;
+    color: #666;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Ensure base anchor tag styling */
+a {
+    color: #2098D1;
+    text-decoration: none;
+}
+
+/* Enhanced Styling for Active Links */
+.active-link {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+/* Hover effect for nav links */
+.navbar-nav .nav-link:hover {
+    background-color: #e2e6ea;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Navbar shadow on scroll */
+.sticky-top {
+    box-shadow: none;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Add shadow when scrolled */
+.sticky-top.scrolled {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+</style>
+  
+
 <nav
   class="navbar navbar-light sticky-top p-2 navbar-expand-lg shadow-sm"
   style="background-color: white; transition: all 0.3s ease"
@@ -95,30 +194,6 @@
   </div>
 </nav>
 
-<style>
-  /* Enhanced Styling for Active Links */
-  .active-link {
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    padding: 5px 10px;
-  }
-
-  .navbar-nav .nav-link:hover {
-    background-color: #e2e6ea;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-
-  /* Navbar shadow on scroll */
-  .sticky-top {
-    box-shadow: none;
-    transition: box-shadow 0.3s ease;
-  }
-
-  .sticky-top.scrolled {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-</style>
 
 <script>
   // Add shadow to navbar on scroll
