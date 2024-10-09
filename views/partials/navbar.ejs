@@ -1,10 +1,34 @@
 <style>
  /* Base Nav-Link Styles */
+ :root {
+                --bg-color: #ffffff;
+                --text-color: #000000;
+            }
+
+            .dark-mode {
+                --bg-color: #1c1c1c;
+                --text-color: #ffffff;
+            }
+
+            body {
+                background-color: var(--bg-color) !important;
+                color: var(--text-color) !important;
+            }
+
+            .bg-dark{
+                background-color: var(--bg-color) !important;
+                color: var(--text-color) !important;
+            }
 .nav-link {
     position: relative;
     overflow: hidden;
-    color: black; /* Default link color */
+    color: var(--text-color) !important; /* Default link color */
     transition: color 0.3s ease; /* Smooth color transition */
+}
+
+#nav{
+  background-color: var(--bg-color) ;
+  color: var(--text-color);
 }
 
 /* Underline Animation */
@@ -82,6 +106,9 @@ a {
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
+.nav-link:hover{
+  color: black !important;
+}
 
 /* Navbar shadow on scroll */
 .sticky-top {
@@ -94,12 +121,24 @@ a {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.toggleMode{
+  width: 25px;
+  height: 25px;
+}
+
+#darkModeToggle{
+  outline: none;
+  border: none;
+  background: transparent;
+}
+
 </style>
   
 
 <nav
-  class="navbar navbar-light sticky-top p-2 navbar-expand-lg shadow-sm"
-  style="background-color: white; transition: all 0.3s ease"
+  id="nav"
+  class="navbar sticky-top p-2 navbar-expand-lg shadow-sm"
+  style=" transition: all 0.3s ease"
 >
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
@@ -126,28 +165,28 @@ a {
       <ul id="navbar-links" class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a
-            class="nav-link text-dark <%= activeLink === 'home' ? 'active-link' : '' %>"
+            class="nav-link <%= activeLink === 'home' ? 'active-link' : '' %>"
             href="/"
             ><i class="fa-solid fa-right-from-bracket me-2"></i>Home Page</a
           >
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-dark <%= activeLink === 'house' ? 'active-link' : '' %>"
+            class="nav-link <%= activeLink === 'house' ? 'active-link' : '' %>"
             href="/house"
             ><i class="fa-solid fa-house me-2"></i>Housing</a
           >
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-dark <%= activeLink === 'food' ? 'active-link' : '' %>"
+            class="nav-link <%= activeLink === 'food' ? 'active-link' : '' %>"
             href="/food"
             ><i class="fa-solid fa-utensils me-2"></i>Food</a
           >
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-dark <%= activeLink === 'market' ? 'active-link' : '' %>"
+            class="nav-link <%= activeLink === 'market' ? 'active-link' : '' %>"
             href="/market"
             ><i class="fa-solid fa-cart-shopping me-2"></i>For Sale</a
           >
@@ -156,6 +195,9 @@ a {
       <div
         class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center mt-3 mt-lg-0"
       >
+        <button id="darkModeToggle" style="margin-right: 10px; ">
+          <img src="https://img.icons8.com/?size=100&id=45475&format=png&color=000000" class="toggleMode" id="toggleMode" alt="">
+        </button>
         <% if (user) { %>
         <span class="navbar-text mb-2 mb-lg-0 me-lg-3"
           >Welcome, <%= user.username %>!</span
@@ -196,6 +238,44 @@ a {
 
 
 <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("darkModeToggle");
+    const image = document.getElementById("toggleMode")
+    const body = document.body;
+    const navbar = document.getElementById("nav")
+    const footer = document.getElementById("footer")
+    let mode = "light";
+
+    const moon = "https://img.icons8.com/?size=100&id=45475&format=png&color=ffffff";
+    const sun = "https://img.icons8.com/?size=100&id=648&format=png&color=000000";
+
+    if (mode === "dark") {
+      body.classList.add("dark-mode");
+      nav.classList.add("dark-mode")
+      if(footer){
+        footer.classList.add("dark-mode")
+      }
+      image.src = moon
+    } else {
+      image.src = sun
+    }
+
+    toggleButton.addEventListener("click", function () {
+      body.classList.toggle("dark-mode");
+      nav.classList.toggle("dark-mode");
+      if(footer){
+        footer.classList.toggle("dark-mode");
+      }
+      mode = mode === "light" ? "dark" : "light";
+
+      if (mode === "dark") {
+        image.src = moon
+      } else {
+        image.src = sun
+      }
+
+    });
+  });
   // Add shadow to navbar on scroll
   window.addEventListener("scroll", function () {
     const navbar = document.querySelector(".sticky-top");
