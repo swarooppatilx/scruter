@@ -148,8 +148,8 @@ app.get('/auth', (req, res) => {
 
 // Handle login form submission
 app.post('/login', [
-  body('username').notEmpty().withMessage('Username is required'),
-  body('password').notEmpty().withMessage('Password is required')
+  body('username').isString().notEmpty().withMessage('Username is required'),
+  body('password').isString().notEmpty().withMessage('Password is required')
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -158,7 +158,7 @@ app.post('/login', [
 
   const { username, password } = req.body;
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username: { $eq: username } });
     if (user && await bcrypt.compare(password, user.password)) {
       req.session.user = user;
       res.redirect('/');
