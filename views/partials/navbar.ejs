@@ -244,7 +244,10 @@ a {
     const body = document.body;
     const navbar = document.getElementById("nav")
     const footer = document.getElementById("footer")
-    let mode = "light";
+    let mode = localStorage.getItem("theme") || "light";
+
+    localStorage.setItem("theme", mode);
+    console.log(localStorage.getItem("theme"))
 
     const moon = "https://img.icons8.com/?size=100&id=45475&format=png&color=ffffff";
     const sun = "https://img.icons8.com/?size=100&id=648&format=png&color=000000";
@@ -269,8 +272,10 @@ a {
       mode = mode === "light" ? "dark" : "light";
 
       if (mode === "dark") {
+        localStorage.setItem("theme", "dark");
         image.src = moon
       } else {
+        localStorage.setItem("theme", "light");
         image.src = sun
       }
 
