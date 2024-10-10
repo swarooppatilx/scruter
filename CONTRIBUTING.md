@@ -38,7 +38,7 @@ Thank you for your interest in contributing to Scruter! Your contributions help 
    ```
 3. **🔄 Submit a pull request**: Go to the original repository and click on the "Pull Request" button to submit your changes.
 
-##Contribution Guidelines
+## Contribution Guidelines
 
 - We welcome contributions in the form of new features, bug fixes, enhancements, and documentation updates.
 - Be respectful and constructive in all interactions with other contributors.
@@ -72,7 +72,7 @@ All tasks will be assigned various levels based on complexity and required skill
 ## Acknowledgments
 
 Thank you for considering contributing to Scruter! 
-If you enjoy working with us, please give the project a ⭐ star! Your support means a lot and encourages further contributions. 
+If you enjoy working with us, please give the project a ⭐ star! Your support means a lot and encourages further contributions. ✨
 
 
 
