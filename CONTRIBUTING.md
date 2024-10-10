@@ -47,9 +47,9 @@ Thank you for your interest in contributing to Scruter! Your contributions help 
 # 🏆 Contribution Points
 All tasks will be assigned various levels based on complexity and required skills. Each level provides different points:
 
-🥇 Level 1: 10 Points
-🥈 Level 2: 25 Points
-🥉 Level 3: 45 Points
+- **🥇 Level 1: 10 Points
+- **🥈 Level 2: 25 Points
+- **🥉 Level 3: 45 Points
 
 ## Commit Messages
 
