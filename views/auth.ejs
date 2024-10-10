@@ -25,9 +25,11 @@
             </div>
             <% if (errors && errors.length > 0) { %>
                 <div class="alert alert-danger">
-                    <% errors.forEach(function(error) { %>
-                        <div class="error-message"><i class="bx bx-error"></i> <%= error.msg %></div>
-                    <% }); %>
+                    <ul>
+                        <% errors.forEach(function(error) { %>
+                            <li><%= error.msg %></li>
+                        <% }); %>
+                    </ul>
                 </div>
             <% } %>
             <form action="/<%= action %>" method="post" id="authForm">
@@ -45,12 +47,12 @@
                     <div class="input-box">
                         <label for="password">Password</label>
                         <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
-                        <i class="bx bx-show" data-target="password" onclick="togglePasswordVisibility(this)"></i>
+                        <i class="bx bx-lock"></i>
                     </div>
                     <div class="input-box">
                         <label for="confirmPassword">Confirm Password</label>
                         <input type="password" class="input-field" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
-                        <i class="bx bx-show" data-target="confirmPassword" onclick="togglePasswordVisibility(this)"></i>
+                        <i class="bx bx-lock"></i>
                     </div>
                 <% } else { %>
                     <div class="input-box">
@@ -61,11 +63,11 @@
                     <div class="input-box">
                         <label for="password">Password</label>
                         <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
-                        <i class="bx bx-show" data-target="password" onclick="togglePasswordVisibility(this)"></i>
+                        <i class="bx bx-lock"></i>
                     </div>
                 <% } %>
                 <div class="input-box">
-                    <input type="submit" class="input-submit" value="<%= action === 'login' ? 'LOGIN' : 'SIGN UP' %>">
+                    <input type="submit" class="input-submit" value="<%= action === 'login' ? 'SIGN IN' : 'SIGN UP' %>">
                 </div>
             </form>
             <div class="bottom">
@@ -74,31 +76,12 @@
                         <%= action === 'login' ? 'Sign Up' : 'Log in' %>
                     </a>
                 </span>
-                <% if (action === 'login') { %>
-                    <span><a href="#">Forgot Password?</a></span>
-                <% } %>
-                </div>
+                <span><a href="#">Forgot Password?</a></span>
+            </div>
         </div>
         <div class="wrapper"></div>
     </div>
 
     <%- include('partials/bottom_nav') %>
-    <script>
-        function togglePasswordVisibility(icon) {
-            const targetId = icon.getAttribute('data-target');
-            const passwordInput = document.getElementById(targetId);
-    
-            // Toggle between 'password' and 'text' type
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('bx-show');
-                icon.classList.add('bx-hide');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('bx-hide');
-                icon.classList.add('bx-show');
-            }
-        }
-    </script>    
 </body>
 </html>
