@@ -19,11 +19,7 @@
             .social-section {
                 padding: 30px;
             }
-
-            body {
-                /* padding-bottom: 70px; */
-            }
-
+            
             /* Media query for phone screens or smaller */
             @media (max-width: 900px) {
                 body {
@@ -176,76 +172,7 @@
                 </div>
             </section>
 
-            <!-- Footer Section -->
-            <section class="text-center social-section bg-light py-5">
-                <div class="container">
-                    <div class="row">
-                        <!-- First part: Website description -->
-                        <div class="col-md-3">
-                            <h4>About Scruter</h4>
-                            <p>Scruter is your local platform for buying, selling, and discovering everything you need.
-                                Whether it's products, services, or community activities, we connect people for a better
-                                local experience.</p>
-                        </div>
-
-                        <!-- Second part: Links to About and other pages -->
-                        <div class="col-md-3">
-                            <h4>Quick Links</h4>
-                            <ul class="list-unstyled">
-                                <li><a href="/about" class="text-dark">About Us</a></li>
-                                <li><a href="/team" class="text-dark">Our Team</a></li>
-                                <li><a href="/privacy-policy" class="text-dark">Privacy Policy</a></li>
-                                <li><a href="/terms" class="text-dark">Terms of Service</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Third part: Helpdesk, Queries, and Contact Us -->
-                        <div class="col-md-3">
-                            <h4>Helpdesk</h4>
-                            <ul class="list-unstyled">
-                                <li><a href="/help" class="text-dark">Help Center</a></li>
-                                <li><a href="/faq" class="text-dark">FAQ</a></li>
-                                <li><a href="/contact" class="text-dark">Contact Us</a></li>
-                                <li><a href="/support" class="text-dark">Support</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Fourth part: Socials -->
-                        <div class="col-md-3">
-                            <h4>Follow Us</h4>
-                            <div class="d-flex justify-content-center">
-                                <div class="icon-circle mx-2">
-                                    <a href="https://facebook.com" target="_blank" aria-label="Follow us on Facebook"
-                                        class="text-dark">
-                                        <i class="fa-brands fa-facebook fa-lg"></i>
-                                    </a>
-                                </div>
-                                <div class="icon-circle mx-2">
-                                    <a href="https://twitter.com" target="_blank" aria-label="Follow us on Twitter"
-                                        class="text-dark">
-                                        <i class="fa-brands fa-x-twitter"></i>
-                                    </a>
-                                </div>
-                                <div class="icon-circle mx-2">
-                                    <a href="https://instagram.com" target="_blank" aria-label="Follow us on Instagram"
-                                        class="text-dark">
-                                        <i class="fa-brands fa-instagram fa-lg"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- Copyright -->
-                    <div class="row">
-                        <div class="col-12 mt-4">
-                            <p class="copyright-text">
-                                &copy; <%= new Date().getFullYear() %> Scruter. Made with ❤️ by Team Scruter.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <%- include('partials/footer') %>
 
             <%- include('partials/bottom_nav') %>
 </body>
