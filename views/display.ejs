@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <%- include('partials/head') %>
+    
     <style>
         .modal-dialog-centered-scrollable {
     display: flex;
@@ -137,5 +138,12 @@
         </div>
     </section>
     <%- include('partials/bottom_nav') %>
+    <script>
+        // /preloader js styling
+        let preloader = document.querySelector("#preloader");
+        window.addEventListener("load",function(e){
+            preloader.style.display = "none";
+        });
+    </script>
 </body>
 </html>

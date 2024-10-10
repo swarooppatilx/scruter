@@ -16,6 +16,7 @@
     </script>
     <%- include('partials/head') %>
         <style>
+            
             .social-section {
                 padding: 30px;
             }
@@ -134,6 +135,7 @@
 </head>
 
 <body>
+
     <%- include('partials/navbar') %>
         <div class="justify-content-center"><img src="/background.jpg" style="width: 100%; height: auto;"
                 class="img-fluid"></div>
@@ -248,6 +250,13 @@
             </section>
 
             <%- include('partials/bottom_nav') %>
+            <script>
+                // /preloader js styling
+                let preloader = document.querySelector("#preloader");
+                window.addEventListener("load",function(e){
+                    preloader.style.display = "none";
+                });
+            </script>
 </body>
 
 </html>
