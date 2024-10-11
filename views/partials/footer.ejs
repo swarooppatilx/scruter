@@ -1,4 +1,116 @@
 <!-- Footer Section -->
+<style>
+    .social-section {
+    padding: 30px;
+}
+/* Media query for phone screens or smaller */
+@media (max-width: 900px) {
+    body {
+        padding-bottom: 61px;
+    }
+}
+
+/* General styles for the footer */
+.social-section {
+    background-color: #f8f9fa;
+    padding: 40px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.social-section h4 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.social-section p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+            /* Styling for the links in the footer */
+            .social-section ul {
+                padding-left: 0;
+                list-style: none;
+            }
+
+            .social-section ul li {
+                margin-bottom: 10px;
+            }
+
+            .social-section ul li a {
+                text-decoration: none;
+                color: #333;
+                transition: color 0.3s ease;
+            }
+
+            .social-section ul li a:hover {
+                color: #007bff;
+            }
+
+            /* Styles for the social media icons */
+            .icon-circle {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background-color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .icon-circle:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .icon-circle a {
+                color: #333;
+                font-size: 1.8rem;
+            }
+
+            .icon-circle a:hover {
+                color: #007bff;
+            }
+
+            /* Gap between the social media icons */
+            .d-flex {
+                gap: 15px;
+            }
+
+            /* Copyright text styling */
+            .copyright-text {
+                margin-top: 40px;
+                font-size: 0.9rem;
+                color: #666;
+            }
+
+            /* Responsive design: For smaller screens */
+            @media (max-width: 768px) {
+                .social-section h4 {
+                    font-size: 1.2rem;
+                }
+
+                .social-section ul li {
+                    font-size: 1rem;
+                }
+
+                .icon-circle {
+                    width: 50px;
+                    height: 50px;
+                }
+
+                .icon-circle a {
+                    font-size: 1.5rem;
+                }
+            }
+       
+</style>
 <section class="text-center social-section bg-light py-5">
     <div class="container">
         <div class="row">
