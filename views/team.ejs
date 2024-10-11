@@ -31,7 +31,7 @@
 </head>
 <body>
     <%- include('partials/navbar') %>
-
+    
     <!-- Meet the Team Section -->
     <section class="team-section text-center mt-4 mb-5 pb-5">
       <div class="container">
@@ -108,6 +108,11 @@
       </div>
     </section>
     <script>
+      // /preloader js styling
+      let preloader = document.querySelector("#preloader");
+                window.addEventListener("load",function(e){
+                    preloader.style.display = "none";
+                });
       document.querySelector("#chinmay-photo").addEventListener("click", function(){
         document.querySelector("#chinmay-photo").setAttribute("src", "/chinmay2.jpg");
         document.querySelector("#chinmay-role").setHTMLUnsafe("AI Jargon Expert");

@@ -16,10 +16,30 @@
     </script>
     <%- include('partials/head') %>
         <style>
+            
             .social-section {
                 padding: 30px;
             }
-            
+
+            :root {
+                --bg-color: #ffffff;
+                --text-color: #000000;
+            }
+
+            .dark-mode {
+                --bg-color: #1c1c1c;
+                --text-color: #ffffff;
+            }
+
+            body {
+                background-color: var(--bg-color) !important;
+                color: var(--text-color) !important;
+            }
+
+            .bg-dark{
+                background-color: var(--bg-color) !important;
+                color: var(--text-color) !important;
+            }
             /* Media query for phone screens or smaller */
             @media (max-width: 900px) {
                 body {
@@ -29,9 +49,10 @@
 
             /* General styles for the footer */
             .social-section {
-                background-color: #f8f9fa;
+                background-color: var(--bg-color);
                 padding: 40px 0;
                 border-top: 1px solid #e0e0e0;
+                color: var(--text-color);
             }
 
             .social-section h4 {
@@ -59,7 +80,7 @@
 
             .social-section ul li a {
                 text-decoration: none;
-                color: #333;
+                color: #666;
                 transition: color 0.3s ease;
             }
 
@@ -130,6 +151,7 @@
 </head>
 
 <body>
+
     <%- include('partials/navbar') %>
         <div class="justify-content-center"><img src="/background.jpg" style="width: 100%; height: auto;"
                 class="img-fluid"></div>
@@ -172,9 +194,89 @@
                 </div>
             </section>
 
+<<<<<<< HEAD
             <%- include('partials/footer') %>
+=======
+            <!-- Footer Section -->
+            <section id="footer" class="text-center social-section  py-5">
+                <div class="container">
+                    <div class="row">
+                        <!-- First part: Website description -->
+                        <div class="col-md-3">
+                            <h4>About Scruter</h4>
+                            <p>Scruter is your local platform for buying, selling, and discovering everything you need.
+                                Whether it's products, services, or community activities, we connect people for a better
+                                local experience.</p>
+                        </div>
+
+                        <!-- Second part: Links to About and other pages -->
+                        <div class="col-md-3">
+                            <h4>Quick Links</h4>
+                            <ul class="list-unstyled">
+                                <li><a href="/about" class="t">About Us</a></li>
+                                <li><a href="/team" class="t">Our Team</a></li>
+                                <li><a href="/privacy-policy" class="t">Privacy Policy</a></li>
+                                <li><a href="/terms" class="t">Terms of Service</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Third part: Helpdesk, Queries, and Contact Us -->
+                        <div class="col-md-3">
+                            <h4>Helpdesk</h4>
+                            <ul class="list-unstyled">
+                                <li><a href="/help" class="t">Help Center</a></li>
+                                <li><a href="/faq" class="t">FAQ</a></li>
+                                <li><a href="/contact" class="t">Contact Us</a></li>
+                                <li><a href="/support" class="t">Support</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Fourth part: Socials -->
+                        <div class="col-md-3">
+                            <h4>Follow Us</h4>
+                            <div class="d-flex justify-content-center">
+                                <div class="icon-circle mx-2">
+                                    <a href="https://facebook.com" target="_blank" aria-label="Follow us on Facebook"
+                                        class="t">
+                                        <i class="fa-brands fa-facebook fa-lg"></i>
+                                    </a>
+                                </div>
+                                <div class="icon-circle mx-2">
+                                    <a href="https://twitter.com" target="_blank" aria-label="Follow us on Twitter"
+                                        class="t">
+                                        <i class="fa-brands fa-x-twitter"></i>
+                                    </a>
+                                </div>
+                                <div class="icon-circle mx-2">
+                                    <a href="https://instagram.com" target="_blank" aria-label="Follow us on Instagram"
+                                        class="t">
+                                        <i class="fa-brands fa-instagram fa-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Copyright -->
+                    <div class="row">
+                        <div class="col-12 mt-4">
+                            <p class="copyright-text">
+                                &copy; <%= new Date().getFullYear() %> Scruter. Made with ❤️ by Team Scruter.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+>>>>>>> origin/main
 
             <%- include('partials/bottom_nav') %>
+            <script>
+                // /preloader js styling
+                let preloader = document.querySelector("#preloader");
+                window.addEventListener("load",function(e){
+                    preloader.style.display = "none";
+                });
+            </script>
 </body>
 
 </html>

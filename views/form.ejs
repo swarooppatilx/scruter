@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <%- include('partials/head') %>
+   
 </head>
 <body>
     <%- include('partials/navbar') %>
@@ -80,6 +81,13 @@
     </section>
     <script src="/search-auto.js"></script>
     <script src="/client-validation.js"></script>
+    <script>
+        // /preloader js styling
+        let preloader = document.querySelector("#preloader");
+        window.addEventListener("load",function(e){
+            preloader.style.display = "none";
+        });
+    </script>
     <%- include('partials/bottom_nav') %>
 </body>
 </html>
