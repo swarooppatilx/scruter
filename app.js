@@ -69,7 +69,9 @@ const foodSchema = new mongoose.Schema({
   latitude: String,
   longitude: String,
   description: String,
-  username: { type: String, required: true }
+  username: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true }
 });
 const Food = mongoose.model('Food', foodSchema);
 
@@ -81,7 +83,9 @@ const houseSchema = new mongoose.Schema({
   latitude: String,
   longitude: String,
   description: String,
-  username: { type: String, required: true }
+  username: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true }
 });
 const House = mongoose.model('House', houseSchema);
 
@@ -93,7 +97,9 @@ const marketSchema = new mongoose.Schema({
   latitude: String,
   longitude: String,
   description: String,
-  username: { type: String, required: true }
+  username: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true }
 });
 const Market = mongoose.model('Market', marketSchema);
 
@@ -176,7 +182,8 @@ app.post('/signup', [
   body('username').notEmpty().withMessage('Username is required'),
   body('email').isEmail().withMessage('Email is required and must be valid'),
   body('password').notEmpty().withMessage('Password is required'),
-  body('confirmPassword').notEmpty().withMessage('Confirm Password is required')
+  body('confirmPassword').notEmpty().withMessage('Confirm Password is required'),
+  body('phone').notEmpty().withMessage('Phone number is required')
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -203,7 +210,7 @@ app.post('/signup', [
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({username, email, password: hashedPassword, phone });
     await newUser.save();
 
     req.session.user = newUser;
@@ -268,17 +275,19 @@ app.post('/house', upload.single('image'), [
   body('rent').isNumeric().withMessage('Rent must be a number'),
   body('latitude').notEmpty().withMessage('Latitude is required'),
   body('longitude').notEmpty().withMessage('Longitude is required'),
-  body('description').notEmpty().withMessage('Description is required')
+  body('description').notEmpty().withMessage('Description is required'),
+  body('email').isEmail().withMessage('Email is required and must be valid'), //email
+  body('phone').notEmpty().withMessage('Phone number is required') //phone
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).render('form', { routeName: 'house', errors: errors.array(), activeLink: 'house' });
   }
 
-  const { title, location, rent, latitude, longitude, description } = req.body;
-  const username = req.session.user.username;
-
+  
   try {
+    const { title, location, rent, latitude, longitude, description, email, phone } = req.body;
+    const username = req.session.user.username;
     const result = await cloudinary.uploader.upload(req.file.path);
     const house = new House({
       title,
@@ -288,7 +297,9 @@ app.post('/house', upload.single('image'), [
       longitude,
       description,
       image: result.secure_url,
-      username
+      username,
+      email, //email
+      phone //phone
     });
 
     await house.save();
@@ -328,17 +339,19 @@ app.post('/market', upload.single('image'), [
   body('price').isNumeric().withMessage('Price must be a number'),
   body('latitude').notEmpty().withMessage('Latitude is required'),
   body('longitude').notEmpty().withMessage('Longitude is required'),
-  body('description').notEmpty().withMessage('Description is required')
+  body('description').notEmpty().withMessage('Description is required'),
+  body('email').isEmail().withMessage('Email is required and must be valid'),
+  body('phone').notEmpty().withMessage('Phone number is required')
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).render('form', { routeName: 'market', errors: errors.array(), activeLink: 'market' });
   }
 
-  const { title, location, price, latitude, longitude, description } = req.body;
-  const username = req.session.user.username;
-
+  
   try {
+    const { title, location, price, latitude, longitude, description, email, phone } = req.body;
+    const username = req.session.user.username;
     const result = await cloudinary.uploader.upload(req.file.path);
     const market = new Market({
       title,
@@ -348,7 +361,9 @@ app.post('/market', upload.single('image'), [
       longitude,
       description,
       image: result.secure_url,
-      username
+      username,
+      email, //email
+      phone //phone
     });
 
     await market.save();
@@ -387,17 +402,19 @@ app.post('/food', upload.single('image'), [
   body('location').notEmpty().withMessage('Location is required'),
   body('latitude').notEmpty().withMessage('Latitude is required'),
   body('longitude').notEmpty().withMessage('Longitude is required'),
-  body('description').notEmpty().withMessage('Description is required')
+  body('description').notEmpty().withMessage('Description is required'),
+  body('email').isEmail().withMessage('Email is required and must be valid'), //email
+  body('phone').notEmpty().withMessage('Phone number is required') //phone
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).render('form', { routeName: 'food', errors: errors.array(), activeLink: 'food' });
   }
 
-  const { title, location, latitude, longitude, description } = req.body;
-  const username = req.session.user.username;
-
+  
   try {
+    const { title, location, latitude, longitude, description, email, phone } = req.body;
+    const username = req.session.user.username;
     const result = await cloudinary.uploader.upload(req.file.path);
     const food = new Food({
       title,
@@ -406,7 +423,9 @@ app.post('/food', upload.single('image'), [
       longitude,
       description,
       image: result.secure_url,
-      username
+      username,
+      email, //email
+      phone //phone
     });
 
     await food.save();
