@@ -1,113 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <%- include('partials/head') %> 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="formstyle.css">
-    <script src="/client-validation.js" defer></script>
-    <style>
-        .input-submit {
-            padding: 10px 20px;
-            height: 50px;
-        }
-        .input-submit:hover {
-            background-color: #000;
-            color: #fff;
-        }
-    </style>
-    
+    <%- include('partials/head') %>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="formstyle.css">
+        <script src="/client-validation.js" defer></script>
+        <style>
+            .input-submit {
+                padding: 10px 20px;
+                height: 50px;
+            }
+
+            .input-submit:hover {
+                background-color: #000;
+                color: #fff;
+            }
+
+            /* Add this to your formstyle.css or a new CSS file */
+            .navbar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1000;
+                /* ensures navbar stays on top */
+                background-color: #fff;
+                /* or your preferred background color */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                /* adds a shadow to make it stand out */
+                padding: 10px 20px;
+            }
+
+            .container {
+                margin-top: 60px;
+                /* add a top margin to avoid content overlapping with the navbar */
+            }
+        </style>
+
 </head>
+
 <body>
     <%- include('partials/navbar') %>
 
-    <div class="container">
-        <div class="box">
-            <div class="header">
-                <p><%= action === 'login' ? 'Log In' : 'Sign Up' %></p>
+        <div class="container">
+            <div class="box">
+                <div class="header">
+                    <p>
+                        <%= action==='login' ? 'Log In' : 'Sign Up' %>
+                    </p>
+                </div>
+                <% if (errors && errors.length> 0) { %>
+                    <div class="alert alert-danger">
+                        <% errors.forEach(function(error) { %>
+                            <div class="error-message"><i class="bx bx-error"></i>
+                                <%= error.msg %>
+                            </div>
+                            <% }); %>
+                    </div>
+                    <% } %>
+                        <form action="/<%= action %>" method="post" id="authForm" novalidate>
+                            <% if (action==='signup' ) { %>
+                                <div class="input-box">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="input-field" id="username" name="username"
+                                        placeholder="Enter Username" required>
+                                    <i class="bx bx-user"></i>
+                                </div>
+                                <div class="input-box">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="input-field" id="email" name="email"
+                                        placeholder="Enter Email" required>
+                                    <i class="bx bx-envelope"></i>
+                                </div>
+                                <div class="input-box">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="input-field" id="password" name="password"
+                                        placeholder="Enter Password" required>
+                                    <i class="bx bx-show" data-target="password"
+                                        onclick="togglePasswordVisibility(this)"></i>
+                                </div>
+                                <div class="input-box">
+                                    <label for="confirmPassword">Confirm Password</label>
+                                    <input type="password" class="input-field" id="confirmPassword"
+                                        name="confirmPassword" placeholder="Confirm Password" required>
+                                    <i class="bx bx-show" data-target="confirmPassword"
+                                        onclick="togglePasswordVisibility(this)"></i>
+                                </div>
+                                <% } else { %>
+                                    <div class="input-box">
+                                        <label for="username">Username</label>
+                                        <input type="text" class="input-field" id="username" name="username"
+                                            placeholder="Enter Username" required>
+                                        <i class="bx bx-user"></i>
+                                    </div>
+                                    <div class="input-box">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="input-field" id="password" name="password"
+                                            placeholder="Enter Password" required>
+                                        <i class="bx bx-show" data-target="password"
+                                            onclick="togglePasswordVisibility(this)"></i>
+                                    </div>
+                                    <% } %>
+                                        <div class="input-box">
+                                            <input type="submit" class="input-submit"
+                                                value="<%= action === 'login' ? 'LOGIN' : 'SIGN UP' %>">
+                                        </div>
+                        </form>
+                        <div class="bottom">
+                            <span>
+                                <a href="/auth?<%= action === 'login' ? 'action=signup' : 'action=login' %>">
+                                    <%= action==='login' ? 'Sign Up' : 'Log in' %>
+                                </a>
+                            </span>
+                            <% if (action==='login' ) { %>
+                                <span><a href="#">Forgot Password?</a></span>
+                                <% } %>
+                        </div>
             </div>
-            <% if (errors && errors.length > 0) { %>
-                <div class="alert alert-danger">
-                    <% errors.forEach(function(error) { %>
-                        <div class="error-message"><i class="bx bx-error"></i> <%= error.msg %></div>
-                    <% }); %>
-                </div>
-            <% } %>
-            <form action="/<%= action %>" method="post" id="authForm" novalidate>
-                <% if (action === 'signup') { %>
-                    <div class="input-box">
-                        <label for="username">Username</label>
-                        <input type="text" class="input-field" id="username" name="username" placeholder="Enter Username" required>
-                        <i class="bx bx-user"></i>
-                    </div>
-                    <div class="input-box">
-                        <label for="email">Email</label>
-                        <input type="email" class="input-field" id="email" name="email" placeholder="Enter Email" required>
-                        <i class="bx bx-envelope"></i>
-                    </div>
-                    <div class="input-box">
-                        <label for="password">Password</label>
-                        <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
-                        <i class="bx bx-show" data-target="password" onclick="togglePasswordVisibility(this)"></i>
-                    </div>
-                    <div class="input-box">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" class="input-field" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
-                        <i class="bx bx-show" data-target="confirmPassword" onclick="togglePasswordVisibility(this)"></i>
-                    </div>
-                <% } else { %>
-                    <div class="input-box">
-                        <label for="username">Username</label>
-                        <input type="text" class="input-field" id="username" name="username" placeholder="Enter Username" required>
-                        <i class="bx bx-user"></i>
-                    </div>
-                    <div class="input-box">
-                        <label for="password">Password</label>
-                        <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
-                        <i class="bx bx-show" data-target="password" onclick="togglePasswordVisibility(this)"></i>
-                    </div>
-                <% } %>
-                <div class="input-box">
-                    <input type="submit" class="input-submit" value="<%= action === 'login' ? 'LOGIN' : 'SIGN UP' %>">
-                </div>
-            </form>
-            <div class="bottom">
-                <span>
-                    <a href="/auth?<%= action === 'login' ? 'action=signup' : 'action=login' %>">
-                        <%= action === 'login' ? 'Sign Up' : 'Log in' %>
-                    </a>
-                </span>
-                <% if (action === 'login') { %>
-                    <span><a href="#">Forgot Password?</a></span>
-                <% } %>
-                </div>
+            <div class="wrapper"></div>
         </div>
-        <div class="wrapper"></div>
-    </div>
 
-    <%- include('partials/bottom_nav') %>
-    <script>
-        // /preloader js styling
-        let preloader = document.querySelector("#preloader");
-        window.addEventListener("load",function(e){
-            preloader.style.display = "none";
-        });
-    </script>
-    <script>
-        function togglePasswordVisibility(icon) {
-            const targetId = icon.getAttribute('data-target');
-            const passwordInput = document.getElementById(targetId);
-    
-            // Toggle between 'password' and 'text' type
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('bx-show');
-                icon.classList.add('bx-hide');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('bx-hide');
-                icon.classList.add('bx-show');
-            }
-        }
-    </script>    
+        <%- include('partials/bottom_nav') %>
+            <script>
+                // /preloader js styling
+                let preloader = document.querySelector("#preloader");
+                window.addEventListener("load", function (e) {
+                    preloader.style.display = "none";
+                });
+            </script>
+            <script>
+                function togglePasswordVisibility(icon) {
+                    const targetId = icon.getAttribute('data-target');
+                    const passwordInput = document.getElementById(targetId);
+
+                    // Toggle between 'password' and 'text' type
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.remove('bx-show');
+                        icon.classList.add('bx-hide');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.remove('bx-hide');
+                        icon.classList.add('bx-show');
+                    }
+                }
+            </script>
 </body>
+
 </html>
