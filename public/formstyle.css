@@ -4,10 +4,7 @@
     --text-color: #333;
     --border-color: rgb(153, 157, 158);
     --focus-color: rgb(89, 53, 180);
-    --box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.15);
-    --light-background: rgba(255, 255, 255, 0.9);
-    --hover-bg: rgba(30, 38, 58, 0.1);
-    --input-bg: rgba(255, 255, 255, 0.8);
+    --box-shadow: 2px 2px 15px 2px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -17,32 +14,25 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
     color: var(--text-color);
-    background: linear-gradient(to bottom right, #f0f4f8, #e1e7ee);
+}
+
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-}
-
-.container {
     position: relative;
 }
 
 .box {
     width: 100%;
     max-width: 450px;
-    background: var(--light-background);
+    background: #fff;
     border-radius: 30px;
     padding: 40px;
     box-shadow: var(--box-shadow);
     z-index: 10;
-    transition: transform 0.3s ease;
-}
-
-.box:hover {
-    transform: translateY(-5px);
 }
 
 .wrapper {
@@ -53,11 +43,6 @@ body {
     background: rgba(255, 255, 255, 0.53);
     box-shadow: var(--box-shadow);
     transform: rotate(5deg);
-    transition: opacity 0.3s ease;
-}
-
-.wrapper:hover {
-    opacity: 0.9;
 }
 
 .header {
@@ -65,17 +50,15 @@ body {
 }
 
 .header p {
-    font-size: 26px;
+    font-size: 25px;
     font-weight: 800;
     margin-top: 10px;
-    text-align: center;
-    color: var(--primary-color);
 }
 
 .input-box {
     display: flex;
     flex-direction: column;
-    margin: 15px 0;
+    margin: 10px 0;
     position: relative;
 }
 
@@ -86,11 +69,10 @@ body {
     right: 12px;
     cursor: pointer; 
     color: #595b5e;
-    transition: color 0.3s ease;
 }
 
 .input-field {
-    height: 45px;
+    height: 40px;
     border: 2px solid var(--border-color);
     border-radius: 7px;
     margin: 7px 0;
@@ -98,13 +80,12 @@ body {
     font-weight: 500;
     padding: 0 40px 0 10px;    
     font-size: 17px;
-    background: var(--input-bg);
-    transition: all 0.3s ease-in-out;
+    background: transparent;
+    transition: all .3s ease-in-out;
 }
 
 .input-field:focus {
     border-color: var(--focus-color);
-    background: rgba(255, 255, 255, 1);
 }
 
 .input-field:focus ~ i {
@@ -119,15 +100,12 @@ body {
     border-radius: 10px;
     color: #fff;
     cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition: all .3s ease-in-out;
+    border-radius: 9px;
 }
 
 .input-submit:hover {
     background: var(--secondary-color);
-    transform: scale(1.05);
 }
 
 .bottom {
@@ -139,11 +117,9 @@ body {
 .bottom a {
     color: #727374;
     text-decoration: none;
-    transition: color 0.3s ease;
 }
 
 .bottom a:hover {
-    color: var(--focus-color);
     text-decoration: underline;
 }
 
