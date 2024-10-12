@@ -146,27 +146,27 @@
       </div>
     </section>
 
-    <section class = "container mt-5 mb-5 pb-5">
+    <section class="container mt-5 mb-5 pb-5">
         <div class="row">
             <div class="col-md-4">
                 <h3>Welcome to Our Project!</h3>
-                <p>Scruter Team is thrilled to be part of <strong>GirlScript Summer of Code (GSoC) Extended 2024</strong> and <strong>Hacktoberfest 2024</strong>, two incredible initiatives that empower developers worldwide to contribute to open-source projects.</p>
+                <p>The Scruter Team is excited to be part of <strong>GSSoC Extended 2024</strong> and <strong>Hacktoberfest 2024</strong>, initiatives that empower global developers to contribute to open-source projects.</p>
             </div>
             <div class="col-md-4">
-                <h3>Join Us in Our Journey</h3>
-                <p>Our project aims to <strong> help you discover local services, post ads, and interact with your community </strong>. As part of GSSoC, we are working hard to enhance our features and improve user experience.</p>
+                <h3>Join Us!</h3>
+                <p>Our project helps you <strong>discover local services and interact with your community</strong>. We are enhancing features to improve user experience.</p>
             </div>
             <div class="col-md-4">
                 <h3>Get Involved!</h3>
-                <p>Whether you are an experienced developer or just starting out, we welcome contributions from everyone! Hacktoberfest is the perfect opportunity to dive into the world of open source.</p>
+                <p>All contributions are welcome! Hacktoberfest is a great way to dive into open source.</p>
             </div>
         </div>
         
-        <section class = "container mt-5 mb-5 pb-5">
-            <p class = "text-center">Explore our repository here: <a href="https://github.com/swarooppatilx/scruter" target="_blank">GitHub Repository Link</a> and start   contributing today!</p>
+        <section class="container mt-5 mb-5 pb-5">
+            <p class="text-center">Explore our repository: <a href="https://github.com/swarooppatilx/scruter" target="_blank" class = "repo-link"> <i class="fab fa-github"></i> GitHub Repository Link</a> and start contributing!</p>
         </section>
-
     </section>
+    
 
     <!-- Custom CSS -->
     <style>
@@ -177,6 +177,21 @@
         transform: translateY(-10px);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
       }
+
+      .repo-link {
+        color: #007bff; /* Bootstrap primary color */
+        font-weight: bold;
+        text-decoration: none; /* Remove underline */
+        padding: 5px 10px; /* Add some padding */
+        border: 2px solid #007bff; /* Add border */
+        border-radius: 5px; /* Rounded corners */
+        transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    }
+
+      .repo-link:hover {
+        background-color: #007bff; /* Change background on hover */
+        color: white; /* Change text color on hover */
+   }
     </style>
 
     <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>
