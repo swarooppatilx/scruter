@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <%- include('partials/head') %> 
+  <%- include('partials/head') %>
     <style>
       .social-icons a {
-      transition: all .38s ease;
-      font-size: 25px;
-      margin-left: 10px;
-      color: black;
+        transition: all .38s ease;
+        font-size: 25px;
+        margin-left: 10px;
+        color: black;
       }
-      .social-icons a:hover{
+
+      .social-icons a:hover {
         color: white;
         transform: scale(1.2);
         padding: 2px 6px;
         border-radius: 4px;
       }
-      #github:hover{
-        background-color:#3a383c ;
+
+      #github:hover {
+        background-color: #3a383c;
       }
-      #linkedin:hover{
-        background-color:#0a66c2 ;
+
+      #linkedin:hover {
+        background-color: #0a66c2;
       }
-      #instagram:hover{
+
+      #instagram:hover {
         background-color: #e1306c;
       }
-      #twitter:hover{
+
+      #twitter:hover {
         background-color: #14171A;
       }
     </style>
 </head>
+
 <body>
-    <%- include('partials/navbar') %>
-    
+  <%- include('partials/navbar') %>
+
     <!-- Meet the Team Section -->
     <section class="team-section text-center mt-4 mb-5 pb-5">
       <div class="container">
@@ -56,7 +63,8 @@
             <div class="social-icons">
               <a href="https://instagram.com/ashish_kharde1" id="instagram"><i class="fab fa-instagram"></i></a>
               <a href="https://x.com/ashkharde" id="twitter"><i class="fab fa-x-twitter"></i></a>
-              <a href="https://linkedin.com/in/ashish-kharde-b5a114288/" id="linkedin"><i class="fab fa-linkedin"></i></a>
+              <a href="https://linkedin.com/in/ashish-kharde-b5a114288/" id="linkedin"><i
+                  class="fab fa-linkedin"></i></a>
               <a href="https://github.com/Ashish-kharde1" id="github"><i class="fab fa-github"></i></a>
             </div>
           </div>
@@ -67,7 +75,8 @@
             <div class="social-icons">
               <a href="https://instagram.com/chinmay._.29/" id="instagram"><i class="fab fa-instagram"></i></a>
               <a href="#" id="twitter"><i class="fab fa-x-twitter"></i></a>
-              <a href="https://linkedin.com/in/chinmay-nakwa-9a0836241" id="linkedin"><i class="fab fa-linkedin"></i></a>
+              <a href="https://linkedin.com/in/chinmay-nakwa-9a0836241" id="linkedin"><i
+                  class="fab fa-linkedin"></i></a>
               <a href="https://github.com/ChinmayNakwa" id="github"><i class="fab fa-github"></i></a>
             </div>
           </div>
@@ -78,7 +87,8 @@
             <div class="social-icons">
               <a href="https://instagram.com/omkar_avasare_" id="instagram"><i class="fab fa-instagram"></i></a>
               <a href="https://x.com/omkar_avasare" id="twitter"><i class="fab fa-x-twitter"></i></a>
-              <a href="https://linkedin.com/in/omkar-avasare-302212279" id="linkedin"><i class="fab fa-linkedin"></i></a>
+              <a href="https://linkedin.com/in/omkar-avasare-302212279" id="linkedin"><i
+                  class="fab fa-linkedin"></i></a>
               <a href="https://github.com/Omkar-Avasare" id="github"><i class="fab fa-github"></i></a>
             </div>
           </div>
@@ -89,7 +99,8 @@
             <div class="social-icons">
               <a href="https://instagram.com/hrishikesh_wadile" id="instagram"><i class="fab fa-instagram"></i></a>
               <a href="#" id="twitter"><i class="fab fa-x-twitter"></i></a>
-              <a href="https://linkedin.com/in/hrishikesh-wadile-5b8284292" id="linkedin"><i class="fab fa-linkedin"></i></a>
+              <a href="https://linkedin.com/in/hrishikesh-wadile-5b8284292" id="linkedin"><i
+                  class="fab fa-linkedin"></i></a>
               <a href="https://github.com/HrishikeshWadile" id="github"><i class="fab fa-github"></i></a>
             </div>
           </div>
@@ -100,7 +111,8 @@
             <div class="social-icons">
               <a href="https://instagram.com/anushkagaikwad924" id="instagram"><i class="fab fa-instagram"></i></a>
               <a href="https://x.com/AnushkaGai32263" id="twitter"><i class="fab fa-x-twitter"></i></a>
-              <a href="https://in.linkedin.com/in/anushka-gaikwad-562981310" id="linkedin"><i class="fab fa-linkedin"></i></a>
+              <a href="https://in.linkedin.com/in/anushka-gaikwad-562981310" id="linkedin"><i
+                  class="fab fa-linkedin"></i></a>
               <a href="#" id="github"><i class="fab fa-github"></i></a>
             </div>
           </div>
@@ -110,10 +122,10 @@
     <script>
       // /preloader js styling
       let preloader = document.querySelector("#preloader");
-                window.addEventListener("load",function(e){
-                    preloader.style.display = "none";
-                });
-      document.querySelector("#chinmay-photo").addEventListener("click", function(){
+      window.addEventListener("load", function (e) {
+        preloader.style.display = "none";
+      });
+      document.querySelector("#chinmay-photo").addEventListener("click", function () {
         document.querySelector("#chinmay-photo").setAttribute("src", "/chinmay2.jpg");
         document.querySelector("#chinmay-role").setHTMLUnsafe("AI Jargon Expert");
       });
@@ -121,4 +133,5 @@
 
     <%- include('partials/bottom_nav') %>
 </body>
+
 </html>

@@ -99,7 +99,7 @@ function previewImage() {
 async function useCurrentLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-            async function(position) {
+            async function (position) {
                 const lat = position.coords.latitude;
                 const lng = position.coords.longitude;
                 document.getElementById('latitude').value = lat;
@@ -109,7 +109,7 @@ async function useCurrentLocation() {
                 const data = await response.json();
                 document.getElementById('location').value = "Near " + data.display_name;
             },
-            function(error) {
+            function (error) {
                 console.error('Geolocation error:', error);
                 alert('Geolocation error: ' + error.message);
             },

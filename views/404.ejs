@@ -1,76 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>404 - PAGE NOT FOUND</title>
-<style>
-body {
-    background-color: #0078d7;
-    color: white;
-    font-family: 'Segoe UI', 'Microsoft Sans Serif', sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-.container {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 80px 48px 48px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-.sad-face {
-    font-size: 100px;
-    font-weight: 100;
-    line-height: 1;
-    margin-bottom: 40px;
-}
-h1 {
-    font-size: 28px;
-    font-weight: 300;
-    margin-bottom: 20px;
-    max-width: 750px;
-}
-p {
-    font-size: 18px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    max-width: 750px;
-}
-.progress {
-    margin: 30px 0;
-}
-.qr-code {
-    width: 120px;
-    height: 120px;
-    background-color: white;
-    margin-top: 30px;
-}
-.small-text {
-    font-size: 14px;
-    opacity: 0.8;
-    margin-top: 20px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - PAGE NOT FOUND</title>
+    <style>
+        body {
+            background-color: #0078d7;
+            color: white;
+            font-family: 'Segoe UI', 'Microsoft Sans Serif', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 80px 48px 48px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .sad-face {
+            font-size: 100px;
+            font-weight: 100;
+            line-height: 1;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            max-width: 750px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            max-width: 750px;
+        }
+
+        .progress {
+            margin: 30px 0;
+        }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            margin-top: 30px;
+        }
+
+        .small-text {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-<div class="container">
-    <div class="sad-face">:(</div>
-    <h1>Your page ran into a problem and needs to restart.</h1>
-    <p>We're just collecting some error info, and then we'll restart for you.</p>
-    <div class="progress">
-        <p>50% complete</p>
+    <div class="container">
+        <div class="sad-face">:(</div>
+        <h1>Your page ran into a problem and needs to restart.</h1>
+        <p>We're just collecting some error info, and then we'll restart for you.</p>
+        <div class="progress">
+            <p>50% complete</p>
+        </div>
+        <img class="qr-code" src="/qr.png" alt="QR Code">
+        <p>For more information about this issue and possible fixes, visit<br><a href="https://github.com/swarooppatilx"
+                style="color: white; text-decoration: none;">https://github.com/swarooppatilx</a></p>
+        <p class="small-text">If you call a support person, give them this info:<br>
+            Stop code: PAGE_NOT_FOUND<br>
+            What failed: router</p>
     </div>
-    <img class="qr-code" src="/qr.png" alt="QR Code">
-    <p>For more information about this issue and possible fixes, visit<br><a href="https://github.com/swarooppatilx" style="color: white; text-decoration: none;">https://github.com/swarooppatilx</a></p>
-    <p class="small-text">If you call a support person, give them this info:<br>
-    Stop code: PAGE_NOT_FOUND<br>
-    What failed: router</p>
-</div>
 </body>
+
 </html>

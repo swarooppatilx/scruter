@@ -46,9 +46,9 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-      folder: 'uploads',
-      format: async (req, file) => 'jpeg', // Supports promises as well
-      public_id: (req, file) => Date.now() + '-' + file.originalname.replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 100),
+    folder: 'uploads',
+    format: async (req, file) => 'jpeg', // Supports promises as well
+    public_id: (req, file) => Date.now() + '-' + file.originalname.replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 100),
   },
 });
 
@@ -210,7 +210,7 @@ app.post('/signup', [
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({username, email, password: hashedPassword, phone });
+    const newUser = new User({ username, email, password: hashedPassword, phone });
     await newUser.save();
 
     req.session.user = newUser;
@@ -284,7 +284,7 @@ app.post('/house', upload.single('image'), [
     return res.status(400).render('form', { routeName: 'house', errors: errors.array(), activeLink: 'house' });
   }
 
-  
+
   try {
     const { title, location, rent, latitude, longitude, description, email, phone } = req.body;
     const username = req.session.user.username;
@@ -348,7 +348,7 @@ app.post('/market', upload.single('image'), [
     return res.status(400).render('form', { routeName: 'market', errors: errors.array(), activeLink: 'market' });
   }
 
-  
+
   try {
     const { title, location, price, latitude, longitude, description, email, phone } = req.body;
     const username = req.session.user.username;
@@ -411,7 +411,7 @@ app.post('/food', upload.single('image'), [
     return res.status(400).render('form', { routeName: 'food', errors: errors.array(), activeLink: 'food' });
   }
 
-  
+
   try {
     const { title, location, latitude, longitude, description, email, phone } = req.body;
     const username = req.session.user.username;
