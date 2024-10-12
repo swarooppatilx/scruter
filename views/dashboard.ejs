@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <section class="container mt-5">
+        <h1>User Dashboard</h1>
+        <p>Welcome, <%= user.username %>!</p>
+        <p>Email: <%= user.email %></p>
+        <p>User ID: <%= user._id %></p> <!-- You can display the ID if necessary -->
+    </section>
+    <%- include('partials/footer') %>
+</body>
+</html>

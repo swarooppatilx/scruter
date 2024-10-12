@@ -251,6 +251,12 @@ app.get('/market/form', ensureAuthenticated, (req, res) => {
   res.render('form', { routeName: 'market', errors: [], activeLink: 'market' });
 });
 
+// Express Route to render the User Dashboard page
+app.get('/dashboard', ensureAuthenticated, (req, res) => {
+  console.log('User Dashboard accessed by:', req.session.user);
+  res.render('dashboard', { user: req.session.user, errors: [], activeLink: 'dashboard' });
+});
+
 // Handle search and display for houses
 app.get('/house', async (req, res) => {
   try {

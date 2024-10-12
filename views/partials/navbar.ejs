@@ -202,6 +202,11 @@ a {
         <span class="navbar-text mb-2 mb-lg-0 me-lg-3"
           >Welcome, <%= user.username %>!</span
         >
+        <!-- User Dashboard Button here-->
+        <a class="btn mb-2 mb-lg-0 me-lg-2" style="background-color: #5bc0de; color: white;" href="/dashboard">
+          <i class="fa-solid fa-tachometer-alt me-2"></i>Dashboard
+        </a>
+        <!-- Logout Button -->
         <a class="btn btn-outline-danger mb-2 mb-lg-0 me-lg-2" href="/logout"
           ><i class="fa-solid fa-user me-2"></i>Logout</a
         >
@@ -221,9 +226,7 @@ a {
           >
             <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
             <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
-            <li>
-              <a class="dropdown-item" href="/market/form">For Sale Ad</a>
-            </li>
+            <li><a class="dropdown-item" href="/market/form">For Sale Ad</a></li>
           </ul>
         </div>
         <% } else { %>
