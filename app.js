@@ -190,7 +190,7 @@ app.post('/signup', [
     return res.status(400).render('auth', { action: 'signup', errors: errors.array(), activeLink: '' });
   }
 
-  const { username, email, password, confirmPassword } = req.body;
+  const { username, email, password, confirmPassword, phone } = req.body;
 
   if (password !== confirmPassword) {
     return res.status(400).render('auth', { action: 'signup', errors: [{ msg: 'Passwords do not match' }], activeLink: '' });
@@ -210,7 +210,7 @@ app.post('/signup', [
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({username, email, password: hashedPassword, phone });
+    const newUser = new User({username, email, password: hashedPassword, phone});
     await newUser.save();
 
     req.session.user = newUser;
