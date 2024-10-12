@@ -16,7 +16,6 @@
     </script>
     <%- include('partials/head') %>
         <style>
-            
             .social-section {
                 padding: 30px;
             }
@@ -36,10 +35,11 @@
                 color: var(--text-color) !important;
             }
 
-            .bg-dark{
+            .bg-dark {
                 background-color: var(--bg-color) !important;
                 color: var(--text-color) !important;
             }
+
             /* Media query for phone screens or smaller */
             @media (max-width: 900px) {
                 body {
@@ -94,14 +94,14 @@
             </section>
             <%- include('partials/footer') %>
 
-            <%- include('partials/bottom_nav') %>
-            <script>
-                // /preloader js styling
-                let preloader = document.querySelector("#preloader");
-                window.addEventListener("load",function(e){
-                    preloader.style.display = "none";
-                });
-            </script>
+                <%- include('partials/bottom_nav') %>
+                    <script>
+                        // /preloader js styling
+                        let preloader = document.querySelector("#preloader");
+                        window.addEventListener("load", function (e) {
+                            preloader.style.display = "none";
+                        });
+                    </script>
 </body>
 
 </html>

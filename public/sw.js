@@ -20,7 +20,7 @@ self.addEventListener('fetch', (event) => {
         if (response) {
           return response;
         }
-        
+
         // Fetch the resource from the network
         return fetch(event.request).catch(() => {
           // If both cache and network are unavailable, show the offline page
