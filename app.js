@@ -233,6 +233,11 @@ app.get('/logout', (req, res) => {
   });
 });
 
+// Contributors Route
+app.get('/contributors', (req, res) => {
+  res.render('contributors', { activeLink: 'contributors' });
+});
+
 // Render form pages with authentication check
 app.get('/food/form', ensureAuthenticated, (req, res) => {
   res.render('form', { routeName: 'food', errors: [], activeLink: 'food' });

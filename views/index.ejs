@@ -1,129 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Add service worker -->
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then((registration) => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch((error) => {
-                    console.error('Service Worker registration failed:', error);
-                });
-        }
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then((registration) => {
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope
+            );
+          })
+          .catch((error) => {
+            console.error("Service Worker registration failed:", error);
+          });
+      }
     </script>
     <%- include('partials/head') %>
-        <style>
-            
-            .social-section {
-                padding: 30px;
-            }
+    <style>
+      .social-section {
+        padding: 30px;
+      }
 
-            :root {
-                --bg-color: #ffffff;
-                --text-color: #000000;
-            }
+      :root {
+        --bg-color: #ffffff;
+        --text-color: #000000;
+      }
 
-            .dark-mode {
-                --bg-color: #1c1c1c;
-                --text-color: #ffffff;
-            }
+      .dark-mode {
+        --bg-color: #1c1c1c;
+        --text-color: #ffffff;
+      }
 
-            body {
-                background-color: var(--bg-color) !important;
-                color: var(--text-color) !important;
-            }
+      body {
+        background-color: var(--bg-color) !important;
+        color: var(--text-color) !important;
+      }
 
-            .bg-dark{
-                background-color: var(--bg-color) !important;
-                color: var(--text-color) !important;
-            }
-            /* Media query for phone screens or smaller */
-            @media (max-width: 900px) {
-                body {
-                    padding-bottom: 61px;
-                }
-            }
-        </style>
-</head>
+      .bg-dark {
+        background-color: var(--bg-color) !important;
+        color: var(--text-color) !important;
+      }
+      /* Media query for phone screens or smaller */
+      @media (max-width: 900px) {
+        body {
+          padding-bottom: 61px;
+        }
+      }
+    </style>
 
-<body>
+    <!-- Information Section -->
+    <style>
+      .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
 
+  <body>
     <%- include('partials/navbar') %>
-        <div class="justify-content-center"><img src="/background.jpg" style="width: 100%; height: auto;"
-                class="img-fluid"></div>
+    <div class="justify-content-center">
+      <img
+        src="/background.jpg"
+        style="width: 100%; height: auto"
+        class="img-fluid"
+      />
+    </div>
 
-        <!-- Search Bar -->
-        <%- include('partials/searchbar') %>
+    <!-- Search Bar -->
+    <%- include('partials/searchbar') %>
 
-            <!-- Mission Section -->
-            <section class="mission-section text-center">
-                <div class="container">
-                    <h2 class="mb-4">Welcome to Scruter</h2>
-                    <p class="lead">Your go-to platform for buying, selling, and finding everything you need locally.
-                    </p>
-                    <p>Connecting communities and making local commerce easy and accessible for everyone.</p>
-                    <% if(!user) { %>
-                        <a href="/auth" class="btn btn-lg cta-button btn-outline-success mx-2">Join Now</a>
-                        <% } %>
-                            <a href="/team" class="btn btn-lg cta-button btn-outline-success">Our Team</a>
-                </div>
-            </section>
+    <!-- Mission Section -->
+    <section class="mission-section text-center">
+      <div class="container">
+        <h2 class="mb-4">Welcome to Scruter</h2>
+        <p class="lead">
+          Your go-to platform for buying, selling, and finding everything you
+          need locally.
+        </p>
+        <p>
+          Connecting communities and making local commerce easy and accessible
+          for everyone.
+        </p>
+        <% if(!user) { %>
+        <a href="/auth" class="btn btn-lg cta-button btn-outline-success mx-2"
+          >Join Now</a
+        >
+        <% } %>
+        <a href="/team" class="btn btn-lg cta-button btn-outline-success"
+          >Our Team</a
+        >
+      </div>
+    </section>
 
-            <!-- Information Section -->
-            <section class="container mt-5 mb-5 pb-5">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h3>What is Scruter?</h3>
-                        <p>Scruter is a local classifieds and community site designed to bring people together for
-                            buying, selling, and exchanging goods and services.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>How It Works</h3>
-                        <p>Post ads, browse listings, and connect with others in your community. Whether you're looking
-                            for food, a place to live, or something to buy, Scruter has it all.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>Get Started</h3>
-                        <p>Creating an account is easy and free. Start posting your ads and discover what your community
-                            has to offer today!</p>
-                    </div>
-                </div>
-            </section>
+    <!-- Information Section -->
+    <section class="container mt-5 mb-5 pb-5">
+      <div class="row">
+        <div class="col-md-4 d-flex justify-content-center">
+          <div class="card text-center shadow h-100 card-hover">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <h3 class="card-title">What is Scruter?</h3>
+              <p class="card-text">
+                Scruter is a local classifieds and community site designed to
+                bring people together for buying, selling, and exchanging goods
+                and services. With an easy-to-use interface, Scruter connects
+                you with people in your local community, whether you're looking
+                for a specific product, service, or simply to connect with
+                like-minded individuals.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+          <div class="card text-center shadow h-100 card-hover">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <h3 class="card-title">How It Works</h3>
+              <p class="card-text">
+                Post ads, browse listings, and connect with others in your
+                community. Whether you're looking for food, housing, services,
+                or just want to sell something, Scruter's platform allows
+                seamless interaction between buyers and sellers with a few
+                simple steps.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+          <div class="card text-center shadow h-100 card-hover">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <h3 class="card-title">Get Started</h3>
+              <p class="card-text">
+                Creating an account is easy and free. In just a few minutes, you
+                can start posting ads and discover what your community has to
+                offer. Join Scruter today and make buying, selling, or
+                exchanging goods a smooth and hassle-free experience.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <section class = "container mt-5 mb-5 pb-5">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h3>Welcome to Our Project!</h3>
-                        <p>Scruter Team is thrilled to be part of <strong>GirlScript Summer of Code (GSoC) Extended 2024</strong> and <strong>Hacktoberfest 2024</strong>, two incredible initiatives that empower developers worldwide to contribute to open-source projects.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>Join Us in Our Journey</h3>
-                        <p>Our project aims to <strong> help you discover local services, post ads, and interact with your community </strong>. As part of GSSoC, we are working hard to enhance our features and improve user experience.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>Get Involved!</h3>
-                        <p>Whether you are an experienced developer or just starting out, we welcome contributions from everyone! Hacktoberfest is the perfect opportunity to dive into the world of open source.</p>
-                    </div>
-                </div>
-                
-                <section class = "container mt-5 mb-5 pb-5">
-                    <p class = "text-center">Explore our repository here: <a href="https://github.com/swarooppatilx/scruter" target="_blank">GitHub Repository Link</a> and start   contributing today!</p>
-                </section>
+    <section class = "container mt-5 mb-5 pb-5">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Welcome to Our Project!</h3>
+                <p>Scruter Team is thrilled to be part of <strong>GirlScript Summer of Code (GSoC) Extended 2024</strong> and <strong>Hacktoberfest 2024</strong>, two incredible initiatives that empower developers worldwide to contribute to open-source projects.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Join Us in Our Journey</h3>
+                <p>Our project aims to <strong> help you discover local services, post ads, and interact with your community </strong>. As part of GSSoC, we are working hard to enhance our features and improve user experience.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Get Involved!</h3>
+                <p>Whether you are an experienced developer or just starting out, we welcome contributions from everyone! Hacktoberfest is the perfect opportunity to dive into the world of open source.</p>
+            </div>
+        </div>
+        
+        <section class = "container mt-5 mb-5 pb-5">
+            <p class = "text-center">Explore our repository here: <a href="https://github.com/swarooppatilx/scruter" target="_blank">GitHub Repository Link</a> and start   contributing today!</p>
+        </section>
 
-            </section>
-            <%- include('partials/footer') %>
+    </section>
 
-            <%- include('partials/bottom_nav') %>
-            <script>
-                // /preloader js styling
-                let preloader = document.querySelector("#preloader");
-                window.addEventListener("load",function(e){
-                    preloader.style.display = "none";
-                });
-            </script>
-</body>
+    <!-- Custom CSS -->
+    <style>
+      .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+    </style>
 
+    <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>
+    <script>
+      // /preloader js styling
+      let preloader = document.querySelector("#preloader");
+      window.addEventListener("load", function (e) {
+        preloader.style.display = "none";
+      });
+    </script>
+  </body>
 </html>
