@@ -1,24 +1,40 @@
 # Description
-<!-- While submitting your PR, you are advised to strictly follow the instructions given below. If your PR gets rejected, violation of the PR raising guidelines should be a cause. -->
 
-**Please provide a summary of your changes related to the issue.** Include relevant context to help us understand the purpose and impact of your work.
+**Summary of Changes:**
+- Provide a brief overview of the changes made in relation to the issue.
 
-**List your tech stack and any dependencies that are required for this change.** This information will help us review and integrate your contributions effectively.
-<!-- Write your description according to the instructions and delete these two instruction lines -->
+**Context:**
+- Explain the motivation behind your changes and any specific problems they address.
 
-## Type of change
-- [ ] Feature Added (issue number: <!-- write issue number here -->)
-- [ ] Issue fix (issue number: <!-- write issue number here -->)
-<!-- Put X in the correct [] box 
-Example - [X] Issue fix (there should not be a space before or after X) -->
+**Tech Stack & Dependencies:**
+- List the technologies and any dependencies required for this change.
+
+---
+
+## Type of Change
+- [ ] Feature Added (Issue number: <!-- write issue number here -->)
+- [ ] Bug Fix (Issue number: <!-- write issue number here -->)
+<!-- Indicate the type of change by marking [X] in the appropriate box. Example: [X] Bug Fix -->
+
+---
+
+## Screenshots 
+
+**Screenshots:**
+- Insert relevant screenshots here.
+
+---
 
 # Checklist:
-
-- [X] I have included a README.md file for my project clearly explaining its purpose, functionality, and usage instructions (applicable for new projects, not bug fixes).
-- [X] My code adheres to the style guidelines outlined by this project.
-- [X] I have thoroughly reviewed my code to identify and address any potential errors or inconsistencies.
-- [X] I have added clear and concise comments to my code, especially in sections that might be challenging to understand at first glance.
+- [X] I have included a `README.md` file that clearly explains the project's purpose, functionality, and usage instructions (if applicable to new features).
+- [X] My code adheres to the project's style guidelines.
+- [X] I have thoroughly reviewed my code and addressed potential errors or inconsistencies.
+- [X] I have added clear and concise comments to my code where necessary, particularly in complex sections.
 - [X] I have reviewed and followed the project's [Contributing Guidelines](CONTRIBUTING.md) to ensure my contribution aligns with the project's requirements.
-<!-- You should follow-up this checklist 
-If any of the checkboxes violate your project condition, uncheck them 
-Example - [ ] I have included a README.md file for my project clearly explaining its purpose, functionality, and usage instructions (applicable for new projects, not bug fixes). -->
+
+---
+
+### Additional Notes
+- Add any additional comments or insights that may assist in reviewing your PR.
+
+<!-- Write all the context clearly and concisely. Remove instruction lines before submitting your PR. -->
