@@ -1,253 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <!-- Add service worker -->
+  <head>
+    <!-- Service worker registration script -->
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then((registration) => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch((error) => {
-                    console.error('Service Worker registration failed:', error);
-                });
-        }
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then((registration) => {
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope
+            );
+          })
+          .catch((error) => {
+            console.error("Service Worker registration failed:", error);
+          });
+      }
     </script>
     <%- include('partials/head') %>
-        <style>
-            .social-section {
-                padding: 30px;
-            }
 
-            body {
-                /* padding-bottom: 70px; */
-            }
+    <style>
+      /* Footer styling */
+      .social-section {
+        background-color: #f8f9fa; /* Light theme background */
+        padding: 40px 0;
+        border-top: 1px solid #e0e0e0;
+      }
 
-            /* Media query for phone screens or smaller */
-            @media (max-width: 900px) {
-                body {
-                    padding-bottom: 61px;
-                }
-            }
+      .social-section h4 {
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+      }
 
-            /* General styles for the footer */
-            .social-section {
-                background-color: #f8f9fa;
-                padding: 40px 0;
-                border-top: 1px solid #e0e0e0;
-            }
+      .social-section p {
+        font-size: 1.1rem;
+        color: #666;
+        max-width: 600px;
+        margin: 0 auto;
+      }
 
-            .social-section h4 {
-                font-size: 1.4rem;
-                font-weight: bold;
-                margin-bottom: 20px;
-            }
+      .social-section ul {
+        list-style: none;
+        padding-left: 0;
+      }
 
-            .social-section p {
-                font-size: 1.1rem;
-                color: #666;
-                max-width: 600px;
-                margin: 0 auto;
-            }
+      .social-section ul li {
+        margin-bottom: 10px;
+      }
 
-            /* Styling for the links in the footer */
-            .social-section ul {
-                padding-left: 0;
-                list-style: none;
-            }
+      .social-section ul li a {
+        text-decoration: none;
+        color: #333;
+        transition: color 0.3s ease;
+      }
 
-            .social-section ul li {
-                margin-bottom: 10px;
-            }
+      .social-section ul li a:hover {
+        color: #007bff; /* Hover effect */
+      }
 
-            .social-section ul li a {
-                text-decoration: none;
-                color: #333;
-                transition: color 0.3s ease;
-            }
+      .icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
 
-            .social-section ul li a:hover {
-                color: #007bff;
-            }
+      .icon-circle:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Hover shadow effect */
+      }
 
-            /* Styles for the social media icons */
-            .icon-circle {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                background-color: #fff;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                margin-bottom: 20px;
-            }
+      .icon-circle a {
+        color: #333; /* Icon color */
+        font-size: 1.8rem;
+      }
 
-            .icon-circle:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            }
+      .icon-circle a:hover {
+        color: #007bff;
+      }
 
-            .icon-circle a {
-                color: #333;
-                font-size: 1.8rem;
-            }
+      /* Social media icons gap */
+      .d-flex {
+        gap: 15px;
+      }
 
-            .icon-circle a:hover {
-                color: #007bff;
-            }
+      .copyright-text {
+        margin-top: 40px;
+        font-size: 0.9rem;
+        color: #666;
+      }
 
-            /* Gap between the social media icons */
-            .d-flex {
-                gap: 15px;
-            }
+      /* Dark theme styling */
+      body.dark-theme {
+        background-color: #121212;
+        color: #f1f1f1;
+      }
 
-            /* Copyright text styling */
-            .copyright-text {
-                margin-top: 40px;
-                font-size: 0.9rem;
-                color: #666;
-            }
+      .dark-theme .social-section {
+        background-color: #1c1c1c;
+        border-top-color: #444;
+      }
 
-            /* Responsive design: For smaller screens */
-            @media (max-width: 768px) {
-                .social-section h4 {
-                    font-size: 1.2rem;
-                }
+      .dark-theme .social-section h4,
+      .dark-theme .social-section ul li a {
+        color: #ffffff;
+      }
 
-                .social-section ul li {
-                    font-size: 1rem;
-                }
+      .dark-theme .social-section ul li a:hover {
+        color: #1e90ff; /* Hover effect in dark mode */
+      }
 
-                .icon-circle {
-                    width: 50px;
-                    height: 50px;
-                }
+      .dark-theme .icon-circle {
+        background-color: #333;
+      }
 
-                .icon-circle a {
-                    font-size: 1.5rem;
-                }
-            }
-        </style>
-</head>
+      .dark-theme .icon-circle a {
+        color: #c9c9c9;
+      }
 
-<body>
+      .dark-theme .icon-circle:hover {
+        background-color: #444;
+      }
+
+      .dark-theme .copyright-text {
+        color: #aaa;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .social-section h4 {
+          font-size: 1.2rem;
+        }
+
+        .social-section p {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
     <%- include('partials/navbar') %>
-        <div class="justify-content-center"><img src="/background.jpg" style="width: 100%; height: auto;"
-                class="img-fluid"></div>
 
-        <!-- Search Bar -->
-        <%- include('partials/searchbar') %>
+    <!-- Main sections -->
+    <div class="justify-content-center">
+      <img
+        src="/background.jpg"
+        style="width: 100%; height: auto"
+        class="img-fluid"
+        alt="Background"
+      />
+    </div>
 
-            <!-- Mission Section -->
-            <section class="mission-section text-center">
-                <div class="container">
-                    <h2 class="mb-4">Welcome to Scruter</h2>
-                    <p class="lead">Your go-to platform for buying, selling, and finding everything you need locally.
-                    </p>
-                    <p>Connecting communities and making local commerce easy and accessible for everyone.</p>
-                    <% if(!user) { %>
-                        <a href="/auth" class="btn btn-lg cta-button btn-outline-success mx-2">Join Now</a>
-                        <% } %>
-                            <a href="/team" class="btn btn-lg cta-button btn-outline-success">Our Team</a>
-                </div>
-            </section>
+    <!-- Footer Section -->
+    <section class="text-center social-section">
+      <div class="container">
+        <div class="row">
+          <!-- About Scruter Section -->
+          <div class="col-md-3">
+            <h4>About Scruter</h4>
+            <p>
+              Scruter is your local platform for buying, selling, and
+              discovering everything you need. Connecting communities for a
+              better local experience.
+            </p>
+          </div>
 
-            <!-- Information Section -->
-            <section class="container mt-5 mb-5 pb-5">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h3>What is Scruter?</h3>
-                        <p>Scruter is a local classifieds and community site designed to bring people together for
-                            buying, selling, and exchanging goods and services.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>How It Works</h3>
-                        <p>Post ads, browse listings, and connect with others in your community. Whether you're looking
-                            for food, a place to live, or something to buy, Scruter has it all.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h3>Get Started</h3>
-                        <p>Creating an account is easy and free. Start posting your ads and discover what your community
-                            has to offer today!</p>
-                    </div>
-                </div>
-            </section>
+          <!-- Quick Links -->
+          <div class="col-md-3">
+            <h4>Quick Links</h4>
+            <ul class="list-unstyled">
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/team">Our Team</a></li>
+              <li><a href="/privacy-policy">Privacy Policy</a></li>
+              <li><a href="/terms">Terms of Service</a></li>
+            </ul>
+          </div>
 
-            <!-- Footer Section -->
-            <section class="text-center social-section bg-light py-5">
-                <div class="container">
-                    <div class="row">
-                        <!-- First part: Website description -->
-                        <div class="col-md-3">
-                            <h4>About Scruter</h4>
-                            <p>Scruter is your local platform for buying, selling, and discovering everything you need.
-                                Whether it's products, services, or community activities, we connect people for a better
-                                local experience.</p>
-                        </div>
+          <!-- Helpdesk and Contact Links -->
+          <div class="col-md-3">
+            <h4>Helpdesk</h4>
+            <ul class="list-unstyled">
+              <li><a href="/help">Help Center</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="/support">Support</a></li>
+            </ul>
+          </div>
 
-                        <!-- Second part: Links to About and other pages -->
-                        <div class="col-md-3">
-                            <h4>Quick Links</h4>
-                            <ul class="list-unstyled">
-                                <li><a href="/about" class="text-dark">About Us</a></li>
-                                <li><a href="/team" class="text-dark">Our Team</a></li>
-                                <li><a href="/privacy-policy" class="text-dark">Privacy Policy</a></li>
-                                <li><a href="/terms" class="text-dark">Terms of Service</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Third part: Helpdesk, Queries, and Contact Us -->
-                        <div class="col-md-3">
-                            <h4>Helpdesk</h4>
-                            <ul class="list-unstyled">
-                                <li><a href="/help" class="text-dark">Help Center</a></li>
-                                <li><a href="/faq" class="text-dark">FAQ</a></li>
-                                <li><a href="/contact" class="text-dark">Contact Us</a></li>
-                                <li><a href="/support" class="text-dark">Support</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Fourth part: Socials -->
-                        <div class="col-md-3">
-                            <h4>Follow Us</h4>
-                            <div class="d-flex justify-content-center">
-                                <div class="icon-circle mx-2">
-                                    <a href="https://facebook.com" target="_blank" aria-label="Follow us on Facebook"
-                                        class="text-dark">
-                                        <i class="fa-brands fa-facebook fa-lg"></i>
-                                    </a>
-                                </div>
-                                <div class="icon-circle mx-2">
-                                    <a href="https://twitter.com" target="_blank" aria-label="Follow us on Twitter"
-                                        class="text-dark">
-                                        <i class="fa-brands fa-x-twitter"></i>
-                                    </a>
-                                </div>
-                                <div class="icon-circle mx-2">
-                                    <a href="https://instagram.com" target="_blank" aria-label="Follow us on Instagram"
-                                        class="text-dark">
-                                        <i class="fa-brands fa-instagram fa-lg"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- Copyright -->
-                    <div class="row">
-                        <div class="col-12 mt-4">
-                            <p class="copyright-text">
-                                &copy; <%= new Date().getFullYear() %> Scruter. Made with ❤️ by Team Scruter.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <%- include('partials/bottom_nav') %>
-</body>
-
+          <!-- Social Media Links -->
+          <div class="col-md-3">
+            <h4>Follow Us</h4>
+            <div class="d-flex justify-content-center">
+              <div class="icon-circle">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  aria-label="Follow us on Facebook"
+                >
+                  <i class="fa-brands fa-facebook"></i>
+                </a>
+              </div>
+              <div class="icon-circle">
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  aria-label="Follow us on Twitter"
+                >
+                  <i class="fa-brands fa-x-twitter"></i>
+                </a>
+              </div>
+              <div class="icon-circle">
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  aria-label="Follow us on Instagram"
+                >
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright-text">
+          &copy; 2024 Scruter. All rights reserved.
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
