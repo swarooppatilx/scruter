@@ -29,6 +29,15 @@
     max-width: 600px;
     margin: 0 auto;
 }
+.quick-link {
+    display: inline-block; 
+    transition: transform 0.3s ease; 
+}
+
+.quick-link:hover {
+    transform: scale(1.1); 
+}
+
 
             /* Styling for the links in the footer */
             .social-section ul {
@@ -126,13 +135,14 @@
             <div class="col-md-3">
                 <h4>Quick Links</h4>
                 <ul class="list-unstyled">
-                    <li><a href="/about" class="text-dark">About Us</a></li>
-                    <li><a href="/team" class="text-dark">Our Team</a></li>
-                    <li><a href="/privacy-policy" class="text-dark">Privacy Policy</a></li>
-                    <li><a href="/terms" class="text-dark">Terms of Service</a></li>
-                    <li><a href="/contributors" class="text-dark">Our Contributors</a></li>
+                    <li><a href="/about" class="text-dark quick-link">About Us</a></li>
+                    <li><a href="/team" class="text-dark quick-link">Our Team</a></li>
+                    <li><a href="/privacy-policy" class="text-dark quick-link">Privacy Policy</a></li>
+                    <li><a href="/terms" class="text-dark quick-link">Terms of Service</a></li>
+                    <li><a href="/contributors" class="text-dark quick-link">Our Contributors</a></li>
                 </ul>
             </div>
+            
 
             <!-- Third part: Helpdesk, Queries, and Contact Us -->
             <div class="col-md-3">
