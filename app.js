@@ -106,6 +106,7 @@ const Market = mongoose.model('Market', marketSchema);
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
+  phone: {type: String, required: true, unique: true}, 
   password: { type: String, required: true }
 });
 const User = mongoose.model('User', userSchema);
@@ -165,6 +166,7 @@ app.post('/login', [
   const { username, password } = req.body;
   try {
     const user = await User.findOne({ username });
+    console.log("Fetched User from MongoDB: ", user);
     if (user && await bcrypt.compare(password, user.password)) {
       req.session.user = user;
       res.redirect('/');
@@ -190,18 +192,21 @@ app.post('/signup', [
     return res.status(400).render('auth', { action: 'signup', errors: errors.array(), activeLink: '' });
   }
 
-  const { username, email, password, confirmPassword } = req.body;
+  const { username, email, password, confirmPassword, phone } = req.body;
 
   if (password !== confirmPassword) {
     return res.status(400).render('auth', { action: 'signup', errors: [{ msg: 'Passwords do not match' }], activeLink: '' });
   }
 
   try {
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    const existingUser = await User.findOne({ $or: [{ username }, { email }, { phone }] });
     if (existingUser) {
       const errors = [];
       if (existingUser.username === username) {
         errors.push({ msg: 'Username is already taken' });
+      }
+      if (existingUser.phone === phone) {
+        errors.push({ msg: 'Phone is already taken' });
       }
       if (existingUser.email === email) {
         errors.push({ msg: 'Email is already registered' });
@@ -233,6 +238,12 @@ app.get('/logout', (req, res) => {
   });
 });
 
+// Express Route to render the User Dashboard page 
+app.get('/dashboard', (req, res) => { 
+  const user = req.session.user; // Accessing user from session
+  res.render('dashboard', { user, activeLink: 'userdashboard' }); 
+}); 
+
 // Contributors Route
 app.get('/contributors', (req, res) => {
   res.render('contributors', { activeLink: 'contributors' });
@@ -251,13 +262,7 @@ app.get('/market/form', ensureAuthenticated, (req, res) => {
   res.render('form', { routeName: 'market', errors: [], activeLink: 'market' });
 });
 
-// Express Route to render the User Dashboard page
-app.get('/dashboard', ensureAuthenticated, (req, res) => {
-  console.log('User Dashboard accessed by:', req.session.user);
-  res.render('dashboard', { user: req.session.user, errors: [], activeLink: 'dashboard' });
-});
-
-// Handle search and display for houses
+// Handle search and display for houses 
 app.get('/house', async (req, res) => {
   try {
     const domain = req.get('host');
