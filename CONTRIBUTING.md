@@ -1,5 +1,5 @@
 
-# Contributing to Scruter
+## Contributing to Scruter
 
 Thank you for your interest in contributing to Scruter! Your contributions help improve our community and make it easier for everyone to buy, sell, and exchange goods and services. Please follow the guidelines below to ensure a smooth contribution process.
 
@@ -13,30 +13,30 @@ Thank you for your interest in contributing to Scruter! Your contributions help 
 
 ## Getting Started
 
-1. **Fork the repository** to your own GitHub account by clicking the "Fork" button at the top-right corner of the repository page.
-2. **Clone your forked repository** to your local machine:
+1. **🍴 Fork the repository** to your own GitHub account by clicking the "Fork" button at the top-right corner of the repository page.
+2. **💻 Clone your forked repository** to your local machine:
    ```bash
    git clone https://github.com/your-username/scruter.git
    cd scruter
    ```
-3. **Create a new branch** for your changes:
+3. **🌿 Create a new branch** for your changes:
    ```bash
    git checkout -b feature-branch-name
    ```
-4. **Make your changes** and test them locally.
+4. **🛠️ Make your changes** and test them locally.
 
 ## Opening a Pull Request
 
-1. **Commit your changes** with clear commit messages:
+1. **✅  Commit your changes** with clear commit messages:
    ```bash
    git add .
    git commit -m 'Add some feature'
    ```
-2. **Push to your branch**:
+2. **📤 Push to your branch**:
    ```bash
    git push origin feature-branch-name
    ```
-3. **Submit a pull request**: Go to the original repository and click on the "Pull Request" button to submit your changes.
+3. **🔄 Submit a pull request**: Go to the original repository and click on the "Pull Request" button to submit your changes.
 
 ## Contribution Guidelines
 
@@ -44,6 +44,12 @@ Thank you for your interest in contributing to Scruter! Your contributions help 
 - Be respectful and constructive in all interactions with other contributors.
 - Test your changes thoroughly before submitting a pull request.
 - Include a clear and descriptive title for your pull request summarizing the changes.
+# 🏆 Contribution Points
+All tasks will be assigned various levels based on complexity and required skills. Each level provides different points:
+
+- **🥇 Level 1:** 10 Points  
+- **🥈 Level 2:** 25 Points  
+- **🥉 Level 3:** 45 Points  
 
 ## Commit Messages
 
@@ -66,7 +72,7 @@ Thank you for your interest in contributing to Scruter! Your contributions help 
 ## Acknowledgments
 
 Thank you for considering contributing to Scruter! 
-If you enjoy working with us, please give the project a ⭐ star! Your support means a lot and encourages further contributions. 
+If you enjoy working with us, please give the project a ⭐ star! Your support means a lot and encourages further contributions. ✨
 
 
 

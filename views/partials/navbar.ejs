@@ -132,6 +132,31 @@ a {
   background: transparent;
 }
 
+/* For Sign-Up button */ 
+.btn-space {
+  min-width: 120px; 
+    padding: 0.5rem 1rem; 
+    border-radius: 5px;
+}
+
+.navbar .btn {
+    min-width: 120px; 
+    padding: 0.5rem 1rem; 
+    border-radius: 5px; 
+}
+
+.btn i {
+    vertical-align: middle; 
+}
+
+@media (max-width: 768px) {
+    .navbar .btn {
+        flex-grow: 1; 
+        margin-bottom: 10px; 
+    }
+}
+
+
 </style>
   
 
@@ -227,9 +252,14 @@ a {
           </ul>
         </div>
         <% } else { %>
-        <a class="btn btn-outline-success" href="/auth?action=login"
-          ><i class="fa-solid fa-user me-2"></i>Login</a
-        >
+          <div class="d-flex flex-column flex-lg-row">
+            <a class="btn btn-outline-success me-2 flex-grow-1" href="/auth?action=login">
+              <i class="fa-solid fa-user me-2"></i>Login
+            </a>
+            <a class="btn btn-outline-primary flex-grow-1" href="/auth?action=signup">
+              <i class="fa-solid fa-user-plus me-2"></i>Sign Up
+            </a>
+          </div>
         <% } %>
       </div>
     </div>

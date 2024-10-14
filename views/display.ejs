@@ -109,6 +109,10 @@
                                     <div class="modal-body">
                                         <img src="<%= card.image %>" class="img-fluid mb-3" alt="<%= card.title %> Image">
                                         <h5><%= card.title %></h5>
+                                        <p class = "card-phone">
+                                            <%= card.phone %> <!-- Adds the phone number when card is pressed -->
+                                        </p>
+                                        <p class="card-email"> <%= card.email %> </p> <!-- Adds the email when card is pressed -->
                                         <p class="card-text">
                                             <a href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>">
                                                 <i class="fa-solid fa-location-dot me-2"></i><%= card.location %>
@@ -137,6 +141,7 @@
             </div>
         </div>
     </section>
+    <%- include('partials/footer') %>
     <%- include('partials/bottom_nav') %>
     <script>
         // /preloader js styling
