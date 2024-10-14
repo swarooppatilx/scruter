@@ -16,6 +16,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // Serve static files from 'public' directory
+app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+
 
 // Session setup
 app.use(session({
@@ -225,6 +227,107 @@ app.post('/signup', [
     res.status(500).render('auth', { action: 'signup', errors: [{ msg: 'Internal Server Error' }], activeLink: '' });
   }
 });
+
+//Change in Dashboard Stuff
+
+//Updating Personal Information of Username and Email
+app.post('/update-personal-info', (req, res) => {
+  if (!req.session.user || !req.session.user.username) {
+      return res.redirect('/login'); // Redirect if not logged in
+  }
+
+  const { username } = req.session.user;
+  const { newUsername, email } = req.body;
+
+  if (!newUsername || !email) {
+      return res.status(400).send('All fields are required.');
+  }
+
+  User.findOneAndUpdate({ username }, { username: newUsername, email }, { new: true })
+      .then(updatedUser => {
+          // Update session data after successful update
+          req.session.user = { username: updatedUser.username, email: updatedUser.email, phone: updatedUser.phone };
+          res.redirect('/dashboard');
+      })
+      .catch(err => {
+          console.error(err);
+          res.status(500).send('Error updating user data.');
+      });
+});
+
+
+//Changing The Password
+app.post('/change-password', (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const { username } = req.session.user; // Fetch the username from the session
+
+  // Validate inputs
+  if (!currentPassword || !newPassword) {
+      return res.status(400).send('All fields are required.');
+  }
+
+  // Find the user by username instead of userId
+  User.findOne({ username })
+      .then(user => {
+          console.log("User found:", user); // Log the user object for debugging
+          if (!user) {
+              return res.status(404).send('User not found.');
+          }
+
+          // Check if the current password matches (using bcrypt)
+          return bcrypt.compare(currentPassword, user.password)
+              .then(isMatch => {
+                  if (!isMatch) {
+                      return res.status(400).send('Current password is incorrect.');
+                  }
+
+                  // Hash the new password and save it
+                  return bcrypt.hash(newPassword, 10)
+                      .then(hashedPassword => {
+                          user.password = hashedPassword; // Update the password
+                          return user.save(); // Save the updated user data
+                      });
+              });
+      })
+      .then(() => {
+          res.redirect('/dashboard'); // Redirect to the dashboard after success
+      })
+      .catch(err => {
+          console.error('Error changing password:', err);
+          res.status(500).send('Error changing password.'); //Show Error when unsuccessful
+      });
+});
+
+
+
+//Updating Contact Info
+app.post('/update-contact-info', (req, res) => {
+  const { phone } = req.body;
+  const { username } = req.session.user; // Fetch the username from the session
+
+  // Validate input data
+  if (!phone) {
+      return res.status(400).send('Phone number is required.');
+  }
+
+  // Update the user phone number in the database based on the username
+  User.findOneAndUpdate({ username }, { phone }, { new: true })
+      .then(updatedUser => {
+          // Update the session with the new contact information
+          req.session.user = {
+              username: updatedUser.username,
+              email: updatedUser.email,
+              phone: updatedUser.phone
+          };
+          res.redirect('/dashboard'); // Redirect back to the dashboard
+      })
+      .catch(err => {
+          console.error('Error updating contact information:', err);
+          res.status(500).send('Error updating contact information.');
+      });
+});
+
+
 
 // Handle logout
 app.get('/logout', (req, res) => {
