@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Scruter</title>
+  <title>About Us - <%= title %></title> <!-- Dynamic Title -->
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -89,29 +89,29 @@
 
   <!-- Nav Bar -->
   <div class="navbar">
-    <a href="index.html"><b>Home</b></a>
-    <a href="about.html"><b>About Us</b></a>
-    <a href="contact.html"><b>Contact Us</b></a>
+    <a href="/"><b>Home</b></a> <!-- Changed link to EJS route -->
+    <a href="/about"><b>About Us</b></a> <!-- Changed link to EJS route -->
+    <a href="/contact"><b>Contact Us</b></a> <!-- Changed link to EJS route -->
   </div>
 
   <!-- About Us -->
   <section class="about-us">
     <div class="container">
       <h1>About Us</h1>
-      <p>Welcome to Scruter! We're a local classifieds and community platform designed to connect people for buying, selling, and exchanging goods and services. Whether you're looking for a place to stay, items to buy, or want to offer your own services, Scruter provides a trusted space for local transactions.</p>
+      <p>Welcome to <%= appName %>! We're a local classifieds and community platform designed to connect people for buying, selling, and exchanging goods and services. Whether you're looking for a place to stay, items to buy, or want to offer your own services, <%= appName %> provides a trusted space for local transactions.</p>
 
       <h2>Our Mission</h2>
-      <p>At Scruter, we believe in fostering strong local connections and promoting sustainable, community-driven commerce. Our platform is built to make buying and selling easier, safer, and more accessible for everyone.</p>
+      <p>At <%= appName %>, we believe in fostering strong local connections and promoting sustainable, community-driven commerce. Our platform is built to make buying and selling easier, safer, and more accessible for everyone.</p>
 
       <h2>What We Offer</h2>
       <ul>
-        <li>Buy & Sell Locally:Find great deals on items you need or sell your own goods easily.</li>
+        <li>Buy & Sell Locally: Find great deals on items you need or sell your own goods easily.</li>
         <li>Trusted Listings: All our listings are community-driven, allowing for safe exchanges.</li>
         <li>Community Focused: We're more than just a marketplace. We're here to support local businesses and promote neighborhood connections.</li>
       </ul>
 
       <h2>How It Works</h2>
-      <p>Simply create a free account, post your ads, browse listings, and connect with others in your community. From finding food to housing, Scruter brings your local market online.</p>
+      <p>Simply create a free account, post your ads, browse listings, and connect with others in your community. From finding food to housing, <%= appName %> brings your local market online.</p>
 
       <h2>Our Values</h2>
       <ul>
@@ -120,9 +120,11 @@
         <li>Convenience</li>
       </ul>
 
-      <p>Thank you for choosing Scruter—where local communities come together!</p>
+      <p>Thank you for choosing <%= appName %>—where local communities come together!</p>
     </div>
   </section>
 
 </body>
 </html>
+
+
