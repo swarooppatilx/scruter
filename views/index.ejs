@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Add service worker -->
     <script>
@@ -45,14 +46,44 @@
             background-color: #2e8030;
             width: 0%;
             z-index: 9999;
+
         }
+      }
+
+      /* Scroll btn */
+      #scroll{
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #1c1c1c;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        padding: 10px 16px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
     </style>
+
+    <!-- Information Section -->
+    <style>
+      .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+
 </head>
 <body>
     <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
     <div class="justify-content-center mb-3">
         <img src="/background.jpg" style="width: 100%; height: auto;" class="img-fluid">
+
     </div>
 
     <!-- Search Bar -->
@@ -60,57 +91,131 @@
 
     <!-- Mission Section -->
     <section class="mission-section text-center">
-        <div class="container">
-            <h2 class="mb-4">Welcome to Scruter</h2>
-            <p class="lead">Your go-to platform for buying, selling, and finding everything you need locally.</p>
-            <p>Connecting communities and making local commerce easy and accessible for everyone.</p>
-            <% if(!user) { %>
-                <a href="/auth" class="btn btn-lg cta-button btn-outline-success mx-2">Join Now</a>
-            <% } %>
-            <a href="/team" class="btn btn-lg cta-button btn-outline-success">Our Team</a>
-        </div>
+      <div class="container">
+        <h2 class="mb-4">Welcome to Scruter</h2>
+        <p class="lead">
+          Your go-to platform for buying, selling, and finding everything you
+          need locally.
+        </p>
+        <p>
+          Connecting communities and making local commerce easy and accessible
+          for everyone.
+        </p>
+        <% if(!user) { %>
+        <a href="/auth" class="btn btn-lg cta-button btn-outline-success mx-2"
+          >Join Now</a
+        >
+        <% } %>
+        <a href="/team" class="btn btn-lg cta-button btn-outline-success"
+          >Our Team</a
+        >
+      </div>
     </section>
 
     <!-- Information Section -->
     <section class="container mt-5 mb-5 pb-5">
-        <div class="row">
-            <div class="col-md-4">
-                <h3>What is Scruter?</h3>
-                <p>Scruter is a local classifieds and community site designed to bring people together for buying, selling, and exchanging goods and services.</p>
+      <div class="row">
+        <div class="col-md-4 d-flex justify-content-center">
+          <div class="card text-center shadow h-100 card-hover">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <h3 class="card-title">What is Scruter?</h3>
+              <p class="card-text">
+                Scruter is a local classifieds and community site designed to
+                bring people together for buying, selling, and exchanging goods
+                and services. With an easy-to-use interface, Scruter connects
+                you with people in your local community, whether you're looking
+                for a specific product, service, or simply to connect with
+                like-minded individuals.
+              </p>
             </div>
-            <div class="col-md-4">
-                <h3>How It Works</h3>
-                <p>Post ads, browse listings, and connect with others in your community. Whether you're looking for food, a place to live, or something to buy, Scruter has it all.</p>
-            </div>
-            <div class="col-md-4">
-                <h3>Get Started</h3>
-                <p>Creating an account is easy and free. Start posting your ads and discover what your community has to offer today!</p>
-            </div>
+          </div>
         </div>
+        <div class="col-md-4 d-flex justify-content-center">
+          <div class="card text-center shadow h-100 card-hover">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <h3 class="card-title">How It Works</h3>
+              <p class="card-text">
+                Post ads, browse listings, and connect with others in your
+                community. Whether you're looking for food, housing, services,
+                or just want to sell something, Scruter's platform allows
+                seamless interaction between buyers and sellers with a few
+                simple steps.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex justify-content-center">
+          <div class="card text-center shadow h-100 card-hover">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <h3 class="card-title">Get Started</h3>
+              <p class="card-text">
+                Creating an account is easy and free. In just a few minutes, you
+                can start posting ads and discover what your community has to
+                offer. Join Scruter today and make buying, selling, or
+                exchanging goods a smooth and hassle-free experience.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Follow Us Section -->
-    <section class="text-center mb-4">
-        <h3>Follow Us On Social</h3>
-        <p>Looking for industry insights and updates? Stay connected with us on social media!</p>
-        <div class="d-flex justify-content-center mt-3">
-            <div class="icon-circle mx-2">
-                <a href="https://facebook.com" target="_blank">
-                    <i class="fa-brands fa-meta fa-lg"></i>
-                </a>
+    <section class="container mt-5 mb-5 pb-5">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Welcome to Our Project!</h3>
+                <p>The Scruter Team is excited to be part of <strong>GSSoC Extended 2024</strong> and <strong>Hacktoberfest 2024</strong>, initiatives that empower global developers to contribute to open-source projects.</p>
             </div>
-            <div class="icon-circle mx-2">
-                <a href="https://twitter.com" target="_blank">
-                    <i class="fa-brands fa-x-twitter fa-lg"></i>
-                </a>
+            <div class="col-md-4">
+                <h3>Join Us!</h3>
+                <p>Our project helps you <strong>discover local services and interact with your community</strong>. We are enhancing features to improve user experience.</p>
             </div>
-            <div class="icon-circle mx-2">
-                <a href="https://instagram.com" target="_blank">
-                    <i class="fa-brands fa-instagram fa-lg"></i>
-                </a>
+            <div class="col-md-4">
+                <h3>Get Involved!</h3>
+                <p>All contributions are welcome! Hacktoberfest is a great way to dive into open source.</p>
             </div>
         </div>
+        
+        <section class="container mt-5 mb-5 pb-5">
+            <p class="text-center">Explore our repository: <a href="https://github.com/swarooppatilx/scruter" target="_blank" class = "repo-link"> <i class="fab fa-github"></i> GitHub Repository Link</a> and start contributing!</p>
+        </section>
     </section>
+    
+
+    <!-- Custom CSS -->
+    <style>
+      .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .repo-link {
+        color: #007bff; /* Bootstrap primary color */
+        font-weight: bold;
+        text-decoration: none; /* Remove underline */
+        padding: 5px 10px; /* Add some padding */
+        border: 2px solid #007bff; /* Add border */
+        border-radius: 5px; /* Rounded corners */
+        transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    }
+
+      .repo-link:hover {
+        background-color: #007bff; /* Change background on hover */
+        color: white; /* Change text color on hover */
+   }
+    </style>
+
+    <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>
+    <script>
+      // /preloader js styling
+      let preloader = document.querySelector("#preloader");
+      window.addEventListener("load", function (e) {
+        preloader.style.display = "none";
+      });
+
 
     <%- include('partials/bottom_nav') %>
 
@@ -124,4 +229,5 @@
         };
     </script>
 </body>
+
 </html>

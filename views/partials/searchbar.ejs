@@ -13,16 +13,39 @@
       </select>
       
       <!-- Search Button -->
-      <button class="btn btn-dark text-light" type="submit">Search</button>
+      <button class="btn btn-dark text-light" id="search-button" type="submit">Search</button>
     </div>
-  </form>
+    <div id="validation-message" class="text-danger mt-2 text-center" style="display: none;">Please enter a search term.</div>  </form>
 </div>
 
-<!-- JavaScript to Update Form Action -->
+<!-- JavaScript to Update Form Action and Validate Input -->
 <script>
-  document.getElementById('search-action').addEventListener('change', function() {
-    const form = document.getElementById('search-form');
-    const activeLink = this.value;
-    form.action = `/${activeLink}?type=${activeLink}`;
+  document.addEventListener("DOMContentLoaded", function() {
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const searchAction = document.getElementById('search-action');
+    const validationMessage = document.getElementById('validation-message'); // Get the validation message element
+
+    // Update form action based on the selected search action
+    searchAction.addEventListener('change', function() {
+      const activeLink = this.value;
+      searchForm.action = `/${activeLink}?type=${activeLink}`;
+    });
+
+    // Validate input before submitting the form
+    searchForm.addEventListener('submit', function(event) {
+      const queryInput = searchInput.value.trim();
+
+      // If the input is empty, prevent form submission and show the validation message
+      if (queryInput === '') {
+        event.preventDefault(); 
+        validationMessage.style.display = 'block';
+        searchInput.classList.add('is-invalid');
+      } else {
+        validationMessage.style.display = 'none'; 
+        searchInput.classList.remove('is-invalid'); 
+      }
+    });
   });
 </script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

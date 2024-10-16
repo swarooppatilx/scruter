@@ -1,43 +1,335 @@
-<nav class="navbar navbar-light sticky-top p-2 navbar-expand-lg" style="background-color: white;">
+<style>
+ /* Base Nav-Link Styles */
+ :root {
+                --bg-color: #ffffff;
+                --text-color: #000000;
+            }
+
+            .dark-mode {
+                --bg-color: #1c1c1c;
+                --text-color: #ffffff;
+            }
+
+            body {
+                background-color: var(--bg-color) !important;
+                color: var(--text-color) !important;
+            }
+
+            .bg-dark{
+                background-color: var(--bg-color) !important;
+                color: var(--text-color) !important;
+            }
+.nav-link {
+    position: relative;
+    overflow: hidden;
+    color: var(--text-color) !important; /* Default link color */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+#nav{
+  background-color: var(--bg-color) ;
+  color: var(--text-color);
+}
+
+/* Underline Animation */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+/* Special styling for first nav item */
+.nav-item:first-child .nav-link::after {
+    background-color: #0078d7;
+}
+
+/* Hover state for underline animation */
+.nav-link:hover::after {
+    transform: translateX(0);
+}
+
+/* Hover state to change link color */
+.nav-link:hover {
+    color: #2098D1;
+}
+
+/* Ensure all links except the first are black */
+.nav-link:not(:first-child) {
+    color: black;
+}
+
+/* Grow effect for hover */
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    transform: perspective(1px) translateZ(0);
+    transition: transform 0.3s ease;
+}
+
+.hvr-grow:hover {
+    transform: scale(1.1);
+}
+
+/* General hover button/link styling */
+[class^="hvr-"] {
+    margin: 0.4em;
+    padding: 1em;
+    cursor: pointer;
+    background: #e1e1e1;
+    text-decoration: none;
+    color: #666;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Ensure base anchor tag styling */
+a {
+    color: #2098D1;
+    text-decoration: none;
+}
+
+/* Enhanced Styling for Active Links */
+.active-link {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+/* Hover effect for nav links */
+.navbar-nav .nav-link:hover {
+    background-color: #e2e6ea;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.nav-link:hover{
+  color: black !important;
+}
+
+/* Navbar shadow on scroll */
+.sticky-top {
+    box-shadow: none;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Add shadow when scrolled */
+.sticky-top.scrolled {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toggleMode{
+  width: 25px;
+  height: 25px;
+}
+
+#darkModeToggle{
+  outline: none;
+  border: none;
+  background: transparent;
+}
+
+/* For Sign-Up button */ 
+.btn-space {
+  min-width: 120px; 
+    padding: 0.5rem 1rem; 
+    border-radius: 5px;
+}
+
+.navbar .btn {
+    min-width: 120px; 
+    padding: 0.5rem 1rem; 
+    border-radius: 5px; 
+}
+
+.btn i {
+    vertical-align: middle; 
+}
+
+@media (max-width: 768px) {
+    .navbar .btn {
+        flex-grow: 1; 
+        margin-bottom: 10px; 
+    }
+}
+
+
+</style>
+  
+
+<nav
+  id="nav"
+  class="navbar sticky-top p-2 navbar-expand-lg shadow-sm"
+  style=" transition: all 0.3s ease"
+>
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <img src="/banner.png" alt="Scruter Logo" width="90" height="30" class="d-inline-block align-text-top"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <img
+        src="/banner.png"
+        alt="Scruter Logo"
+        width="90"
+        height="30"
+        class="d-inline-block align-text-top"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul id="navbar-links" class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link text-dark <%= activeLink === 'home' ? 'active' : '' %>" href="/"><i class="fa-solid fa-right-from-bracket me-2"></i>Home Page</a>
+          <a
+            class="nav-link <%= activeLink === 'home' ? 'active-link' : '' %>"
+            href="/"
+            ><i class="fa-solid fa-right-from-bracket me-2"></i>Home Page</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark <%= activeLink === 'house' ? 'active' : '' %>" href="/house"><i class="fa-solid fa-house me-2"></i>Housing</a>
+          <a
+            class="nav-link <%= activeLink === 'house' ? 'active-link' : '' %>"
+            href="/house"
+            ><i class="fa-solid fa-house me-2"></i>Housing</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark <%= activeLink === 'food' ? 'active' : '' %>" href="/food"><i class="fa-solid fa-utensils me-2"></i>Food</a>
+          <a
+            class="nav-link <%= activeLink === 'food' ? 'active-link' : '' %>"
+            href="/food"
+            ><i class="fa-solid fa-utensils me-2"></i>Food</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark <%= activeLink === 'market' ? 'active' : '' %>" href="/market"><i class="fa-solid fa-cart-shopping me-2"></i>For Sale</a>
+          <a
+            class="nav-link <%= activeLink === 'market' ? 'active-link' : '' %>"
+            href="/market"
+            ><i class="fa-solid fa-cart-shopping me-2"></i>For Sale</a
+          >
         </li>
       </ul>
-      <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center mt-3 mt-lg-0">
+      <div
+        class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center mt-3 mt-lg-0"
+      >
+        <button id="darkModeToggle" style="margin-right: 10px; ">
+          <img src="https://img.icons8.com/?size=100&id=45475&format=png&color=000000" class="toggleMode" id="toggleMode" alt="">
+        </button>
         <% if (user) { %>
-          <span class="navbar-text mb-2 mb-lg-0 me-lg-3">Welcome, <%= user.username %>!</span>
-          <a class="btn btn-outline-danger mb-2 mb-lg-0 me-lg-2" href="/logout"><i class="fa-solid fa-user me-2"></i>Logout</a>
-          <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle text-light" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-solid fa-marker me-2"></i>Create Post
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
-              <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
-              <li><a class="dropdown-item" href="/market/form">For Sale Ad</a></li>
-            </ul>
-          </div>
+        <span class="navbar-text mb-2 mb-lg-0 me-lg-3"
+          >Welcome, <%= user.username %>!</span
+        >
+        <a class="btn btn-outline-danger mb-2 mb-lg-0 me-lg-2" href="/logout"
+          ><i class="fa-solid fa-user me-2"></i>Logout</a
+        >
+        <div class="dropdown">
+          <button
+            class="btn btn-success dropdown-toggle text-light"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-marker me-2"></i>Create Post
+          </button>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="dropdownMenuButton1"
+          >
+            <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
+            <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
+            <li>
+              <a class="dropdown-item" href="/market/form">For Sale Ad</a>
+            </li>
+          </ul>
+        </div>
         <% } else { %>
-          <a class="btn btn-outline-success" href="/auth?action=login"><i class="fa-solid fa-user me-2"></i>Login</a>
+          <div class="d-flex flex-column flex-lg-row">
+            <a class="btn btn-outline-success me-2 flex-grow-1" href="/auth?action=login">
+              <i class="fa-solid fa-user me-2"></i>Login
+            </a>
+            <a class="btn btn-outline-primary flex-grow-1" href="/auth?action=signup">
+              <i class="fa-solid fa-user-plus me-2"></i>Sign Up
+            </a>
+          </div>
         <% } %>
       </div>
     </div>
   </div>
 </nav>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("darkModeToggle");
+    const image = document.getElementById("toggleMode")
+    const body = document.body;
+    const navbar = document.getElementById("nav")
+    const footer = document.getElementById("footer")
+    let mode = localStorage.getItem("theme") || "light";
+
+    localStorage.setItem("theme", mode);
+    console.log(localStorage.getItem("theme"))
+
+    const moon = "https://img.icons8.com/?size=100&id=45475&format=png&color=ffffff";
+    const sun = "https://img.icons8.com/?size=100&id=648&format=png&color=000000";
+
+    if (mode === "dark") {
+      body.classList.add("dark-mode");
+      nav.classList.add("dark-mode")
+      if(footer){
+        footer.classList.add("dark-mode")
+      }
+      image.src = moon
+    } else {
+      image.src = sun
+    }
+
+    toggleButton.addEventListener("click", function () {
+      body.classList.toggle("dark-mode");
+      nav.classList.toggle("dark-mode");
+      if(footer){
+        footer.classList.toggle("dark-mode");
+      }
+      mode = mode === "light" ? "dark" : "light";
+
+      if (mode === "dark") {
+        localStorage.setItem("theme", "dark");
+        image.src = moon
+      } else {
+        localStorage.setItem("theme", "light");
+        image.src = sun
+      }
+
+    });
+  });
+  // Add shadow to navbar on scroll
+  window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".sticky-top");
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+
+  // Hover functionality for dropdown
+  const dropdown = document.querySelector(".dropdown");
+  dropdown.addEventListener("mouseenter", () => {
+    const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+    dropdownMenu.classList.add("show");
+  });
+
+  dropdown.addEventListener("mouseleave", () => {
+    const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+    dropdownMenu.classList.remove("show");
+  });
+</script>
