@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Add service worker -->
+    <!-- Service worker registration script -->
+</head>
+
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js')
@@ -15,65 +16,179 @@
         }
     </script>
     <%- include('partials/head') %>
+
     <style>
-        .icon-circle {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #ffffff;
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
+/* Footer styling */
+.social-section {
+    background-color: #f8f9fa; /* Light theme background */
+    padding: 40px 0;
+    border-top: 1px solid #e0e0e0;
+}
 
-        .icon-circle:hover {
-            background-color: #eeeeee;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+.social-section h4 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
 
-        .icon-circle i {
-            color: #333;
-            font-size: 24px;
-        }
+.social-section p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
 
-        /* Scroll Progress Bar */
-        #progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 6px;
-            background-color: #2e8030;
-            width: 0%;
-            z-index: 9999;
+.social-section ul {
+    list-style: none;
+    padding-left: 0;
+}
 
-        }
+.social-section ul li {
+    margin-bottom: 10px;
+}
+
+.social-section ul li a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.icon-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.icon-circle:hover {
+    background-color: #eeeeee;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.icon-circle i {
+    color: #333;
+    font-size: 24px;
+}
+
+/* Scroll Progress Bar */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 6px;
+    background-color: #2e8030;
+    width: 0%;
+    z-index: 9999;
+}
+
+/* Scroll btn */
+#scroll {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1c1c1c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 16px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+      .social-section ul li a:hover {
+        color: #007bff; /* Hover effect */
       }
 
-      /* Scroll btn */
-      #scroll{
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #1c1c1c;
-        color: white;
-        border: none;
+      .icon-circle {
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
-        padding: 10px 16px;
-        font-size: 20px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-    </style>
-
-    <!-- Information Section -->
-    <style>
-      .card-hover {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
       }
-      .card-hover:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+      .icon-circle:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Hover shadow effect */
+      }
+
+      .icon-circle a {
+        color: #333; /* Icon color */
+        font-size: 1.8rem;
+      }
+
+      .icon-circle a:hover {
+        color: #007bff;
+      }
+
+      /* Social media icons gap */
+      .d-flex {
+        gap: 15px;
+      }
+
+      .copyright-text {
+        margin-top: 40px;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      /* Dark theme styling */
+      body.dark-theme {
+        background-color: #121212;
+        color: #f1f1f1;
+      }
+
+      .dark-theme .social-section {
+        background-color: #1c1c1c;
+        border-top-color: #444;
+      }
+
+      .dark-theme .social-section h4,
+      .dark-theme .social-section ul li a {
+        color: #ffffff;
+      }
+
+      .dark-theme .social-section ul li a:hover {
+        color: #1e90ff; /* Hover effect in dark mode */
+      }
+
+      .dark-theme .icon-circle {
+        background-color: #333;
+      }
+
+      .dark-theme .icon-circle a {
+        color: #c9c9c9;
+      }
+
+      .dark-theme .icon-circle:hover {
+        background-color: #444;
+      }
+
+      .dark-theme .copyright-text {
+        color: #aaa;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .social-section h4 {
+          font-size: 1.2rem;
+        }
+
+        .social-section p {
+          font-size: 1rem;
+        }
       }
     </style>
 
@@ -81,170 +196,150 @@
 <body>
     <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
-    <div class="justify-content-center mb-3">
-        <img src="/background.jpg" style="width: 100%; height: auto;" class="img-fluid">
+<div class="justify-content-center mb-3">
+    <img src="/background.jpg" style="width: 100%; height: auto;" class="img-fluid" alt="Background">
+</div>
 
     </div>
 
-    <!-- Search Bar -->
-    <%- include('partials/searchbar') %>
-
-    <!-- Mission Section -->
-    <section class="mission-section text-center">
+    <!-- Footer Section -->
+    <section class="text-center social-section">
       <div class="container">
-        <h2 class="mb-4">Welcome to Scruter</h2>
-        <p class="lead">
-          Your go-to platform for buying, selling, and finding everything you
-          need locally.
-        </p>
-        <p>
-          Connecting communities and making local commerce easy and accessible
-          for everyone.
-        </p>
-        <% if(!user) { %>
-        <a href="/auth" class="btn btn-lg cta-button btn-outline-success mx-2"
-          >Join Now</a
-        >
-        <% } %>
-        <a href="/team" class="btn btn-lg cta-button btn-outline-success"
-          >Our Team</a
-        >
-      </div>
-    </section>
-
-    <!-- Information Section -->
-    <section class="container mt-5 mb-5 pb-5">
-      <div class="row">
-        <div class="col-md-4 d-flex justify-content-center">
-          <div class="card text-center shadow h-100 card-hover">
-            <div class="card-body d-flex flex-column justify-content-center">
-              <h3 class="card-title">What is Scruter?</h3>
-              <p class="card-text">
-                Scruter is a local classifieds and community site designed to
-                bring people together for buying, selling, and exchanging goods
-                and services. With an easy-to-use interface, Scruter connects
-                you with people in your local community, whether you're looking
-                for a specific product, service, or simply to connect with
-                like-minded individuals.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 d-flex justify-content-center">
-          <div class="card text-center shadow h-100 card-hover">
-            <div class="card-body d-flex flex-column justify-content-center">
-              <h3 class="card-title">How It Works</h3>
-              <p class="card-text">
-                Post ads, browse listings, and connect with others in your
-                community. Whether you're looking for food, housing, services,
-                or just want to sell something, Scruter's platform allows
-                seamless interaction between buyers and sellers with a few
-                simple steps.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 d-flex justify-content-center">
-          <div class="card text-center shadow h-100 card-hover">
-            <div class="card-body d-flex flex-column justify-content-center">
-              <h3 class="card-title">Get Started</h3>
-              <p class="card-text">
-                Creating an account is easy and free. In just a few minutes, you
-                can start posting ads and discover what your community has to
-                offer. Join Scruter today and make buying, selling, or
-                exchanging goods a smooth and hassle-free experience.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="container mt-5 mb-5 pb-5">
         <div class="row">
-            <div class="col-md-4">
-                <h3>Welcome to Our Project!</h3>
-                <p>The Scruter Team is excited to be part of <strong>GSSoC Extended 2024</strong> and <strong>Hacktoberfest 2024</strong>, initiatives that empower global developers to contribute to open-source projects.</p>
+          <!-- About Scruter Section -->
+          <div class="col-md-3">
+            <h4>About Scruter</h4>
+            <p>
+              Scruter is your local platform for buying, selling, and
+              discovering everything you need. Connecting communities for a
+              better local experience.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="col-md-3">
+            <h4>Quick Links</h4>
+            <ul class="list-unstyled">
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/team">Our Team</a></li>
+              <li><a href="/privacy-policy">Privacy Policy</a></li>
+              <li><a href="/terms">Terms of Service</a></li>
+            </ul>
+          </div>
+
+          <!-- Helpdesk and Contact Links -->
+          <div class="col-md-3">
+            <h4>Helpdesk</h4>
+            <ul class="list-unstyled">
+              <li><a href="/help">Help Center</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/contact">Contact Us</a></li>
+              <li><a href="/support">Support</a></li>
+            </ul>
+          </div>
+
+          <!-- Social Media Links -->
+          <div class="col-md-3">
+            <h4>Follow Us</h4>
+            <div class="d-flex justify-content-center">
+              <div class="icon-circle">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  aria-label="Follow us on Facebook"
+                >
+                  <i class="fa-brands fa-facebook"></i>
+                </a>
+              </div>
+              <div class="icon-circle">
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  aria-label="Follow us on Twitter"
+                >
+                  <i class="fa-brands fa-x-twitter"></i>
+                </a>
+              </div>
+              <div class="icon-circle">
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  aria-label="Follow us on Instagram"
+                >
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+              </div>
             </div>
-            <div class="col-md-4">
-                <h3>Join Us!</h3>
-                <p>Our project helps you <strong>discover local services and interact with your community</strong>. We are enhancing features to improve user experience.</p>
-            </div>
-            <div class="col-md-4">
-                <h3>Get Involved!</h3>
-                <p>All contributions are welcome! Hacktoberfest is a great way to dive into open source.</p>
-            </div>
+          </div>
         </div>
-        
-        <section class="container mt-5 mb-5 pb-5">
-            <p class="text-center">Explore our repository: <a href="https://github.com/swarooppatilx/scruter" target="_blank" class = "repo-link"> <i class="fab fa-github"></i> GitHub Repository Link</a> and start contributing!</p>
-        </section>
+        <div class="copyright-text">
+          &copy; 2024 Scruter. All rights reserved.
+        </div>
+      </div>
     </section>
-    
-
-    <!-- Custom CSS -->
-    <style>
-      .card-hover {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .card-hover:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      }
-
-      .repo-link {
-        color: #007bff; /* Bootstrap primary color */
-        font-weight: bold;
-        text-decoration: none; /* Remove underline */
-        padding: 5px 10px; /* Add some padding */
-        border: 2px solid #007bff; /* Add border */
-        border-radius: 5px; /* Rounded corners */
-        transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  <!-- Custom CSS -->
+  <style>
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
-      .repo-link:hover {
-        background-color: #007bff; /* Change background on hover */
-        color: white; /* Change text color on hover */
-   }
-    </style>
+    .repo-link {
+      color: #007bff; /* Bootstrap primary color */
+      font-weight: bold;
+      text-decoration: none; /* Remove underline */
+      padding: 5px 10px; /* Add some padding */
+      border: 2px solid #007bff; /* Add border */
+      border-radius: 5px; /* Rounded corners */
+      transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    }
 
-    <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>
-    <script>
-      // /preloader js styling
-      let preloader = document.querySelector("#preloader");
-      window.addEventListener("load", function (e) {
-        preloader.style.display = "none";
-      });
+    .repo-link:hover {
+      background-color: #007bff; /* Change background on hover */
+      color: white; /* Change text color on hover */
+    }
+  </style>
 
+  <%- include('partials/footer') %> 
+  <%- include('partials/bottom_nav') %>
+  
+  <script>
+    // Preloader JS styling
+    let preloader = document.querySelector("#preloader");
+    window.addEventListener("load", function () {
+      preloader.style.display = "none";
+    });
+<!-- Scroll Progress Script -->
+<script>
+  window.onscroll = function() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("progress-bar").style.width = scrolled + "%";
+  };
+</script>
 
-    <%- include('partials/bottom_nav') %>
+<!-- Embedded Chatbot Script -->
+<script>
+  window.embeddedChatbotConfig = {
+    chatbotId: "3y5y_b4ZtgDExQUL8b2_A",
+    domain: "www.chatbase.co"
+  }
+</script>
+<script
+  src="https://www.chatbase.co/embed.min.js"
+  chatbotId="3y5y_b4ZtgDExQUL8b2_A"
+  domain="www.chatbase.co"
+  defer>
+</script>
 
-    <!-- Scroll Progress Script -->
-    <script>
-        window.onscroll = function() {
-            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            var scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
-        };
-    </script>
-
-    
-    <script>
-      window.embeddedChatbotConfig = {
-      chatbotId: "3y5y_b4ZtgDExQUL8b2_A",
-      domain: "www.chatbase.co"
-      }
-      </script>
-      <script
-      src="https://www.chatbase.co/embed.min.js"
-      chatbotId="3y5y_b4ZtgDExQUL8b2_A"
-      domain="www.chatbase.co"
-      defer>
-      </script>
-    <button id="scroll" onclick="scrollToTop()"><i class="fa-solid fa-arrow-up"></i></button>
-
-  </body>
+<!-- Scroll to Top Button -->
+<button id="scroll" onclick="scrollToTop()">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
 
 </body>
 
