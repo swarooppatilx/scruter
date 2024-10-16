@@ -168,6 +168,7 @@ a {
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       <img
+        id="navbarLogo"
         src="/banner.png"
         alt="Scruter Logo"
         width="90"
@@ -270,66 +271,72 @@ a {
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const toggleButton = document.getElementById("darkModeToggle");
-    const image = document.getElementById("toggleMode")
+    const image = document.getElementById("toggleMode");
     const body = document.body;
-    const navbar = document.getElementById("nav")
-    const footer = document.getElementById("footer")
+    const navbar = document.getElementById("nav");
+    const logo = document.getElementById("navbarLogo"); // Reference to the logo image
+    const footer = document.getElementById("footer");
     let mode = localStorage.getItem("theme") || "light";
 
     localStorage.setItem("theme", mode);
-    console.log(localStorage.getItem("theme"))
+    console.log(localStorage.getItem("theme"));
 
     const moon = "https://img.icons8.com/?size=100&id=45475&format=png&color=ffffff";
     const sun = "https://img.icons8.com/?size=100&id=648&format=png&color=000000";
 
+    // Initial setup based on saved theme
     if (mode === "dark") {
       body.classList.add("dark-mode");
-      nav.classList.add("dark-mode")
-      if(footer){
-        footer.classList.add("dark-mode")
+      navbar.classList.add("dark-mode");
+      if (footer) {
+        footer.classList.add("dark-mode");
       }
-      image.src = moon
+      image.src = moon;
+      logo.src = "/banner2.png"; // Change logo for dark mode
     } else {
-      image.src = sun
+      image.src = sun;
     }
 
+    // Toggle dark/light mode
     toggleButton.addEventListener("click", function () {
       body.classList.toggle("dark-mode");
-      nav.classList.toggle("dark-mode");
-      if(footer){
+      navbar.classList.toggle("dark-mode");
+      if (footer) {
         footer.classList.toggle("dark-mode");
       }
       mode = mode === "light" ? "dark" : "light";
 
       if (mode === "dark") {
         localStorage.setItem("theme", "dark");
-        image.src = moon
+        image.src = moon;
+        logo.src = "/banner2.png"; // Change logo for dark mode
       } else {
         localStorage.setItem("theme", "light");
-        image.src = sun
+        image.src = sun;
+        logo.src = "/banner.png"; // Revert to original logo for light mode
       }
-
     });
-  });
-  // Add shadow to navbar on scroll
-  window.addEventListener("scroll", function () {
-    const navbar = document.querySelector(".sticky-top");
-    if (window.scrollY > 50) {
-      navbar.classList.add("scrolled");
-    } else {
-      navbar.classList.remove("scrolled");
-    }
-  });
 
-  // Hover functionality for dropdown
-  const dropdown = document.querySelector(".dropdown");
-  dropdown.addEventListener("mouseenter", () => {
-    const dropdownMenu = dropdown.querySelector(".dropdown-menu");
-    dropdownMenu.classList.add("show");
-  });
+    // Add shadow to navbar on scroll
+    window.addEventListener("scroll", function () {
+      const navbar = document.querySelector(".sticky-top");
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
 
-  dropdown.addEventListener("mouseleave", () => {
-    const dropdownMenu = dropdown.querySelector(".dropdown-menu");
-    dropdownMenu.classList.remove("show");
+    // Hover functionality for dropdown
+    const dropdown = document.querySelector(".dropdown");
+    dropdown.addEventListener("mouseenter", () => {
+      const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+      dropdownMenu.classList.add("show");
+    });
+
+    dropdown.addEventListener("mouseleave", () => {
+      const dropdownMenu = dropdown.querySelector(".dropdown-menu");
+      dropdownMenu.classList.remove("show");
+    });
   });
 </script>
