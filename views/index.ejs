@@ -312,15 +312,35 @@
     window.addEventListener("load", function () {
       preloader.style.display = "none";
     });
+<!-- Scroll Progress Script -->
+<script>
+  window.onscroll = function() {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("progress-bar").style.width = scrolled + "%";
+  };
+</script>
 
-    // Scroll Progress Script
-    window.onscroll = function() {
-      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      var scrolled = (winScroll / height) * 100;
-      document.getElementById("progress-bar").style.width = scrolled + "%";
-    };
-  </script>
+<!-- Embedded Chatbot Script -->
+<script>
+  window.embeddedChatbotConfig = {
+    chatbotId: "3y5y_b4ZtgDExQUL8b2_A",
+    domain: "www.chatbase.co"
+  }
+</script>
+<script
+  src="https://www.chatbase.co/embed.min.js"
+  chatbotId="3y5y_b4ZtgDExQUL8b2_A"
+  domain="www.chatbase.co"
+  defer>
+</script>
+
+<!-- Scroll to Top Button -->
+<button id="scroll" onclick="scrollToTop()">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
 </body>
 
 </html>
