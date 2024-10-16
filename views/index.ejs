@@ -1,60 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <!-- Service worker registration script -->
+</head>
+
     <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("/sw.js")
-          .then((registration) => {
-            console.log(
-              "Service Worker registered with scope:",
-              registration.scope
-            );
-          })
-          .catch((error) => {
-            console.error("Service Worker registration failed:", error);
-          });
-      }
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch((error) => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        }
     </script>
     <%- include('partials/head') %>
 
     <style>
-      /* Footer styling */
-      .social-section {
-        background-color: #f8f9fa; /* Light theme background */
-        padding: 40px 0;
-        border-top: 1px solid #e0e0e0;
-      }
+/* Footer styling */
+.social-section {
+    background-color: #f8f9fa; /* Light theme background */
+    padding: 40px 0;
+    border-top: 1px solid #e0e0e0;
+}
 
-      .social-section h4 {
-        font-size: 1.4rem;
-        font-weight: bold;
-        margin-bottom: 20px;
-        color: #333;
-      }
+.social-section h4 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
 
-      .social-section p {
-        font-size: 1.1rem;
-        color: #666;
-        max-width: 600px;
-        margin: 0 auto;
-      }
+.social-section p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
 
-      .social-section ul {
-        list-style: none;
-        padding-left: 0;
-      }
+.social-section ul {
+    list-style: none;
+    padding-left: 0;
+}
 
-      .social-section ul li {
-        margin-bottom: 10px;
-      }
+.social-section ul li {
+    margin-bottom: 10px;
+}
 
-      .social-section ul li a {
-        text-decoration: none;
-        color: #333;
-        transition: color 0.3s ease;
-      }
+.social-section ul li a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.icon-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.icon-circle:hover {
+    background-color: #eeeeee;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.icon-circle i {
+    color: #333;
+    font-size: 24px;
+}
+
+/* Scroll Progress Bar */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 6px;
+    background-color: #2e8030;
+    width: 0%;
+    z-index: 9999;
+}
+
+/* Scroll btn */
+#scroll {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1c1c1c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 16px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
 
       .social-section ul li a:hover {
         color: #007bff; /* Hover effect */
@@ -145,18 +191,15 @@
         }
       }
     </style>
-  </head>
 
-  <body>
+</head>
+<body>
+    <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
+<div class="justify-content-center mb-3">
+    <img src="/background.jpg" style="width: 100%; height: auto;" class="img-fluid" alt="Background">
+</div>
 
-    <div class="justify-content-center">
-      <img
-        src="/background.jpg"
-        style="width: 100%; height: auto"
-        class="img-fluid"
-        alt="Background"
-      />
     </div>
 
     <!-- Footer Section -->
@@ -234,5 +277,50 @@
         </div>
       </div>
     </section>
-  </body>
+  <!-- Custom CSS -->
+  <style>
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .repo-link {
+      color: #007bff; /* Bootstrap primary color */
+      font-weight: bold;
+      text-decoration: none; /* Remove underline */
+      padding: 5px 10px; /* Add some padding */
+      border: 2px solid #007bff; /* Add border */
+      border-radius: 5px; /* Rounded corners */
+      transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    }
+
+    .repo-link:hover {
+      background-color: #007bff; /* Change background on hover */
+      color: white; /* Change text color on hover */
+    }
+  </style>
+
+  <%- include('partials/footer') %> 
+  <%- include('partials/bottom_nav') %>
+  
+  <script>
+    // Preloader JS styling
+    let preloader = document.querySelector("#preloader");
+    window.addEventListener("load", function () {
+      preloader.style.display = "none";
+    });
+
+    // Scroll Progress Script
+    window.onscroll = function() {
+      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrolled = (winScroll / height) * 100;
+      document.getElementById("progress-bar").style.width = scrolled + "%";
+    };
+  </script>
+</body>
+
 </html>
