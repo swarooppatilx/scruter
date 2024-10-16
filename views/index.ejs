@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<head>
     <!-- Add service worker -->
     <script>
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("/sw.js")
-          .then((registration) => {
-            console.log(
-              "Service Worker registered with scope:",
-              registration.scope
-            );
-          })
-          .catch((error) => {
-            console.error("Service Worker registration failed:", error);
-          });
-      }
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch((error) => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        }
     </script>
     <%- include('partials/head') %>
     <style>
-      .social-section {
-        padding: 30px;
-      }
+        .icon-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
 
-      :root {
-        --bg-color: #ffffff;
-        --text-color: #000000;
-      }
+        .icon-circle:hover {
+            background-color: #eeeeee;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-      .dark-mode {
-        --bg-color: #1c1c1c;
-        --text-color: #ffffff;
-      }
+        .icon-circle i {
+            color: #333;
+            font-size: 24px;
+        }
 
-      body {
-        background-color: var(--bg-color) !important;
-        color: var(--text-color) !important;
-      }
+        /* Scroll Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 6px;
+            background-color: #2e8030;
+            width: 0%;
+            z-index: 9999;
 
-      .bg-dark {
-        background-color: var(--bg-color) !important;
-        color: var(--text-color) !important;
-      }
-      /* Media query for phone screens or smaller */
-      @media (max-width: 900px) {
-        body {
-          padding-bottom: 61px;
         }
       }
 
@@ -76,16 +76,14 @@
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
       }
     </style>
-  </head>
 
-  <body>
+</head>
+<body>
+    <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
-    <div class="justify-content-center">
-      <img
-        src="/background.jpg"
-        style="width: 100%; height: auto"
-        class="img-fluid"
-      />
+    <div class="justify-content-center mb-3">
+        <img src="/background.jpg" style="width: 100%; height: auto;" class="img-fluid">
+
     </div>
 
     <!-- Search Bar -->
@@ -218,14 +216,18 @@
         preloader.style.display = "none";
       });
 
-      // Scroll to top button
-      function scrollToTop() {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      }
+
+    <%- include('partials/bottom_nav') %>
+
+    <!-- Scroll Progress Script -->
+    <script>
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        };
     </script>
-    <button id="scroll" onclick="scrollToTop()"><i class="fa-solid fa-arrow-up"></i></button>
-  </body>
+</body>
+
 </html>
