@@ -6,8 +6,16 @@
     <link rel="stylesheet" href="formstyle.css">
     <script src="/client-validation.js" defer></script>
     <style>
+        body{
+            overflow-y: hidden;
+        }
         .input-submit {
-            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            padding-bottom: 35px;
+            text-align: center;
         }
         .input-submit:hover {
             background-color: #000;
@@ -113,6 +121,19 @@
                 icon.classList.add('bx-show');
             }
         }
-    </script>    
+    </script>
+    <script>
+        window.embeddedChatbotConfig = {
+        chatbotId: "3y5y_b4ZtgDExQUL8b2_A",
+        domain: "www.chatbase.co"
+        }
+        </script>
+        <script
+        src="https://www.chatbase.co/embed.min.js"
+        chatbotId="3y5y_b4ZtgDExQUL8b2_A"
+        domain="www.chatbase.co"
+        defer>
+        </script>
+
 </body>
 </html>
