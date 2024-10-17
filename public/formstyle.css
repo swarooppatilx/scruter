@@ -53,6 +53,7 @@ body {
     font-size: 25px;
     font-weight: 800;
     margin-top: 10px;
+    font-weight: 400;
 }
 
 .input-box {
@@ -68,7 +69,7 @@ body {
     top: 40px;
     right: 12px;
     cursor: pointer; 
-    color: #595b5e;
+    color: #363738;
 }
 
 .input-field {
@@ -102,6 +103,7 @@ body {
     cursor: pointer;
     transition: all .3s ease-in-out;
     border-radius: 9px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .input-submit:hover {
@@ -121,6 +123,7 @@ body {
 
 .bottom a:hover {
     text-decoration: underline;
+    color: #333;
 }
 
 @media (max-width: 480px) {
