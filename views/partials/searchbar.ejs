@@ -24,15 +24,22 @@
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
     const searchAction = document.getElementById('search-action');
-    const validationMessage = document.getElementById('validation-message'); // Get the validation message element
+    const validationMessage = document.getElementById('validation-message');
 
     // Update form action based on the selected search action
     searchAction.addEventListener('change', function() {
       const activeLink = this.value;
       searchForm.action = `/${activeLink}?type=${activeLink}`;
+      
+      // Automatically submit the form if there is a query
+      const queryInput = searchInput.value.trim();
+      if (queryInput !== '') {
+        validationMessage.style.display = 'none'; // Hide validation message if there is a query
+        searchForm.submit();
+      }
     });
 
-    // Validate input before submitting the form
+    // Validate input and submit form when search button is clicked
     searchForm.addEventListener('submit', function(event) {
       const queryInput = searchInput.value.trim();
 
@@ -44,6 +51,23 @@
       } else {
         validationMessage.style.display = 'none'; 
         searchInput.classList.remove('is-invalid'); 
+      }
+    });
+
+    // Additional listener for search button click
+    document.getElementById('search-button').addEventListener('click', function(event) {
+      const queryInput = searchInput.value.trim();
+      const selectedType = searchAction.value;
+
+      // If there is a query or an action is selected, submit the form
+      if (queryInput !== '' || selectedType) {
+        validationMessage.style.display = 'none'; // Hide validation message
+        searchForm.submit();
+      } else {
+        // If no query, show validation message
+        event.preventDefault();
+        validationMessage.style.display = 'block';
+        searchInput.classList.add('is-invalid');
       }
     });
   });
