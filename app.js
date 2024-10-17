@@ -180,7 +180,16 @@ app.post('/login', [
 // Handle signup form submission
 app.post('/signup', [
   body('username').notEmpty().withMessage('Username is required'),
-  body('email').isEmail().withMessage('Email is required and must be valid'),
+  body('email')
+    .isEmail().withMessage('Email is required and must be valid')
+    .custom(value => {
+      const trustedDomains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com'];
+      const emailDomain = value.split('@')[1];
+      if (!trustedDomains.includes(emailDomain)) {
+        throw new Error('Please use a trusted email provider (e.g., Gmail, Yahoo, Outlook, Hotmail, iCloud)');
+      }
+      return true;
+    }),
   body('password').notEmpty().withMessage('Password is required'),
   body('confirmPassword').notEmpty().withMessage('Confirm Password is required'),
   body('phone').notEmpty().withMessage('Phone number is required')
