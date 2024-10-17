@@ -1,5 +1,40 @@
 <!-- Footer Section -->
 <style>
+.icon-circle {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .icon-circle a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        color: #000;
+        transition: color 0.3s ease;
+    }
+
+    .icon-circle:hover {
+        background-color: #007bff; /* Change background on hover */
+        transform: scale(1.1); /* Slightly enlarge the icon on hover */
+    }
+
+    .icon-circle:hover a {
+        color: white; /* Change icon color on hover */
+    }
+
+    .icon-circle i {
+        font-size: 24px;
+    }
+
+
+
     .social-section {
     padding: 30px;
 }
