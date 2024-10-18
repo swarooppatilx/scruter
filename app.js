@@ -231,7 +231,7 @@ app.post('/signup', [
 //Change in Dashboard Stuff
 
 //Updating Personal Information of Username and Email
-app.post('/update-personal-info', (req, res) => {
+app.post('/update-personal-info',ensureAuthenticated, (req, res) => {
   if (!req.session.user || !req.session.user.username) {
       return res.redirect('/login'); // Redirect if not logged in
   }
@@ -257,7 +257,7 @@ app.post('/update-personal-info', (req, res) => {
 
 
 //Changing The Password
-app.post('/change-password', (req, res) => {
+app.post('/change-password',ensureAuthenticated, (req, res) => {
   const { currentPassword, newPassword } = req.body;
   const { username } = req.session.user; // Fetch the username from the session
 
@@ -301,7 +301,7 @@ app.post('/change-password', (req, res) => {
 
 
 //Updating Contact Info
-app.post('/update-contact-info', (req, res) => {
+app.post('/update-contact-info',ensureAuthenticated, (req, res) => {
   const { phone } = req.body;
   const { username } = req.session.user; // Fetch the username from the session
 
@@ -342,7 +342,7 @@ app.get('/logout', (req, res) => {
 });
 
 // Express Route to render the User Dashboard page 
-app.get('/dashboard', (req, res) => { 
+app.get('/dashboard',ensureAuthenticated, (req, res) => { 
   const user = req.session.user; // Accessing user from session
   res.render('dashboard', { user, activeLink: 'userdashboard' }); 
 }); 
