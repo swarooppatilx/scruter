@@ -222,46 +222,66 @@ a {
           <img src="https://img.icons8.com/?size=100&id=45475&format=png&color=000000" class="toggleMode" id="toggleMode" alt="">
         </button>
         <% if (user) { %>
-        <span class="navbar-text mb-2 mb-lg-0 me-lg-3"
-          >Welcome, <%= user.username %></span
-        >
-        <!-- Logout Button -->  
-        <a class="btn btn-outline-danger mb-2 mb-lg-0 me-lg-2" href="/logout"
-        ><i class="fa-solid fa-user me-2"></i>Logout</a
-        >
-        <!-- User Dashboard Button here-->  
-        <a class="btn mb-2 mb-lg-0 me-lg-2" style="background-color: #5bc0de; color: white;" href="/dashboard">  
-          <i class="fa-solid fa-tachometer-alt me-2"></i>Dashboard  
-        </a>  
-        
-        <div class="dropdown">
-          <button
-            class="btn btn-success dropdown-toggle text-light"
-            type="button"
-            id="dropdownMenuButton1"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <i class="fa-solid fa-marker me-2"></i>Create Post
-          </button>
-          <ul
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="dropdownMenuButton1"
-          >
-            <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
-            <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
-            <li><a class="dropdown-item" href="/market/form">For Sale Ad</a></li>
-          </ul>
-        </div>
-        <% } else { %>
-          <div class="d-flex flex-column flex-lg-row">
-            <a class="btn btn-outline-success me-2 flex-grow-1" href="/auth?action=login">
-              <i class="fa-solid fa-user me-2"></i>Login
-            </a>
-            <a class="btn btn-outline-primary flex-grow-1" href="/auth?action=signup">
-              <i class="fa-solid fa-user-plus me-2"></i>Sign Up
-            </a>
+          <div class="d-flex align-items-start">
+            <!-- User Dropdown -->
+            <div class="dropdown me-3">
+              <button
+                class="btn btn-outline-primary dropdown-toggle"
+                type="button"
+                id="userDropdownMenu"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Welcome, <%= user.username %>!
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenu">
+                <li>
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-success dropdown-toggle text-light"
+                      type="button"
+                      id="createBlogDropdownMenu"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i class="fa-solid fa-marker me-2"></i>Create Post
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="createBlogDropdownMenu">
+                      <li>
+                        <a class="dropdown-item" href="/house/form">
+                          <i class="fa-solid fa-home me-2"></i>House Ad
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="/food/form">
+                          <i class="fa-solid fa-utensils me-2"></i>Food Ad
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="/market/form">
+                          <i class="fa-solid fa-store me-2"></i>For Sale Ad
+                        </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="/blog/form">
+                          <i class="fa-solid fa-blog me-2"></i>Create Blog
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li>
+                  <a class="dropdown-item text-danger mt-2" href="/logout">
+                    <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
+        <% } else { %>
+          <a class="btn btn-outline-success" href="/auth?action=login">
+            <i class="fa-solid fa-user me-2"></i>Login
+          </a>
         <% } %>
       </div>
     </div>
