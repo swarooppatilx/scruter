@@ -616,3 +616,13 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
+//about page
+app.get('/about', (req, res) => {
+  res.render('about', { 
+    title: 'About Us - Scruter', 
+    appName: 'Scruter',
+    activeLink: 'about'
+  });
+});
