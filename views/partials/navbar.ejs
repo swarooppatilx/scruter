@@ -1,24 +1,21 @@
 <style>
  /* Base Nav-Link Styles */
  :root {
-                --bg-color: #ffffff;
-                --text-color: #000000;
-            }
-
-            .dark-mode {
-                --bg-color: #1c1c1c;
-                --text-color: #ffffff;
-            }
-
-            body {
-                background-color: var(--bg-color) !important;
-                color: var(--text-color) !important;
-            }
-
-            .bg-dark{
-                background-color: var(--bg-color) !important;
-                color: var(--text-color) !important;
-            }
+    --bg-color: #ffffff;
+    --text-color: #000000;
+  }
+  .dark-mode {
+    --bg-color: #1c1c1c;
+    --text-color: #ffffff;
+  }
+  body {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+  }
+  .bg-dark{
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+    }
 .nav-link {
     position: relative;
     overflow: hidden;
@@ -226,11 +223,17 @@ a {
         </button>
         <% if (user) { %>
         <span class="navbar-text mb-2 mb-lg-0 me-lg-3"
-          >Welcome, <%= user.username %>!</span
+          >Welcome, <%= user.username %></span
         >
+        <!-- Logout Button -->  
         <a class="btn btn-outline-danger mb-2 mb-lg-0 me-lg-2" href="/logout"
-          ><i class="fa-solid fa-user me-2"></i>Logout</a
+        ><i class="fa-solid fa-user me-2"></i>Logout</a
         >
+        <!-- User Dashboard Button here-->  
+        <a class="btn mb-2 mb-lg-0 me-lg-2" style="background-color: #5bc0de; color: white;" href="/dashboard">  
+          <i class="fa-solid fa-tachometer-alt me-2"></i>Dashboard  
+        </a>  
+        
         <div class="dropdown">
           <button
             class="btn btn-success dropdown-toggle text-light"
@@ -247,9 +250,7 @@ a {
           >
             <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
             <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
-            <li>
-              <a class="dropdown-item" href="/market/form">For Sale Ad</a>
-            </li>
+            <li><a class="dropdown-item" href="/market/form">For Sale Ad</a></li>
           </ul>
         </div>
         <% } else { %>
@@ -287,9 +288,9 @@ a {
     // Initial setup based on saved theme
     if (mode === "dark") {
       body.classList.add("dark-mode");
-      navbar.classList.add("dark-mode");
-      if (footer) {
-        footer.classList.add("dark-mode");
+      navbar.classList.add("dark-mode")
+      if(footer){
+        footer.classList.add("dark-mode")
       }
       image.src = moon;
       logo.src = "/banner2.png"; // Change logo for dark mode
@@ -301,7 +302,7 @@ a {
     toggleButton.addEventListener("click", function () {
       body.classList.toggle("dark-mode");
       navbar.classList.toggle("dark-mode");
-      if (footer) {
+      if(footer){
         footer.classList.toggle("dark-mode");
       }
       mode = mode === "light" ? "dark" : "light";
