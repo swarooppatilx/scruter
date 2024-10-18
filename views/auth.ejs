@@ -33,11 +33,21 @@
                 <p><%= action === 'login' ? 'Log In' : 'Sign Up' %></p>
             </div>
             <% if (errors && errors.length > 0) { %>
-                <div class="alert alert-danger">
+                <div id="errorAlert" class="alert alert-danger" style="position: absolute; left: 80%; top: 80%;">
                     <% errors.forEach(function(error) { %>
                         <div class="error-message"><i class="bx bx-error"></i> <%= error.msg %></div>
                     <% }); %>
                 </div>
+            
+                <!-- JavaScript to hide the alert after 4 seconds -->
+                <script>
+                    setTimeout(function() {
+                        const errorAlert = document.getElementById('errorAlert');
+                        if (errorAlert) {
+                            errorAlert.style.display = 'none';
+                        }
+                    }, 4000);  // 4000ms = 4 seconds
+                </script>
             <% } %>
             <form action="/<%= action %>" method="post" id="authForm">
                 <% if (action === 'signup') { %>
