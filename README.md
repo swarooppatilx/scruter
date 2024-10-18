@@ -46,6 +46,7 @@ Scruter is built using the following technologies:
 - **Bootstrap (CSS framework)**
 
 <!-- Prerequisites Section -->
+
 ## Prerequisites 👈🏻
 
 Before setting up the project, ensure you have the following installed:
@@ -60,6 +61,7 @@ Before setting up the project, ensure you have the following installed:
 </div>
 
 <!-- Installation Section -->
+
 ## <div align="center">Installation 🛠️</div>
 
 Follow these steps to set up Scruter locally:
@@ -70,12 +72,15 @@ Follow these steps to set up Scruter locally:
 git clone https://github.com/swarooppatilx/scruter.git
 cd scruter
 ```
+
 2. **Install dependencies**
 
 Run the following command to install the necessary packages:
+
 ```bash
 npm install
 ```
+
 3. **Create a .env file**
 
 In the project root, create a .env file and add the following environment variables
@@ -93,6 +98,7 @@ CLOUDINARY_API_SECRET=your_cloudinary_api_secret
 To start the application, use one of the following commands:
 
 **Start the server**
+
 ```bash
 npm start
 ```
@@ -113,30 +119,35 @@ Contributions are welcome! Follow these steps to contribute:
   Click the "Fork" button at the top-right corner of the repository page to create a personal copy.
 
 - **Clone your forked repository**
-    ```bash
-    git clone https://github.com/your-username/scruter.git
-    cd scruter
-    ```
+
+  ```bash
+  git clone https://github.com/your-username/scruter.git
+  cd scruter
+  ```
 
 - **Create a new branch**
-    ```bash
-    git checkout -b feature-branch-name
-    ```
+
+  ```bash
+  git checkout -b feature-branch-name
+  ```
 
 - **Add your changes**
-    ```bash
-    git add .
-    ```
+
+  ```bash
+  git add .
+  ```
 
 - **Make your changes and commit them**
-    ```bash
-    git commit -m 'Add some feature'
-    ```
+
+  ```bash
+  git commit -m 'Add some feature'
+  ```
 
 - **Push to the branch**
-    ```bash
-    git push origin feature-branch-name
-    ```
+
+  ```bash
+  git push origin feature-branch-name
+  ```
 
 - **Submit a pull request**  
   Go to the original repository and click on the "Pull Request" button to submit your changes.
@@ -157,7 +168,7 @@ This project is licensed under the [GPL-3.0 License](/LICENSE).
             <h4>Swaroop Patil</h4>
         </td> 
     </tr> 
-</table> 
+</table>
 
 ## <div align="center">Additional Tips 🔍</div>
 
@@ -165,33 +176,39 @@ Here are a few tips to ensure a smooth contribution process:
 
 1. **Stay Updated**  
    Keep your forked repository up-to-date by syncing it with the original repository:
-    ```bash
-    git fetch upstream
-    git checkout main
-    git merge upstream/main
-    ```
+
+   ```bash
+   git fetch upstream
+   git checkout main
+   git merge upstream/main
+   ```
 
 2. **Test Thoroughly**  
    Make sure to test your changes thoroughly before submitting them. You can do this by running the project locally:
-    ```bash
-    npm start
-    ```
+
+   ```bash
+   npm start
+   ```
+
    If you're making significant changes, consider writing tests or ensuring existing tests pass by running:
-    ```bash
-    npm test
-    ```
+
+   ```bash
+   npm test
+   ```
 
 3. **Follow the Code Style Guidelines**  
    Adhering to the project's code style guidelines is crucial. If available, use the provided linting tools to ensure consistent code style:
-    ```bash
-    npm run lint
-    ```
+
+   ```bash
+   npm run lint
+   ```
 
 4. **Write Clear Commit Messages**  
    Always use clear and concise commit messages. A good format could be:
-    ```bash
-    [feature] Add feature to enhance user dashboard
-    ```
+
+   ```bash
+   [feature] Add feature to enhance user dashboard
+   ```
 
 5. **Engage in Discussions**  
    If you're unsure about a feature or want to suggest improvements, engage with the maintainers via the [Discussions](https://github.com/swarooppatilx/scruter/discussions) section.
@@ -201,7 +218,6 @@ Here are a few tips to ensure a smooth contribution process:
 Big thanks to all the contributors who have helped make Scruter a better platform! 🎉
 
 <a href="https://github.com/swarooppatilx/scruter/graphs/contributors"> <img align="center" src="https://contrib.rocks/image?max=100&repo=swarooppatilx/scruter" /> </a> <p align="right"><a href="#top"><img src="https://img.shields.io/badge/Move%20to%20top-Blue?style=plastic" alt="Back To Top"></a></p>
-
 
 <p align="center">
     <img src="https://media.giphy.com/media/Ll22OhMLAlVDb8UQWe/giphy.gif" width="60" height="60"/>
