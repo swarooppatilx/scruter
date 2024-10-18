@@ -1,9 +1,9 @@
-
 ## Contributing to Scruter
 
 Thank you for your interest in contributing to Scruter! Your contributions help improve our community and make it easier for everyone to buy, sell, and exchange goods and services. Please follow the guidelines below to ensure a smooth contribution process.
 
 ## Table of Contents
+
 - [Getting Started](#getting-started)
 - [Opening a Pull Request](#opening-a-pull-request)
 - [Contribution Guidelines](#contribution-guidelines)
@@ -27,7 +27,7 @@ Thank you for your interest in contributing to Scruter! Your contributions help 
 
 ## Opening a Pull Request
 
-1. **✅  Commit your changes** with clear commit messages:
+1. **✅ Commit your changes** with clear commit messages:
    ```bash
    git add .
    git commit -m 'Add some feature'
@@ -44,16 +44,18 @@ Thank you for your interest in contributing to Scruter! Your contributions help 
 - Be respectful and constructive in all interactions with other contributors.
 - Test your changes thoroughly before submitting a pull request.
 - Include a clear and descriptive title for your pull request summarizing the changes.
+
 # 🏆 Contribution Points
+
 All tasks will be assigned various levels based on complexity and required skills. Each level provides different points:
 
-- **🥇 Level 1:** 10 Points  
-- **🥈 Level 2:** 25 Points  
-- **🥉 Level 3:** 45 Points  
+- **🥇 Level 1:** 10 Points
+- **🥈 Level 2:** 25 Points
+- **🥉 Level 3:** 45 Points
 
 ## Commit Messages
 
-- Use meaningful commit messages related to your changes. 
+- Use meaningful commit messages related to your changes.
 - Prefix your commit messages with the following:
   - `fix:` for bug fixes.
   - `feat:` for new features.
@@ -71,11 +73,7 @@ All tasks will be assigned various levels based on complexity and required skill
 
 ## Acknowledgments
 
-Thank you for considering contributing to Scruter! 
+Thank you for considering contributing to Scruter!
 If you enjoy working with us, please give the project a ⭐ star! Your support means a lot and encourages further contributions. ✨
 
-
-
 Happy coding! 🚀
-
-

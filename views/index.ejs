@@ -5,7 +5,7 @@
     <!-- Add service worker -->
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
+            navigator.serviceWorker.register('js/sw.js')
                 .then((registration) => {
                     console.log('Service Worker registered with scope:', registration.scope);
                 })
@@ -46,24 +46,8 @@
             background-color: #2e8030;
             width: 0%;
             z-index: 9999;
-
-        }
       }
 
-      /* Scroll btn */
-      #scroll{
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #1c1c1c;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        padding: 10px 16px;
-        font-size: 20px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
     </style>
 
     <!-- Information Section -->
@@ -177,7 +161,7 @@
         </div>
         
         <section class="container mt-5 mb-5 pb-5">
-            <p class="text-center">Explore our repository: <a href="https://github.com/swarooppatilx/scruter" target="_blank" class = "repo-link"> <i class="fab fa-github"></i> GitHub Repository Link</a> and start contributing!</p>
+            <p class="text-center"><a href="https://github.com/swarooppatilx/scruter" target="_blank" class = "repo-link"> <i class="fab fa-github"></i> GitHub Repository Link</a></p>
         </section>
     </section>
     
@@ -209,13 +193,6 @@
     </style>
 
     <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>
-    <script>
-      // /preloader js styling
-      let preloader = document.querySelector("#preloader");
-      window.addEventListener("load", function (e) {
-        preloader.style.display = "none";
-      });
-    </script>
 
     <%- include('partials/bottom_nav') %>
 
@@ -242,7 +219,6 @@
       domain="www.chatbase.co"
       defer>
       </script>
-    <button id="scroll" onclick="scrollToTop()"><i class="fa-solid fa-arrow-up"></i></button>
 
   </body>
 

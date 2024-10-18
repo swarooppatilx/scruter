@@ -1,25 +1,24 @@
 {
-    "lang": "en-us",
-    "name": "Scruter",
-    "short_name": "Scruter",
-    "description": "Scruter is a local classifieds and community site designed to bring people together for buying, selling, and exchanging goods and services.",
-    "start_url": "/",
-    "background_color": "#ffffff",
-    "theme_color": "#000000",
-    "orientation": "portrait",
-    "display": "standalone",
+  "lang": "en-us",
+  "name": "Scruter",
+  "short_name": "Scruter",
+  "description": "Scruter is a local classifieds and community site designed to bring people together for buying, selling, and exchanging goods and services.",
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "display": "standalone",
 
-    "icons": [
-      {
-        "src": "/icon.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
- 	"src":"/icon.png",
-	"sizes":"512x512",
-	"type":"image/png"
-      }
-    ]
-  }
-  
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
