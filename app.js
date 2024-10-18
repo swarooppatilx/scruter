@@ -361,6 +361,22 @@ app.get('/contributors', (req, res) => {
   res.render('contributors', { activeLink: 'contributors' });
 });
 
+
+// Terms route
+app.get('/terms', (req, res) => {
+  res.render('terms', {
+    activeLink: 'terms' // You can customize this based on your layout
+  });
+});
+
+app.get('/privacy-policy', (req, res) => {
+  res.render('privacy-policy', {
+    activeLink: 'privacy-policy' // You can customize this based on your layout
+  });
+});
+
+
+
 // Render form pages with authentication check
 app.get('/food/form', ensureAuthenticated, (req, res) => {
   res.render('form', { routeName: 'food', errors: [], activeLink: 'food' });
