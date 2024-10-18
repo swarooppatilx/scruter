@@ -345,7 +345,16 @@ app.get('/logout', (req, res) => {
 app.get('/dashboard',ensureAuthenticated, (req, res) => { 
   const user = req.session.user; // Accessing user from session
   res.render('dashboard', { user, activeLink: 'userdashboard' }); 
-}); 
+});
+
+//About Page Route
+app.get('/about', (req, res) => {
+  res.render('about', { 
+    title: 'About Us - Scruter', 
+    appName: 'Scruter',
+    activeLink: 'about'
+  });
+});
 
 // Contributors Route
 app.get('/contributors', (req, res) => {
