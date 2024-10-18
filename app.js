@@ -16,6 +16,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // Serve static files from 'public' directory
+app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+
 
 // Session setup
 app.use(session({
@@ -106,6 +108,7 @@ const Market = mongoose.model('Market', marketSchema);
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
+  phone: {type: String, required: true, unique: true}, 
   password: { type: String, required: true }
 });
 const User = mongoose.model('User', userSchema);
@@ -165,6 +168,7 @@ app.post('/login', [
   const { username, password } = req.body;
   try {
     const user = await User.findOne({ username });
+    console.log("Fetched User from MongoDB: ", user);
     if (user && await bcrypt.compare(password, user.password)) {
       req.session.user = user;
       res.redirect('/');
@@ -197,11 +201,14 @@ app.post('/signup', [
   }
 
   try {
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    const existingUser = await User.findOne({ $or: [{ username }, { email }, { phone }] });
     if (existingUser) {
       const errors = [];
       if (existingUser.username === username) {
         errors.push({ msg: 'Username is already taken' });
+      }
+      if (existingUser.phone === phone) {
+        errors.push({ msg: 'Phone is already taken' });
       }
       if (existingUser.email === email) {
         errors.push({ msg: 'Email is already registered' });
@@ -221,6 +228,107 @@ app.post('/signup', [
   }
 });
 
+//Change in Dashboard Stuff
+
+//Updating Personal Information of Username and Email
+app.post('/update-personal-info',ensureAuthenticated, (req, res) => {
+  if (!req.session.user || !req.session.user.username) {
+      return res.redirect('/login'); // Redirect if not logged in
+  }
+
+  const { username } = req.session.user;
+  const { newUsername, email } = req.body;
+
+  if (!newUsername || !email) {
+      return res.status(400).send('All fields are required.');
+  }
+
+  User.findOneAndUpdate({ username }, { username: newUsername, email }, { new: true })
+      .then(updatedUser => {
+          // Update session data after successful update
+          req.session.user = { username: updatedUser.username, email: updatedUser.email, phone: updatedUser.phone };
+          res.redirect('/dashboard');
+      })
+      .catch(err => {
+          console.error(err);
+          res.status(500).send('Error updating user data.');
+      });
+});
+
+
+//Changing The Password
+app.post('/change-password',ensureAuthenticated, (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const { username } = req.session.user; // Fetch the username from the session
+
+  // Validate inputs
+  if (!currentPassword || !newPassword) {
+      return res.status(400).send('All fields are required.');
+  }
+
+  // Find the user by username instead of userId
+  User.findOne({ username })
+      .then(user => {
+          console.log("User found:", user); // Log the user object for debugging
+          if (!user) {
+              return res.status(404).send('User not found.');
+          }
+
+          // Check if the current password matches (using bcrypt)
+          return bcrypt.compare(currentPassword, user.password)
+              .then(isMatch => {
+                  if (!isMatch) {
+                      return res.status(400).send('Current password is incorrect.');
+                  }
+
+                  // Hash the new password and save it
+                  return bcrypt.hash(newPassword, 10)
+                      .then(hashedPassword => {
+                          user.password = hashedPassword; // Update the password
+                          return user.save(); // Save the updated user data
+                      });
+              });
+      })
+      .then(() => {
+          res.redirect('/dashboard'); // Redirect to the dashboard after success
+      })
+      .catch(err => {
+          console.error('Error changing password:', err);
+          res.status(500).send('Error changing password.'); //Show Error when unsuccessful
+      });
+});
+
+
+
+//Updating Contact Info
+app.post('/update-contact-info',ensureAuthenticated, (req, res) => {
+  const { phone } = req.body;
+  const { username } = req.session.user; // Fetch the username from the session
+
+  // Validate input data
+  if (!phone) {
+      return res.status(400).send('Phone number is required.');
+  }
+
+  // Update the user phone number in the database based on the username
+  User.findOneAndUpdate({ username }, { phone }, { new: true })
+      .then(updatedUser => {
+          // Update the session with the new contact information
+          req.session.user = {
+              username: updatedUser.username,
+              email: updatedUser.email,
+              phone: updatedUser.phone
+          };
+          res.redirect('/dashboard'); // Redirect back to the dashboard
+      })
+      .catch(err => {
+          console.error('Error updating contact information:', err);
+          res.status(500).send('Error updating contact information.');
+      });
+});
+
+
+
 // Handle logout
 app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
@@ -233,10 +341,41 @@ app.get('/logout', (req, res) => {
   });
 });
 
+// Express Route to render the User Dashboard page 
+app.get('/dashboard',ensureAuthenticated, (req, res) => { 
+  const user = req.session.user; // Accessing user from session
+  res.render('dashboard', { user, activeLink: 'userdashboard' }); 
+});
+
+//About Page Route
+app.get('/about', (req, res) => {
+  res.render('about', { 
+    title: 'About Us - Scruter', 
+    appName: 'Scruter',
+    activeLink: 'about'
+  });
+});
+
 // Contributors Route
 app.get('/contributors', (req, res) => {
   res.render('contributors', { activeLink: 'contributors' });
 });
+
+
+// Terms route
+app.get('/terms', (req, res) => {
+  res.render('terms', {
+    activeLink: 'terms' // You can customize this based on your layout
+  });
+});
+
+app.get('/privacy-policy', (req, res) => {
+  res.render('privacy-policy', {
+    activeLink: 'privacy-policy' // You can customize this based on your layout
+  });
+});
+
+
 
 // Render form pages with authentication check
 app.get('/food/form', ensureAuthenticated, (req, res) => {
@@ -251,7 +390,7 @@ app.get('/market/form', ensureAuthenticated, (req, res) => {
   res.render('form', { routeName: 'market', errors: [], activeLink: 'market' });
 });
 
-// Handle search and display for houses
+// Handle search and display for houses 
 app.get('/house', async (req, res) => {
   try {
     const domain = req.get('host');
