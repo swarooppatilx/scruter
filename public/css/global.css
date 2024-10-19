@@ -40,9 +40,13 @@ body {
 
 .social-section p {
   font-size: 1.1rem;
-  color: #666; /* Default text color */
+  color: #333; /* Default text color */
   max-width: 600px;
   margin: 0 auto;
+}
+
+body.dark-mode .social-section p {
+  color: #fff; /*dark-mode text color*/
 }
 
 /* Links hover effects */
@@ -72,7 +76,7 @@ body {
 
 .social-section ul li a {
   text-decoration: none;
-  color: #333; /* Default link color */
+  color: #666; /* Default link color */
   transition: color 0.3s ease;
 }
 
@@ -82,7 +86,7 @@ body {
 
 /* Dark mode link colors */
 body.dark-mode .social-section ul li a {
-  color: #ddd; /* Light color for dark mode */
+  color: #fff !important; /* Light color for dark mode */
 }
 
 body.dark-mode .social-section ul li a:hover {
@@ -122,7 +126,11 @@ body.dark-mode .social-section ul li a:hover {
 
 /* Dark mode social media icon colors */
 body.dark-mode .icon-circle {
-  background-color: #444; /* Dark background for icons */
+  background-color: #ddd; /* Dark background for icons */
+}
+
+body.dark-mode .icon-circle:hover {
+  background-color: #fff !important;
 }
 
 body.dark-mode .icon-circle a {
