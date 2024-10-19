@@ -8,39 +8,46 @@
     body {
       font-family: 'Arial', sans-serif;
       color: #333;
-      background-color: #f9f9f9;
+      background-color: #f3f6f9;
       margin: 0;
       padding: 0;
+      line-height: 1.6;
     }
 
     /* Nav Bar */
     .navbar {
-      background-color: white;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       padding: 15px;
       text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     .navbar a {
-      color: black;
+      color: #2c3e50;
       text-decoration: none;
       padding: 10px 20px;
       font-size: 18px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .navbar a:hover {
-      background-color: #c2c4c5;
+      background-color: #3498db;
+      color: #fff;
       border-radius: 5px;
     }
 
-    /* About Us  */
+    /* About Us Section */
     .about-us {
-      background-color: #fff;
+      background-color: #ffffff;
       padding: 50px 20px;
-      color: #222;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
@@ -50,69 +57,121 @@
     }
 
     h1 {
-      font-size: 36px;
+      font-size: 42px;
       margin-bottom: 20px;
     }
 
     h2 {
       font-size: 28px;
-      margin-top: 30px;
+      margin-top: 40px;
+      margin-bottom: 20px;
     }
 
     p {
       font-size: 18px;
-      line-height: 1.6;
-      margin-bottom: 20px;
+      line-height: 1.8;
+      margin-bottom: 25px;
       color: #555;
     }
 
+    /* Cards for List Items */
     ul {
       list-style: none;
       padding-left: 0;
+      display: flex; /* Use flexbox to align items in a row */
+      justify-content: center; /* Center align the items */
     }
 
     ul li {
       font-size: 18px;
       line-height: 1.6;
       background-color: #ecf0f1;
-      margin: 10px 0;
-      padding: 10px;
-      border-left: 4px solid #3498db;
+      margin: 10px; /* Space between items */
+      padding: 20px;
+      flex: 1; /* Allow items to grow equally */
+      max-width: 30%; /* Maximum width for each item */
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      text-align: center;
     }
 
     ul li:hover {
-      background-color: #d0e8f4;
+      background-color: #6cafdc;
+      color: #fff;
+      transform: translateY(-5px);
     }
+
+    /* Cards for Paragraph Sections */
+    .card {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    /* Styling Buttons */
+    .cta-button {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-align: center;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    .cta-button:hover {
+      background-color: #2980b9;
+    }
+
   </style>
 </head>
 <body>
 
   <!-- Nav Bar -->
   <div class="navbar">
-    <a href="/"><b>Home</b></a> <!-- Changed link to EJS route -->
-    <a href="/about"><b>About Us</b></a> <!-- Changed link to EJS route -->
-    <a href="/contact"><b>Contact Us</b></a> <!-- Changed link to EJS route -->
+    <a href="/"><b>Home</b></a>
+    <a href="/about"><b>About Us</b></a>
+    <a href="/contact"><b>Contact Us</b></a>
   </div>
 
-  <!-- About Us -->
+  <!-- About Us Section -->
   <section class="about-us">
     <div class="container">
       <h1>About Us</h1>
-      <p>Welcome to <%= appName %>! We're a local classifieds and community platform designed to connect people for buying, selling, and exchanging goods and services. Whether you're looking for a place to stay, items to buy, or want to offer your own services, <%= appName %> provides a trusted space for local transactions.</p>
 
-      <h2>Our Mission</h2>
-      <p>At <%= appName %>, we believe in fostering strong local connections and promoting sustainable, community-driven commerce. Our platform is built to make buying and selling easier, safer, and more accessible for everyone.</p>
+      <!-- Mission Card -->
+      <div class="card">
+        <h2>Our Mission</h2>
+        <p>At <%= appName %>, we believe in fostering strong local connections and promoting sustainable, community-driven commerce. Our platform is built to make buying and selling easier, safer, and more accessible for everyone.</p>
+      </div>
 
+      <!-- What We Offer Cards -->
       <h2>What We Offer</h2>
       <ul>
         <li>Buy & Sell Locally: Find great deals on items you need or sell your own goods easily.</li>
         <li>Trusted Listings: All our listings are community-driven, allowing for safe exchanges.</li>
-        <li>Community Focused: We're more than just a marketplace. We're here to support local businesses and promote neighborhood connections.</li>
+        <li>Community Focused: We're here to support local businesses and promote neighborhood connections.</li>
       </ul>
 
-      <h2>How It Works</h2>
-      <p>Simply create a free account, post your ads, browse listings, and connect with others in your community. From finding food to housing, <%= appName %> brings your local market online.</p>
+      <!-- How It Works Card -->
+      <div class="card">
+        <h2>How It Works</h2>
+        <p>Simply create a free account, post your ads, browse listings, and connect with others in your community. From finding food to housing, <%= appName %> brings your local market online.</p>
+      </div>
 
+      <!-- Our Values Cards -->
       <h2>Our Values</h2>
       <ul>
         <li>Trust</li>
@@ -126,5 +185,3 @@
 
 </body>
 </html>
-
-
