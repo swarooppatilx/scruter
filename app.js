@@ -1,6 +1,6 @@
-const express = require("express");
+const express = require('express');
 const bodyParser = require('body-parser');
-const path = require("path");
+const path = require('path');
 const multer = require('multer');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
@@ -12,19 +12,25 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const app = express();
 
+// Import the database.js file
+const { User, Food, House, Market } = require('./database'); // Adjust path as needed
+
 // Middleware to parse JSON and form data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // Serve static files from 'public' directory
+app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
 
 // Session setup
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
-  cookie: { secure: false } // Set to true if using HTTPS
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
+    cookie: { secure: false }, // Set to true if using HTTPS
+  })
+);
 
 // Middleware to set user object for views
 app.use((req, res, next) => {
@@ -32,8 +38,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.set("views", path.resolve(__dirname, "views"));
-app.set("view engine", "ejs");
+app.set('views', path.resolve(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // Cloudinary configuration
 cloudinary.config({
@@ -46,69 +52,17 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-      folder: 'uploads',
-      format: async (req, file) => 'jpeg', // Supports promises as well
-      public_id: (req, file) => Date.now() + '-' + file.originalname.replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 100),
+    folder: 'uploads',
+    format: async (req, file) => 'jpeg', // Supports promises as well
+    public_id: (req, file) =>
+      Date.now() +
+      '-' +
+      file.originalname.replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 100),
   },
 });
 
 // Initialize multer with the Cloudinary storage
 const upload = multer({ storage });
-
-
-// Connect to MongoDB
-mongoose.connect(process.env.DB_URL)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(error => console.error('Error connecting to MongoDB:', error));
-
-// Schemas and Models
-const foodSchema = new mongoose.Schema({
-  title: String,
-  image: String,
-  location: String,
-  latitude: String,
-  longitude: String,
-  description: String,
-  username: { type: String, required: true },
-  email: { type: String, required: true },
-  phone: { type: String, required: true }
-});
-const Food = mongoose.model('Food', foodSchema);
-
-const houseSchema = new mongoose.Schema({
-  title: String,
-  image: String,
-  location: String,
-  rent: Number,
-  latitude: String,
-  longitude: String,
-  description: String,
-  username: { type: String, required: true },
-  email: { type: String, required: true },
-  phone: { type: String, required: true }
-});
-const House = mongoose.model('House', houseSchema);
-
-const marketSchema = new mongoose.Schema({
-  title: String,
-  image: String,
-  location: String,
-  price: Number,
-  latitude: String,
-  longitude: String,
-  description: String,
-  username: { type: String, required: true },
-  email: { type: String, required: true },
-  phone: { type: String, required: true }
-});
-const Market = mongoose.model('Market', marketSchema);
-
-const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
-});
-const User = mongoose.model('User', userSchema);
 
 // Authentication middleware
 const ensureAuthenticated = (req, res, next) => {
@@ -126,7 +80,7 @@ app.get('/', (req, res) => {
     searchAction: '/food',
     selectedType: req.query.type || 'food',
     query: req.query.query || '',
-    activeLink: 'home'
+    activeLink: 'home',
   });
 });
 
@@ -136,7 +90,7 @@ app.get('/team', (req, res) => {
     searchAction: '/food',
     selectedType: req.query.type || 'food',
     q: req.query.q || '',
-    activeLink: ''
+    activeLink: '',
   });
 });
 
@@ -153,29 +107,116 @@ app.get('/auth', (req, res) => {
 });
 
 // Handle login form submission
-app.post('/login', [
-  body('username').notEmpty().withMessage('Username is required'),
-  body('password').notEmpty().withMessage('Password is required')
-], async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).render('auth', { action: 'login', errors: errors.array(), activeLink: '' });
-  }
-
-  const { username, password } = req.body;
-  try {
-    const user = await User.findOne({ username });
-    if (user && await bcrypt.compare(password, user.password)) {
-      req.session.user = user;
-      res.redirect('/');
-    } else {
-      res.status(400).render('auth', { action: 'login', errors: [{ msg: 'Invalid credentials' }], activeLink: '' });
+app.post(
+  '/login',
+  [
+    body('username').notEmpty().withMessage('Username is required'),
+    body('password').notEmpty().withMessage('Password is required'),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render('auth', {
+        action: 'login',
+        errors: errors.array(),
+        activeLink: '',
+      });
     }
-  } catch (error) {
-    console.error('Error during login:', error);
-    res.status(500).render('500');
+
+    const { username, password } = req.body;
+    try {
+      const user = await User.findOne({ username });
+      console.log('Fetched User from MongoDB: ', user);
+      if (user && (await bcrypt.compare(password, user.password))) {
+        req.session.user = user;
+        res.redirect('/');
+      } else {
+        res.status(400).render('auth', {
+          action: 'login',
+          errors: [{ msg: 'Invalid credentials' }],
+          activeLink: '',
+        });
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      res.status(500).render('500');
+    }
   }
-});
+);
+
+// Handle signup form submission
+app.post(
+  '/signup',
+  [
+    body('username').notEmpty().withMessage('Username is required'),
+    body('email').isEmail().withMessage('Email is required and must be valid'),
+    body('password').notEmpty().withMessage('Password is required'),
+    body('confirmPassword')
+      .notEmpty()
+      .withMessage('Confirm Password is required'),
+    body('phone').notEmpty().withMessage('Phone number is required'),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render('auth', {
+        action: 'signup',
+        errors: errors.array(),
+        activeLink: '',
+      });
+    }
+
+    const { username, email, password, confirmPassword, phone } = req.body;
+
+    if (password !== confirmPassword) {
+      return res.status(400).render('auth', {
+        action: 'signup',
+        errors: [{ msg: 'Passwords do not match' }],
+        activeLink: '',
+      });
+    }
+
+    try {
+      const existingUser = await User.findOne({
+        $or: [{ username }, { email }, { phone }],
+      });
+      if (existingUser) {
+        const errors = [];
+        if (existingUser.username === username) {
+          errors.push({ msg: 'Username is already taken' });
+        }
+        if (existingUser.phone === phone) {
+          errors.push({ msg: 'Phone is already taken' });
+        }
+        if (existingUser.email === email) {
+          errors.push({ msg: 'Email is already registered' });
+        }
+        return res
+          .status(400)
+          .render('auth', { action: 'signup', errors, activeLink: '' });
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new User({
+        username,
+        email,
+        password: hashedPassword,
+        phone,
+      });
+      await newUser.save();
+
+      req.session.user = newUser;
+      res.redirect('/');
+    } catch (error) {
+      console.error('Error during signup:', error);
+      res.status(500).render('auth', {
+        action: 'signup',
+        errors: [{ msg: 'Internal Server Error' }],
+        activeLink: '',
+      });
+    }
+  }
+);
 
 // Handle signup form submission
 app.post('/signup', [
@@ -197,42 +238,111 @@ app.post('/signup', [
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).render('auth', { action: 'signup', errors: errors.array(), activeLink: '' });
+//Change in Dashboard Stuff
+
+//Updating Personal Information of Username and Email
+app.post('/update-personal-info', ensureAuthenticated, (req, res) => {
+  if (!req.session.user || !req.session.user.username) {
+    return res.redirect('/login'); // Redirect if not logged in
   }
 
-  const { username, email, password, confirmPassword, phone } = req.body;
+  const { username } = req.session.user;
+  const { newUsername, email } = req.body;
 
-  if (password !== confirmPassword) {
-    return res.status(400).render('auth', { action: 'signup', errors: [{ msg: 'Passwords do not match' }], activeLink: '' });
+  if (!newUsername || !email) {
+    return res.status(400).send('All fields are required.');
   }
 
-  try {
-    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
-    if (existingUser) {
-      const errors = [];
-      if (existingUser.username === username) {
-        errors.push({ msg: 'Username is already taken' });
+  User.findOneAndUpdate(
+    { username },
+    { username: newUsername, email },
+    { new: true }
+  )
+    .then(updatedUser => {
+      // Update session data after successful update
+      req.session.user = {
+        username: updatedUser.username,
+        email: updatedUser.email,
+        phone: updatedUser.phone,
+      };
+      res.redirect('/dashboard');
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send('Error updating user data.');
+    });
+});
+
+//Changing The Password
+app.post('/change-password', ensureAuthenticated, (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const { username } = req.session.user; // Fetch the username from the session
+
+  // Validate inputs
+  if (!currentPassword || !newPassword) {
+    return res.status(400).send('All fields are required.');
+  }
+
+  // Find the user by username instead of userId
+  User.findOne({ username })
+    .then(user => {
+      console.log('User found:', user); // Log the user object for debugging
+      if (!user) {
+        return res.status(404).send('User not found.');
       }
-      if (existingUser.email === email) {
-        errors.push({ msg: 'Email is already registered' });
-      }
-      return res.status(400).render('auth', { action: 'signup', errors, activeLink: '' });
-    }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({username, email, password: hashedPassword, phone});
-    await newUser.save();
+      // Check if the current password matches (using bcrypt)
+      return bcrypt.compare(currentPassword, user.password).then(isMatch => {
+        if (!isMatch) {
+          return res.status(400).send('Current password is incorrect.');
+        }
 
-    req.session.user = newUser;
-    res.redirect('/');
-  } catch (error) {
-    console.error('Error during signup:', error);
-    res.status(500).render('auth', { action: 'signup', errors: [{ msg: 'Internal Server Error' }], activeLink: '' });
+        // Hash the new password and save it
+        return bcrypt.hash(newPassword, 10).then(hashedPassword => {
+          user.password = hashedPassword; // Update the password
+          return user.save(); // Save the updated user data
+        });
+      });
+    })
+    .then(() => {
+      res.redirect('/dashboard'); // Redirect to the dashboard after success
+    })
+    .catch(err => {
+      console.error('Error changing password:', err);
+      res.status(500).send('Error changing password.'); //Show Error when unsuccessful
+    });
+});
+
+//Updating Contact Info
+app.post('/update-contact-info', ensureAuthenticated, (req, res) => {
+  const { phone } = req.body;
+  const { username } = req.session.user; // Fetch the username from the session
+
+  // Validate input data
+  if (!phone) {
+    return res.status(400).send('Phone number is required.');
   }
+
+  // Update the user phone number in the database based on the username
+  User.findOneAndUpdate({ username }, { phone }, { new: true })
+    .then(updatedUser => {
+      // Update the session with the new contact information
+      req.session.user = {
+        username: updatedUser.username,
+        email: updatedUser.email,
+        phone: updatedUser.phone,
+      };
+      res.redirect('/dashboard'); // Redirect back to the dashboard
+    })
+    .catch(err => {
+      console.error('Error updating contact information:', err);
+      res.status(500).send('Error updating contact information.');
+    });
 });
 
 // Handle logout
 app.get('/logout', (req, res) => {
-  req.session.destroy((err) => {
+  req.session.destroy(err => {
     if (err) {
       console.error('Error during logout:', err);
       res.status(500).render('500');
@@ -242,9 +352,37 @@ app.get('/logout', (req, res) => {
   });
 });
 
+// Express Route to render the User Dashboard page
+app.get('/dashboard', ensureAuthenticated, (req, res) => {
+  const user = req.session.user; // Accessing user from session
+  res.render('dashboard', { user, activeLink: 'userdashboard' });
+});
+
+//About Page Route
+app.get('/about', (req, res) => {
+  res.render('about', {
+    title: 'About Us - Scruter',
+    appName: 'Scruter',
+    activeLink: 'about',
+  });
+});
+
 // Contributors Route
 app.get('/contributors', (req, res) => {
   res.render('contributors', { activeLink: 'contributors' });
+});
+
+// Terms route
+app.get('/terms', (req, res) => {
+  res.render('terms', {
+    activeLink: 'terms', // You can customize this based on your layout
+  });
+});
+
+app.get('/privacy-policy', (req, res) => {
+  res.render('privacy-policy', {
+    activeLink: 'privacy-policy', // You can customize this based on your layout
+  });
 });
 
 // Render form pages with authentication check
@@ -271,11 +409,19 @@ app.get('/house', async (req, res) => {
       $or: [
         { title: searchRegex },
         { location: searchRegex },
-        { description: searchRegex }
-      ]
+        { description: searchRegex },
+      ],
     });
 
-    res.render('display', { cards: houses, domain, imagepath: "/house.jpg", query, selectedType: 'house', searchAction: '/house', activeLink: 'house' });
+    res.render('display', {
+      cards: houses,
+      domain,
+      imagepath: '/house.jpg',
+      query,
+      selectedType: 'house',
+      searchAction: '/house',
+      activeLink: 'house',
+    });
   } catch (error) {
     console.error('Error fetching houses:', error);
     res.status(500).render('500');
@@ -283,46 +429,67 @@ app.get('/house', async (req, res) => {
 });
 
 // Handle form submission for houses
-app.post('/house', upload.single('image'), [
-  body('title').notEmpty().withMessage('Title is required'),
-  body('location').notEmpty().withMessage('Location is required'),
-  body('rent').isNumeric().withMessage('Rent must be a number'),
-  body('latitude').notEmpty().withMessage('Latitude is required'),
-  body('longitude').notEmpty().withMessage('Longitude is required'),
-  body('description').notEmpty().withMessage('Description is required'),
-  body('email').isEmail().withMessage('Email is required and must be valid'), //email
-  body('phone').notEmpty().withMessage('Phone number is required') //phone
-], async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).render('form', { routeName: 'house', errors: errors.array(), activeLink: 'house' });
-  }
+app.post(
+  '/house',
+  upload.single('image'),
+  [
+    body('title').notEmpty().withMessage('Title is required'),
+    body('location').notEmpty().withMessage('Location is required'),
+    body('rent').isNumeric().withMessage('Rent must be a number'),
+    body('latitude').notEmpty().withMessage('Latitude is required'),
+    body('longitude').notEmpty().withMessage('Longitude is required'),
+    body('description').notEmpty().withMessage('Description is required'),
+    body('email').isEmail().withMessage('Email is required and must be valid'), //email
+    body('phone').notEmpty().withMessage('Phone number is required'), //phone
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render('form', {
+        routeName: 'house',
+        errors: errors.array(),
+        activeLink: 'house',
+      });
+    }
 
-  
-  try {
-    const { title, location, rent, latitude, longitude, description, email, phone } = req.body;
-    const username = req.session.user.username;
-    const result = await cloudinary.uploader.upload(req.file.path);
-    const house = new House({
-      title,
-      location,
-      rent,
-      latitude,
-      longitude,
-      description,
-      image: result.secure_url,
-      username,
-      email, //email
-      phone //phone
-    });
+    try {
+      const {
+        title,
+        location,
+        rent,
+        latitude,
+        longitude,
+        description,
+        email,
+        phone,
+      } = req.body;
+      const username = req.session.user.username;
+      const result = await cloudinary.uploader.upload(req.file.path);
+      const house = new House({
+        title,
+        location,
+        rent,
+        latitude,
+        longitude,
+        description,
+        image: result.secure_url,
+        username,
+        email, //email
+        phone, //phone
+      });
 
-    await house.save();
-    res.redirect('/house');
-  } catch (error) {
-    console.error('Error saving house:', error);
-    res.status(500).render('form', { routeName: 'house', errors: [{ msg: 'Internal Server Error' }], activeLink: 'house' });
+      await house.save();
+      res.redirect('/house');
+    } catch (error) {
+      console.error('Error saving house:', error);
+      res.status(500).render('form', {
+        routeName: 'house',
+        errors: [{ msg: 'Internal Server Error' }],
+        activeLink: 'house',
+      });
+    }
   }
-});
+);
 
 // Handle search and display for market
 app.get('/market', async (req, res) => {
@@ -335,11 +502,19 @@ app.get('/market', async (req, res) => {
       $or: [
         { title: searchRegex },
         { location: searchRegex },
-        { description: searchRegex }
-      ]
+        { description: searchRegex },
+      ],
     });
 
-    res.render('display', { cards: markets, domain, imagepath: "/market.jpg", query, selectedType: 'market', searchAction: '/market', activeLink: 'market' });
+    res.render('display', {
+      cards: markets,
+      domain,
+      imagepath: '/market.jpg',
+      query,
+      selectedType: 'market',
+      searchAction: '/market',
+      activeLink: 'market',
+    });
   } catch (error) {
     console.error('Error fetching markets:', error);
     res.status(500).render('500');
@@ -347,46 +522,67 @@ app.get('/market', async (req, res) => {
 });
 
 // Handle form submission for market
-app.post('/market', upload.single('image'), [
-  body('title').notEmpty().withMessage('Title is required'),
-  body('location').notEmpty().withMessage('Location is required'),
-  body('price').isNumeric().withMessage('Price must be a number'),
-  body('latitude').notEmpty().withMessage('Latitude is required'),
-  body('longitude').notEmpty().withMessage('Longitude is required'),
-  body('description').notEmpty().withMessage('Description is required'),
-  body('email').isEmail().withMessage('Email is required and must be valid'),
-  body('phone').notEmpty().withMessage('Phone number is required')
-], async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).render('form', { routeName: 'market', errors: errors.array(), activeLink: 'market' });
-  }
+app.post(
+  '/market',
+  upload.single('image'),
+  [
+    body('title').notEmpty().withMessage('Title is required'),
+    body('location').notEmpty().withMessage('Location is required'),
+    body('price').isNumeric().withMessage('Price must be a number'),
+    body('latitude').notEmpty().withMessage('Latitude is required'),
+    body('longitude').notEmpty().withMessage('Longitude is required'),
+    body('description').notEmpty().withMessage('Description is required'),
+    body('email').isEmail().withMessage('Email is required and must be valid'),
+    body('phone').notEmpty().withMessage('Phone number is required'),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render('form', {
+        routeName: 'market',
+        errors: errors.array(),
+        activeLink: 'market',
+      });
+    }
 
-  
-  try {
-    const { title, location, price, latitude, longitude, description, email, phone } = req.body;
-    const username = req.session.user.username;
-    const result = await cloudinary.uploader.upload(req.file.path);
-    const market = new Market({
-      title,
-      location,
-      price,
-      latitude,
-      longitude,
-      description,
-      image: result.secure_url,
-      username,
-      email, //email
-      phone //phone
-    });
+    try {
+      const {
+        title,
+        location,
+        price,
+        latitude,
+        longitude,
+        description,
+        email,
+        phone,
+      } = req.body;
+      const username = req.session.user.username;
+      const result = await cloudinary.uploader.upload(req.file.path);
+      const market = new Market({
+        title,
+        location,
+        price,
+        latitude,
+        longitude,
+        description,
+        image: result.secure_url,
+        username,
+        email, //email
+        phone, //phone
+      });
 
-    await market.save();
-    res.redirect('/market');
-  } catch (error) {
-    console.error('Error saving market item:', error);
-    res.status(500).render('form', { routeName: 'market', errors: [{ msg: 'Internal Server Error' }], activeLink: 'market' });
+      await market.save();
+      res.redirect('/market');
+    } catch (error) {
+      console.error('Error saving market item:', error);
+      res.status(500).render('form', {
+        routeName: 'market',
+        errors: [{ msg: 'Internal Server Error' }],
+        activeLink: 'market',
+      });
+    }
   }
-});
+);
 
 // Handle search and display for food
 app.get('/food', async (req, res) => {
@@ -399,11 +595,19 @@ app.get('/food', async (req, res) => {
       $or: [
         { title: searchRegex },
         { location: searchRegex },
-        { description: searchRegex }
-      ]
+        { description: searchRegex },
+      ],
     });
 
-    res.render('display', { cards: foods, domain, imagepath: "/food.jpg", query, selectedType: 'food', searchAction: '/food', activeLink: 'food' });
+    res.render('display', {
+      cards: foods,
+      domain,
+      imagepath: '/food.jpg',
+      query,
+      selectedType: 'food',
+      searchAction: '/food',
+      activeLink: 'food',
+    });
   } catch (error) {
     console.error('Error fetching foods:', error);
     res.status(500).render('500');
@@ -411,45 +615,64 @@ app.get('/food', async (req, res) => {
 });
 
 // Handle form submission for food
-app.post('/food', upload.single('image'), [
-  body('title').notEmpty().withMessage('Title is required'),
-  body('location').notEmpty().withMessage('Location is required'),
-  body('latitude').notEmpty().withMessage('Latitude is required'),
-  body('longitude').notEmpty().withMessage('Longitude is required'),
-  body('description').notEmpty().withMessage('Description is required'),
-  body('email').isEmail().withMessage('Email is required and must be valid'), //email
-  body('phone').notEmpty().withMessage('Phone number is required') //phone
-], async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).render('form', { routeName: 'food', errors: errors.array(), activeLink: 'food' });
+app.post(
+  '/food',
+  upload.single('image'),
+  [
+    body('title').notEmpty().withMessage('Title is required'),
+    body('location').notEmpty().withMessage('Location is required'),
+    body('latitude').notEmpty().withMessage('Latitude is required'),
+    body('longitude').notEmpty().withMessage('Longitude is required'),
+    body('description').notEmpty().withMessage('Description is required'),
+    body('email').isEmail().withMessage('Email is required and must be valid'), //email
+    body('phone').notEmpty().withMessage('Phone number is required'), //phone
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render('form', {
+        routeName: 'food',
+        errors: errors.array(),
+        activeLink: 'food',
+      });
+    }
+
+    try {
+      const {
+        title,
+        location,
+        latitude,
+        longitude,
+        description,
+        email,
+        phone,
+      } = req.body;
+      const username = req.session.user.username;
+      const result = await cloudinary.uploader.upload(req.file.path);
+      const food = new Food({
+        title,
+        location,
+        latitude,
+        longitude,
+        description,
+        image: result.secure_url,
+        username,
+        email, //email
+        phone, //phone
+      });
+
+      await food.save();
+      res.redirect('/food');
+    } catch (error) {
+      console.error('Error saving food item:', error);
+      res.status(500).render('form', {
+        routeName: 'food',
+        errors: [{ msg: 'Internal Server Error' }],
+        activeLink: 'food',
+      });
+    }
   }
-
-  
-  try {
-    const { title, location, latitude, longitude, description, email, phone } = req.body;
-    const username = req.session.user.username;
-    const result = await cloudinary.uploader.upload(req.file.path);
-    const food = new Food({
-      title,
-      location,
-      latitude,
-      longitude,
-      description,
-      image: result.secure_url,
-      username,
-      email, //email
-      phone //phone
-    });
-
-    await food.save();
-    res.redirect('/food');
-  } catch (error) {
-    console.error('Error saving food item:', error);
-    res.status(500).render('form', { routeName: 'food', errors: [{ msg: 'Internal Server Error' }], activeLink: 'food' });
-  }
-});
-
+);
 
 app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
   const { type, id } = req.params;
@@ -480,8 +703,7 @@ app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
     }
 
     // Check if the user is "admin" or owns the item
-    if (username === "admin" || item.username === username) {
-
+    if (username === 'admin' || item.username === username) {
       // Delete the item from the database
       await Model.deleteOne({ _id: id });
       return res.redirect(`/${type}`);
@@ -493,7 +715,6 @@ app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
     res.status(500).render('500');
   }
 });
-
 
 // 404 Error Handler
 app.use((req, res) => {

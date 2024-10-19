@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - <%= title %></title> <!-- Dynamic Title -->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      color: #333;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Nav Bar */
+    .navbar {
+      background-color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .navbar a {
+      color: black;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 18px;
+    }
+
+    .navbar a:hover {
+      background-color: #c2c4c5;
+      border-radius: 5px;
+    }
+
+    /* About Us  */
+    .about-us {
+      background-color: #fff;
+      padding: 50px 20px;
+      color: #222;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1, h2 {
+      color: #2c3e50;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-top: 30px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      font-size: 18px;
+      line-height: 1.6;
+      background-color: #ecf0f1;
+      margin: 10px 0;
+      padding: 10px;
+      border-left: 4px solid #3498db;
+    }
+
+    ul li:hover {
+      background-color: #d0e8f4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav Bar -->
+  <div class="navbar">
+    <a href="/"><b>Home</b></a> <!-- Changed link to EJS route -->
+    <a href="/about"><b>About Us</b></a> <!-- Changed link to EJS route -->
+    <a href="/contact"><b>Contact Us</b></a> <!-- Changed link to EJS route -->
+  </div>
+
+  <!-- About Us -->
+  <section class="about-us">
+    <div class="container">
+      <h1>About Us</h1>
+      <p>Welcome to <%= appName %>! We're a local classifieds and community platform designed to connect people for buying, selling, and exchanging goods and services. Whether you're looking for a place to stay, items to buy, or want to offer your own services, <%= appName %> provides a trusted space for local transactions.</p>
+
+      <h2>Our Mission</h2>
+      <p>At <%= appName %>, we believe in fostering strong local connections and promoting sustainable, community-driven commerce. Our platform is built to make buying and selling easier, safer, and more accessible for everyone.</p>
+
+      <h2>What We Offer</h2>
+      <ul>
+        <li>Buy & Sell Locally: Find great deals on items you need or sell your own goods easily.</li>
+        <li>Trusted Listings: All our listings are community-driven, allowing for safe exchanges.</li>
+        <li>Community Focused: We're more than just a marketplace. We're here to support local businesses and promote neighborhood connections.</li>
+      </ul>
+
+      <h2>How It Works</h2>
+      <p>Simply create a free account, post your ads, browse listings, and connect with others in your community. From finding food to housing, <%= appName %> brings your local market online.</p>
+
+      <h2>Our Values</h2>
+      <ul>
+        <li>Trust</li>
+        <li>Community</li>
+        <li>Convenience</li>
+      </ul>
+
+      <p>Thank you for choosing <%= appName %>—where local communities come together!</p>
+    </div>
+  </section>
+
+</body>
+</html>
+
+

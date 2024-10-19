@@ -1,0 +1,10 @@
+# Ignore all node_modules
+node_modules
+
+# Ignore build directories
+build
+dist
+
+# Ignore specific file types if needed
+*.min.js
+*.test.js
