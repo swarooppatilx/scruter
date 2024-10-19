@@ -1,13 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('itemForm');
-  const titleField = document.getElementById('title');
-  const imageField = document.getElementById('image');
-  const locationField = document.getElementById('location');
-  const latitudeField = document.getElementById('latitude');
-  const longitudeField = document.getElementById('longitude');
-  const descriptionField = document.getElementById('description');
-  const rentField = document.getElementById('rent');
-  const priceField = document.getElementById('price');
+  const fields = {
+    title: document.getElementById('title'),
+    image: document.getElementById('image'),
+    location: document.getElementById('location'),
+    latitude: document.getElementById('latitude'),
+    longitude: document.getElementById('longitude'),
+    description: document.getElementById('description'),
+    rent: document.getElementById('rent'),
+    price: document.getElementById('price'),
+  };
   const formGroupElements = form.querySelectorAll('.form-group, .mb-3');
 
   function showError(element, message) {
@@ -37,89 +39,63 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function validateField(field, conditions) {
+    for (const [check, message] of conditions) {
+      if (!check()) {
+        showError(field, message);
+        return false;
+      }
+    }
+    return true;
+  }
+
   form.addEventListener('submit', event => {
     clearErrors();
     let hasErrors = false;
-    const title = titleField.value.trim();
-    const image = imageField.files[0];
-    const location = locationField.value.trim();
-    const latitude = latitudeField.value.trim();
-    const longitude = longitudeField.value.trim();
-    const description = descriptionField.value.trim();
     const routeName = form.action.split('/').pop();
 
-    if (!title) {
-      showError(titleField, 'Title is required!');
-      hasErrors = true;
-    } else if (title.length < 3) {
-      showError(titleField, 'Title must be at least 3 characters long!');
-      hasErrors = true;
-    }
+    hasErrors |= !validateField(fields.title, [
+      [() => fields.title.value.trim() !== '', 'Title is required!'],
+      [() => fields.title.value.length >= 3, 'Title must be at least 3 characters long!'],
+    ]);
 
-    if (!image) {
-      showError(imageField, 'Image is required!');
-      hasErrors = true;
-    } else {
-      const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
-      if (!validImageTypes.includes(image.type)) {
-        showError(
-          imageField,
-          'Invalid image type! Only JPEG, PNG, and GIF are allowed.'
-        );
-        hasErrors = true;
-      }
+    const image = fields.image.files[0];
+    hasErrors |= !validateField(fields.image, [
+      [() => image !== undefined, 'Image is required!'],
+      [() => ['image/jpeg', 'image/png', 'image/gif'].includes(image.type), 'Invalid image type! Only JPEG, PNG, and GIF are allowed.'],
+      [() => image.size <= 2 * 1024 * 1024, 'Image size exceeds 2MB!'],
+    ]);
 
-      const maxSize = 2 * 1024 * 1024; // 2MB
-      if (image.size > maxSize) {
-        showError(imageField, 'Image size exceeds 2MB!');
-        hasErrors = true;
-      }
-    }
-
-    if (!location) {
-      showError(locationField, 'Location is required!');
-      hasErrors = true;
-    }
+    hasErrors |= !validateField(fields.location, [
+      [() => fields.location.value.trim() !== '', 'Location is required!'],
+    ]);
 
     const latPattern = /^-?([1-8]?[0-9](\.\d+)?|90(\.0+)?)$/;
     const lonPattern = /^-?((1[0-7][0-9]|[1-9]?[0-9])(\.\d+)?|180(\.0+)?)$/;
-    if (!latPattern.test(latitude) || !lonPattern.test(longitude)) {
-      showError(latitudeField, 'Invalid latitude or longitude format!');
-      showError(longitudeField, 'Invalid latitude or longitude format!');
-      hasErrors = true;
-    }
+    hasErrors |= !validateField(fields.latitude, [
+      [() => latPattern.test(fields.latitude.value.trim()), 'Invalid latitude format!'],
+    ]);
+    hasErrors |= !validateField(fields.longitude, [
+      [() => lonPattern.test(fields.longitude.value.trim()), 'Invalid longitude format!'],
+    ]);
 
-    if (!description) {
-      showError(descriptionField, 'Description is required!');
-      hasErrors = true;
-    } else if (description.length < 10) {
-      showError(
-        descriptionField,
-        'Description must be at least 10 characters long!'
-      );
-      hasErrors = true;
-    }
+    hasErrors |= !validateField(fields.description, [
+      [() => fields.description.value.trim() !== '', 'Description is required!'],
+      [() => fields.description.value.length >= 10, 'Description must be at least 10 characters long!'],
+    ]);
 
     if (routeName === 'house') {
-      const rent = rentField.value.trim();
-      if (!rent) {
-        showError(rentField, 'Rent is required!');
-        hasErrors = true;
-      } else if (isNaN(rent) || rent <= 0) {
-        showError(rentField, 'Invalid rent value!');
-        hasErrors = true;
-      }
+      hasErrors |= !validateField(fields.rent, [
+        [() => fields.rent.value.trim() !== '', 'Rent is required!'],
+        [() => !isNaN(fields.rent.value) && fields.rent.value > 0, 'Invalid rent value!'],
+      ]);
     }
 
     if (routeName === 'market') {
-      const price = priceField.value.trim();
-      if (!price) {
-        showError(priceField, 'Price is required!');
-        hasErrors = true;
-      } else if (isNaN(price) || price <= 0) {
-        showError(priceField, 'Invalid price value!');
-        hasErrors = true;
-      }
+      hasErrors |= !validateField(fields.price, [
+        [() => fields.price.value.trim() !== '', 'Price is required!'],
+        [() => !isNaN(fields.price.value) && fields.price.value > 0, 'Invalid price value!'],
+      ]);
     }
 
     if (hasErrors) {
