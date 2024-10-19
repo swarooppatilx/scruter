@@ -96,34 +96,6 @@
         color: #007bff;
     }
 
-    /* Styles for the social media icons */
-    .icon-circle {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background-color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-    }
-
-    .icon-circle:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .icon-circle a {
-        color: #333;
-        font-size: 1.8rem;
-    }
-
-    .icon-circle a:hover {
-        color: #007bff;
-    }
-
     /* Gap between the social media icons */
     .d-flex {
         gap: 15px;
@@ -157,10 +129,10 @@
     }
 </style>
 
-<section class="text-center social-section bg-light py-5">
+<section id="footer" class="social-section py-5">
     <div class="container">
         <div class="row">
-            <!-- First part: Website description -->
+            <!-- About Scruter -->
             <div class="col-md-3">
                 <h4>About Scruter</h4>
                 <p>Scruter is your local platform for buying, selling, and discovering everything you need.
@@ -168,7 +140,7 @@
                     local experience.</p>
             </div>
 
-            <!-- Second part: Quick Links -->
+            <!-- Quick Links -->
             <div class="col-md-3">
                 <h4>Quick Links</h4>
                 <ul class="list-unstyled">
@@ -180,7 +152,7 @@
                 </ul>
             </div>
 
-            <!-- Third part: Helpdesk, Queries, and Contact Us -->
+            <!-- Helpdesk -->
             <div class="col-md-3">
                 <h4>Helpdesk</h4>
                 <ul class="list-unstyled">
@@ -191,22 +163,22 @@
                 </ul>
             </div>
 
-            <!-- Fourth part: Socials -->
+            <!-- Social Media Links -->
             <div class="col-md-3">
                 <h4>Follow Us</h4>
                 <div class="d-flex justify-content-center">
                     <div class="icon-circle mx-2">
-                        <a href="https://facebook.com" target="_blank" aria-label="Follow us on Facebook" class="text-dark">
+                        <a href="https://facebook.com" target="_blank" aria-label="Follow us on Facebook">
                             <i class="fa-brands fa-facebook fa-lg"></i>
                         </a>
                     </div>
                     <div class="icon-circle mx-2">
-                        <a href="https://twitter.com" target="_blank" aria-label="Follow us on Twitter" class="text-dark">
-                            <i class="fa-brands fa-twitter"></i>
+                        <a href="https://twitter.com" target="_blank" aria-label="Follow us on Twitter">
+                            <i class="fa-brands fa-x-twitter"></i>
                         </a>
                     </div>
                     <div class="icon-circle mx-2">
-                        <a href="https://instagram.com" target="_blank" aria-label="Follow us on Instagram" class="text-dark">
+                        <a href="https://instagram.com" target="_blank" aria-label="Follow us on Instagram">
                             <i class="fa-brands fa-instagram fa-lg"></i>
                         </a>
                     </div>
@@ -217,10 +189,30 @@
         <!-- Copyright -->
         <div class="row">
             <div class="col-12 mt-4">
-                <p class="copyright-text">
-                    Made with ❤️ by Team Scruter.
-                </p>
+                <p class="copyright-text">Made with ❤️ by Team Scruter.</p>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.getElementById('dark-mode-toggle');
+
+    // Load the user's preference from local storage
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+    }
+
+    toggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+
+      // Save the user's preference
+      if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('dark-mode', 'enabled');
+      } else {
+        localStorage.removeItem('dark-mode');
+      }
+    });
+  });
+</script>

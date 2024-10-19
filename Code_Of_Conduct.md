@@ -15,6 +15,7 @@ We pledge to act in ways that contribute to an open, welcoming, diverse, inclusi
 To maintain a positive, constructive, and respectful environment in the **Scruter** project, all participants are expected to adhere to the following standards:
 
 ### Positive Behavior:
+
 - **Respectful Communication**: Engage respectfully in all interactions, ensuring that discussions are professional and focused on contributing to the project’s goals.
 - **Constructive Feedback**: Provide feedback that is aimed at helping others improve, while maintaining an encouraging and respectful tone.
 - **Collaboration**: Work together openly, sharing ideas and resources to overcome challenges and improve the platform for all users.
@@ -23,6 +24,7 @@ To maintain a positive, constructive, and respectful environment in the **Scrute
 - **Professionalism**: Maintain professionalism in all interactions, ensuring that the project’s goals and values remain a priority.
 
 ### Unacceptable Behavior:
+
 - **Harassment**: Harassment of any kind, including unwelcome comments, personal attacks, or inappropriate behavior, is strictly prohibited.
 - **Discrimination**: Discriminatory language or behavior based on personal identity, beliefs, or background will not be tolerated.
 - **Disrespect**: Engaging in trolling, dismissive remarks, or inflammatory behavior that disrupts the project’s collaborative environment is unacceptable.
@@ -70,14 +72,17 @@ If a community member is found to have violated this Code of Conduct, the commun
 Community leaders will follow these guidelines when determining the consequences for violations of this Code of Conduct:
 
 1. **Correction**:
+
    - **Community Impact**: A minor violation that causes minimal disruption to the project.
    - **Consequence**: A private conversation to clarify the violation and provide guidance on behavior improvement.
 
 2. **Warning**:
+
    - **Community Impact**: A moderate violation that negatively affects the collaborative environment of the project.
    - **Consequence**: A formal warning with clear expectations for future behavior.
 
 3. **Temporary Suspension**:
+
    - **Community Impact**: A significant violation that harms the community or disrupts the project’s progress.
    - **Consequence**: Temporary suspension from participating in the project, with the possibility of reinstatement after review.
 
@@ -92,4 +97,3 @@ At **Scruter**, we are dedicated to creating a welcoming, inclusive, and support
 ## Attribution
 
 This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org), version 2.0, available [here](https://www.contributor-covenant.org/version/2/0/code_of_conduct.html).
-
