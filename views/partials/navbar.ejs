@@ -124,6 +124,20 @@
     transition: box-shadow 0.3s ease;
   }
 
+  .navbar-toggler {
+    border: none;
+    /* Change border color */
+  }
+
+  .navbar-toggler i {
+    color: var(--text-color)
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none;
+    /* Change border color */
+  }
+
   /* Add shadow when scrolled */
   .sticky-top.scrolled {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -173,10 +187,9 @@
     background: var(--secondary-bg-color) !important;
   }
 
-
-
-
-
+  .navbar-toggler {
+    color: var(--text-color) !important;
+  }
 
   @media (max-width: 768px) {
     .navbar .btn {
@@ -193,8 +206,17 @@
         class="d-inline-block align-text-top" />
     </a>
 
-    <div class="d-none d-lg-block position-absolute top-50 start-50 translate-middle">
-      <ul class="navbar-nav justify-content-center flex-grow-1">
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar">
+      <i class="fa-solid fa-bars me-2"></i>
+    </button>
+
+
+
+    <div class="collapse navbar-collapse" id="navBar">
+      <!-- For Big Screens  -->
+      <ul class="navbar-nav justify-content-center flex-grow-1 d-none d-lg-flex">
         <li class="nav-item">
           <a class="nav-link <%= activeLink === 'house' ? 'active-link' : '' %>" href="/house"><i
               class="fa-solid fa-house me-2"></i>Housing</a>
@@ -206,76 +228,102 @@
         <li class="nav-item">
           <a class="nav-link <%= activeLink === 'market' ? 'active-link' : '' %>" href="/market"><i
               class="fa-solid fa-cart-shopping me-2"></i>For Sale</a>
+        </li>
       </ul>
-    </div>
 
-    <div class="ms-auto d-flex gap-2">
-      <% if (user) { %>
-        <div class="btn-group d-none d-lg-block">
-          <button style="border: none; background: none; color: var(--text-color);" class="d-flex align-items-center"
-            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-
-            <div class="me-2 text-end">
-              <p class="mb-0 small" style="color: var(--text-color)">
-                <%= user.username %>
-              </p>
-              <p class="mb-0 small text-secondary">
-                <%= user.email.slice(0, 5) + "xxx@gmail.com" %>
-              </p>
-            </div>
-
-            <div class="me-2 dropdown-toggle">
-              <img class="img-fluid rounded-circle" style="height: 30px; object-fit: cover;" src="/avatar.jpg"
-                alt="alt">
-            </div>
-          </button>
-
-          <ul class="dropdown-menu">
-            <li class="dropstart">
-              <a class="dropdown-item" href="#" data-bs-toggle="dropdown">
-                <i class="fa-solid fa-plus me-2"></i>
-                Create Post
+      <!-- For Small Screens -->
+      <ul class="navbar-nav justify-content-center d-lg-none mt-3">
+        <% if(!user) { %>
+          <li class="nav-item d-grid">
+            <a class="btn btn-outline-success me-2 flex-grow-1" href="/auth?action=login">
+              <i class="fa-solid fa-user me-2"></i>Login
+            </a>
+          </li>
+          <% } else { %>
+            <li class="nav-item d-flex">
+              <a class="btn btn-outline-secondary" href="/dashboard">
+                <i class="fa-solid fa-gear me-2"></i>
+                Settings
               </a>
 
-              <ul class="dropdown-menu">
-                <li>
-                <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
-                <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
-                <li><a class="dropdown-item" href="/market/form">For Sale Ad</a></li>
+              <a class="btn btn-danger" href="/logout">
+                <i class="fa-solid fa-right-from-bracket me-2"></i>
+                Logout
+              </a>
             </li>
-          </ul>
-          </li>
-
-          <li>
-            <a class="dropdown-item" href="/dashboard">
-              <i class="fa-solid fa-gear me-2"></i>
-              Settings
-            </a>
-          </li>
-
-          <li>
-            <a class="dropdown-item" href="/logout">
-              <i class="fa-solid fa-right-from-bracket me-2"></i>
-              Logout
-            </a>
-          </li>
-          </ul>
-        </div>
-        <% } %>
-
-          <button id="darkModeToggle" style="margin-right: 10px; ">
-            <img src="https://img.icons8.com/?size=100&id=45475&format=png&color=000000" class="toggleMode"
-              id="toggleMode" alt="">
-          </button>
-
-          <% if(!user) { %>
-            <div class="d-flex gap-0">
-              <a class="btn btn-outline-success me-2 flex-grow-1" href="/auth?action=login">
-                <i class="fa-solid fa-user me-2"></i>Login
-              </a>
-            </div>
             <% } %>
+
+              <li class="nav-item">
+                <a class="btn btn-info"
+                  onclick="localStorage.setItem('theme', localStorage.getItem('theme') == 'dark' ? 'light' : 'dark');location.reload()">
+                  Toggle Theme
+                </a>
+              </li>
+      </ul>
+
+      <div class="ms-auto d-flex gap-2 d-none d-lg-block">
+        <% if (user) { %>
+          <div class="btn-group">
+            <button style="border: none; background: none; color: var(--text-color);" class="d-flex align-items-center"
+              data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+
+              <div class="me-2 text-end">
+                <p class="mb-0 small" style="color: var(--text-color)">
+                  <%= user.username %>
+                </p>
+                <p class="mb-0 small text-secondary">
+                  <%= user.email.slice(0, 5) + "xxx@gmail.com" %>
+                </p>
+              </div>
+
+              <div class="me-2 dropdown-toggle">
+                <img class="img-fluid rounded-circle" style="height: 30px; object-fit: cover;" src="/avatar.jpg"
+                  alt="alt">
+              </div>
+            </button>
+
+            <ul class="dropdown-menu">
+              <li class="dropstart">
+                <a class="dropdown-item" href="#" data-bs-toggle="dropdown">
+                  <i class="fa-solid fa-plus me-2"></i>
+                  Create Post
+                </a>
+
+                <ul class="dropdown-menu">
+                  <li>
+                  <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
+                  <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
+                  <li><a class="dropdown-item" href="/market/form">For Sale Ad</a></li>
+              </li>
+            </ul>
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="/dashboard">
+                <i class="fa-solid fa-gear me-2"></i>
+                Settings
+              </a>
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="/logout">
+                <i class="fa-solid fa-right-from-bracket me-2"></i>
+                Logout
+              </a>
+            </li>
+            </ul>
+          </div>
+          <% } %>
+
+            <button id="darkModeToggle">
+              <img src="https://img.icons8.com/?size=100&id=45475&format=png&color=000000" class="toggleMode"
+                id="toggleMode" alt="">
+            </button>
+      </div>
     </div>
+
+
+  </div>
 </nav>
 
 
