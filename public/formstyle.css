@@ -5,6 +5,7 @@
     --border-color: rgb(153, 157, 158);
     --focus-color: rgb(89, 53, 180);
     --box-shadow: 2px 2px 15px 2px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
 }
 
 * {
@@ -14,7 +15,9 @@
 }
 
 body {
+    font-family: 'Arial', sans-serif; /* Set a default font */
     color: var(--text-color);
+    background: #f4f4f4; /* Add a light background color */
 }
 
 .container {
@@ -29,20 +32,31 @@ body {
     width: 100%;
     max-width: 450px;
     background: #fff;
-    border-radius: 30px;
+    border-radius: 20px; /* Slightly reduce border radius */
     padding: 40px;
     box-shadow: var(--box-shadow);
     z-index: 10;
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+.box:hover {
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-3px);
 }
 
 .wrapper {
     position: absolute;
     width: 455px;
     height: 500px;
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.53);
+    border-radius: 20px; /* Slightly reduce border radius */
+    background: rgba(255, 255, 255, 0.6); /* Make wrapper more opaque */
     box-shadow: var(--box-shadow);
     transform: rotate(5deg);
+    transition: all 0.3s ease;
+}
+
+.wrapper:hover {
+    transform: rotate(6deg);
 }
 
 .header {
@@ -50,7 +64,7 @@ body {
 }
 
 .header p {
-    font-size: 25px;
+    font-size: 28px; /* Increase font size for better visibility */
     font-weight: 800;
     margin-top: 10px;
 }
@@ -72,14 +86,14 @@ body {
 }
 
 .input-field {
-    height: 40px;
+    height: 45px; /* Increase input height */
     border: 2px solid var(--border-color);
     border-radius: 7px;
     margin: 7px 0;
     outline: none;
     font-weight: 500;
     padding: 0 40px 0 10px;    
-    font-size: 17px;
+    font-size: 18px; /* Slightly increase font size */
     background: transparent;
     transition: all .3s ease-in-out;
 }
@@ -92,8 +106,13 @@ body {
     color: var(--focus-color);
 }
 
+.input-field::placeholder {
+    color: rgba(51, 51, 51, 0.6);
+    font-style: italic;
+}
+
 .input-submit {
-    height: 30px;
+    height: 40px; /* Increase button height */
     margin-top: 20px;
     background: var(--primary-color);
     border: none;
@@ -101,11 +120,16 @@ body {
     color: #fff;
     cursor: pointer;
     transition: all .3s ease-in-out;
-    border-radius: 9px;
 }
 
 .input-submit:hover {
     background: var(--secondary-color);
+    transform: translateY(-1px); /* Add a lift effect on hover */
+}
+
+.input-submit:focus {
+    outline: none;
+    box-shadow: 0 0 5px var(--focus-color);
 }
 
 .bottom {
@@ -130,5 +154,15 @@ body {
 
     .wrapper {
         display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .box {
+        padding: 30px;
+    }
+    .wrapper {
+        width: 500px;
+        height: 600px;
     }
 }
