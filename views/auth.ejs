@@ -33,11 +33,21 @@
                 <p><%= action === 'login' ? 'Log In' : 'Sign Up' %></p>
             </div>
             <% if (errors && errors.length > 0) { %>
-                <div class="alert alert-danger">
+                <div id="errorAlert" class="alert alert-danger" style="position: absolute; left: 80%; top: 80%;">
                     <% errors.forEach(function(error) { %>
                         <div class="error-message"><i class="bx bx-error"></i> <%= error.msg %></div>
                     <% }); %>
                 </div>
+            
+                <!-- JavaScript to hide the alert after 4 seconds -->
+                <script>
+                    setTimeout(function() {
+                        const errorAlert = document.getElementById('errorAlert');
+                        if (errorAlert) {
+                            errorAlert.style.display = 'none';
+                        }
+                    }, 4000);  // 4000ms = 4 seconds
+                </script>
             <% } %>
             <form action="/<%= action %>" method="post" id="authForm">
                 <% if (action === 'signup') { %>
@@ -134,6 +144,66 @@
         domain="www.chatbase.co"
         defer>
         </script>
+        
+<script>
+    // Save data to local storage on signup
+    const authForm = document.getElementById('authForm');
+    authForm.addEventListener('submit', function (e) {
+        if (window.location.pathname.includes('signup')) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            // Save user data to local storage as JSON
+            const userData = { username, email, phone, password };
+            const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+            existingUsers.push(userData);
+            localStorage.setItem('users', JSON.stringify(existingUsers));
+
+            alert('Signup successful! You can now log in.');
+            window.location.href = '/auth?action=login';
+        } else if (window.location.pathname.includes('login')) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Retrieve all users from local storage and check for a match
+            const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+            const matchedUser = storedUsers.find(user => user.username === username && user.password === password);
+
+            if (matchedUser) {
+                alert('Login successful!');
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+    });
+
+    function togglePasswordVisibility(icon) {
+        const targetId = icon.getAttribute('data-target');
+        const passwordInput = document.getElementById(targetId);
+
+        // Toggle between 'password' and 'text' type
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('bx-show');
+            icon.classList.add('bx-hide');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('bx-hide');
+            icon.classList.add('bx-show');
+        }
+    }
+</script>
+
 
 </body>
 </html>

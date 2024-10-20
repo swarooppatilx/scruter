@@ -93,6 +93,10 @@ body.dark-mode .social-section ul li a:hover {
   color: #ffffff; /* Highlight color for dark mode */
 }
 
+box.dark-mode {
+  background-color: #000000;
+}
+
 /* Social media icons */
 .icon-circle {
   width: 60px;

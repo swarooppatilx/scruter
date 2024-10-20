@@ -13,6 +13,16 @@
   box-sizing: border-box;
 }
 
+.dark-mode {
+  --primary-color: #121212;
+  --secondary-color: #1a1a1a;
+  --text-color: #fff;
+}
+
+.dark-mode .box {
+  background-color: #000; /* Black background for dark mode */
+}
+
 body {
   color: var(--text-color);
 }
@@ -118,7 +128,9 @@ body {
   color: #727374;
   text-decoration: none;
 }
-
+.dark-mode input {
+  color: white;
+}
 .bottom a:hover {
   text-decoration: underline;
 }
