@@ -5,57 +5,90 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>404 - PAGE NOT FOUND</title>
 <style>
-body {
-    background-color: #439ce6;
-    color: white;
-    font-family: 'Segoe UI', 'Microsoft Sans Serif', sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    body {
+        background-color: #0078d7;
+        color: white;
+        font-family: 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-image: linear-gradient(135deg, #0078d7, #00a1f1);
+    }
+    
+    .container {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 80px 48px 48px;
+        max-width: 1000px;
+        margin: 0 auto;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .sad-face {
+        font-size: 120px;
+        font-weight: 100;
+        line-height: 1;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    h1 {
+        font-size: 32px;
+        font-weight: 300;
+        margin-bottom: 20px;
+        max-width: 750px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        max-width: 750px;
+        font-weight: 400;
+    }
+    
+    .progress {
+        margin: 30px 0;
+        background-color: rgba(255, 255, 255, 0.2);
+        height: 10px;
+        border-radius: 5px;
+        overflow: hidden;
 }
-.container {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 80px 48px 48px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-.sad-face {
-    font-size: 100px;
-    font-weight: 100;
-    line-height: 1;
-    margin-bottom: 40px;
-}
- 
-h1 {
 
-    font-size:  28px;
-    font-weight:  300;
-    margin-bottom:  20px;
-    max-width:  750px;
+.progress-bar {
+    width: 50%;
+    height: 100%;
+    background-color: #fff;
+    animation: progress 2s ease
+}
 
+@keyframes progress {
+    0% { width: 0; }
+    100% { width: 50%; }
 }
- 
-p {
-    font-size: 18px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    max-width: 750px;
-    font-weight: 500;
-}
-.progress {
-    margin: 30px 0;
-}
+
 .qr-code {
     width: 120px;
     height: 120px;
     background-color: white;
     margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
+
+.qr-code:hover {
+    transform: scale(1.05);
+}
+
 .qr-code:active{
     color: antiquewhite;
 }
@@ -63,6 +96,18 @@ p {
     font-size: 14px;
     opacity: 0.8;
     margin-top: 20px;
+    line-height: 1.4;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.5);
+    transition: border-bottom 0.3s ease;
+}
+
+a:hover {
+    border-bottom: 1px solid white;
 }
 </style>
 </head>
