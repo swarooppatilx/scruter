@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>User Profile</h2>
+    <% if (messages.success) { %>
+      <div class="success"><%= messages.success %></div>
+    <% } %>
+    <% if (messages.error) { %>
+      <div class="error"><%= messages.error %></div>
+    <% } %>
+    <form action="/profile/update" method="POST">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" value="<%= user.username %>" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+  </div>
+</body>
+</html>
