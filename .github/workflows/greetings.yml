@@ -12,5 +12,5 @@ jobs:
       - uses: actions/first-interaction@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-message: '👋 Thank you @${{ github.actor }} for raising an issue! We appreciate your effort in helping us improve. Our team will review it shortly. Stay tuned!'
-          pr-message: ' 🎉 Thank you @${{ github.actor }} for your contribution! Your pull request has been submitted successfully. A maintainer will review it as soon as possible. We appreciate your support in making this project better'
+          issue-message: '👋 Thank you @${{ github.actor }} for raising an issue! We appreciate your effort in helping us improve. Our team will review it shortly. Stay tuned! If you need further assistance or want to join the conversation, feel free to join our Discord server: [Discord Link](https://discord.gg/65S7jRFe)'
+          pr-message: ' 🎉 Thank you @${{ github.actor }} for your contribution! Your pull request has been submitted successfully. A maintainer will review it as soon as possible. We appreciate your support in making this project better. Also, feel free to join our Discord server: [Discord Link](https://discord.gg/65S7jRFe)'

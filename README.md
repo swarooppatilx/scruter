@@ -11,6 +11,7 @@ Scruter is a local classifieds and community platform where people can connect, 
 </p>
 
 ## <div align="center">Join our Discord Server</div>
+
 <div align="center">
   <a href="https://discord.gg/65S7jRFe"><img src="https://img.shields.io/badge/Discord-7289DA?logo=discord&logoColor=white" width="200"></a>
 </div>
