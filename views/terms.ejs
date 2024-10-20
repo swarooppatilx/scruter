@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions</title>
+    <title><%= title %></title>
     <link href="styles.css" rel="stylesheet"> 
     <style>
         body {
@@ -135,52 +135,51 @@
 
 <body>
     <div class="container">
-        <h1>Terms and Conditions</h1>
-        <p>Welcome to Scruter! These Terms of Service govern your use of our website and services. By accessing or using our services, you agree to comply with and be bound by these terms.</p>
+        <h1><%= heading %></h1>
+        <p><%= intro %></p>
 
         <div class="card">
             <h2>Acceptance of Terms</h2>
-            <p>By accessing this website, you agree to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern Scruter’s relationship with you in relation to this website.</p>
+            <p><%= termsContent %></p>
         </div>
 
         <div class="card">
             <h2>Changes to the Terms</h2>
-            <p>We reserve the right to make changes to these terms at any time. Any such changes will be posted on this page, and it is your responsibility to review these terms regularly to ensure you are aware of any changes.</p>
+            <p><%= changesContent %></p>
         </div>
 
         <div class="card">
             <h2>Use of Website</h2>
-            <p>You agree to use this website only for lawful purposes and in a way that does not infringe the rights of, restrict or inhibit anyone else's use and enjoyment of the website.</p>
+            <p><%= useOfWebsite %></p>
         </div>
 
         <div class="card">
             <h3>Prohibited Use</h3>
             <p>You are prohibited from using the site or its content:</p>
             <ul>
-                <li>For any unlawful purpose;</li>
-                <li>To solicit others to perform or participate in any unlawful acts;</li>
-                <li>To violate any international, federal, provincial, or state regulations, rules, laws, or local ordinances;</li>
-                <li>To infringe upon or violate our intellectual property rights or the intellectual property rights of others;</li>
+                <% prohibitedUses.forEach(function(use) { %>
+                    <li><%= use %></li>
+                <% }) %>
             </ul>
         </div>
 
         <div class="card">
             <h2>Limitation of Liability</h2>
-            <p>In no event will [Your Company Name] or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on [Your Company Name]'s website.</p>
+            <p><%= liabilityContent %></p>
         </div>
 
         <div class="card">
             <h2>Governing Law</h2>
-            <p>These terms and conditions are governed by and construed in accordance with the laws of [Your Country], and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
+            <p><%= governingLaw %></p>
         </div>
 
         <div class="card">
             <h2>Contact Us</h2>
             <p>If you have any questions about these terms and conditions, you can contact us at:</p>
             <ul>
-                <li>Email: scruter@gmail.com</li>
-                <li>Phone: 999999999</li>
-                <li>Address: </li>
+                <li>Email: <%= email %></li>
+                <li>Phone: <%= phone %></li>
+                <li>Address: <%= address %></li>
             </ul>
         </div>
 
