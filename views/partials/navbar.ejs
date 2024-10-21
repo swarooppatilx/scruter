@@ -168,7 +168,7 @@ a {
         alt="Scruter Logo"
         width="90"
         height="30"
-        class="d-inline-block align-text-top"
+        class="d-inline-block align-text-top gsap"
       />
     </a>
     <button
@@ -184,28 +184,28 @@ a {
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul id="navbar-links" class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item gsap">
           <a
             class="nav-link <%= activeLink === 'home' ? 'active-link' : '' %>"
             href="/"
             ><i class="fa-solid fa-house"></i>  Home Page</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item gsap">
           <a
             class="nav-link <%= activeLink === 'house' ? 'active-link' : '' %>"
             href="/house"
             ><i class="fa-solid fa-city"></i> Housing</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item gsap">
           <a
             class="nav-link <%= activeLink === 'food' ? 'active-link' : '' %>"
             href="/food"
             ><i class="fa-solid fa-utensils me-2"></i>Food</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item gsap">
           <a
             class="nav-link <%= activeLink === 'market' ? 'active-link' : '' %>"
             href="/market"
@@ -216,7 +216,7 @@ a {
       <div
         class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center mt-3 mt-lg-0"
       >
-        <button id="darkModeToggle" style="margin-right: 10px; ">
+        <button id="darkModeToggle" class="gsap" style="margin-right: 10px; ">
           <img src="https://img.icons8.com/?size=100&id=45475&format=png&color=000000" class="toggleMode" id="toggleMode" alt="">
         </button>
         <% if (user) { %>
@@ -269,7 +269,7 @@ a {
                   </div>
                 </li>
                 <li>
-                  <a class="dropdown-item text-danger mt-2" href="/logout">
+                  <a class="gsap dropdown-item text-danger mt-2" href="/logout">
                     <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
                   </a>
                 </li>
