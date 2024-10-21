@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx nodemon app.js",
+    "dev": "nodemon app.js",
     "start": "node app.js",
     "lint": "eslint .",
     "lint:ejs": "npx ejs-lint views/**/*.ejs",
@@ -13,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "cloudinary": "^1.41.3",
     "connect-mongo": "^5.1.0",
     "dotenv": "^16.4.5",

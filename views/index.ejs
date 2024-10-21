@@ -14,6 +14,11 @@
                 });
         }
     </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
+
+
     <%- include('partials/head') %>
     <style>
         .icon-circle {
@@ -66,7 +71,7 @@
     <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
     <div class="justify-content-center mb-3">
-        <img src="/background.jpg" style="width: 100%; height: auto;" class="img-fluid">
+        <img src="/background.jpg" style="width: 100%; height: auto;" class="img-fluid gsap-hero">
 
     </div>
 
@@ -75,7 +80,7 @@
 
     <!-- Mission Section -->
     <section class="mission-section text-center">
-      <div class="container">
+      <div class="container gsap-main">
         <h2 class="mb-4">Welcome to Scruter</h2>
         <p class="lead">
           Your go-to platform for buying, selling, and finding everything you
@@ -99,7 +104,7 @@
     <!-- Information Section -->
     <section class="container mt-5 mb-5 pb-5">
       <div class="row">
-        <div class="col-md-4 d-flex justify-content-center">
+        <div class="col-md-4 d-flex justify-content-center gsap-card">
           <div class="card text-center shadow h-100 card-hover">
             <div class="card-body d-flex flex-column justify-content-center">
               <h3 class="card-title">What is Scruter?</h3>
@@ -114,7 +119,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 d-flex justify-content-center">
+        <div class="col-md-4 d-flex justify-content-center gsap-card">
           <div class="card text-center shadow h-100 card-hover">
             <div class="card-body d-flex flex-column justify-content-center">
               <h3 class="card-title">How It Works</h3>
@@ -128,7 +133,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4 d-flex justify-content-center">
+        <div class="col-md-4 d-flex justify-content-center gsap-card ">
           <div class="card text-center shadow h-100 card-hover">
             <div class="card-body d-flex flex-column justify-content-center">
               <h3 class="card-title">Get Started</h3>
@@ -146,21 +151,21 @@
 
     <section class="container mt-5 mb-5 pb-5">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 gsap-card2">
                 <h3>Welcome to Our Project!</h3>
                 <p>The Scruter Team is excited to be part of <strong>GSSoC Extended 2024</strong> and <strong>Hacktoberfest 2024</strong>, initiatives that empower global developers to contribute to open-source projects.</p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 gsap-card2">
                 <h3>Join Us!</h3>
                 <p>Our project helps you <strong>discover local services and interact with your community</strong>. We are enhancing features to improve user experience.</p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 gsap-card2">
                 <h3>Get Involved!</h3>
                 <p>All contributions are welcome! Hacktoberfest is a great way to dive into open source.</p>
             </div>
         </div>
         
-        <section class="container mt-5 mb-5 pb-5">
+        <section class="container mt-5 mb-5 pb-5 gsap-card2">
             <p class="text-center"><a href="https://github.com/swarooppatilx/scruter" target="_blank" class = "repo-link"> <i class="fab fa-github"></i> GitHub Repository Link</a></p>
         </section>
     </section>
@@ -218,6 +223,69 @@
       chatbotId="3y5y_b4ZtgDExQUL8b2_A"
       domain="www.chatbase.co"
       defer>
+      </script>
+      <script >
+         gsap.registerPlugin(ScrollTrigger);
+        const tl=gsap.timeline()
+          tl.fromTo(".gsap", {
+            y: -100,
+            opacity: 0,
+            ease: "power1.inOut",
+          },{
+              y:0,
+              opacity:1,
+              duration:0.5,
+              stagger:0.3
+
+          }
+        );
+       
+      tl.fromTo(".gsap-main",{
+          scale:0,
+          opacity:0,
+          ease: "power1.inOut",
+      },{
+          scale:1,
+          opacity:1,
+          duration:1,
+          ease: "power1.inOut",
+      }
+    );
+    gsap.fromTo(".gsap-card",{
+          y:200,
+          opacity: 0,
+          ease: "power1.inOut",
+        },{
+          y:0,
+          opacity:1,
+          duration:2,
+          scrollTrigger: {
+            trigger: '.gsap-card',   // Trigger based on image scrolling into view
+            start: 'top 92%', // Start animation when image hits 90% from top of viewport
+            toggleActions: 'play none none none', // Animation plays once when it comes into view
+        }
+
+        }
+      );
+      gsap.fromTo(".gsap-card2",{
+          y:200,
+          opacity: 0,
+          ease: "power1.inOut",
+        },{
+          y:0,
+          opacity:1,
+          duration:2,
+          scrollTrigger: {
+            trigger: '.gsap-card2',   // Trigger based on image scrolling into view
+            start: 'top 90%', // Start animation when image hits 90% from top of viewport
+            toggleActions: 'play none none none', // Animation plays once when it comes into view
+        }
+
+        }
+      );
+
+        
+
       </script>
 
   </body>
