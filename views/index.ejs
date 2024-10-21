@@ -8,6 +8,9 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
+  <script src="js/gsap.js"></script>
 
   <!-- Add service worker -->
   <script>
@@ -190,29 +193,9 @@
             </div>
           </div>
         </div>
-      </section>
-
-      <section class="container mt-5 mb-5 pb-5">
-        <div class="row">
-          <div class="col-md-4">
-            <h3>Welcome to Our Project!</h3>
-            <p>The Scruter Team is excited to be part of <strong>GSSoC Extended 2024</strong> and <strong>Hacktoberfest
-                2024</strong>, initiatives that empower global developers to contribute to open-source projects.</p>
-          </div>
-          <div class="col-md-4">
-            <h3>Join Us!</h3>
-            <p>Our project helps you <strong>discover local services and interact with your community</strong>. We are
-              enhancing features to improve user experience.</p>
-          </div>
-          <div class="col-md-4">
-            <h3>Get Involved!</h3>
-            <p>All contributions are welcome! Hacktoberfest is a great way to dive into open source.</p>
-          </div>
-        </div>
-
-        <section class="container mt-5 mb-5 pb-5">
-          <p class="text-center"><a href="https://github.com/swarooppatilx/scruter" target="_blank" class="repo-link">
-              <i class="fab fa-github"></i> GitHub Repository Link</a></p>
+        
+        <section class="container mt-5 mb-5 pb-5 gsap-card2">
+            <p class="text-center"><a href="https://github.com/swarooppatilx/scruter" target="_blank" class = "repo-link"> <i class="fab fa-github"></i> GitHub Repository Link</a></p>
         </section>
       </section>
 
@@ -254,8 +237,6 @@
 
       <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>
 
-          <%- include('partials/bottom_nav') %>
-
             <!-- Scroll Progress Script -->
             <script>
               window.onscroll = function () {
@@ -265,17 +246,6 @@
                 document.getElementById("progress-bar").style.width = scrolled + "%";
               };
             </script>
-
-
-            <script>
-              window.embeddedChatbotConfig = {
-                chatbotId: "3y5y_b4ZtgDExQUL8b2_A",
-                domain: "www.chatbase.co"
-              }
-            </script>
-            <script src="https://www.chatbase.co/embed.min.js" chatbotId="3y5y_b4ZtgDExQUL8b2_A"
-              domain="www.chatbase.co" defer>
-              </script>
 
 </body>
 
