@@ -1,213 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <%- include('partials/head') %> 
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="css/formstyle.css">
-    <script src="js/client-validation.js" defer></script>
-    <style>
-        body {
-            overflow-y: auto;  // Changed from hidden to auto to allow scrolling
-        }
-        .input-submit {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            padding-bottom: 35px;
-            text-align: center;
-        }
-        .input-submit:hover {
-            background-color: #000;
-            color: #fff;
-        }
-    </style>
-    
+    <%- include('partials/head') %>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="css/formstyle.css">
+        <script src="js/client-validation.js" defer></script>
+        <style>
+            body {
+                overflow-y: auto;
+            }
+            .input-submit {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+                padding-bottom: 35px;
+                text-align: center;
+            }
+            .input-submit:hover {
+                background-color: #000;
+                color: #fff;
+            }
+            .error-message {
+                color: red;
+                font-size: 12px;
+                margin-top: 5px;
+            }
+        </style>
+
 </head>
+
 <body>
     <%- include('partials/navbar') %>
 
-    <div class="container">
-        <div class="box">
-            <div class="header">
-                <p><%= action === 'login' ? 'Log In' : 'Sign Up' %></p>
-            </div>
-            <% if (errors && errors.length > 0) { %>
-                <div id="errorAlert" class="alert alert-danger" style="position: absolute; left: 80%; top: 80%;">
+        <div class="container">
+            <div class="box">
+                <div class="header">
+                    <p>
+                        <%= action==='login' ? 'Log In' : 'Sign Up' %>
+                    </p>
+                </div>
+                <% if (errors && errors.length> 0) { %>
+                    <!-- <div id="errorAlert" class="alert alert-danger" style="position: absolute; left: 80%; top: 80%;">
                     <% errors.forEach(function(error) { %>
                         <div class="error-message"><i class="bx bx-error"></i> <%= error.msg %></div>
                     <% }); %>
-                </div>
-            
-                <!-- JavaScript to hide the alert after 4 seconds -->
-                <script>
-                    setTimeout(function() {
-                        const errorAlert = document.getElementById('errorAlert');
-                        if (errorAlert) {
-                            errorAlert.style.display = 'none';
-                        }
-                    }, 4000);  // 4000ms = 4 seconds
-                </script>
-            <% } %>
-            <form action="/<%= action %>" method="post" id="authForm">
-                <% if (action === 'signup') { %>
-                    <div class="input-box">
-                        <label for="username">Username</label>
-                        <input type="text" class="input-field" id="username" name="username" placeholder="Enter Username" required>
-                        <i class="bx bx-user"></i>
-                    </div>
-                    <div class="input-box">
-                        <label for="email">Email</label>
-                        <input type="email" class="input-field" id="email" name="email" placeholder="Enter Email" required>
-                        <i class="bx bx-envelope"></i>
-                    </div>
-                    <div class="input-box">
-                        <label for="phone">Phone</label>
-                        <input type="phone" class="input-field" id="phone" name="phone" placeholder="Enter Phone" required>
-                        <i class="bx bx-phone"></i>
-                    </div>
-                    <div class="input-box">
-                        <label for="password">Password</label>
-                        <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
-                        <i class="bx bx-show" data-target="password" onclick="togglePasswordVisibility(this)"></i>
-                    </div>
-                    <div class="input-box">
-                        <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" class="input-field" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
-                        <i class="bx bx-show" data-target="confirmPassword" onclick="togglePasswordVisibility(this)"></i>
-                    </div>
-                <% } else { %>
-                    <div class="input-box">
-                        <label for="username">Username</label>
-                        <input type="text" class="input-field" id="username" name="username" placeholder="Enter Username" required>
-                        <i class="bx bx-user"></i>
-                    </div>
-                    <div class="input-box">
-                        <label for="password">Password</label>
-                        <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
-                        <i class="bx bx-show" data-target="password" onclick="togglePasswordVisibility(this)"></i>
-                    </div>
-                    <div class="input-box">
-                        <label>
-                            <input type="checkbox" id="rememberMe"> Remember Me
-                        </label>
-                    </div>
-                <% } %>
-                <div class="input-box">
-                    <input type="submit" class="input-submit" value="<%= action === 'login' ? 'LOGIN' : 'SIGN UP' %>">
-                </div>
-            </form>
-            <div class="bottom">
-                <span>
-                    <a href="/auth?<%= action === 'login' ? 'action=signup' : 'action=login' %>">
-                        <%= action === 'login' ? 'Sign Up' : 'Log in' %>
-                    </a>
-                </span>
-                <% if (action === 'login') { %>
-                    <span><a href="#">Forgot Password?</a></span>
-                <% } %>
-                </div>
- 
+                </div> -->
+                    <!-- JavaScript to hide the alert after 4 seconds -->
+                    <script>
+                        setTimeout(function () {
+                            const errorAlert = document.getElementById('errorAlert');
+                            if (errorAlert) {
+                                errorAlert.style.display = 'none';
+                            }
+                        }, 4000);  // 4000ms = 4 seconds
+                    </script>
+                    <% } %>
+                        <form novalidate action="/<%= action %>" method="post" id="authForm">
+                            <% if (action==='signup' ) { %>
+                                <div class="input-box">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="input-field" id="username" name="username"
+                                        placeholder="Enter Username" required>
+                                    <i class="bx bx-user"></i>
+                                    <div id="usernameError" class="error-message"></div>
+                                </div>
+                                <div class="input-box">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="input-field" id="email" name="email"
+                                        placeholder="Enter Email" required>
+                                    <i class="bx bx-envelope"></i>
+                                    <div id="emailError" class="error-message"></div>
+                                </div>
+                                <div class="input-box">
+                                    <label for="phone">Phone</label>
+                                    <input type="phone" class="input-field" id="phone" name="phone"
+                                        placeholder="Enter Phone" required>
+                                    <i class="bx bx-phone"></i>
+                                    <div id="phoneError" class="error-message"></div>
+                                </div>
+                                <div class="input-box">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="input-field" id="password" name="password"
+                                        placeholder="Enter Password" required>
+                                    <i class="bx bx-show" data-target="password"
+                                        onclick="togglePasswordVisibility(this)"></i>
+                                    <div id="passwordError" class="error-message"></div>
+                                </div>
+                                <div class="input-box">
+                                    <label for="confirmPassword">Confirm Password</label>
+                                    <input type="password" class="input-field" id="confirmPassword"
+                                        name="confirmPassword" placeholder="Confirm Password" required>
+                                    <i class="bx bx-show" data-target="confirmPassword"
+                                        onclick="togglePasswordVisibility(this)"></i>
+                                    <div id="confirmPasswordError" class="error-message"></div>
+                                </div>
+                                <% } else { %>
+                                    <div class="input-box">
+                                        <label for="username">Username</label>
+                                        <input type="text" class="input-field" id="username" name="username"
+                                            placeholder="Enter Username" required>
+                                        <i class="bx bx-user"></i>
+                                        <div id="usernameError" class="error-message"></div>
+                                    </div>
+                                    <div class="input-box">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="input-field" id="password" name="password"
+                                            placeholder="Enter Password" required>
+                                        <i class="bx bx-show" data-target="password"
+                                            onclick="togglePasswordVisibility(this)"></i>
+                                        <div id="passwordError" class="error-message"></div>
+                                    </div>
+                                    <div class="input-box">
+                                        <label>
+                                            <input type="checkbox" id="rememberMe"> Remember Me
+                                        </label>
+                                    </div>
+                                    <% } %>
+                                        <div class="input-box">
+                                            <input type="submit" class="input-submit"
+                                                value="<%= action === 'login' ? 'LOGIN' : 'SIGN UP' %>">
+                                        </div>
+                        </form>
+                        <div class="bottom">
+                            <span>
+                                <a href="/auth?<%= action === 'login' ? 'action=signup' : 'action=login' %>">
+                                    <%= action==='login' ? 'Sign Up' : 'Log in' %>
+                                </a>
+                            </span>
+                            <% if (action==='login' ) { %>
+                                <span><a href="#">Forgot Password?</a></span>
+                                <% } %>
+                        </div>
+            </div>
         </div>
-        
-    </div>
- 
-    <%- include('partials/bottom_nav') %>
-    <script>
-        // /preloader js styling
-        let preloader = document.querySelector("#preloader");
-        window.addEventListener("load",function(e){
-            preloader.style.display = "none";
-        });
-    </script>
-    <script>
-        function togglePasswordVisibility(icon) {
-            const targetId = icon.getAttribute('data-target');
-            const passwordInput = document.getElementById(targetId);
-    
-            // Toggle between 'password' and 'text' type
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('bx-show');
-                icon.classList.add('bx-hide');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('bx-hide');
-                icon.classList.add('bx-show');
-            }
-        }
-    </script>
-    <script>
-        window.embeddedChatbotConfig = {
-        chatbotId: "3y5y_b4ZtgDExQUL8b2_A",
-        domain: "www.chatbase.co"
-        }
-        </script>
-        <script
-        src="https://www.chatbase.co/embed.min.js"
-        chatbotId="3y5y_b4ZtgDExQUL8b2_A"
-        domain="www.chatbase.co"
-        defer>
-        </script>
-        
-<script>
-    // Save data to local storage on signup
-    const authForm = document.getElementById('authForm');
-    authForm.addEventListener('submit', function (e) {
-        if (window.location.pathname.includes('signup')) {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (password !== confirmPassword) {
-                alert('Passwords do not match');
-                return;
-            }
-
-            // Save user data to local storage as JSON
-            const userData = { username, email, phone, password };
-            const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-            existingUsers.push(userData);
-            localStorage.setItem('users', JSON.stringify(existingUsers));
-
-            alert('Signup successful! You can now log in.');
-            window.location.href = '/auth?action=login';
-        } else if (window.location.pathname.includes('login')) {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            // Check if "Remember Me" is checked
-            const rememberMe = document.getElementById('rememberMe').checked;
-
-            // Retrieve all users from local storage and check for a match
-            const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
-            const matchedUser = storedUsers.find(user => user.username === username && user.password === password);
-
-            if (matchedUser) {
-                alert('Login successful!');
-                if (rememberMe) {
-                    localStorage.setItem('rememberedUsername', username);
+        <%- include('partials/bottom_nav') %>
+            <script>
+                // /preloader js styling
+                let preloader = document.querySelector("#preloader");
+                window.addEventListener("load", function (e) {
+                    preloader.style.display = "none";
+                });
+            </script>
+            <script>
+                function togglePasswordVisibility(icon) {
+                    const targetId = icon.getAttribute('data-target');
+                    const passwordInput = document.getElementById(targetId);
+                    // Toggle between 'password' and 'text' type
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.remove('bx-show');
+                        icon.classList.add('bx-hide');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.remove('bx-hide');
+                        icon.classList.add('bx-show');
+                    }
                 }
-            } else {
-                alert('Invalid username or password');
-            }
-        }
-    });
-
-    // On page load, check if there's a remembered username
-    window.onload = function() {
-        const rememberedUsername = localStorage.getItem('rememberedUsername');
-        if (rememberedUsername) {
-            document.getElementById('username').value = rememberedUsername;
-            document.getElementById('rememberMe').checked = true;
-        }
-    };
-</script>
-
-
+            </script>
+            <script>
+                window.embeddedChatbotConfig = {
+                    chatbotId: "3y5y_b4ZtgDExQUL8b2_A",
+                    domain: "www.chatbase.co"
+                }
+            </script>
+            <script src="https://www.chatbase.co/embed.min.js" chatbotId="3y5y_b4ZtgDExQUL8b2_A"
+                domain="www.chatbase.co" defer>
+                </script>
+            <script>
+                // Save data to local storage on signup
+                const authForm = document.getElementById('authForm');
+                authForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const action = urlParams.get('action');
+                    if (action === 'signup') {
+                        e.preventDefault();
+                        document.querySelectorAll('.error-message').forEach(e => e.textContent = '');
+                        let isValid = true;
+                        const username = document.getElementById('username').value;
+                        if (username.trim() === '') {
+                            document.getElementById('usernameError').textContent = 'Username is required';
+                            isValid = false;
+                        }
+                        const email = document.getElementById('email').value;
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(email)) {
+                            document.getElementById('emailError').textContent = 'Invalid email address';
+                            isValid = false;
+                        }
+                        const phone = document.getElementById('phone').value;
+                        if (!/^[789]\d{9}$/.test(phone)) {
+                            document.getElementById('phoneError').textContent = 'Enter Valid phone number';
+                            isValid = false;
+                        }
+                        const password = document.getElementById('password').value;
+                        if (password.length < 6) {
+                            document.getElementById('passwordError').textContent = 'Password must be at least 6 characters long';
+                            isValid = false;
+                        }
+                        const confirmPassword = document.getElementById('confirmPassword').value;
+                        if (password !== confirmPassword) {
+                            document.getElementById('confirmPasswordError').textContent = 'Passwords do not match';
+                            isValid = false;
+                        }
+                        if (!isValid) {
+                            return;
+                        }
+                        // Save user data to local storage as JSON
+                        const userData = { username, email, phone, password };
+                        const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+                        existingUsers.push(userData);
+                        localStorage.setItem('users', JSON.stringify(existingUsers));
+                        alert('Signup successful! You can now log in.');
+                        window.location.href = '/auth?action=login';
+                    } else if (action === 'login') {
+                        e.preventDefault();
+                        const username = document.getElementById('username').value;
+                        const password = document.getElementById('password').value;
+                        let isValid = true;
+                        if (username === '') {
+                            document.getElementById('usernameError').textContent = 'Username is required';
+                            isValid = false;
+                        }
+                        if (password === '') {
+                            document.getElementById('passwordError').textContent = 'Password is required';
+                            isValid = false;
+                        }
+                        if (!isValid) {
+                            return;
+                        }
+                        // Check if "Remember Me" is checked
+                        const rememberMe = document.getElementById('rememberMe').checked;
+                        // Retrieve all users from local storage and check for a match
+                        const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+                        const matchedUser = storedUsers.find(user => user.username === username && user.password === password);
+                        if (matchedUser) {
+                            alert('Login successful!');
+                            if (rememberMe) {
+                                localStorage.setItem('rememberedUsername', username);
+                            }
+                        } else {
+                            alert('Invalid username or password');
+                        }
+                    }
+                });
+                // On page load, check if there's a remembered username
+                window.onload = function () {
+                    const rememberedUsername = localStorage.getItem('rememberedUsername');
+                    if (rememberedUsername) {
+                        document.getElementById('username').value = rememberedUsername;
+                        document.getElementById('rememberMe').checked = true;
+                    }
+                };
+            </script>
 </body>
 </html>

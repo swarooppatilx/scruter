@@ -62,6 +62,27 @@
         width: 0%;
         z-index: 9999;
       }
+         /* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212; 
+    color: #ffffff; 
+  }
+  .card {
+    background-color: #1e1e1e; 
+    color: #ffffff; 
+  }
+  .modal-content {
+    background-color: #2a2a2a; 
+    color: #ffffff; 
+  }
+  .btn-close {
+    filter: invert(1); 
+  }
+  p, h5, a {
+    color: #ffffff;
+  }
+}
     </style>
   </head>
   <body>
