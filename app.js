@@ -246,6 +246,12 @@ app.get('/terms', (req, res) => {
   });
 });
 
+app.get('/faq', (req, res) => {
+  res.render('faq', {
+    activeLink: 'faq' // You can customize this based on your layout
+  });
+});
+
 app.get('/privacy-policy', (req, res) => {
   res.render('privacy-policy', {
     activeLink: 'privacy-policy' // You can customize this based on your layout
