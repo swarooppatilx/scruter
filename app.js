@@ -144,81 +144,30 @@ app.post(
   }
 );
 
+
 // Handle signup form submission
-app.post(
-  '/signup',
-  [
-    body('username').notEmpty().withMessage('Username is required'),
-    body('email').isEmail().withMessage('Email is required and must be valid'),
-    body('password').notEmpty().withMessage('Password is required'),
-    body('confirmPassword')
-      .notEmpty()
-      .withMessage('Confirm Password is required'),
-    body('phone').notEmpty().withMessage('Phone number is required'),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).render('auth', {
-        action: 'signup',
-        errors: errors.array(),
-        activeLink: '',
-      });
-    }
-
-    const { username, email, password, confirmPassword, phone } = req.body;
-
-    if (password !== confirmPassword) {
-      return res.status(400).render('auth', {
-        action: 'signup',
-        errors: [{ msg: 'Passwords do not match' }],
-        activeLink: '',
-      });
-    }
-
-    try {
-      const existingUser = await User.findOne({
-        $or: [{ username }, { email }, { phone }],
-      });
-      if (existingUser) {
-        const errors = [];
-        if (existingUser.username === username) {
-          errors.push({ msg: 'Username is already taken' });
-        }
-        if (existingUser.phone === phone) {
-          errors.push({ msg: 'Phone is already taken' });
-        }
-        if (existingUser.email === email) {
-          errors.push({ msg: 'Email is already registered' });
-        }
-        return res
-          .status(400)
-          .render('auth', { action: 'signup', errors, activeLink: '' });
+app.post('/signup', [
+  body('username').notEmpty().withMessage('Username is required'),
+  body('email')
+    .isEmail().withMessage('Email is required and must be valid')
+    .custom(value => {
+      const trustedDomains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com'];
+      const emailDomain = value.split('@')[1];
+      if (!trustedDomains.includes(emailDomain)) {
+        throw new Error('Please use a trusted email provider (e.g., Gmail, Yahoo, Outlook, Hotmail, iCloud)');
       }
+      return true;
+    }),
+  body('password').notEmpty().withMessage('Password is required'),
+  body('confirmPassword').notEmpty().withMessage('Confirm Password is required'),
+  body('phone').notEmpty().withMessage('Phone number is required')
+], async (req, res) => {
+  const errors = validationResult(req);
+})
+  if (!errors.isEmpty()) 
+    return res.status(400).render('auth', { action: 'signup', errors: errors.array(), activeLink: '' 
 
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const newUser = new User({
-        username,
-        email,
-        password: hashedPassword,
-        phone,
-      });
-      await newUser.save();
-
-      req.session.user = newUser;
-      res.redirect('/');
-    } catch (error) {
-      console.error('Error during signup:', error);
-      res.status(500).render('auth', {
-        action: 'signup',
-        errors: [{ msg: 'Internal Server Error' }],
-        activeLink: '',
-      });
-    }
-  }
-);
-
-//Change in Dashboard Stuff
+    });
 
 //Updating Personal Information of Username and Email
 app.post('/update-personal-info', ensureAuthenticated, (req, res) => {
