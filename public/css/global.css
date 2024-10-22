@@ -141,6 +141,22 @@ body.dark-mode .icon-circle a {
   color: #ddd; /* Light color for dark mode */
 }
 
+body.dark-mode .modal {
+  --bs-modal-color: whitesmoke;
+  --bs-modal-bg: #333;
+  box-shadow:
+    0 4px 8px rgba(255, 255, 255, 0.2),
+    0 6px 20px rgba(255, 255, 255, 0.19); /* White box shadow */
+}
+
+body.dark-mode .card {
+  --bs-card-color: whitesmoke;
+  --bs-card-bg: #333;
+  box-shadow:
+    0 4px 8px rgba(255, 255, 255, 0.2),
+    0 6px 20px rgba(255, 255, 255, 0.19); /* White box shadow */
+}
+
 /* Gap between the social media icons */
 .d-flex {
   gap: 15px;
