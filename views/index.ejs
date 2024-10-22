@@ -246,6 +246,33 @@
                 document.getElementById("progress-bar").style.width = scrolled + "%";
               };
             </script>
+              <script>
+                const scrollButton = document.getElementById('scrollToTopBtn');
+                const updatesList = document.getElementById('updatesList');
+          
+                // Scroll-to-top button logic
+                window.addEventListener('scroll', () => {
+                  window.pageYOffset > 100
+                    ? scrollButton.classList.add('show-btn')
+                    : scrollButton.classList.remove('show-btn');
+                });
+          
+                function smoothScrollToTop() {
+                  const scrollY = window.pageYOffset;
+          
+                  if (scrollY > 0) {
+                    window.scrollBy(0, -Math.min(scrollY, 70));
+                    requestAnimationFrame(smoothScrollToTop);
+                  }
+                }
+          
+                scrollButton.addEventListener('click', () => {
+                  smoothScrollToTop();
+                });
+          
+             
+          
+              </script>
 
 </body>
 
