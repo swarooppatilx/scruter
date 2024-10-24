@@ -1,89 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scruter Footer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+        }
+        .social-section {
+            background-color: #fff;
+            padding: 40px 0;
+        }
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        .icon-circle a {
+            color: #343a40;
+            text-decoration: none;
+        }
+        .icon-circle:hover {
+            background-color: #007bff;
+        }
+        .icon-circle:hover a {
+            color: #fff;
+        }
+        .copyright-text {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .dark-mode {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .dark-mode .social-section {
+            background-color: #495057;
+        }
+        .dark-mode .icon-circle {
+            background-color: #6c757d;
+        }
+        .dark-mode .icon-circle:hover {
+            background-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
 <section id="footer" class="social-section py-5">
-  <div class="container">
-    <div class="row">
-      <!-- About Scruter -->
-      <div class="col-md-3">
-        <h4>About Scruter</h4>
-        <p>
-          Scruter is your local platform for buying, selling, and discovering
-          everything you need. Whether it's products, services, or community
-          activities, we connect people for a better local experience.
-        </p>
-      </div>
+    <div class="container">
+        <div class="row">
+            <!-- About Scruter -->
+            <div class="col-md-3">
+                <h4>About Scruter</h4>
+                <p>
+                    Scruter is your local platform for buying, selling, and discovering
+                    everything you need. Whether it's products, services, or community
+                    activities, we connect people for a better local experience.
+                </p>
+            </div>
 
-      <!-- Quick Links -->
-      <div class="col-md-3">
-        <h4>Quick Links</h4>
-        <ul class="list-unstyled">
-          <li><a href="/about" class="text-dark quick-link">About Us</a></li>
-          <li><a href="/team" class="text-dark quick-link">Our Team</a></li>
-          <li><a href="/privacy-policy" class="text-dark quick-link">Privacy Policy</a></li>
-          <li><a href="/terms" class="text-dark quick-link">Terms of Service</a></li>
-          <li><a href="/contributors" class="text-dark quick-link">Our Contributors</a></li>
-        </ul>
-      </div>
+            <!-- Quick Links -->
+            <div class="col-md-3">
+                <h4>Quick Links</h4>
+                <ul class="list-unstyled">
+                    <li><a href="/about" class="text-dark quick-link">About Us</a></li>
+                    <li><a href="/team" class="text-dark quick-link">Our Team</a></li>
+                    <li><a href="/privacy-policy" class="text-dark quick-link">Privacy Policy</a></li>
+                    <li><a href="/terms" class="text-dark quick-link">Terms of Service</a></li>
+                    <li><a href="/contributors" class="text-dark quick-link">Our Contributors</a></li>
+                </ul>
+            </div>
 
-      <!-- Helpdesk -->
-      <div class="col-md-3">
-        <h4>Helpdesk</h4>
-        <ul class="list-unstyled">
-          <li><a href="/help" class="text-dark help-desk">Help Center</a></li>
-          <li><a href="/faq" class="text-dark help-desk">FAQ</a></li>
-          <li><a href="/contact" class="text-dark help-desk">Contact Us</a></li>
-          <li><a href="/support" class="text-dark help-desk">Support</a></li>
-        </ul>
-      </div>
+            <!-- Helpdesk -->
+            <div class="col-md-3">
+                <h4>Helpdesk</h4>
+                <ul class="list-unstyled">
+                    <li><a href="/help" class="text-dark help-desk">Help Center</a></li>
+                    <li><a href="/faq" class="text-dark help-desk">FAQ</a></li>
+                    <li><a href="/contact" class="text-dark help-desk">Contact Us</a></li>
+                    <li><a href="/support" class="text-dark help-desk">Support</a></li>
+                </ul>
+            </div>
 
-      <!-- Social Media Links -->
-      <div class="col-md-3">
-        <h4>Follow Us</h4>
-        <div class="d-flex justify-content-center">
-          <div class="icon-circle mx-2">
-            <a href="https://facebook.com" target="_blank" aria-label="Follow us on Facebook">
-              <i class="fa-brands fa-facebook fa-lg"></i>
-            </a>
-          </div>
-          <div class="icon-circle mx-2">
-            <a href="https://twitter.com" target="_blank" aria-label="Follow us on Twitter">
-              <i class="fa-brands fa-x-twitter"></i>
-            </a>
-          </div>
-          <div class="icon-circle mx-2">
-            <a href="https://instagram.com" target="_blank" aria-label="Follow us on Instagram">
-              <i class="fa-brands fa-instagram fa-lg"></i>
-            </a>
-          </div>
+            <!-- Social Media Links -->
+            <div class="col-md-3">
+                <h4>Follow Us</h4>
+                <div class="d-flex justify-content-center">
+                    <div class="icon-circle mx-2" data-toggle="tooltip" title="Follow us on Facebook">
+                        <a href="https://facebook.com" target="_blank" aria-label="Follow us on Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM8 1.25a6.75 6.75 0 1 1 0 13.5A6.75 6.75 0 0 1 8 1.25zM10.5 8a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0zm1.5-4.5a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="icon-circle mx-2" data-toggle="tooltip" title="Follow us on Twitter">
+                        <a href="https://twitter.com" target="_blank" aria-label="Follow us on Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                                <path d="M5.026 15c6.037 0 9.321-5 9.321-9.321 0-.142 0-.284-.01-.425A6.68 6.68 0 0 0 16 3.076a6.58 6.58 0 0 1-1.889.517 3.293 3.293 0 0 0 1.44-1.818 6.561 6.561 0 0 1-2.084.795 3.285 3.285 0 0 0-5.604 2.99A9.32 9.32 0 0 1 1.11 2.67 3.285 3.285 0 0 0 2.018 8.8a3.24 3.24 0 0 1-1.486-.41v.041c0 1.58 1.124 2.894 2.618 3.188a3.286 3.286 0 0 1-1.477.056 3.293 3.293 0 0 0 3.067 2.28A6.585 6.585 0 0 1 0 13.536a9.314 9.314 0 0 0 5.029 1.476"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="icon-circle mx-2" data-toggle="tooltip" title="Follow us on Instagram">
+                        <a href="https://instagram.com" target="_blank" aria-label="Follow us on Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 4.42 3.58 8 8 8 4.42 0 8-3.58 8-8 0-4.42-3.58-8-8-8zM8 1.25a6.75 6.75 0 1 1 0 13.5A6.75 6.75 0 0 1 8 1.25zM10.5 8a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0zm1.5-4.5a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+        <hr />
+        <!-- Copyright -->
+        <div class="row">
+            <div class="col-12 mt-4">
+                <p class="copyright-text">Made with ❤️ by Team Scruter.</p>
+            </div>
+        </div>
     </div>
-    <hr />
-    <!-- Copyright -->
-    <div class="row">
-      <div class="col-12 mt-4">
-        <p class="copyright-text">Made with ❤️ by Team Scruter.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const toggleButton = document.getElementById('dark-mode-toggle');
-
-    // Load the user's preference from local storage
-    if (localStorage.getItem('dark-mode') === 'enabled') {
-      document.body.classList.add('dark-mode');
-    }
-
-    toggleButton.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-
-      // Save the user's preference
-      if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('dark-mode', 'enabled');
-      } else {
-        localStorage.removeItem('dark-mode');
-      }
+    // Enable tooltips
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
     });
-  });
+
+    // Dark mode toggle
+    const toggleSwitch = document.querySelector('.dark-mode-toggle');
+    toggleSwitch.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        localStorage.setItem('dark-mode', isDarkMode ? 'enabled' : 'disabled');
+    });
+
+    // Check local storage for dark mode preference
+    const darkModePreference = localStorage.getItem('dark-mode');
+    if (darkModePreference === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
 </script>
+</body>
+</html>
