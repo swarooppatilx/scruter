@@ -19,7 +19,7 @@
       }
 
       .location-link:hover {
-        text-decoration: underline; /* Optional: Add underline back on hover if desired */
+        text-decoration: underline; 
       }
 
       .card-img-top {
@@ -168,45 +168,57 @@
                   <h5><%= card.title %></h5>
                   <p class="card-phone">
                     <%= card.phone %>
-                    <!-- Adds the phone number when card is pressed -->
                   </p>
                   <p class="card-email"><%= card.email %></p>
-                  <!-- Adds the email when card is pressed -->
                   <p class="card-text">
                     <a
                       href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>"
                     >
-                      <i class="fa-solid fa-location-dot me-2"></i><%=
-                      card.location %>
+                      <i class="fa-solid fa-location-dot me-2"></i><%= card.location %>
                     </a>
                   </p>
                   <% if (card.price) { %>
                   <p class="card-text">
-                    <b
-                      >Price: <%= card.price %><i
-                        class="fa-solid fa-indian-rupee-sign ms-2"
-                      ></i
-                    ></b>
+                    <b>Price: <%= card.price %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b>
                   </p>
                   <% } %> <% if (card.rent) { %>
                   <p class="card-text">
-                    <b
-                      >Rent: <%= card.rent %><i
-                        class="fa-solid fa-indian-rupee-sign ms-2"
-                      ></i
-                    ></b>
+                    <b>Rent: <%= card.rent %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b>
                   </p>
                   <% } %>
                   <p><%= card.description %></p>
+
+                  <!-- Review Section -->
+                  <hr />
+                  <h5>Reviews</h5>
+
+                  <!-- Display existing reviews -->
+                  <div class="reviews">
+                    <% card.reviews.forEach(function(review) { %>
+                      <div class="review mb-3">
+                        <p><strong><%= review.username %></strong> - <%= review.date.toDateString() %></p>
+                        <p><%= review.comment %></p>
+                      </div>
+                    <% }); %>
+                  </div>
+
+                  <!-- Form to add new review -->
+                  <% if (user) { %>
+                  <hr />
+                  <form action="/add-review/<%= card._id %>" method="POST">
+                    <div class="mb-3">
+                      <label for="reviewComment<%= card._id %>" class="form-label">Add a review:</label>
+                      <textarea name="comment" id="reviewComment<%= card._id %>" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                  </form>
+                  <% } else { %>
+                  <p class="text-muted">Please <a href="/login">log in</a> to leave a review.</p>
+                  <% } %>
                 </div>
-                <% if (user && user.username === card.username || user &&
-                user.username === "admin") { %>
+                <% if (user && user.username === card.username || user && user.username === "admin") { %>
                 <div class="modal-footer">
-                  <form
-                    action="/delete/<%= selectedType %>/<%= card._id %>"
-                    method="POST"
-                    style="display: inline"
-                  >
+                  <form action="/delete/<%= selectedType %>/<%= card._id %>" method="POST" style="display: inline">
                     <button type="submit" class="btn btn-danger">Delete</button>
                   </form>
                 </div>
@@ -225,8 +237,7 @@
         var winScroll =
           document.body.scrollTop || document.documentElement.scrollTop;
         var height =
-          document.documentElement.scrollHeight -
-          document.documentElement.clientHeight;
+          document.documentElement.scrollHeight - document.documentElement.clientHeight;
         var scrolled = (winScroll / height) * 100;
         document.getElementById("progress-bar").style.width = scrolled + "%";
       };
@@ -239,9 +250,10 @@
     </script>
     <script
       src="https://www.chatbase.co/embed.min.js"
-      chatbotId="3y5y_b4ZtgDExQUL8b2_A"
-      domain="www.chatbase.co"
+      id="embeddedChatbotScript"
       defer
     ></script>
+    <script src="/javascripts/progressbar.js"></script>
   </body>
 </html>
+
