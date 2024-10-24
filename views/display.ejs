@@ -198,6 +198,31 @@
                   </p>
                   <% } %>
                   <p><%= card.description %></p>
+                  <!-- Review Section -->
+                  <hr />
+                  <h5>Reviews</h5>
+                  <!-- Display existing reviews -->
+                  <div class="reviews">
+                    <% card.reviews.forEach(function(review) { %>
+                      <div class="review mb-3">
+                        <p><strong><%= review.username %></strong> - <%= review.date.toDateString() %></p>
+                        <p><%= review.comment %></p>
+                      </div>
+                    <% }); %>
+                  </div>
+                  <!-- Form to add new review -->
+                  <% if (user) { %>
+                  <hr />
+                  <form action="/add-review/<%= card._id %>" method="POST">
+                    <div class="mb-3">
+                      <label for="reviewComment<%= card._id %>" class="form-label">Add a review:</label>
+                      <textarea name="comment" id="reviewComment<%= card._id %>" class="form-control" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                  </form>
+                  <% } else { %>
+                  <p class="text-muted">Please <a href="/login">log in</a> to leave a review.</p>
+                  <% } %>
                 </div>
                 <% if (user && user.username === card.username || user &&
                 user.username === "admin") { %>
