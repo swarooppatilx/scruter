@@ -6,13 +6,50 @@
     <link rel="stylesheet" href="formstyle.css">
     <script src="/client-validation.js" defer></script>
     <style>
-        .input-submit {
-            padding: 10px 20px;
-        }
-        .input-submit:hover {
-            background-color: #000;
-            color: #fff;
-        }
+        .input-box {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.input-submit {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.input-submit:hover {
+    background-color: #45a049;
+}
+
+/* Google Signup Button */
+.google-signup {
+    display: inline-flex;
+    align-items: center;
+    background-color: #ffffff;
+    color: #555;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.google-signup:hover {
+    background-color: #f7f7f7;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
     </style>
 </head>
 <body>
@@ -64,6 +101,19 @@
                         <i class="bx bx-show" data-target="password" onclick="togglePasswordVisibility(this)"></i>
                     </div>
                 <% } %>
+                <form action="/signup" method="POST">
+                    <div class="input-box">
+                        <input type="submit" class="input-submit" value="SIGN UP">
+                    </div>
+                
+                    <div class="input-box">
+                        <button class="google-signup" type="button" onclick="handleGoogleSignUp()">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" 
+                                 alt="Google Logo" class="google-icon">
+                            Sign Up with Google
+                        </button>
+                    </div>
+                </form>                
                 <div class="input-box">
                     <input type="submit" class="input-submit" value="<%= action === 'login' ? 'LOGIN' : 'SIGN UP' %>">
                 </div>
