@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8; /* Light background for contrast */
+            margin: 0;
+            padding: 0;
+        }
+
+        .feedback-form-container {
+            background-color: #ffebee; /* Light pink sky color */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin: 20px auto; /* Centered container */
+            padding: 20px;
+        }
+
+        .form-title {
+            color: #0077be; /* Blue sea color */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-button {
+            background-color: #0077be; /* Blue sea color */
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%; /* Full width button */
+        }
+
+        .submit-button:hover {
+            background-color: #005f8a; /* Darker blue on hover */
+        }
+
+        .success-message {
+            color: green;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 500px) {
+            .feedback-form-container {
+                padding: 15px;
+            }
+
+            .form-title {
+                font-size: 1.5em; /* Adjust title size for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="feedback-form-container">
+        <h2 class="form-title">Feedback Form</h2>
+        <form id="feedbackForm">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="email">Email ID:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="rating">Star Rating:</label>
+                <select id="rating" name="rating" required>
+                    <option value="">Select rating</option>
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+            </div>
+            <div>
+                <label for="feedback">Feedback Message:</label>
+                <textarea id="feedback" name="feedback" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+        <div id="successMessage" class="success-message" style="display: none;">
+            Thanks for your feedback! It has been successfully submitted.
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for form validation and submission
+        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // You can add your validation logic here if needed
+
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+
+            // Optionally, reset the form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
