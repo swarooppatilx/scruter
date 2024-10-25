@@ -3,10 +3,14 @@
 <head>
     <%- include('partials/head') %> 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="formstyle.css">
-    <script src="/client-validation.js" defer></script>
+    <link rel="stylesheet" href="css/formstyle.css">
+    <script src="js/client-validation.js" defer></script>
     <style>
-        .input-box {
+body {
+    overflow-y: auto;  /* Changed from hidden to auto to allow scrolling */
+}
+
+.input-box {
     text-align: center;
     margin-top: 20px;
 }
@@ -20,13 +24,16 @@
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .input-submit:hover {
     background-color: #45a049;
+    color: #fff;  /* Adding a color change on hover */
 }
 
-/* Google Signup Button */
 .google-signup {
     display: inline-flex;
     align-items: center;
@@ -51,6 +58,7 @@
     margin-right: 10px;
 }
     </style>
+    
 </head>
 <body>
     <%- include('partials/navbar') %>
@@ -61,11 +69,21 @@
                 <p><%= action === 'login' ? 'Log In' : 'Sign Up' %></p>
             </div>
             <% if (errors && errors.length > 0) { %>
-                <div class="alert alert-danger">
+                <div id="errorAlert" class="alert alert-danger" style="position: absolute; left: 80%; top: 80%;">
                     <% errors.forEach(function(error) { %>
                         <div class="error-message"><i class="bx bx-error"></i> <%= error.msg %></div>
                     <% }); %>
                 </div>
+            
+                <!-- JavaScript to hide the alert after 4 seconds -->
+                <script>
+                    setTimeout(function() {
+                        const errorAlert = document.getElementById('errorAlert');
+                        if (errorAlert) {
+                            errorAlert.style.display = 'none';
+                        }
+                    }, 4000);  // 4000ms = 4 seconds
+                </script>
             <% } %>
             <form action="/<%= action %>" method="post" id="authForm">
                 <% if (action === 'signup') { %>
@@ -78,6 +96,11 @@
                         <label for="email">Email</label>
                         <input type="email" class="input-field" id="email" name="email" placeholder="Enter Email" required>
                         <i class="bx bx-envelope"></i>
+                    </div>
+                    <div class="input-box">
+                        <label for="phone">Phone</label>
+                        <input type="phone" class="input-field" id="phone" name="phone" placeholder="Enter Phone" required>
+                        <i class="bx bx-phone"></i>
                     </div>
                     <div class="input-box">
                         <label for="password">Password</label>
@@ -99,6 +122,11 @@
                         <label for="password">Password</label>
                         <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
                         <i class="bx bx-show" data-target="password" onclick="togglePasswordVisibility(this)"></i>
+                    </div>
+                    <div class="input-box">
+                        <label>
+                            <input type="checkbox" id="rememberMe"> Remember Me
+                        </label>
                     </div>
                 <% } %>
                 <form action="/signup" method="POST">
@@ -128,11 +156,19 @@
                     <span><a href="#">Forgot Password?</a></span>
                 <% } %>
                 </div>
+ 
         </div>
-        <div class="wrapper"></div>
+        
     </div>
-
+ 
     <%- include('partials/bottom_nav') %>
+    <script>
+        // /preloader js styling
+        let preloader = document.querySelector("#preloader");
+        window.addEventListener("load",function(e){
+            preloader.style.display = "none";
+        });
+    </script>
     <script>
         function togglePasswordVisibility(icon) {
             const targetId = icon.getAttribute('data-target');
@@ -149,6 +185,78 @@
                 icon.classList.add('bx-show');
             }
         }
-    </script>    
+    </script>
+    <script>
+        window.embeddedChatbotConfig = {
+        chatbotId: "3y5y_b4ZtgDExQUL8b2_A",
+        domain: "www.chatbase.co"
+        }
+        </script>
+        <script
+        src="https://www.chatbase.co/embed.min.js"
+        chatbotId="3y5y_b4ZtgDExQUL8b2_A"
+        domain="www.chatbase.co"
+        defer>
+        </script>
+        
+<script>
+    // Save data to local storage on signup
+    const authForm = document.getElementById('authForm');
+    authForm.addEventListener('submit', function (e) {
+        if (window.location.pathname.includes('signup')) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            // Save user data to local storage as JSON
+            const userData = { username, email, phone, password };
+            const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+            existingUsers.push(userData);
+            localStorage.setItem('users', JSON.stringify(existingUsers));
+
+            alert('Signup successful! You can now log in.');
+            window.location.href = '/auth?action=login';
+        } else if (window.location.pathname.includes('login')) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Check if "Remember Me" is checked
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            // Retrieve all users from local storage and check for a match
+            const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
+            const matchedUser = storedUsers.find(user => user.username === username && user.password === password);
+
+            if (matchedUser) {
+                alert('Login successful!');
+                if (rememberMe) {
+                    localStorage.setItem('rememberedUsername', username);
+                }
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+    });
+
+    // On page load, check if there's a remembered username
+    window.onload = function() {
+        const rememberedUsername = localStorage.getItem('rememberedUsername');
+        if (rememberedUsername) {
+            document.getElementById('username').value = rememberedUsername;
+            document.getElementById('rememberMe').checked = true;
+        }
+    };
+</script>
+
+
 </body>
 </html>

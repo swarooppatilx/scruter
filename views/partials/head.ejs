@@ -31,6 +31,18 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://scruter.onrender.com" />
     <meta name="google-site-verification" content="_oj6zj-kGPf-RZHyjieJIjyA78UkgO4lh0-4AN7CGLk" />
+    
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TVZP9ZS1B7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TVZP9ZS1B7');
+    </script>
+
+
 
    <!-- Bootstrap CSS -->
    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -40,76 +52,25 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
    <!-- Font Awesome CSS -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS -->
+     <link rel="stylesheet" href="css/global.css">
+     <link rel="stylesheet" href="css/preloader.css">
  
+   <% if (user) { %>
    <style>
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
-    body {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 600;
-    background-color: #EDF4F2;
-}
-
-    .nav-link {
-      margin: 0;
-      border: 2px solid transparent;
-      border-radius: 8px;
-      transition: border-color 0.3s;
-    }
-
-    .nav-link:hover {
-      border-color: #0078d7;
-    }
-
-    .nav-link.active {
-      font-weight: bold;
-      color: #0078d7 !important; /* Highlight color */
-    }
-
-    #search-bar {
-      margin: 0 auto; /* Center the search bar */
-      max-width: 100%; /* Ensure search bar doesn't exceed screen width */
-    }
-
-    /* Mobile styles */
-    @media (max-width: 576px) {
-      .nav-link {
-        margin: 10px 0; /* Adjust spacing for mobile */
-      }
-      #search-bar {
-        width: 95%; /* Wider on mobile */
-      }
-    }
-
-    /* Small laptops and above */
-    @media (min-width: 768px) {
-      .nav-link {
-        margin: 0 15px; /* Adjust spacing for small laptops */
-      }
-      #search-bar {
-        width: 80%; /* Moderate width on tablets */
-      }
-    }
-
-    /* Desktops and above */
-    @media (min-width: 992px) {
-      .nav-link {
-        margin: 0 25px; /* Adjust spacing for desktops */
-      }
-      
-      #search-bar {
-        width: 80%; /* More narrow on desktops */
-      }
-      <% if (user) { %>
       #navbar-links {
         padding-left: 180px;
       }
-      <% } else { %>
-        #navbar-links {
+   </style>
+   <% } else { %>
+   <style>
+      #navbar-links {
         padding-right: 110px;
       }
-      <% } %>
-    }
+   </style>
+   <% } %>
 
+   <style>
     .navbar-b {
       box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
     }
@@ -119,20 +80,44 @@
       left: 25%;
       transform: translateX(-50%);
     }
+   </style>
     
-    <% if (user) { %>
+   <% if (user) { %>
+   <style>
       .nav-link-b {
       display: flex;
       justify-content: center;
       align-items: center;
       color: #14A44D;
     }
-      <% } else { %>
+   </style>
+   <% } else { %>
+   <style>
       .nav-link-b {
       display: flex;
       justify-content: center;
       align-items: center;
       color: #DC4C64;
     }
-      <% } %>
    </style>
+   <% } %>
+       <!-- preloader -->
+       <div id="preloader">
+        <div class="wrapper">
+            <div class="box-wrap">
+                <div class="box one"></div>
+                <div class="box two"></div>
+                <div class="box three"></div>
+                <div class="box four"></div>
+                <div class="box five"></div>
+                <div class="box six"></div>
+            </div>
+        </div>
+      </div>
+      <script>
+        // /preloader js styling
+        let preloader = document.querySelector("#preloader");
+        window.addEventListener("load", function (e) {
+          preloader.style.display = "none";
+        });
+      </script>

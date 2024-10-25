@@ -1,0 +1,182 @@
+:root {
+  --font-family: 'Nunito', sans-serif;
+  --font-weight: 400;
+  --font-size: 16px;
+  --bg-color: #ffffff;
+  --text-color: #000000;
+}
+
+body {
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Dark mode styles */
+.dark-mode {
+  --bg-color: #1c1c1c;
+  --text-color: #ffffff;
+}
+
+.bg-dark {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Footer styles */
+.social-section {
+  padding: 40px 0;
+  border-top: 1px solid #e0e0e0; /* Light border color */
+  text-align: center;
+}
+
+.social-section h4 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.social-section p {
+  font-size: 1.1rem;
+  color: #333; /* Default text color */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+body.dark-mode .social-section p {
+  color: #fff; /*dark-mode text color*/
+}
+
+/* Links hover effects */
+.quick-link,
+.help-desk {
+  display: inline-block;
+  transition:
+    transform 0.3s ease,
+    text-decoration 0.3s ease;
+}
+
+.quick-link:hover,
+.help-desk:hover {
+  transform: scale(1.1);
+  text-decoration: underline;
+}
+
+/* Footer list styles */
+.social-section ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.social-section ul li {
+  margin-bottom: 10px;
+}
+
+.social-section ul li a {
+  text-decoration: none;
+  color: #666; /* Default link color */
+  transition: color 0.3s ease;
+}
+
+.social-section ul li a:hover {
+  color: #007bff; /* Hover color */
+}
+
+/* Dark mode link colors */
+body.dark-mode .social-section ul li a {
+  color: #fff !important; /* Light color for dark mode */
+}
+
+body.dark-mode .social-section ul li a:hover {
+  color: #ffffff; /* Highlight color for dark mode */
+}
+
+box.dark-mode {
+  background-color: #000000;
+}
+
+/* Social media icons */
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #fff; /* Light background for icons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.icon-circle:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.icon-circle a {
+  color: #333; /* Default icon color */
+  font-size: 1.8rem;
+  transition: color 0.3s ease;
+}
+
+.icon-circle a:hover {
+  color: #007bff; /* Icon hover color */
+}
+
+/* Dark mode social media icon colors */
+body.dark-mode .icon-circle {
+  background-color: #ddd; /* Dark background for icons */
+}
+
+body.dark-mode .icon-circle:hover {
+  background-color: #fff !important;
+}
+
+body.dark-mode .icon-circle a {
+  color: #ddd; /* Light color for dark mode */
+}
+
+/* Gap between the social media icons */
+.d-flex {
+  gap: 15px;
+}
+
+/* Copyright text styling */
+.copyright-text {
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #666; /* Default copyright color */
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+  .nav-link {
+    margin: 10px 0; /* Adjust spacing for mobile */
+  }
+  #search-bar {
+    width: 95%; /* Wider on mobile */
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-link {
+    margin: 0 15px; /* Adjust spacing for small laptops */
+  }
+  #search-bar {
+    width: 80%; /* Moderate width on tablets */
+  }
+}
+
+@media (min-width: 992px) {
+  .nav-link {
+    margin: 0 25px; /* Adjust spacing for desktops */
+  }
+  #search-bar {
+    width: 80%; /* More narrow on desktops */
+  }
+}

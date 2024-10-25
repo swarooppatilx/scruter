@@ -1,0 +1,65 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <%- include('partials/head') %> 
+</head> 
+<body> 
+    <%- include('partials/navbar') %> 
+    <div id="user-dashboard" class="container d-flex flex-column align-items-center justify-content-center mb-5 pb-5 mt-5 pt-5" style="z-index: 100;background-color: rgb(243, 244, 246)"> 
+        <h1 class="text-center mb-4 display-4">Welcome to Your Dashboard, <strong><%= user.username %></strong>!</h1> 
+        <p class="text-center lead">Your registered email: <strong><%= user.email %></strong></p> 
+        <p class="text-center lead">Phone Number: <strong><%= user.phone %></strong></p>
+        <p class="text-center lead">Plan: <strong>Basic</strong></p>
+    </div>
+    
+    <div class="container my-5">
+        <div class="card shadow">
+            <div class="card-body">
+                <h2 class="text-2xl font-semibold mb-4 text-center">Change Your User Data</h2>
+    
+                <form id="personal-info-form" method="POST" action="/update-personal-info" class="mb-4">
+                    <div class="mb-3">
+                        <label for="newUsername" class="form-label">New Username</label>
+                        <input type="text" id="newUsername" name="newUsername" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">New Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Info</button>
+                </form>
+                <h2 class="text-2xl font-semibold mb-4 text-center">Change Password</h2>
+                <form id="password-change-form" method="POST" action="/change-password" class="mb-4">
+                    <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Current Password</label>
+                        <input type="password" id="currentPassword" name="currentPassword" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" id="newPassword" name="newPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Change Password</button>
+                </form>
+                <h2 class="text-2xl font-semibold mb-4 text-center">Update Contact Information</h2>
+                <form id="contact-info-form" method="POST" action="/update-contact-info" class="mb-4">
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Update Contact</button>
+                </form>
+            </div>
+        </div>
+    </div>
+  
+    <%- include('partials/footer') %> 
+
+    <script>
+      // /preloader js styling
+     let preloader = document.querySelector("#preloader");
+        window.addEventListener("load",function(e){
+                preloader.style.display = "none";
+    });
+    </script>
+</body> 
+</html> 

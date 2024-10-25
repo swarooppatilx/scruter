@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+    <style>
+      /* Scoped styles for contributors page */
+      .contributors-content * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .contributors-content {
+        font-family: Arial, sans-serif;
+        background-color: #f9fafb;
+        color: #1f2937;
+        line-height: 1.5;
+      }
+      .cta-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background-color: white;
+        color: #2563eb;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 9999px;
+        transition: background-color 0.3s ease;
+      }
+
+      .cta-button:hover {
+        background-color: #bfdbfe;
+      }
+
+      .contributors-content .hero {
+        height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background-color: #bfdbfe;
+        color: white;
+        text-align: center;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+        max-width: 64rem;
+        padding: 0 1rem;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .hero p {
+        font-size: 1.5rem;
+        color: #bfdbfe;
+        margin-bottom: 2rem;
+      }
+
+      .stats,
+      .contributors {
+        padding: 4rem 1rem;
+      }
+
+      .stats {
+        background-color: white;
+      }
+
+      .contributors {
+        background-color: #f3f4f6;
+      }
+
+      .stats h2,
+      .contributors h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .stats-container,
+      .contributors-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 80rem;
+        margin: 0 auto;
+      }
+
+      .stat-card,
+      .contributor-card {
+        background-color: white;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .contributor-card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      .contributor-card img {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        margin: 0 auto 1rem;
+        border: 4px solid #3b82f6;
+      }
+
+      .card-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: inherit; /* Inherit color for the card text */
+        width: 100%; /* Ensure the entire card is clickable */
+      }
+
+      .card-link:hover {
+        color: inherit; /* Maintain color on hover */
+      }
+
+      .stat-card h3 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #1f2937;
+      }
+
+      .stat-card p {
+        color: #6b7280;
+      }
+
+      .contributor-card h3 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .contributor-card p {
+        font-size: 0.875rem;
+        color: #3b82f6;
+        margin-bottom: 1rem;
+      }
+
+      .contributor-card .contributions {
+        display: inline-block;
+        background-color: #dbeafe;
+        color: #1e40af;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+      }
+
+      .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+      }
+
+      .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3b82f6;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .contribute {
+        background-color: #2563eb;
+        color: white;
+        padding: 4rem 1rem;
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      .contribute h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+
+      .contribute p {
+        font-size: 1.25rem;
+        color: #bfdbfe;
+        margin-bottom: 2rem;
+      }
+
+      @media (min-width: 640px) {
+        .hero h1 {
+          font-size: 3.75rem;
+        }
+
+        .hero p {
+          font-size: 1.875rem;
+        }
+      }
+      /* Scroll Progress Bar */
+      #progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 6px;
+        background-color: #2e8030;
+        width: 0%;
+        z-index: 9999;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="progress-bar"></div>
+    <%- include('partials/navbar') %>
+
+    <div class="contributors-content">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h1 id="heroTitle">Our Amazing Contributors</h1>
+          <p id="heroSubtitle">
+            Shaping the future of scruter, one commit at a time
+          </p>
+          <a href="#contribute" class="cta-button">Become a Contributor</a>
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="stats">
+        <h2>Project Statistics</h2>
+        <div id="stats" class="stats-container">
+          <!-- Stat Cards will be inserted here -->
+        </div>
+      </section>
+
+      <!-- Contributors Grid -->
+      <section class="contributors">
+        <h2>Meet Our Contributors</h2>
+        <div id="contributors" class="contributors-container">
+          <div id="loading" class="loading">
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const contributorsContainer = document.getElementById('contributors');
+        const statsContainer = document.getElementById('stats');
+        const loadingIndicator = document.getElementById('loading');
+
+        // Fetch contributors and repo stats
+        async function fetchData() {
+          loadingIndicator.style.display = 'flex';
+
+          try {
+            const contributorsResponse = await axios.get(
+              'https://api.github.com/repos/swarooppatilx/scruter/contributors'
+            );
+            const contributorsData = contributorsResponse.data;
+
+            const repoResponse = await axios.get(
+              'https://api.github.com/repos/swarooppatilx/scruter'
+            );
+            const repoData = repoResponse.data;
+
+            populateStats(repoData, contributorsData);
+            populateContributors(contributorsData);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          } finally {
+            loadingIndicator.style.display = 'none';
+          }
+        }
+
+        function populateStats(repoData, contributors) {
+          const stats = [
+            { label: 'Contributors', value: contributors.length },
+            {
+              label: 'Total Contributions',
+              value: contributors.reduce(
+                (sum, contributor) => sum + contributor.contributions,
+                0
+              ),
+            },
+            { label: 'GitHub Stars', value: repoData.stargazers_count },
+            { label: 'Forks', value: repoData.forks_count },
+          ];
+
+          statsContainer.innerHTML = '';
+          stats.forEach((stat, index) => {
+            const statCard = document.createElement('div');
+            statCard.className = 'stat-card';
+            statCard.innerHTML = `
+                        <h3>${stat.value}</h3>
+                        <p>${stat.label}</p>
+                    `;
+            statsContainer.appendChild(statCard);
+          });
+        }
+
+        function populateContributors(contributors) {
+          contributorsContainer.innerHTML = '';
+          contributors.forEach(contributor => {
+            const contributorCard = document.createElement('div');
+            contributorCard.className = 'contributor-card';
+            contributorCard.innerHTML = `
+                        <a href="${contributor.html_url}" target="_blank" class="card-link">
+                            <img src="${contributor.avatar_url}" alt="${contributor.login}" />
+                            <h3>${contributor.login}</h3>
+                            <div class="contributions">${contributor.contributions} contributions</div>
+                        </a>
+                    `;
+            contributorsContainer.appendChild(contributorCard);
+          });
+        }
+
+        fetchData();
+      });
+    </script>
+    <!-- Scroll Progress Script -->
+    <script>
+      window.onscroll = function () {
+        var winScroll =
+          document.body.scrollTop || document.documentElement.scrollTop;
+        var height =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById('progress-bar').style.width = scrolled + '%';
+      };
+    </script>
+    <%- include('partials/footer') %>
+    <%- include('partials/bottom_nav') %>
+  </body>
+</html>

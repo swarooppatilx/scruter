@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <%- include('partials/head') %>
+   
 </head>
 <body>
     <%- include('partials/navbar') %>
@@ -16,21 +17,39 @@
                                 <%= routeName === 'food' ? 'Share Food' : routeName === 'house' ? 'Post House Ad' : 'Sell Item' %>
                             </h2>
                             <form action="/<%= routeName %>" method="post" enctype="multipart/form-data" id="itemForm">
-                                <div class="mb-3">
+                                <div class="mb-3"> <!-- Item Name area -->
                                     <label for="title" class="form-label">
                                         <i class="fa-solid fa-<%= routeName === 'food' ? 'utensils' : routeName === 'house' ? 'house-user' : 'cart-shopping' %> me-2"></i>
                                         <%= routeName === 'food' ? 'Food Name' : routeName === 'house' ? 'House Name' : 'Item Name' %>:
                                     </label>
                                     <input type="text" class="form-control" id="title" name="title" placeholder="Enter <%= routeName === 'food' ? 'Food' : routeName === 'house' ? 'House' : 'Item' %> Name" required>
                                 </div>
-                                <div class="mb-3">
+
+                                <div class="mb-3"> <!-- Item Image area -->
                                     <label for="image" class="form-label">
                                         <i class="fa-solid fa-image me-2"></i><%= routeName === 'food' ? 'Food' : routeName === 'house' ? 'House' : 'Item' %> Image:
                                     </label>
                                     <input type="file" class="form-control" id="image" name="image" onchange="previewImage()" required>
                                     <img id="img-preview" class="img-fluid d-none mt-3" style="max-width: 200px;" />
                                 </div>
-                                <div class="mb-3">
+                                
+                                <!-- New Email Input -->
+                                <div class="mb-3"> <!-- Email area -->
+                                    <label for="email" class="form-label">
+                                        <i class="fa-solid fa-envelope me-2"></i>Email:
+                                    </label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" required>
+                                </div>
+
+                                <!-- New Phone Number Input -->
+                                <div class="mb-3"> <!-- Phone Number area -->
+                                    <label for="phone" class="form-label">
+                                        <i class="fa-solid fa-phone me-2"></i>Phone Number:
+                                    </label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Phone Number" required>
+                                </div>
+
+                                <div class="mb-3"> <!-- Location area -->
                                     <label for="location" class="form-label">
                                         <i class="fa-solid fa-map-marker-alt me-2"></i>Location:
                                     </label>
@@ -41,28 +60,32 @@
                                     <input type="hidden" id="latitude" name="latitude" required>
                                     <input type="hidden" id="longitude" name="longitude" required>
                                 </div>
+
                                 <% if (routeName === 'house') { %>
-                                <div class="mb-3">
+                                <div class="mb-3"> <!-- House Rent area  (For House) -->
                                     <label for="rent" class="form-label">
                                         <i class="fa-solid fa-indian-rupee-sign me-2"></i>House Rent:
                                     </label>
                                     <input type="number" class="form-control" id="rent" name="rent" placeholder="Enter Rent" required>
                                 </div>
                                 <% } %>
+
                                 <% if (routeName === 'market') { %>
-                                <div class="mb-3">
+                                <div class="mb-3"> <!-- Item Price (For Market) -->
                                     <label for="price" class="form-label">
                                         <i class="fa-solid fa-indian-rupee-sign me-2"></i>Item Price:
                                     </label>
                                     <input type="number" class="form-control" id="price" name="price" placeholder="Enter Item Price" required>
                                 </div>
                                 <% } %>
-                                <div class="mb-3">
+
+                                <div class="mb-3">  <!-- Description area -->
                                     <label for="description" class="form-label">
                                         <i class="fa-solid fa-align-left me-2"></i>Description:
                                     </label>
                                     <textarea class="form-control" id="description" name="description" placeholder="Enter Description" required></textarea>
                                 </div>
+
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary" id="submitButton">
                                         <i class="fa-solid fa-paper-plane me-2"></i>Submit
@@ -78,8 +101,27 @@
             </div>
         </div>
     </section>
-    <script src="/search-auto.js"></script>
-    <script src="/client-validation.js"></script>
+    <script src="js/search-auto.js"></script>
+    <script src="js/client-validation.js"></script>
+    <script>
+        // /preloader js styling
+        let preloader = document.querySelector("#preloader");
+        window.addEventListener("load",function(e){
+            preloader.style.display = "none";
+        });
+    </script>
+    <script>
+        window.embeddedChatbotConfig = {
+        chatbotId: "3y5y_b4ZtgDExQUL8b2_A",
+        domain: "www.chatbase.co"
+        }
+        </script>
+        <script
+        src="https://www.chatbase.co/embed.min.js"
+        chatbotId="3y5y_b4ZtgDExQUL8b2_A"
+        domain="www.chatbase.co"
+        defer>
+        </script>
     <%- include('partials/bottom_nav') %>
 </body>
 </html>
