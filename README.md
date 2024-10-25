@@ -49,6 +49,7 @@ Scruter is a local classifieds and community platform where people can connect, 
 <br />
 
 ## <div align="center">This project is now OFFICIALLY accepted for✔</div>
+
 <table>
 
    <tr>
@@ -68,7 +69,6 @@ Scruter is a local classifieds and community platform where people can connect, 
    </tr>
 
 </table>
-
 
 ## <div align="center">Overview 📌</div>
 
