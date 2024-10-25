@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://scruter.vercel.app/</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/house</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/food</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/market</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/auth?action=login</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/auth</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/team</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/about</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/privacy-policy</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/terms-page</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/contributors</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/faq</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://scruter.vercel.app/auth?action=signup</loc>
+  <lastmod>2024-10-25T21:09:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>
