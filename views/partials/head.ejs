@@ -55,9 +55,67 @@
     <!-- Custom CSS -->
      <link rel="stylesheet" href="css/global.css">
      <link rel="stylesheet" href="css/preloader.css">
- 
+ <style>
+  /* Stylish Scrollbar with Smooth Corners and Animations for WebKit Browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: linear-gradient(180deg, #f3f4f6, #e5e7eb);
+    border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #14A44D, #DC4C64);
+    border-radius: 12px;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border: 3px solid #f3f4f6;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #0c8030, #b82d44);
+    transform: scale(1.1); /* Slightly enlarges the thumb on hover */
+}
+
+/* Animations for Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #14A44D #f3f4f6;
+}
+
+/* Track */
+*::-moz-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 12px;
+}
+
+/* Thumb */
+*::-moz-scrollbar-thumb {
+    background: #131414;
+    border-radius: 12px;
+    border: 3px solid #f3f4f6;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover Effect */
+*::-moz-scrollbar-thumb:hover {
+    background: #0c8030;
+    transform: scale(1.1); /* Slightly enlarges the thumb on hover */
+}
+
+/* Smooth Scrolling Animation */
+html {
+    scroll-behavior: smooth;
+}
+
+ </style>
    <% if (user) { %>
    <style>
+    
       #navbar-links {
         padding-left: 180px;
       }
