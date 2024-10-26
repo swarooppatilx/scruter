@@ -20,6 +20,55 @@ Scruter is a local classifieds and community platform where people can connect, 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
 </div>
+<table align="center">
+    <thead align="center">
+        <tr border: 2px;>
+            <td><b>🌟 Stars</b></td>
+            <td><b>🍴 Forks</b></td>
+            <td><b>🐛 Issues</b></td>
+            <td><b>🔔 Open PRs</b></td>
+            <td><b>🔕 Close PRs</b></td>
+            <td><b>🌐Contributors</b></td>
+            <td><b>📂 Repo Size</b></td>
+            <td><b>🆔 LIcense</b></td>
+        </tr>
+     </thead>
+    <tbody>
+         <tr>
+            <td><img alt="Stars" src="https://img.shields.io/github/stars/swarooppatilx/scruter?style=flat&logo=github"/></td>
+             <td><img alt="Forks" src="https://img.shields.io/github/forks/swarooppatilx/scruter?style=flat&logo=github"/></td>
+            <td><img alt="Issues" src="https://img.shields.io/github/issues/swarooppatilx/scruter?style=flat&logo=github"/></td>
+            <td><img alt="Open Pull Requests" src="https://img.shields.io/github/issues-pr/swarooppatilx/scruter?style=flat&logo=github"/></td>
+           <td><img alt="Close Pull Requests" src="https://img.shields.io/github/issues-pr-closed/swarooppatilx/scruter?style=flat&color=green&logo=github"/></td>
+           <td><img alt="Contributors" src="https://img.shields.io/github/contributors/swarooppatilx/scruter?style=flat&color=green&logo=github"/></td>             
+           <td><img alt="Repo Size" src="https://img.shields.io/github/repo-size/swarooppatilx/scruter?style=flat&color=green&logo=github"/></td>           
+           <td><img alt="License" src="https://img.shields.io/github/license/swarooppatilx/scruter?style=flat&color=green&logo=github"/></td>
+        </tr>
+    </tbody>
+</table>
+<br />
+
+## <div align="center">This project is now OFFICIALLY accepted for✔</div>
+
+<table>
+
+   <tr>
+      <th>Event Logo</th>
+      <th>Event Name</th>
+      <th>Event Description</th>
+   </tr>
+   <tr>
+      <td><img src="https://github.com/Annapoornaaradhya/BuddyTrail/blob/Video/img/gssocextd1.jpg" width="600" height="auto" loading="lazy" alt="GSSoC 24"/></td>
+      <td>GirlScript Summer of Code 2024</td>
+      <td>GirlScript Summer of Code is a three-month-long Open Source Program conducted every summer by GirlScript Foundation.</td>
+   </tr>
+   <tr>
+     <td><img src="https://github.com/neeru24/Connect_icons/blob/main/hacktober.png" width="300" height="auto" loading="lazy" alt="Hacktoberfest 2024"/</td>
+      <td>Hacktoberfest 2024</td>
+      <td>Hacktoberfest is a month-long celebration of open source software run by DigitalOcean, GitHub, and Twilio.</td>
+   </tr>
+
+</table>
 
 ## <div align="center">Overview 📌</div>
 
@@ -44,12 +93,34 @@ Scruter is a local classifieds and community platform where people can connect, 
 
 Scruter is built using the following technologies:
 
-- **Node.js**
-- **Express.js**
-- **MongoDB**
-- **EJS (Embedded JavaScript templating)**
-- **Cloudinary (Image hosting)**
-- **Bootstrap (CSS framework)**
+  <table align="center">
+    <thead align="center">
+        <tr border: 2px;>
+            <td><b>HTML</b></td>
+            <td><b>CSS</b></td>
+            <td><b>Javascript</b></td>
+            <td><b>Node.js</b></td>
+            <td><b>Express.js</b></td>
+            <td><b>MongoDB</b></td>
+            <td><b>EJS</b></td>
+            <td><b>Cloudinary</b></td>
+            <td><b>Bootstrap</b></td>
+        </tr>
+     </thead>
+    <tbody>
+         <tr>
+            <td><img src="https://skillicons.dev/icons?i=html&theme=dark" /></td>
+            <td><img src="https://skillicons.dev/icons?i=css&theme=dark" /></td>
+            <td><img src="https://skillicons.dev/icons?i=javascript&theme=dark" /></td>
+             <td><img src="https://skillicons.dev/icons?i=nodejs&theme=dark" /></td>
+            <td><img src="https://skillicons.dev/icons?i=expressjs&theme=dark" /></td>
+            <td><img src="https://skillicons.dev/icons?i=mongodb&theme=dark"/></td>
+            <td><img src="https://static-00.iconduck.com/assets.00/file-type-ejs-icon-2048x1151-hdkbavbz.png" width="50" height="50" border-radius="50%"/></td>
+           <td><img src="https://soshace.com/wp-content/uploads/2023/04/cloudinary-879.png" width="80" height="50" border-radius="50%"/></td>
+           <td><img src="https://skillicons.dev/icons?i=bootstrap&theme=dark" /></td>
+        </tr>
+    </tbody>
+</table>
 
 <!-- Prerequisites Section -->
 

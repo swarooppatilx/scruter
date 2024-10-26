@@ -359,9 +359,15 @@ app.get('/terms', (req, res) => {
   });
 });
 
+app.get('/terms-page', (req, res) => {
+  res.render('terms-page', {
+    activeLink: 'terms-page', // You can customize this based on your layout
+  });
+});
+
 app.get('/faq', (req, res) => {
   res.render('faq', {
-    activeLink: 'faq' // You can customize this based on your layout
+    activeLink: 'faq', // You can customize this based on your layout
   });
 });
 

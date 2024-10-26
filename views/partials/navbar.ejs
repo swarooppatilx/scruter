@@ -219,22 +219,9 @@ a {
         <button id="darkModeToggle" class="gsap" style="margin-right: 10px; ">
           <img src="https://img.icons8.com/?size=100&id=45475&format=png&color=000000" class="toggleMode" id="toggleMode" alt="">
         </button>
+        
         <% if (user) { %>
-          <div class="d-flex align-items-start">
-            <!-- User Dropdown -->
-            <div class="dropdown me-3">
-              <button
-                class="btn btn-outline-primary dropdown-toggle"
-                type="button"
-                id="userDropdownMenu"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Welcome, <%= user.username %>!
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenu">
-                <li>
-                  <div class="dropdown">
+                   <div class="dropdown">
                     <button
                       class="btn btn-success dropdown-toggle text-light"
                       type="button"
@@ -242,9 +229,14 @@ a {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <i class="fa-solid fa-marker me-2"></i>Create Post
+                    <%= user.username %>!
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="createBlogDropdownMenu">
+                      <li>
+                        <a class="dropdown-item" href="/dashboard">
+                          <i class="fa-solid fa-user me-2"></i>Profile
+                        </a>
+                      </li>
                       <li>
                         <a class="dropdown-item" href="/house/form">
                           <i class="fa-solid fa-home me-2"></i>House Ad
@@ -261,29 +253,40 @@ a {
                         </a>
                       </li>
                       <li>
-                        <a class="dropdown-item" href="/blog/form">
-                          <i class="fa-solid fa-blog me-2"></i>Create Blog
+                        <a class="gsap dropdown-item text-danger mt-2" href="/logout">
+                          <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
                         </a>
                       </li>
                     </ul>
                   </div>
-                </li>
-                <li>
-                  <a class="gsap dropdown-item text-danger mt-2" href="/logout">
-                    <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        <% } else { %>
-          <a class="btn btn-outline-success" href="/auth?action=login">
-            <i class="fa-solid fa-user me-2"></i>Login
-          </a>
-        <% } %>
+                  <% } else { %>
+                  <div class="dropdown">
+                    <a class="btn btn-outline-success" href="/auth?action=login">
+                      <i class="fa-solid fa-user me-2"></i>Login
+                    </a>
+                  </div>
+                  <% } %>
+
       </div>
     </div>
   </div>
+  <div class="gtranslate_wrapper"></div>
+
+      <script>
+    
+      window.gtranslateSettings = {
+        "default_language":"en",
+        "detect_browser_language":true,
+        "wrapper_selector":".gtranslate_wrapper"
+      }
+    
+      </script>
+    
+      <script 
+        src="https://cdn.gtranslate.net/widgets/latest/float.js"
+        defer
+      ></script>
+    
 </nav>
 
 
