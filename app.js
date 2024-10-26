@@ -371,6 +371,12 @@ app.get('/faq', (req, res) => {
   });
 });
 
+app.get('/help', (req, res) => {
+  res.render('help', {
+    activeLink: 'help', // You can customize this based on your layout
+  });
+});
+
 app.get('/privacy-policy', (req, res) => {
   res.render('privacy-policy', {
     activeLink: 'privacy-policy', // You can customize this based on your layout
