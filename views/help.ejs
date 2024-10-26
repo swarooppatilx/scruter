@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+    <style>
+      /* Global Light Mode Styles */
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9fafb;
+        color: #1f2937;
+        line-height: 1.6;
+      }
+
+      .help-content {
+        padding: 3rem 2rem;
+        max-width: 800px;
+        margin: 2rem auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .help-section h1 {
+        font-size: 2.8rem;
+        font-weight: bold;
+        color: #2563eb;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #2563eb;
+        padding-bottom: 0.5rem;
+      }
+
+      .help-section h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #1f2937;
+      }
+
+      .help-section p {
+        margin-bottom: 1.5rem;
+        text-align: justify;
+        line-height: 1.8;
+      }
+
+      .faq-item {
+        margin-top: 1.5rem;
+      }
+
+      .faq-question {
+        font-weight: bold;
+        cursor: pointer;
+        padding: 0.5rem 0;
+        color: #2563eb;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .faq-answer {
+        display: none;
+        padding: 0.5rem 0;
+        color: #4b5563;
+      }
+
+      /* Call-to-Action Button */
+      .cta-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background-color: #2563eb;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 9999px;
+        transition:
+          background-color 0.3s ease,
+          transform 0.3s ease;
+        margin-top: 2rem;
+        text-align: center;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .cta-button:hover {
+        background-color: #1d4ed8;
+        transform: scale(1.05);
+      }
+
+      /* Dark Mode Styles */
+      .dark-mode {
+        background-color: #1c1c1c;
+        color: #f9fafb;
+      }
+
+      .dark-mode .help-content {
+        background-color: #374151;
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+      }
+
+      .dark-mode .help-section h1 {
+        color: #60a5fa;
+        border-bottom-color: #60a5fa;
+      }
+
+      .dark-mode .help-section h2 {
+        color: #9ca3af; /* Darkened color for better visibility */
+      }
+
+      .dark-mode .faq-question {
+        color: #60a5fa;
+        border-bottom-color: #4b5563;
+      }
+
+      .dark-mode .faq-answer {
+        color: #d1d5db;
+      }
+
+      .dark-mode .cta-button {
+        background-color: #60a5fa;
+      }
+
+      .dark-mode .cta-button:hover {
+        background-color: #3b82f6;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="progress-bar"></div>
+    <%- include('partials/navbar') %>
+
+    <div class="help-content">
+      <section class="help-section">
+        <h1>Help Center</h1>
+        <p>
+          Welcome to our Help Center! Our website is designed to offer a
+          comprehensive platform where users can manage and interact with our
+          services efficiently. Whether you’re here to browse resources, manage
+          your account, or contact support, we are here to assist.
+        </p>
+
+        <h2>What is This Site About?</h2>
+        <p>
+          Our platform is built to help users easily buy, sell, and find local
+          products and services. By connecting communities through ads,
+          listings, and an intuitive interface, our platform makes local
+          commerce accessible and convenient for everyone. Whether you're
+          looking for housing, services, or items for sale, we’re here to
+          connect you with your local community.
+        </p>
+
+        <h2>Getting Started</h2>
+        <p>
+          New to our platform? Start by creating an account and exploring
+          features designed to help you easily buy, sell, and find local
+          products and services. Discover how to connect with your community
+          through our ads and listings, and make the most of our guides to learn
+          how to navigate each section effectively for a seamless experience.
+        </p>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleAnswer(this)">
+            How do I reset my password?
+          </div>
+          <div class="faq-answer">
+            To reset your password, go to the login page and click on "Forgot
+            Password." Follow the instructions to reset your password through
+            your registered email.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleAnswer(this)">
+            Where can I view my account settings?
+          </div>
+          <div class="faq-answer">
+            Navigate to your profile by clicking on your avatar in the top-right
+            corner, and select "Account Settings" from the dropdown menu.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleAnswer(this)">
+            How do I contact customer support?
+          </div>
+          <div class="faq-answer">
+            You can reach our support team through the "Contact Us" page. Fill
+            in the form, and we will respond within 24-48 hours.
+          </div>
+        </div>
+
+        <a href="/contact" class="cta-button">Contact Support</a>
+      </section>
+    </div>
+
+    <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>
+
+    <script>
+      function toggleAnswer(element) {
+        const answer = element.nextElementSibling;
+        answer.style.display =
+          answer.style.display === 'block' ? 'none' : 'block';
+      }
+    </script>
+  </body>
+</html>
