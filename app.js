@@ -390,6 +390,20 @@ app.get('/market/form', ensureAuthenticated, (req, res) => {
   res.render('form', { routeName: 'market', errors: [], activeLink: 'market' });
 });
 
+app.get('/:type/edit/:id', ensureAuthenticated, async (req, res) => {
+  const { id, type } = req.params
+  if (!['food', 'house', 'market'].includes(type)) return res.status(400).render('400');
+
+  const Model = type === 'food' ? Food : type === 'house' ? House : Market
+  const item = await Model.findById(id).catch(() => { });
+  if (!item) return res.status(404).render('404');
+
+  if (req.session.user.username !== item.username)
+    return res.status(500).render('500');
+
+  res.render("edit", { item, type, activeLink: type });
+})
+
 // Handle search and display for houses
 app.get('/house', async (req, res) => {
   try {
@@ -482,6 +496,49 @@ app.post(
     }
   }
 );
+
+app.post(
+  '/edit/:type/:id',
+  upload.single('image'),
+  [
+    body('title').notEmpty().withMessage('Title is required'),
+    body('location').notEmpty().withMessage('Location is required'),
+    body('latitude').notEmpty().withMessage('Latitude is required'),
+    body('longitude').notEmpty().withMessage('Longitude is required'),
+    body('description').notEmpty().withMessage('Description is required'),
+    body('email').isEmail().withMessage('Email is required and must be valid'),
+    body('phone').notEmpty().withMessage('Phone number is required'),
+    body('rent').custom((value, { req }) => req.params.type === 'house' ? value !== '' && !isNaN(value) : true),
+    body('price').custom((value, { req }) => req.params.type === 'market' ? value !== '' && !isNaN(value) : true),
+  ],
+  async (req, res) => {
+    const { type, id } = req.params;
+    if (!['food', 'house', 'market'].includes(type)) return res.status(400).render('400');
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).render(`/edit/${type}/${id}`, {
+      type: req.params.type,
+      errors: errors.array(),
+      activeLink: req.params.activeLink,
+    });    
+
+    const Model = type === 'food' ? Food : type === 'house' ? House : Market
+    const item = await Model.findById(id).catch(() => { });
+    if (!item) return res.status(404).render('404');
+
+    if (req.session.user.username !== item.username)
+      return res.status(500).render('500');
+
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      item.image = result.secure_url;
+    }
+
+    Object.assign(item, req.body);
+    await item.save();
+
+    return res.redirect(`/${type}`);
+  })
 
 // Handle search and display for market
 app.get('/market', async (req, res) => {
@@ -707,6 +764,7 @@ app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
     res.status(500).render('500');
   }
 });
+
 
 // 404 Error Handler
 app.use((req, res) => {
