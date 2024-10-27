@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+    <style>
+        /* Scoped styles for terms and conditions page */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+            background-color: #f9fafb; /* Light background */
+            color: #1f2937; /* Dark text color */
+            line-height: 1.6;
+        }
+        .terms-content {
+            padding: 3rem 2rem; /* More padding for spacious layout */
+            max-width: 800px; /* Limit the width for better readability */
+            margin: 2rem auto; /* Center the content with some margin */
+            background-color: #ffffff; /* White background for content area */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #2563eb; /* Button color */
+            color: white; /* White text */
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 9999px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 2rem; /* More margin for spacing */
+            text-align: center; /* Center text in button */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); /* Button shadow */
+        }
+        .cta-button:hover {
+            background-color: #1d4ed8; /* Darker shade on hover */
+            transform: scale(1.05); /* Scale up on hover */
+        }
+        .terms-section {
+            margin-top: 2rem;
+        }
+        .terms-section h1 {
+            font-size: 2.8rem; /* Responsive heading size */
+            font-weight: bold;
+            color: #2563eb; /* Color for the main heading */
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #2563eb; /* Underline effect */
+            padding-bottom: 0.5rem; /* Space under the heading */
+        }
+        .terms-section h2 {
+            font-size: 2rem; /* Section heading size */
+            font-weight: bold;
+            margin-bottom: 0.5rem; /* Space between headings */
+            color: #1f2937; /* Dark color for subheadings */
+        }
+        .terms-section p {
+            margin-bottom: 1.5rem; /* More space between paragraphs */
+            text-align: justify; /* Justify text for better readability */
+            line-height: 1.8; /* Increased line height for clarity */
+        }
+        @media (min-width: 640px) {
+            .terms-section h1 {
+                font-size: 3rem; /* Larger heading for wider screens */
+            }
+        }
+        /* Scroll Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 6px;
+            background-color: #2e8030; /* Progress bar color */
+            width: 0%; /* Initial width */
+            z-index: 9999;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="progress-bar"></div>
+    <%- include('partials/navbar') %>
+
+    <div class="terms-content">
+        <!-- Terms and Conditions Main Heading -->
+        <section class="terms-section">
+            <h1>Terms and Conditions</h1>
+            <p>Please read these terms and conditions carefully before using our service. These terms outline your rights and responsibilities when using our platform.</p>
+
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or using the service, you agree to be bound by these terms. This acceptance applies to all visitors, users, and others who access or use the service. If you are using the service on behalf of a company or organization, you represent that you have the authority to bind that entity to these terms, in which case the terms "you" and "your" will refer to that entity.</p>
+
+            <h2>2. Modifications to Terms</h2>
+            <p>We reserve the right to modify these terms at any time. Changes will be effective immediately upon posting the revised terms on our website. Your continued use of the service after any such changes constitutes your acceptance of the new terms. It is your responsibility to review these terms periodically for any updates.</p>
+
+            <h2>3. User Responsibilities</h2>
+            <p>You agree to use the service in compliance with all applicable laws and regulations. You are responsible for your conduct and any content you provide while using the service. You must not use the service for any illegal or unauthorized purpose, and you agree to comply with all applicable local, state, national, and international laws.</p>
+
+            <h2>4. Limitation of Liability</h2>
+            <p>Our liability is limited to the maximum extent permitted by law. In no event shall we be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, use, goodwill, or other intangible losses, arising out of or related to your access to or use of (or inability to access or use) the service.</p>
+
+            <h2>5. Privacy Policy</h2>
+            <p>We are committed to protecting your privacy. Our privacy policy explains how we collect, use, and disclose your information. By using our service, you consent to the collection and use of information in accordance with our privacy policy. We encourage you to review the privacy policy to understand our practices regarding your personal data.</p>
+
+            <h2>6. Payment Terms</h2>
+            <p>All payments must be made in full prior to service delivery. Payment methods accepted include credit cards and PayPal. You agree to provide accurate and complete payment information and to promptly update any information to keep your account current.</p>
+
+            <h2>7. Cancellation Policy</h2>
+            <p>Users may cancel their subscription at any time. Refunds will be processed according to our refund policy, which outlines the conditions under which refunds will be issued. To cancel your subscription, please follow the cancellation instructions provided in your account settings.</p>
+
+            <h2>8. Contact Us</h2>
+            <p>If you have any questions about these terms, please contact us. Our customer support team is available to assist you.</p>
+        </section>
+    </div>
+
+    <%- include('partials/footer') %>
+    <%- include('partials/bottom_nav') %>
+</body>
+</html>
