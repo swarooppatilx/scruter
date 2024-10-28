@@ -10,6 +10,21 @@
 Scruter is a local classifieds and community platform where people can connect, buy, sell, and exchange services.
 </p>
 
+
+
+## Table of Contents
+
+- [Join our Discord Server](#join-our-discord-server)
+- [Overview 📌](#overview-📌)
+- [Live Demo 🎥](#live-demo-🎥)
+- [Technologies Used](#technologies-used)
+- [Prerequisites 👈🏻](#prerequisites-👈🏻)
+- [Installation 🛠️](#installation-🛠️)
+- [Contributing 🌟](#contributing-🌟)
+- [License 📜](#license-📜)
+- [Project Admin ⚡](#project-admin-⚡)
+- [Additional Tips 🔍](#additional-tips-🔍)
+
 ## <div align="center">Join our Discord Server</div>
 
 <div align="center">
