@@ -5,96 +5,97 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
-   <style>
-    /* Basic Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+    <style>
+        /* Privacy Policy container styling */
+        body {
+            background-color: #eef2f3; /* Light background for contrast */
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .privacy-policy-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #ffffff; /* White background for the container */
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            color: #333;
+        }
 
-/* Progress Bar */
-#progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 5px;
-    background: #3498db;
-    z-index: 9999;
-    width: 0%;
-}
+        /* Header styling */
+        .privacy-policy-container h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #007BFF; /* Change header color for better visibility */
+            margin-bottom: 1.5rem;
+        }
 
-/* Container Styling */
-.container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
+        /* Section titles */
+        .privacy-policy-container h2 {
+            font-size: 1.8rem;
+            color: #0056b3; /* Darker shade for section titles */
+            margin-top: 1.5rem;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 0.5rem;
+        }
 
-/* Headers */
-h1 {
-    font-size: 2.2rem;
-    margin-bottom: 1rem;
-    color: #333;
-    text-align: center;
-}
+        /* Paragraph styling */
+        .privacy-policy-container p {
+            line-height: 1.7; /* Increased line-height for better readability */
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
 
-h2 {
-    font-size: 1.6rem;
-    margin-top: 1.5rem;
-    color: #444;
-}
+        /* List styling */
+        .privacy-policy-container ul {
+            list-style-type: none;
+            padding: 0;
+            margin-left: 1rem;
+        }
+        .privacy-policy-container ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem; /* Increased padding for bullets */
+            position: relative;
+            font-size: 1rem;
+        }
+        .privacy-policy-container ul li:before {
+            content: "•";
+            color: #007BFF;
+            font-size: 1.5rem; /* Larger bullet point */
+            position: absolute;
+            left: 0;
+        }
 
-/* Paragraphs */
-p {
-    line-height: 1.6;
-    margin: 1rem 0;
-    color: #555;
-}
+        /* Strong text */
+        .privacy-policy-container strong {
+            color: #333;
+        }
 
-/* Lists */
-ul {
-    margin-left: 20px;
-    margin-bottom: 1rem;
-}
+        /* Contact information styling */
+        .privacy-policy-container ul li:last-child {
+            font-style: italic;
+        }
 
-ul li {
-    margin: 0.5rem 0;
-    color: #666;
-}
-
-/* Links and Button */
-a.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
-
-a.button:hover {
-    background-color: #2c8cc4;
-}
-
-/* Navbar and Footer */
-
-
-   </style>
-
+        /* Media Queries for responsiveness */
+        @media (max-width: 600px) {
+            .privacy-policy-container {
+                padding: 1rem; /* Reduce padding on smaller screens */
+            }
+            .privacy-policy-container h1 {
+                font-size: 2rem; /* Smaller header on small screens */
+            }
+            .privacy-policy-container h2 {
+                font-size: 1.5rem; /* Smaller section titles */
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
 
-     <div class="container">
+    <div class="privacy-policy-container">
         <h1>Privacy Policy</h1>
 
         <p>Welcome to Scruter's Privacy Policy. This policy outlines how we handle your personal data and protect your privacy when you use our website and services.</p>
@@ -138,18 +139,13 @@ a.button:hover {
         <h2>Contact Us</h2>
         <p>If you have any questions or concerns about this Privacy Policy, please contact us at:</p>
         <ul>
-            <li>Email: scruter@gmail.com</li>
+            <li>Email: <a href="mailto:scruter@gmail.com" style="color: #007BFF;">scruter@gmail.com</a></li>
             <li>Phone: 999999999</li>
             <li>Address:</li>
         </ul>
-
-      
     </div>
-
-
 
     <%- include('partials/footer') %>
     <%- include('partials/bottom_nav') %>
 </body>
 </html>
-   
