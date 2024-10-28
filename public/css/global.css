@@ -196,3 +196,31 @@ body.dark-mode .card {
     width: 80%; /* More narrow on desktops */
   }
 }
+
+/* Common styles for both states */
+.navbar, .footer {
+  background-color: #fff; /* Ensure consistent background */
+  color: #333; /* Consistent text color */
+}
+
+/* Button styles */
+.button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Specific styles for logged-in state */
+.logged-in .button {
+  background-color: #007bff; /* Consistent button color */
+  color: white; /* Text color */
+}
+
+/* Ensure the layout is consistent */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
