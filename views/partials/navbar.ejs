@@ -153,12 +153,18 @@ a {
 
 /* Custom styles for the navbar toggler icon */
 .navbar-toggler-icon {
-  background-color: var(--text-color); /* Default color */
+    background-color: transparent; /* Remove default background */
+    border: none; /* Remove border */
 }
 
 /* Change the color of the toggler icon in dark mode */
 .dark-mode .navbar-toggler-icon {
-  background-color: #ffffff; /* Light color for dark mode */
+    background-color: transparent; /* Ensure no background in dark mode */
+}
+
+/* Add a custom background for the toggler icon in light mode */
+.navbar-toggler {
+    background-color: transparent; /* Ensure no background */
 }
 
 </style>
@@ -371,5 +377,7 @@ a {
     });
   });
 </script>
+
+
 
 
