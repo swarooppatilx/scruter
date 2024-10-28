@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+
+        <section id="share-form"
+            class="d-flex align-items-center justify-content-center min-vh-100 mb-5 pb-5 mt-5 pt-5">
+            <div class="container mb-5 pd-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h2 class="text-center mb-4">
+                                    <%= type==='food' ? 'Share Food' : type==='house' ? 'Post House Ad' : 'Sell Item' %>
+                                </h2>
+                                <form action="/edit/<%= type %>/<%= item._id %>" method="post"
+                                    enctype="multipart/form-data" id="itemForm">
+                                    <div class="mb-3"> <!-- Item Name area -->
+                                        <label for="title" class="form-label">
+                                            <i
+                                                class="fa-solid fa-<%= type === 'food' ? 'utensils' : type === 'house' ? 'house-user' : 'cart-shopping' %> me-2"></i>
+                                            <%= type==='food' ? 'Food Name' : type==='house' ? 'House Name'
+                                                : 'Item Name' %>:
+                                        </label>
+                                        <input type="text" class="form-control" id="title" name="title"
+                                            placeholder="Enter <%= type === 'food' ? 'Food' : type === 'house' ? 'House' : 'Item' %> Name"
+                                            value="<%= item.title %>" required>
+                                    </div>
+
+                                    <div class="mb-3"> <!-- Item Image area -->
+                                        <label for="image" class="form-label">
+                                            <i class="fa-solid fa-image me-2"></i>
+                                            <%= type==='food' ? 'Food' : type==='house' ? 'House' : 'Item' %> Image:
+                                        </label>
+                                        <input type="file" class="form-control" id="image" name="image"
+                                            onchange="previewImage()">
+
+                                        <img id="img-preview" class="img-fluid mt-3" style="max-width: 200px;"
+                                            src="<%= item.image %>" />
+                                    </div>
+
+                                    <!-- New Email Input -->
+                                    <div class="mb-3"> <!-- Email area -->
+                                        <label for="email" class="form-label">
+                                            <i class="fa-solid fa-envelope me-2"></i>Email:
+                                        </label>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            placeholder="Enter Your Email" value="<%= item.email %>" required>
+                                    </div>
+
+                                    <!-- New Phone Number Input -->
+                                    <div class="mb-3"> <!-- Phone Number area -->
+                                        <label for="phone" class="form-label">
+                                            <i class="fa-solid fa-phone me-2"></i>Phone Number:
+                                        </label>
+                                        <input type="tel" class="form-control" id="phone" name="phone"
+                                            placeholder="Enter Your Phone Number" value="<%= item.phone %>" required>
+                                    </div>
+
+                                    <div class="mb-3"> <!-- Location area -->
+                                        <label for="location" class="form-label">
+                                            <i class="fa-solid fa-map-marker-alt me-2"></i>Location:
+                                        </label>
+                                        <div class="input-group mb-3 position-relative">
+                                            <input type="text" class="form-control" id="location" name="location"
+                                                placeholder="Enter Location" value="<%= item.location %>" required>
+                                            <button type="button" class="btn btn-primary" id="use-location-btn"><i
+                                                    class="fa-solid fa-location-crosshairs me-2"></i></button>
+                                        </div>
+                                        <input type="hidden" id="latitude" name="latitude" value="<%= item.latitude %>"
+                                            required>
+                                        <input type="hidden" id="longitude" name="longitude"
+                                            value="<%= item.longitude %>" required>
+                                    </div>
+
+                                    <% if (type==='house' ) { %>
+                                        <div class="mb-3"> <!-- House Rent area  (For House) -->
+                                            <label for="rent" class="form-label">
+                                                <i class="fa-solid fa-indian-rupee-sign me-2"></i>House Rent:
+                                            </label>
+                                            <input type="number" class="form-control" id="rent" name="rent"
+                                                placeholder="Enter Rent" value="<%= item.rent %>" required>
+                                        </div>
+                                        <% } %>
+
+                                            <% if (type==='market' ) { %>
+                                                <div class="mb-3"> <!-- Item Price (For Market) -->
+                                                    <label for="price" class="form-label">
+                                                        <i class="fa-solid fa-indian-rupee-sign me-2"></i>Item Price:
+                                                    </label>
+                                                    <input type="number" class="form-control" id="price" name="price"
+                                                        placeholder="Enter Item Price" value="<%= item.price %>"
+                                                        required>
+                                                </div>
+                                                <% } %>
+
+                                                    <div class="mb-3"> <!-- Description area -->
+                                                        <label for="description" class="form-label">
+                                                            <i class="fa-solid fa-align-left me-2"></i>
+                                                            Description:
+                                                        </label>
+                                                        <textarea class="form-control" id="description"
+                                                            name="description" placeholder="Enter Description"
+                                                            required><%= item.description %></textarea>
+                                                    </div>
+
+                                                    <div class="text-center">
+                                                        <button type="submit" class="btn btn-primary" id="submitButton">
+                                                            <i class="fa-solid fa-paper-plane me-2"></i>Submit
+                                                        </button>
+                                                        <div class="spinner-border text-primary d-none mt-3"
+                                                            role="status" id="loadingSpinner">
+                                                            <span class="visually-hidden">Loading...</span>
+                                                        </div>
+                                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="../../js/search-auto.js"></script>
+</body>
+<%- include('partials/bottom_nav') %>
+
+</html>
