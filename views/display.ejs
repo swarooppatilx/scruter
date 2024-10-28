@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('partials/head') %>
+
+<head>
+  <%- include('partials/head') %>
 
     <style>
       .modal-dialog-centered-scrollable {
@@ -14,12 +15,14 @@
         max-height: 80vh;
         overflow-y: auto;
       }
+
       .location-link {
         display: none;
       }
 
       .location-link:hover {
-        text-decoration: underline; /* Optional: Add underline back on hover if desired */
+        text-decoration: underline;
+        /* Optional: Add underline back on hover if desired */
       }
 
       .card-img-top {
@@ -30,7 +33,8 @@
       .card {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         /* Add box shadow to the card */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Default shadow */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        /* Default shadow */
       }
 
       .card:hover {
@@ -52,6 +56,7 @@
       .search-bar .btn {
         border-radius: 0;
       }
+
       /* Scroll Progress Bar */
       #progress-bar {
         position: fixed;
@@ -63,185 +68,138 @@
         z-index: 9999;
       }
     </style>
-  </head>
-  <body>
-    <div id="progress-bar"></div>
-    <%- include('partials/navbar') %>
+</head>
+
+<body>
+  <div id="progress-bar"></div>
+  <%- include('partials/navbar') %>
     <section>
       <div class="justify-content-center">
-        <img
-          src="<%= imagepath %>"
-          style="width: 100%; height: auto"
-          class="img-fluid"
-        />
+        <img src="<%= imagepath %>" style="width: 100%; height: auto" class="img-fluid" />
       </div>
 
       <!-- Search Bar -->
       <%- include('partials/searchbar') %>
 
-      <div class="container mt-5 mb-5 pb-5">
-        <div class="row">
-          <% if (cards.length === 0) { %>
-          <div class="col-12">
-            <p class="text-center">No results found</p>
-          </div>
-          <% } else { %> <% cards.forEach(card => { %>
-          <div class="col-md-4 mb-4">
-            <div
-              class="card"
-              style="height: 440px"
-              data-bs-toggle="modal"
-              data-bs-target="#modal<%= card._id %>"
-            >
-              <img
-                src="<%= card.image %>"
-                class="card-img-top"
-                alt="<%= card.title %> Image"
-              />
-              <div class="card-body">
-                <h5 class="card-title"><%= card.title %></h5>
-                <p class="card-text">
-                  <a
-                    href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>"
-                    class="location-link"
-                  >
-                    <i class="fa-solid fa-location-dot me-2"></i>
-                    <%= card.location.length> 30 ? card.location.substring(0,
-                    30) + '...' : card.location %>
-                  </a>
-                </p>
-                <% if (card.price) { %>
-                <p class="card-text">
-                  <b
-                    >Price: <%= card.price %><i
-                      class="fa-solid fa-indian-rupee-sign ms-2"
-                    ></i
-                  ></b>
-                </p>
-                <% } %> <% if (card.rent) { %>
-                <p class="card-text">
-                  <b
-                    >Rent: <%= card.rent %><i
-                      class="fa-solid fa-indian-rupee-sign ms-2"
-                    ></i
-                  ></b>
-                </p>
-                <% } %>
-                <p class="card-text">
-                  <%- card.description.length > 50 ? 
-                  card.description.substring(0, 50) + '<i class="text-primary">...Read more</i>' : card.description 
-                  %>
-                </p>
+        <div class="container mt-5 mb-5 pb-5">
+          <div class="row">
+            <% if (cards.length===0) { %>
+              <div class="col-12">
+                <p class="text-center">No results found</p>
               </div>
-            </div>
-          </div>
+              <% } else { %>
+                <% cards.forEach(card=> { %>
+                  <div class="col-md-4 mb-4">
+                    <div class="card" style="height: 440px" data-bs-toggle="modal"
+                      data-bs-target="#modal<%= card._id %>">
+                      <img src="<%= card.image %>" class="card-img-top" alt="<%= card.title %> Image" />
+                      <div class="card-body">
+                        <h5 class="card-title">
+                          <%= card.title %>
+                        </h5>
+                        <p class="card-text">
+                          <a href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>"
+                            class="location-link">
+                            <i class="fa-solid fa-location-dot me-2"></i>
+                            <%= card.location.length> 30 ? card.location.substring(0,
+                              30) + '...' : card.location %>
+                          </a>
+                        </p>
+                        <% if (card.price) { %>
+                          <p class="card-text">
+                            <b>Price: <%= card.price %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b>
+                          </p>
+                          <% } %>
+                            <% if (card.rent) { %>
+                              <p class="card-text">
+                                <b>Rent: <%= card.rent %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b>
+                              </p>
+                              <% } %>
+                                <p class="card-text">
+                                  <%- card.description.length> 50 ?
+                                    card.description.substring(0, 50) + '<i class="text-primary">...Read more</i>' :
+                                    card.description
+                                    %>
+                                </p>
+                      </div>
+                    </div>
+                  </div>
 
-          <!-- Modal for each card -->
-          <div
-            class="modal fade"
-            id="modal<%= card._id %>"
-            tabindex="-1"
-            aria-labelledby="modalLabel<%= card._id %>"
-            aria-hidden="true"
-          >
-            <div
-              class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-            >
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="modalLabel<%= card._id %>">
-                    <%= card.title %>
-                  </h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">
-                  <img
-                    src="<%= card.image %>"
-                    class="img-fluid mb-3"
-                    alt="<%= card.title %> Image"
-                  />
-                  <h5><%= card.title %></h5>
-                  <p class="card-phone">
-                    <%= card.phone %>
-                    <!-- Adds the phone number when card is pressed -->
-                  </p>
-                  <p class="card-email"><%= card.email %></p>
-                  <!-- Adds the email when card is pressed -->
-                  <p class="card-text">
-                    <a
-                      href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>"
-                    >
-                      <i class="fa-solid fa-location-dot me-2"></i><%=
-                      card.location %>
-                    </a>
-                  </p>
-                  <% if (card.price) { %>
-                  <p class="card-text">
-                    <b
-                      >Price: <%= card.price %><i
-                        class="fa-solid fa-indian-rupee-sign ms-2"
-                      ></i
-                    ></b>
-                  </p>
-                  <% } %> <% if (card.rent) { %>
-                  <p class="card-text">
-                    <b
-                      >Rent: <%= card.rent %><i
-                        class="fa-solid fa-indian-rupee-sign ms-2"
-                      ></i
-                    ></b>
-                  </p>
-                  <% } %>
-                  <p><%= card.description %></p>
-                </div>
-                <% if (user && user.username === card.username || user &&
-                user.username === "admin") { %>
-                <div class="modal-footer">
-                  <form
-                    action="/delete/<%= selectedType %>/<%= card._id %>"
-                    method="POST"
-                    style="display: inline"
-                  >
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                  </form>
-                </div>
-                <% } %>
-              </div>
-            </div>
+                  <!-- Modal for each card -->
+                  <div class="modal fade" id="modal<%= card._id %>" tabindex="-1"
+                    aria-labelledby="modalLabel<%= card._id %>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalLabel<%= card._id %>">
+                            <%= card.title %>
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <img src="<%= card.image %>" class="img-fluid mb-3" alt="<%= card.title %> Image" />
+                          <h5>
+                            <%= card.title %>
+                          </h5>
+                          <p class="card-phone">
+                            <%= card.phone %>
+                              <!-- Adds the phone number when card is pressed -->
+                          </p>
+                          <p class="card-email">
+                            <%= card.email %>
+                          </p>
+                          <!-- Adds the email when card is pressed -->
+                          <p class="card-text">
+                            <a
+                              href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>">
+                              <i class="fa-solid fa-location-dot me-2"></i>
+                              <%= card.location %>
+                            </a>
+                          </p>
+                          <% if (card.price) { %>
+                            <p class="card-text">
+                              <b>Price: <%= card.price %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b>
+                            </p>
+                            <% } %>
+                              <% if (card.rent) { %>
+                                <p class="card-text">
+                                  <b>Rent: <%= card.rent %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b>
+                                </p>
+                                <% } %>
+                                  <p>
+                                    <%= card.description %>
+                                  </p>
+                        </div>
+                        <% if (user && user.username===card.username || user && user.username==="admin" ) { %>
+                          <div class="modal-footer">
+                            <form action="/delete/<%= selectedType %>/<%= card._id %>" method="POST"
+                              style="display: inline">
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                              <a href="/<%= selectedType %>/edit/<%= card._id %>" class="btn btn-primary">Edit</a>
+                            </form>
+                          </div>
+                          <% } %>
+                      </div>
+                    </div>
+                  </div>
+                  <% }); %>
+                    <% } %>
           </div>
-          <% }); %> <% } %>
         </div>
-      </div>
     </section>
     <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>
-    <!-- Scroll Progress Script -->
-    <script>
-      window.onscroll = function () {
-        var winScroll =
-          document.body.scrollTop || document.documentElement.scrollTop;
-        var height =
-          document.documentElement.scrollHeight -
-          document.documentElement.clientHeight;
-        var scrolled = (winScroll / height) * 100;
-        document.getElementById("progress-bar").style.width = scrolled + "%";
-      };
-    </script>
-    <script>
-      window.embeddedChatbotConfig = {
-        chatbotId: "3y5y_b4ZtgDExQUL8b2_A",
-        domain: "www.chatbase.co",
-      };
-    </script>
-    <script
-      src="https://www.chatbase.co/embed.min.js"
-      chatbotId="3y5y_b4ZtgDExQUL8b2_A"
-      domain="www.chatbase.co"
-      defer
-    ></script>
-  </body>
+        <!-- Scroll Progress Script -->
+        <script>
+          window.onscroll = function () {
+            var winScroll =
+              document.body.scrollTop || document.documentElement.scrollTop;
+            var height =
+              document.documentElement.scrollHeight -
+              document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+          };
+        </script>
+</body>
+
 </html>

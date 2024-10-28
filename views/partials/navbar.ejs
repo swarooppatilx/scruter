@@ -127,6 +127,10 @@ a {
   background: transparent;
 }
 
+.navbar-toggler{
+  background-color: rgb(255, 255, 255);
+}
+
 /* For Sign-Up button */ 
 .btn-space {
   min-width: 120px; 
@@ -168,7 +172,7 @@ a {
         alt="Scruter Logo"
         width="90"
         height="30"
-        class="d-inline-block align-text-top"
+        class="d-inline-block align-text-top gsap"
       />
     </a>
     <button
@@ -184,28 +188,28 @@ a {
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul id="navbar-links" class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item gsap">
           <a
             class="nav-link <%= activeLink === 'home' ? 'active-link' : '' %>"
             href="/"
             ><i class="fa-solid fa-house"></i>  Home Page</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item gsap">
           <a
             class="nav-link <%= activeLink === 'house' ? 'active-link' : '' %>"
             href="/house"
             ><i class="fa-solid fa-city"></i> Housing</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item gsap">
           <a
             class="nav-link <%= activeLink === 'food' ? 'active-link' : '' %>"
             href="/food"
             ><i class="fa-solid fa-utensils me-2"></i>Food</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item gsap">
           <a
             class="nav-link <%= activeLink === 'market' ? 'active-link' : '' %>"
             href="/market"
@@ -216,25 +220,12 @@ a {
       <div
         class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center mt-3 mt-lg-0"
       >
-        <button id="darkModeToggle" style="margin-right: 10px; ">
+        <button id="darkModeToggle" class="gsap" style="margin-right: 10px; ">
           <img src="https://img.icons8.com/?size=100&id=45475&format=png&color=000000" class="toggleMode" id="toggleMode" alt="">
         </button>
+        
         <% if (user) { %>
-          <div class="d-flex align-items-start">
-            <!-- User Dropdown -->
-            <div class="dropdown me-3">
-              <button
-                class="btn btn-outline-primary dropdown-toggle"
-                type="button"
-                id="userDropdownMenu"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Welcome, <%= user.username %>!
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenu">
-                <li>
-                  <div class="dropdown">
+                   <div class="dropdown">
                     <button
                       class="btn btn-success dropdown-toggle text-light"
                       type="button"
@@ -242,9 +233,14 @@ a {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <i class="fa-solid fa-marker me-2"></i>Create Post
+                    <%= user.username %>!
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="createBlogDropdownMenu">
+                      <li>
+                        <a class="dropdown-item" href="/dashboard">
+                          <i class="fa-solid fa-user me-2"></i>Profile
+                        </a>
+                      </li>
                       <li>
                         <a class="dropdown-item" href="/house/form">
                           <i class="fa-solid fa-home me-2"></i>House Ad
@@ -261,29 +257,40 @@ a {
                         </a>
                       </li>
                       <li>
-                        <a class="dropdown-item" href="/blog/form">
-                          <i class="fa-solid fa-blog me-2"></i>Create Blog
+                        <a class="gsap dropdown-item text-danger mt-2" href="/logout">
+                          <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
                         </a>
                       </li>
                     </ul>
                   </div>
-                </li>
-                <li>
-                  <a class="dropdown-item text-danger mt-2" href="/logout">
-                    <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        <% } else { %>
-          <a class="btn btn-outline-success" href="/auth?action=login">
-            <i class="fa-solid fa-user me-2"></i>Login
-          </a>
-        <% } %>
+                  <% } else { %>
+                  <div class="dropdown">
+                    <a class="btn btn-outline-success" href="/auth?action=login">
+                      <i class="fa-solid fa-user me-2"></i>Login
+                    </a>
+                  </div>
+                  <% } %>
+
       </div>
     </div>
   </div>
+  <div class="gtranslate_wrapper"></div>
+
+      <script>
+    
+      window.gtranslateSettings = {
+        "default_language":"en",
+        "detect_browser_language":true,
+        "wrapper_selector":".gtranslate_wrapper"
+      }
+    
+      </script>
+    
+      <script 
+        src="https://cdn.gtranslate.net/widgets/latest/float.js"
+        defer
+      ></script>
+    
 </nav>
 
 

@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="css/formstyle.css">
     <script src="js/client-validation.js" defer></script>
     <style>
-        body{
-            overflow-y: hidden;
+        body {
+            overflow-y: auto;  // Changed from hidden to auto to allow scrolling
         }
         .input-submit {
             display: flex;
@@ -87,6 +87,11 @@
                         <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
                         <i class="bx bx-show" data-target="password" onclick="togglePasswordVisibility(this)"></i>
                     </div>
+                    <div class="input-box">
+                        <label>
+                            <input type="checkbox" id="rememberMe"> Remember Me
+                        </label>
+                    </div>
                 <% } %>
                 <div class="input-box">
                     <input type="submit" class="input-submit" value="<%= action === 'login' ? 'LOGIN' : 'SIGN UP' %>">
@@ -132,18 +137,6 @@
             }
         }
     </script>
-    <script>
-        window.embeddedChatbotConfig = {
-        chatbotId: "3y5y_b4ZtgDExQUL8b2_A",
-        domain: "www.chatbase.co"
-        }
-        </script>
-        <script
-        src="https://www.chatbase.co/embed.min.js"
-        chatbotId="3y5y_b4ZtgDExQUL8b2_A"
-        domain="www.chatbase.co"
-        defer>
-        </script>
         
 <script>
     // Save data to local storage on signup
@@ -175,33 +168,32 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
+            // Check if "Remember Me" is checked
+            const rememberMe = document.getElementById('rememberMe').checked;
+
             // Retrieve all users from local storage and check for a match
             const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
             const matchedUser = storedUsers.find(user => user.username === username && user.password === password);
 
             if (matchedUser) {
                 alert('Login successful!');
+                if (rememberMe) {
+                    localStorage.setItem('rememberedUsername', username);
+                }
             } else {
                 alert('Invalid username or password');
             }
         }
     });
 
-    function togglePasswordVisibility(icon) {
-        const targetId = icon.getAttribute('data-target');
-        const passwordInput = document.getElementById(targetId);
-
-        // Toggle between 'password' and 'text' type
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            icon.classList.remove('bx-show');
-            icon.classList.add('bx-hide');
-        } else {
-            passwordInput.type = 'password';
-            icon.classList.remove('bx-hide');
-            icon.classList.add('bx-show');
+    // On page load, check if there's a remembered username
+    window.onload = function() {
+        const rememberedUsername = localStorage.getItem('rememberedUsername');
+        if (rememberedUsername) {
+            document.getElementById('username').value = rememberedUsername;
+            document.getElementById('rememberMe').checked = true;
         }
-    }
+    };
 </script>
 
 
