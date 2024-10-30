@@ -644,13 +644,21 @@ app.post(
     }
   }
 );
-
 // Handle search and display for food
 app.get('/food', async (req, res) => {
   try {
     const domain = req.get('host');
     const query = req.query.query || '';
+    const sort = req.query.sort || ''; // Get the sort parameter from query
     const searchRegex = new RegExp(query, 'i');
+
+    // Build the sort object based on the query parameter
+    let sortOptions = {};
+    if (sort === 'asc') {
+      sortOptions.price = 1; // Sort by price ascending
+    } else if (sort === 'desc') {
+      sortOptions.price = -1; // Sort by price descending
+    }
 
     const foods = await Food.find({
       $or: [
@@ -658,7 +666,7 @@ app.get('/food', async (req, res) => {
         { location: searchRegex },
         { description: searchRegex },
       ],
-    });
+    }).sort(sortOptions); // Apply sorting
 
     res.render('display', {
       cards: foods,
