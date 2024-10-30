@@ -421,7 +421,16 @@ app.get('/house', async (req, res) => {
   try {
     const domain = req.get('host');
     const query = req.query.query || '';
+    const sort = req.query.sort || ''; // Get the sort parameter from query
     const searchRegex = new RegExp(query, 'i');
+
+    // Build the sort object based on the query parameter
+    let sortOptions = {};
+    if (sort === 'asc') {
+      sortOptions.rent = 1; // Sort by rent ascending
+    } else if (sort === 'desc') {
+      sortOptions.rent = -1; // Sort by rent descending
+    }
 
     const houses = await House.find({
       $or: [
@@ -429,7 +438,7 @@ app.get('/house', async (req, res) => {
         { location: searchRegex },
         { description: searchRegex },
       ],
-    });
+    }).sort(sortOptions);
 
     res.render('display', {
       cards: houses,
