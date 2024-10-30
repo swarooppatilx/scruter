@@ -1,200 +1,243 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <%- include('partials/head') %>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frequently Asked Questions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f9fafb; /* Light background */
-            color: #374151; /* Darker text */
-            line-height: 1.6; /* Increased line height */
-            padding: 2rem; /* Increased padding */
-        }
+      /* Global Light Mode Styles */
 
-        h1 {
-            text-align: center;
-            color: #086b09; /* Green color */
-            font-size: 2.5rem; /* Increased font size */
-            margin-bottom: 1.5rem; /* Space below the heading */
-            opacity: 0; /* Start hidden */
-            animation: fadeIn 1s forwards; /* Apply fade-in animation */
-        }
+/* Global Light Mode Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9fafb;
+    color: #1f2937;
+    line-height: 1.6;
+}
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0; /* Start fully transparent */
-                transform: translateY(-20px); /* Start slightly higher */
-            }
-            to {
-                opacity: 1; /* End fully opaque */
-                transform: translateY(0); /* End in original position */
-            }
-        }
+.help-content {
+    padding: 3rem 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
 
-        h3 {
-            background-color: #e0f2fe; /* Light blue background */
-            border-radius: 0.5rem; /* Rounded corners */
-            padding: 15px; /* Padding for headers */
-            font-size: 1.25rem; /* Increased font size */
-            margin: 1rem 0; /* Space above and below */
-            cursor: pointer; /* Make the heading clickable */
-            transition: background-color 0.3s ease, transform 0.2s; /* Smooth background color change */
-        }
+.help-section h1 {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #2563eb;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #2563eb;
+    padding-bottom: 0.5rem;
+    text-align: center;
+}
 
-        h3:hover {
-            background-color: #bfdbfe; /* Slightly darker blue on hover */
-            transform: translateY(-2px); /* Slight lift effect on hover */
-        }
+.faq-item {
+    margin-top: 1.5rem;
+}
 
-        p {
-            margin-bottom: 1rem; /* Increased margin */
-            display: none; /* Hide answers by default */
-            font-size: 1rem; /* Increased font size */
-            padding: 10px; /* Padding for answers */
-            background-color: #ffffff; /* White background */
-            border-left: 4px solid #1d4ed8; /* Blue left border */
-            border-radius: 0.5rem; /* Rounded corners */
-            transition: max-height 0.3s ease, opacity 0.3s ease; /* Smooth transition */
-            overflow: hidden; /* Hide overflowing content */
-            opacity: 0; /* Start hidden */
-            max-height: 0; /* Set initial max height to zero */
-        }
+.faq-question {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.75rem;
+    color: #2563eb;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: #f0f9ff;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
 
-        .faq-item.active p {
-            display: block; /* Show answers when active */
-            opacity: 1; /* Fade in */
-            max-height: 100px; /* Set a max height for transition */
-        }
+.faq-question:hover {
+    background-color: #dbeafe;
+    transform: translateY(-2px);
+}
 
-        .container {
-            max-width: 800px; /* Increased width */
-            margin: 0 auto;
-            background-color: #ffffff;
-            padding: 2rem; /* Increased padding */
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+.faq-answer {
+    max-height: 0; /* Collapsed by default */
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    opacity: 0; /* Collapsed by default */
+    padding: 0 0.75rem;
+    color: #4b5563;
+}
 
-        .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 2rem; /* Add some space above the button */
-        }
+.faq-item.active .faq-answer {
+    max-height: 200px; /* Enough height to show the content */
+    opacity: 1; /* Make it visible */
+    padding: 0.75rem; /* Padding when visible */
+    background-color: #ffffff; /* Background for visible answer */
+    border-left: 3px solid #2563eb; /* Border style */
+    border-radius: 0 0 8px 8px; /* Rounded bottom corners */
+}
 
-        .back-button {
-            background-color: #08a01a; /* Green background */
-            color: white; /* White text */
-            padding: 0.75rem 1.5rem; /* Padding for the button */
-            border: none;
-            border-radius: 0.5rem; /* Rounded corners */
-            cursor: pointer; /* Change cursor on hover */
-            text-align: center;
-            text-decoration: none; /* Remove underline */
-            font-weight: bold; /* Make text bold */
-            transition: background-color 0.3s ease; /* Smooth background color change */
-        }
+/* Call-to-Action Button */
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #2563eb;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 9999px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+}
 
-        .back-button:hover {
-            background-color: #1e40af; /* Darker blue on hover */
-        }
+.cta-button:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.05);
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: #1c1c1c;
+    color: #f9fafb;
+}
+
+.dark-mode .help-content {
+    background-color: #374151;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .faq-question {
+    color: #60a5fa;
+    background-color: #1f2937;
+    border-bottom-color: #4b5563;
+}
+
+.dark-mode .faq-question:hover {
+    background-color: #283241;
+}
+
+.dark-mode .faq-item.active .faq-answer {
+    background-color: #1f2937;
+    border-left-color: #60a5fa;
+    color: #d1d5db;
+
+}
+
     </style>
-</head>
+  </head>
 
-<body>
-    <div class="container">
-        <h1>Frequently Asked Questions</h1>
+  <body>
+    <div id="progress-bar"></div>
+    <%- include('partials/navbar') %>
 
-        <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">What is Scruter?</h3>
-            <p>Scruter is your local platform for buying, selling, and discovering everything you need. Whether it's products, services, or community activities, we connect people for a better local experience.</p>
-        </div>
-
-        <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">How can I buy or sell items on Scruter?</h3>
-            <p>You can create an account, list your items for sale, or browse items available in your local area through our user-friendly interface.</p>
-        </div>
+    <div class="help-content">
+      <section class="help-section">
+        <h1>FAQs</h1>
 
         <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">Is there a fee for using Scruter?</h3>
-            <p>Scruter is free to use for buying and selling. However, we may charge a small fee for premium listings or features in the future.</p>
+          <div class="faq-question" onclick="toggleAnswer(this)">What is Scruter?</div>
+          <div class="faq-answer">
+            Scruter is your local platform for buying, selling, and discovering everything you need. Whether it's products, services, or community activities, we connect people for a better local experience.
+          </div>
         </div>
 
         <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">How can I contact customer support?</h3>
-            <p>If you have any questions or need assistance, you can reach our customer support team at scruter@gmail.com or call us at 999999999.</p>
+          <div class="faq-question" onclick="toggleAnswer(this)">How can I buy or sell items on Scruter?</div>
+          <div class="faq-answer">
+            You can create an account, list your items for sale, or browse items available in your local area through our user-friendly interface.
+          </div>
         </div>
 
         <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">What should I do if I encounter a problem with a transaction?</h3>
-            <p>If you experience any issues with a transaction, please contact our support team immediately, and we will assist you in resolving the matter.</p>
+          <div class="faq-question" onclick="toggleAnswer(this)">Is there a fee for using Scruter?</div>
+          <div class="faq-answer">
+            Scruter is free to use for buying and selling. However, we may charge a small fee for premium listings or features in the future.
+          </div>
         </div>
 
         <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">Can I edit or delete my listings?</h3>
-            <p>Yes, you can edit or delete your listings anytime through your account dashboard.</p>
+          <div class="faq-question" onclick="toggleAnswer(this)">How can I contact customer support?</div>
+          <div class="faq-answer">
+            If you have any questions or need assistance, you can reach our customer support team at scruter@gmail.com or call us at 999999999.
+          </div>
         </div>
 
         <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">How can I reset my password?</h3>
-            <p>If you've forgotten your password, you can reset it by clicking on the "Forgot Password?" link on the login page and following the instructions.</p>
+          <div class="faq-question" onclick="toggleAnswer(this)">What should I do if I encounter a problem with a transaction?</div>
+          <div class="faq-answer">
+            If you experience any issues with a transaction, please contact our support team immediately, and we will assist you in resolving the matter.
+          </div>
         </div>
 
         <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">What payment methods are accepted on Scruter?</h3>
-            <p>We accept various payment methods, including credit/debit cards and popular online payment systems. Specific payment options will be listed at checkout.</p>
+          <div class="faq-question" onclick="toggleAnswer(this)">Can I edit or delete my listings?</div>
+          <div class="faq-answer">
+            Yes, you can edit or delete your listings anytime through your account dashboard.
+          </div>
         </div>
 
         <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">Can I leave reviews for buyers or sellers?</h3>
-            <p>Yes! After completing a transaction, you can leave reviews for buyers or sellers based on your experience to help others make informed decisions.</p>
+          <div class="faq-question" onclick="toggleAnswer(this)">How can I reset my password?</div>
+          <div class="faq-answer">
+            If you've forgotten your password, you can reset it by clicking on the "Forgot Password?" link on the login page and following the instructions.
+          </div>
         </div>
 
         <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">Is my personal information safe on Scruter?</h3>
-            <p>Yes, we take your privacy seriously. We use industry-standard security measures to protect your personal information. Please review our privacy policy for more details.</p>
+          <div class="faq-question" onclick="toggleAnswer(this)">What payment methods are accepted on Scruter?</div>
+          <div class="faq-answer">
+            We accept various payment methods, including credit/debit cards and popular online payment systems. Specific payment options will be listed at checkout.
+          </div>
         </div>
 
         <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">How do I report a user or listing?</h3>
-            <p>If you encounter suspicious activity or listings, please contact our support team with the details, and we will investigate the matter promptly.</p>
+          <div class="faq-question" onclick="toggleAnswer(this)">Can I leave reviews for buyers or sellers?</div>
+          <div class="faq-answer">
+            Yes! After completing a transaction, you can leave reviews for buyers or sellers based on your experience to help others make informed decisions.
+          </div>
         </div>
 
         <div class="faq-item">
-            <h3 onclick="toggleAnswer(this)">Can I access Scruter from my mobile device?</h3>
-            <p>Yes, Scruter is optimized for mobile use, so you can browse, buy, and sell items directly from your smartphone or tablet.</p>
+          <div class="faq-question" onclick="toggleAnswer(this)">Is my personal information safe on Scruter?</div>
+          <div class="faq-answer">
+            Yes, we take your privacy seriously. We use industry-standard security measures to protect your personal information. Please review our privacy policy for more details.
+          </div>
         </div>
 
-        <div class="button-container">
-            <a href="/" class="back-button">Back to Home</a>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleAnswer(this)">How do I report a user or listing?</div>
+          <div class="faq-answer">
+            If you encounter suspicious activity or listings, please contact our support team with the details, and we will investigate the matter promptly.
+          </div>
         </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleAnswer(this)">Can I access Scruter from my mobile device?</div>
+          <div class="faq-answer">
+            Yes, Scruter is optimized for mobile use, so you can browse, buy, and sell items directly from your smartphone or tablet.
+          </div>
+        </div>
+
+        <a href="/contact" class="cta-button">Contact Support</a>
+      </section>
     </div>
 
+    <%- include('partials/footer') %> 
+    <%- include('partials/bottom_nav') %>
+
     <script>
-        function toggleAnswer(element) {
-            const answer = element.nextElementSibling; // Get the answer (next <p> element)
-            const faqItem = element.parentElement; // Get the parent FAQ item
-            if (answer.style.display === "none" || answer.style.display === "") {
-                answer.style.display = "block"; // Show the answer
-                faqItem.classList.add('active'); // Add active class for styles
-                answer.style.opacity = 1; // Fade in
-                answer.style.maxHeight = '100px'; // Set a max height for transition
-            } else {
-                answer.style.opacity = 0; // Fade out
-                setTimeout(() => {
-                    answer.style.display = "none"; // Hide the answer after fade out
-                    faqItem.classList.remove('active'); // Remove active class
-                }, 300); // Match this to the transition duration
+document.querySelectorAll('.faq-question').forEach(item => {
+    item.addEventListener('click', () => {
+        const parentItem = item.closest('.faq-item');
+        parentItem.classList.toggle('active'); // Toggle active class
+
+        // Optionally close other questions
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+            if (otherItem !== parentItem) {
+                otherItem.classList.remove('active');
             }
-        }
-
-        // Optional: Set all answers to be hidden initially
-        document.querySelectorAll('.faq-item p').forEach(p => p.style.display = 'none');
+        });
+    });
+});
     </script>
-</body>
-
+  </body>
 </html>
