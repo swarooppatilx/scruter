@@ -140,11 +140,6 @@ body.dark-mode .icon-circle:hover {
   background-color: #fff !important;
 }
 
-body.dark-mode .icon-circle a {
-  font-size: 1.5rem;
-  color: #000000; /* Light color for dark mode */
-}
-
 body.dark-mode .modal {
   --bs-modal-color: whitesmoke;
   --bs-modal-bg: #333;
