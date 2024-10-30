@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+    <style>
+      /* Global Light Mode Styles */
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9fafb;
+        color: #1f2937;
+        line-height: 1.6;
+      }
+
+      .support-content {
+        padding: 3rem 2rem;
+        max-width: 800px;
+        margin: 2rem auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .support-section h1,
+      .support-section h2 {
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #2563eb;
+      }
+
+      .support-section h1 {
+        font-size: 2.8rem;
+        border-bottom: 2px solid #2563eb;
+        padding-bottom: 0.5rem;
+      }
+
+      .support-section h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: #1f2937;
+      }
+
+      .support-section p {
+        margin-bottom: 1.5rem;
+        text-align: justify;
+        line-height: 1.8;
+      }
+
+      .faq-section {
+        font-size: 1.1rem;
+        margin-top: 2rem;
+        color: #1f2937;
+      }
+
+      .faq-section .question {
+        font-weight: bold;
+        margin-top: 1rem;
+        color: #2563eb;
+      }
+
+      .faq-section .answer {
+        margin-top: 0.5rem;
+        color: #4b5563;
+      }
+
+      .contact-info-header {
+        font-size: 1.2rem;
+        color: #1f2937;
+        font-weight: bold;
+        margin-top: 2rem;
+        text-align: center;
+      }
+
+      .contact-info {
+        font-size: 1.1rem;
+        color: #2563eb;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 0.5rem;
+        border-top: 2px solid #e2e8f0;
+        padding-top: 1.5rem;
+      }
+
+      .contact-info span {
+        display: block;
+        margin-top: 0.5rem;
+        color: #4b5563;
+        font-weight: normal;
+      }
+
+      .cta-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background-color: #2563eb;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 9999px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-bottom: 2rem; /* Margin moved to bottom */
+        text-align: center;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .cta-button:hover {
+        background-color: #1d4ed8;
+        transform: scale(1.05);
+      }
+
+      /* Dark Mode Styles */
+      .dark-mode {
+        background-color: #1c1c1c;
+        color: #f9fafb;
+      }
+
+      .dark-mode .support-content {
+        background-color: #374151;
+        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+      }
+
+      .dark-mode .support-section h1 {
+        color: #60a5fa;
+        border-bottom-color: #60a5fa;
+      }
+
+      .dark-mode .support-section h2 {
+        color: #9ca3af;
+      }
+
+      .dark-mode .faq-section .question {
+        color: #60a5fa;
+      }
+
+      .dark-mode .faq-section .answer {
+        color: #d1d5db;
+      }
+
+      .dark-mode .contact-info-header {
+        color: #e5e7eb;
+      }
+
+      .dark-mode .contact-info {
+        color: #e5e7eb;
+        border-top-color: #4b5563;
+      }
+
+      .dark-mode .contact-info span {
+        color: #d1d5db;
+      }
+
+      .dark-mode .cta-button {
+        background-color: #60a5fa;
+      }
+
+      .dark-mode .cta-button:hover {
+        background-color: #3b82f6;
+      }
+
+      .faq-section .question {
+        border-bottom: 2px solid #4b5563; /* Add underline */
+        padding-bottom: 0.2rem; /* Optional padding */
+        cursor: pointer; /* Change cursor to hand */
+      }
+
+      .faq-section .answer {
+        margin-top: 0.5rem;
+        color: #4b5563;
+        cursor: pointer; /* Change cursor to hand */
+      }
+
+      .faq-section .answer:hover {
+        text-decoration: underline; /* Underline on hover for answers */
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <%- include('partials/navbar') %>
+
+    <div class="support-content">
+      <section class="support-section">
+        <h1>Support Us</h1>
+        <p>
+          We’re dedicated to fostering connections and supporting local commerce.
+          Your involvement helps us grow, improve, and provide the best possible
+          experience for our community. Consider spreading the word, engaging with us
+          on social media, or leaving feedback. Interested in partnering? Reach out to 
+          explore collaboration opportunities.
+        </p>
+
+        <a href="/contact" class="cta-button">Support Our Mission</a>
+
+        <h2>Reach Out to Us</h2>
+        <p>
+          Need help or have a question? We’re here to assist you with navigating our
+          features, managing your account, or any other inquiries. Don’t hesitate to 
+          get in touch—our team is committed to ensuring you have a smooth and efficient 
+          experience on our platform.
+        </p>
+
+        <div class="faq-section">
+          <div class="question" onclick="toggleAnswer(this)">How can I create an account?</div>
+          <div class="answer" style="display: none;">To create an account, click on the 'Sign Up' button at the top right corner of the homepage and follow the registration steps.</div>
+        
+          <div class="question" onclick="toggleAnswer(this)">What should I do if I forget my password?</div>
+          <div class="answer" style="display: none;">If you forget your password, click on 'Forgot Password' on the login page. You'll receive an email to reset your password.</div>
+        
+          <div class="question" onclick="toggleAnswer(this)">Can I delete my account?</div>
+          <div class="answer" style="display: none;">Yes, you can delete your account by going to the account settings and selecting 'Delete Account.' Please note this action is irreversible.</div>
+        
+          <div class="question" onclick="toggleAnswer(this)">How do I report a problem?</div>
+          <div class="answer" style="display: none;">If you encounter an issue, reach out to our support team via the contact information below, or use the 'Report Issue' button available in your account settings.</div>
+        </div>
+        
+        <script>
+          function toggleAnswer(questionElement) {
+            const answerElement = questionElement.nextElementSibling; // Get the corresponding answer
+            if (answerElement.style.display === "none" || answerElement.style.display === "") {
+              answerElement.style.display = "block"; // Show the answer
+            } else {
+              answerElement.style.display = "none"; // Hide the answer
+            }
+          }
+        </script>
+        
+
+        <div class="contact-info-header">Contact Info</div>
+        <div class="contact-info">
+          <span>Email: support@ourwebsite.com</span>
+          <span>Phone: +123-456-7890</span>
+          <span>Address: 123 Commerce Lane, Suite 400, Cityville</span>
+        </div>
+      </section>
+    </div>
+
+    <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>
+  </body>
+</html>
