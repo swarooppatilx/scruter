@@ -126,7 +126,7 @@
                   </div>
 
                   <!-- Modal for each card -->
-                  <div class="modal fade" id="modal<%= card._id %>" tabindex="-1"
+                <div class="modal fade" id="modal<%= card._id %>" tabindex="-1"
                     aria-labelledby="modalLabel<%= card._id %>" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                       <div class="modal-content">
@@ -143,12 +143,10 @@
                           </h5>
                           <p class="card-phone">
                             <%= card.phone %>
-                              <!-- Adds the phone number when card is pressed -->
                           </p>
                           <p class="card-email">
                             <%= card.email %>
                           </p>
-                          <!-- Adds the email when card is pressed -->
                           <p class="card-text">
                             <a
                               href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>">
@@ -170,15 +168,21 @@
                                     <%= card.description %>
                                   </p>
                         </div>
-                        <% if (user && user.username===card.username || user && user.username==="admin" ) { %>
-                          <div class="modal-footer">
+                        <div class="modal-footer d-flex justify-content-between">
+                          <% if (user && user.username===card.username || user && user.username==="admin" ) { %>
                             <form action="/delete/<%= selectedType %>/<%= card._id %>" method="POST"
                               style="display: inline">
                               <button type="submit" class="btn btn-danger">Delete</button>
                               <a href="/<%= selectedType %>/edit/<%= card._id %>" class="btn btn-primary">Edit</a>
                             </form>
-                          </div>
-                          <% } %>
+                            <% } %>
+
+                              <!-- Buy Now Button at the bottom-right corner of the modal footer -->
+                              <button type="button" class="btn btn-primary"
+                                style="background-color: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                                Buy Now
+                              </button>
+                        </div>
                       </div>
                     </div>
                   </div>

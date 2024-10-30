@@ -231,10 +231,41 @@
 
         .repo-link:hover {
           background-color: #007bff;
+          text-decoration: none;
           /* Change background on hover */
           color: white;
           /* Change text color on hover */
         }
+
+        .carousel-control-prev, .carousel-control-next {
+            width: 50px; 
+            height: 50px; 
+            top: 50%; /* Center vertically */
+            transform: translateY(-50%); /* Center vertically */
+            opacity: 0.8; /* Add slight transparency for aesthetic effect */
+          }
+          /* Move the previous button slightly to the right */
+          .carousel-control-prev {
+            left: 20px; 
+          }
+
+          /* Move the next button slightly to the left */
+          .carousel-control-next {
+            right: 20px;
+          }
+
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better visibility */
+            border-radius: 50%; 
+            padding: 30px; 
+            font-size: 16px; 
+          }
+
+          .carousel-control-prev-icon:hover, .carousel-control-next-icon:hover {
+            background-color: rgba(0, 0, 0, 0.7); 
+          }
+
+         
       </style>
 
       <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>

@@ -52,11 +52,18 @@
             padding: 0;
             margin-left: 1rem;
         }
+
         .privacy-policy-container ul li {
             margin-bottom: 0.5rem;
             padding-left: 1.5rem; /* Increased padding for bullets */
             position: relative;
             font-size: 1rem;
+
+
+        .button:hover {
+            background-color: #3b82f6;
+            text-decoration: none;
+
         }
         .privacy-policy-container ul li:before {
             content: "•";
@@ -88,6 +95,50 @@
                 font-size: 1.5rem; /* Smaller section titles */
             }
         }
+
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1f2937;
+            color: #f9fafb;
+        }
+
+        body.dark-mode .card {
+            background-color: #2d3748;
+            color: #f9fafb;
+        }
+
+        body.dark-mode .button {
+            background-color: #4f46e5;
+            color: #ffff;
+        }
+
+        body.dark-mode .button:hover {
+            background-color: #4338ca;
+        }
+
+        body.dark-mode a {
+            color: #3b82f6;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3 {
+            color: #bbf7d0; /* Light color for headings in dark mode */
+        }
+
+        .welcome-message {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: #dbeafe;
+            margin-bottom: 2rem;
+        }
+
+        body.dark-mode .welcome-message {
+            background-color: #4b5563;
+            color: #f9fafb;
+        }
+
     </style>
 </head>
 
