@@ -3,10 +3,12 @@
 import { cn } from "@/utils/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const MainNav = () => {
     
     const pathname=usePathname();
+    const [loading,setLoading]=useState(true);
     
     const routes=[{
         href: `/`,
@@ -14,6 +16,13 @@ const MainNav = () => {
         active: pathname.startsWith(`/`)
     }]
 
+    useEffect(()=>{
+        setLoading(false);
+    },[])
+
+    if(loading){
+        return null
+    }
     
     return ( 
         <div
