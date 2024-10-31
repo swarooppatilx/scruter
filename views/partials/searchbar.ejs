@@ -4,18 +4,23 @@
     <div class="d-flex justify-content-center align-items-center">
       <!-- Search Input -->
       <input type="text" class="form-control me-2 w-25" id="search-input" name="query" placeholder="Search" value="<%= query %>">  
-      
+
       <!-- Inline Dropdown for Search Action -->
       <select class="form-select me-2" id="search-action" name="type" style="width: 100px;">
         <option value="food" <%= activeLink === 'food' ? 'selected' : '' %>>Food</option>
         <option value="house" <%= activeLink === 'house' ? 'selected' : '' %>>House</option>
         <option value="market" <%= activeLink === 'market' ? 'selected' : '' %>>Market</option>
       </select>
-      
+      <!-- Sort by Price Dropdown -->
+      <select class="form-select me-2" id="sort-by-price" name="sort" style="width: 180px;">
+        <option value="">Sort by Price</option>
+        <option value="asc">Price: Low to High</option>
+        <option value="desc">Price: High to Low</option>
+      </select>
       <!-- Search Button -->
       <button class="btn btn-dark text-light" id="search-button" type="submit">Search</button>
     </div>
-    <div id="validation-message" class="text-danger mt-2 text-center" style="display: none;">Please enter a search term.</div>  </form>
+    <div id="validation-message" class="text-danger mt-2 text-center" style="display: none;">Please enter a search term or select a sort option. </div>  </form>
 </div>
 
 <!-- JavaScript to Update Form Action and Validate Input -->
@@ -24,7 +29,8 @@
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
     const searchAction = document.getElementById('search-action');
-    const validationMessage = document.getElementById('validation-message'); // Get the validation message element
+    const sortByPrice = document.getElementById('sort-by-price');
+    const validationMessage = document.getElementById('validation-message');
 
     // Update form action based on the selected search action
     searchAction.addEventListener('change', function() {
@@ -36,8 +42,8 @@
     searchForm.addEventListener('submit', function(event) {
       const queryInput = searchInput.value.trim();
 
-      // If the input is empty, prevent form submission and show the validation message
-      if (queryInput === '') {
+      // If the input is empty and no sorting option is selected, prevent form submission and show the validation message
+      if (queryInput === '' && sortByPrice.value === '') {
         event.preventDefault(); 
         validationMessage.style.display = 'block';
         searchInput.classList.add('is-invalid');

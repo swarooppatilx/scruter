@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import MainNav from '@/components/NavBars&Footers/main-nav';
 import Container from '../ui/container';
+import NavbarActions from './navbar-actions';
 
 export const revalidate = 0;
 
@@ -14,7 +15,7 @@ const Navbar = async () => {
           </Link>
 
           <MainNav />
-          {/* <NavbarActions/> */}
+          <NavbarActions/>
         </div>
       </Container>
     </div>

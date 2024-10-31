@@ -15,7 +15,10 @@ datasource db {
 
 model User {
   id           String  @id @default(uuid()) @map("_id")
+<<<<<<< HEAD
   mobileNumber String  @unique
+=======
+>>>>>>> dee513b1d33f7c59456a9de0436ba0e1413ba07e
   name         String
 
   email String? @unique
@@ -28,7 +31,6 @@ model User {
 
 model Seller {
   id String @id @default(uuid()) @map("_id")
-  mobileNumber String  @unique
   name String
 
   email        String  @unique
