@@ -20,6 +20,7 @@ const foodSchema = new mongoose.Schema({
   title: String,
   image: String,
   location: String,
+  price: Number,
   latitude: String,
   longitude: String,
   description: String,
