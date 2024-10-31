@@ -421,7 +421,16 @@ app.get('/house', async (req, res) => {
   try {
     const domain = req.get('host');
     const query = req.query.query || '';
+    const sort = req.query.sort || ''; // Get the sort parameter from query
     const searchRegex = new RegExp(query, 'i');
+
+    // Build the sort object based on the query parameter
+    let sortOptions = {};
+    if (sort === 'asc') {
+      sortOptions.rent = 1; // Sort by rent ascending
+    } else if (sort === 'desc') {
+      sortOptions.rent = -1; // Sort by rent descending
+    }
 
     const houses = await House.find({
       $or: [
@@ -429,7 +438,7 @@ app.get('/house', async (req, res) => {
         { location: searchRegex },
         { description: searchRegex },
       ],
-    });
+    }).sort(sortOptions);
 
     res.render('display', {
       cards: houses,
@@ -553,11 +562,21 @@ app.post(
   })
 
 // Handle search and display for market
+// Handle search and display for market
 app.get('/market', async (req, res) => {
   try {
     const domain = req.get('host');
     const query = req.query.query || '';
+    const sort = req.query.sort || ''; // Get the sort parameter from query
     const searchRegex = new RegExp(query, 'i');
+
+    // Build the sort object based on the query parameter
+    let sortOptions = {};
+    if (sort === 'asc') {
+      sortOptions.price = 1; // Sort by price ascending
+    } else if (sort === 'desc') {
+      sortOptions.price = -1; // Sort by price descending
+    }
 
     const markets = await Market.find({
       $or: [
@@ -565,7 +584,7 @@ app.get('/market', async (req, res) => {
         { location: searchRegex },
         { description: searchRegex },
       ],
-    });
+    }).sort(sortOptions); // Apply sorting
 
     res.render('display', {
       cards: markets,
@@ -581,6 +600,7 @@ app.get('/market', async (req, res) => {
     res.status(500).render('500');
   }
 });
+
 
 // Handle form submission for market
 app.post(
@@ -644,13 +664,21 @@ app.post(
     }
   }
 );
-
 // Handle search and display for food
 app.get('/food', async (req, res) => {
   try {
     const domain = req.get('host');
     const query = req.query.query || '';
+    const sort = req.query.sort || ''; // Get the sort parameter from query
     const searchRegex = new RegExp(query, 'i');
+
+    // Build the sort object based on the query parameter
+    let sortOptions = {};
+    if (sort === 'asc') {
+      sortOptions.price = 1; // Sort by price ascending
+    } else if (sort === 'desc') {
+      sortOptions.price = -1; // Sort by price descending
+    }
 
     const foods = await Food.find({
       $or: [
@@ -658,7 +686,7 @@ app.get('/food', async (req, res) => {
         { location: searchRegex },
         { description: searchRegex },
       ],
-    });
+    }).sort(sortOptions); // Apply sorting
 
     res.render('display', {
       cards: foods,

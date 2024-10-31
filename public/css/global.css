@@ -119,7 +119,7 @@ box.dark-mode {
 }
 
 .icon-circle a {
-  color: #333; /* Default icon color */
+  color: #333333; /* Default icon color */
   font-size: 1.8rem;
   transition: color 0.3s ease;
 }
@@ -130,15 +130,19 @@ box.dark-mode {
 
 /* Dark mode social media icon colors */
 body.dark-mode .icon-circle {
+  height: 3rem;
+  width: 3rem;
   background-color: #ddd; /* Dark background for icons */
 }
 
 body.dark-mode .icon-circle:hover {
+  
   background-color: #fff !important;
 }
 
 body.dark-mode .icon-circle a {
-  color: #ddd; /* Light color for dark mode */
+  font-size: 1.5rem;
+  color: #000000; /* Light color for dark mode */
 }
 
 body.dark-mode .modal {
