@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import '../globals.css';
 import Navbar from '@/components/NavBars&Footers/navbar';
 import Footer from '@/components/NavBars&Footers/footer';
+import CustomCursor from '@/components/ui/CustomCursor';
 
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
+        <CustomCursor />
           <Navbar />
           {children}
           <Footer />
