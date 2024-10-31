@@ -117,42 +117,71 @@
       color: white; /* Change text color on hover */
     }
 
-    .carousel-control-prev,
-    .carousel-control-next {
-      width: 50px;
-      height: 50px;
-      top: 50%; /* Center vertically */
-      transform: translateY(-50%); /* Center vertically */
-      opacity: 0.8; /* Add slight transparency for aesthetic effect */
-    }
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Center vertically */
+    opacity: 0.8; /* Add slight transparency for aesthetic effect */
+}
 
-    /* Move the previous button slightly to the right */
-    .carousel-control-prev {
-      left: 20px;
-    }
+/* Move the previous button slightly to the right */
+.carousel-control-prev {
+    left: 20px;
+}
 
-    /* Move the next button slightly to the left */
-    .carousel-control-next {
-      right: 20px;
-    }
+/* Move the next button slightly to the left */
+.carousel-control-next {
+    right: 20px;
+}
 
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better visibility */
-      border-radius: 50%;
-      padding: 30px;
-      font-size: 16px;
-    }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better visibility */
+    border-radius: 50%;
+    padding: 30px;
+    font-size: 16px;
+}
 
-    .carousel-control-prev-icon:hover,
-    .carousel-control-next-icon:hover {
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-  </style>
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Card hover effect */
+.card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Scroll button styles */
+.scroll-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none; /* Initially hidden */
+}
+
+.scroll-button.show-btn {
+    display: block; /* Show when class added */
+}
+
+.scroll-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
 
 </head>
 
 <body>
+  <button class="scroll-button">Back to Top</button>
   <div id="progress-bar"></div>
   <%- include('partials/navbar') %>
 
@@ -256,15 +285,39 @@
   <%- include('partials/footer') %>
   <%- include('partials/bottom_nav') %>
 
-  <!-- Scroll Progress Script -->
-  <script>
-    window.onscroll = function () {
-      var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      var scrolled = (winScroll / height) * 100;
-      document.getElementById("progress-bar").style.width = scrolled + "%";
-    };
-  </script>
+<!-- Scroll Progress Script -->
+<script>
+  window.onscroll = function () {
+    // Scroll progress bar
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("progress-bar").style.width = scrolled + "%";
+
+    // Back to top button visibility
+    const scrollButton = document.querySelector(".scroll-button");
+    if (winScroll > 100) {
+      scrollButton.classList.add("show-btn");
+    } else {
+      scrollButton.classList.remove("show-btn");
+    }
+  };
+
+  function smoothScrollToTop() {
+    const scrollY = window.pageYOffset;
+    const scrollStep = Math.max(10, Math.floor(scrollY / 20));
+    if (scrollY > 0) {
+      window.scrollBy(0, -scrollStep);
+      requestAnimationFrame(smoothScrollToTop);
+    }
+  }
+
+  // When the button is clicked, scroll to the top smoothly
+  document.querySelector(".scroll-button")?.addEventListener("click", () => {
+    requestAnimationFrame(smoothScrollToTop);
+  });
+</script>
+
 
   <script>
     // Scroll back to the top when the button is clicked
