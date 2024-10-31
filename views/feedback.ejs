@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #685487, #6cb0c6); /* Gradient background */
+            color: #e0e0e0; /* Light text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .feedback-container {
+            background-color: #1e1e1e; /* Slightly lighter background for the container */
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(105, 90, 90, 0.7);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #e0e0e0; /* Light text for labels */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #555; /* Darker border */
+            border-radius: 4px;
+            background-color: #333; /* Input background */
+            color: #fff; /* Input text color */
+            box-sizing: border-box;
+        }
+
+        .star-rating {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 5px;
+        }
+
+        input[type="radio"] {
+            display: none; /* Hide radio buttons */
+        }
+
+        .star {
+            font-size: 30px; /* Increased star size */
+            color: #ccc; /* Default star color */
+            cursor: pointer;
+            transition: color 0.3s; /* Smooth transition for color change */
+        }
+
+        /* Change star color on hover */
+        .star:hover,
+        .star:hover ~ .star {
+            color: #FFD700; /* Highlight on hover */
+        }
+
+        /* Change color of selected star */
+        input[type="radio"]:checked + .star {
+            color: #FFD700; /* Highlight selected star */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745; /* Green button */
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #218838; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="feedback-container">
+        <h1>Feedback Form</h1>
+        <form id="feedbackForm">
+            <div class="input-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label>Rating:</label>
+                <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5" required>
+                    <label for="star5" class="star">★</label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4" class="star">★</label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3" class="star">★</label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" class="star">★</label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" class="star">★</label>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+</body>
+</html>

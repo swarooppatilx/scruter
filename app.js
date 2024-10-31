@@ -217,7 +217,16 @@ app.post(
     }
   }
 );
+app.get('/feedback', (req, res) => {
+  res.render('feedback');
+});
 
+app.post('/submit-feedback', (req, res) => {
+  const { name, email, rating, message } = req.body;
+  console.log('Feedback received:', { name, email, rating, message });
+  // You can handle the feedback submission logic here (e.g., save to a database)
+  res.send('Thank you for your feedback!');
+});
 //Change in Dashboard Stuff
 
 //Updating Personal Information of Username and Email

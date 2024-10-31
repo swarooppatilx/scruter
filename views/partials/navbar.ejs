@@ -216,6 +216,13 @@ a {
             ><i class="fa-solid fa-cart-shopping me-2"></i>For Sale</a
           >
         </li>
+        <li class="nav-item gsap">
+          <a
+            class="nav-link <%= activeLink === 'feedback-section' ? 'active-link' : '' %>"
+            href="/feedback"
+            ><i class="fa-solid fa-chat"></i>Feedback</a
+          >
+        </li>
       </ul>
       <div
         class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center mt-3 mt-lg-0"
@@ -257,6 +264,12 @@ a {
                         </a>
                       </li>
                       <li>
+                        <li>
+                          <a class="dropdown-item" href="views/feedback">
+                            <i class="fa-solid fa-store me-2"></i>For Sale Ad
+                          </a>
+                        </li>
+                        <li>
                         <a class="gsap dropdown-item text-danger mt-2" href="/logout">
                           <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
                         </a>
