@@ -67,10 +67,32 @@
         width: 0%;
         z-index: 9999;
       }
+          .scroll-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: none; /* Initially hidden */
+    }
+
+    .scroll-button.show-btn {
+      display: block; /* Show when class added */
+    }
+
+    .scroll-button:hover {
+      background-color: #0056b3; /* Darker shade on hover */
+    }
     </style>
 </head>
 
 <body>
+  <button class="scroll-button">Back to Top</button>
   <div id="progress-bar"></div>
   <%- include('partials/navbar') %>
     <section>
@@ -126,7 +148,7 @@
                   </div>
 
                   <!-- Modal for each card -->
-                  <div class="modal fade" id="modal<%= card._id %>" tabindex="-1"
+                <div class="modal fade" id="modal<%= card._id %>" tabindex="-1"
                     aria-labelledby="modalLabel<%= card._id %>" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                       <div class="modal-content">
@@ -143,12 +165,10 @@
                           </h5>
                           <p class="card-phone">
                             <%= card.phone %>
-                              <!-- Adds the phone number when card is pressed -->
                           </p>
                           <p class="card-email">
                             <%= card.email %>
                           </p>
-                          <!-- Adds the email when card is pressed -->
                           <p class="card-text">
                             <a
                               href="https://www.google.com/maps/search/?api=1&query=<%= card.latitude %>,<%= card.longitude %>">
@@ -170,15 +190,21 @@
                                     <%= card.description %>
                                   </p>
                         </div>
-                        <% if (user && user.username===card.username || user && user.username==="admin" ) { %>
-                          <div class="modal-footer">
+                        <div class="modal-footer d-flex justify-content-between">
+                          <% if (user && user.username===card.username || user && user.username==="admin" ) { %>
                             <form action="/delete/<%= selectedType %>/<%= card._id %>" method="POST"
                               style="display: inline">
                               <button type="submit" class="btn btn-danger">Delete</button>
                               <a href="/<%= selectedType %>/edit/<%= card._id %>" class="btn btn-primary">Edit</a>
                             </form>
-                          </div>
-                          <% } %>
+                            <% } %>
+
+                              <!-- Buy Now Button at the bottom-right corner of the modal footer -->
+                              <button type="button" class="btn btn-primary"
+                                style="background-color: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                                Buy Now
+                              </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -199,6 +225,35 @@
             var scrolled = (winScroll / height) * 100;
             document.getElementById("progress-bar").style.width = scrolled + "%";
           };
+          window.onscroll = function () {
+              // Scroll progress bar
+              var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+              var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+              var scrolled = (winScroll / height) * 100;
+              document.getElementById("progress-bar").style.width = scrolled + "%";
+
+              // Back to top button visibility
+              const scrollButton = document.querySelector(".scroll-button");
+              if (winScroll > 100) {
+                scrollButton.classList.add("show-btn");
+              } else {
+                scrollButton.classList.remove("show-btn");
+              }
+            };
+
+            function smoothScrollToTop() {
+              const scrollY = window.pageYOffset;
+              const scrollStep = Math.max(10, Math.floor(scrollY / 20));
+              if (scrollY > 0) {
+                window.scrollBy(0, -scrollStep);
+                requestAnimationFrame(smoothScrollToTop);
+              }
+            }
+
+            // When the button is clicked, scroll to the top smoothly
+            document.querySelector(".scroll-button")?.addEventListener("click", () => {
+              requestAnimationFrame(smoothScrollToTop);
+            });
         </script>
 </body>
 
