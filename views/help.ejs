@@ -1,205 +1,199 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <%- include('partials/head') %>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
     <style>
-      /* Global Light Mode Styles */
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f9fafb;
-        color: #1f2937;
-        line-height: 1.6;
-      }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+            display: flex;
+            flex-direction: column;
+        }
 
-      .help-content {
-        padding: 3rem 2rem;
-        max-width: 800px;
-        margin: 2rem auto;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      }
+        .main-content {
+            width: 90%;
+            padding-left: 8rem;
+            padding-right: 8rem;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
 
-      .help-section h1 {
-        font-size: 2.8rem;
-        font-weight: bold;
-        color: #2563eb;
-        margin-bottom: 1rem;
-        border-bottom: 2px solid #2563eb;
-        padding-bottom: 0.5rem;
-      }
+        .title-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
 
-      .help-section h2 {
-        font-size: 2rem;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-        color: #1f2937;
-      }
+        .title-section h1 {
+            font-size: 2.4rem;
+            color: #2563eb;
+            font-weight: bold;
+        }
 
-      .help-section p {
-        margin-bottom: 1.5rem;
-        text-align: justify;
-        line-height: 1.8;
-      }
+        .title-section p {
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
 
-      .faq-item {
-        margin-top: 1.5rem;
-      }
+        section {
+            margin-top: 2rem;
+        }
 
-      .faq-question {
-        font-weight: bold;
-        cursor: pointer;
-        padding: 0.5rem 0;
-        color: #2563eb;
-        border-bottom: 1px solid #e2e8f0;
-      }
+        section h2 {
+            font-size: 1.8rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            border-left: 4px solid #2563eb;
+            padding-left: 8px;
+            margin-bottom: 1rem;
+        }
 
-      .faq-answer {
-        display: none;
-        padding: 0.5rem 0;
-        color: #4b5563;
-      }
+        section h2 i {
+            margin-right: 8px;
+            color: #6f42c1;
+        }
 
-      /* Call-to-Action Button */
-      .cta-button {
-        display: inline-block;
-        padding: 1rem 2rem;
-        background-color: #2563eb;
-        color: white;
-        font-weight: bold;
-        text-decoration: none;
-        border-radius: 9999px;
-        transition:
-          background-color 0.3s ease,
-          transform 0.3s ease;
-        margin-top: 2rem;
-        text-align: center;
-        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-      }
+        /* Sidebar styles */
+        .sidebar {
+            width: 25%;
+            background: linear-gradient(to bottom, #007bff, #6f42c1);
+            color: #fff;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
 
-      .cta-button:hover {
-        background-color: #1d4ed8;
-        transform: scale(1.05);
-      }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
 
-      /* Dark Mode Styles */
-      .dark-mode {
-        background-color: #1c1c1c;
-        color: #f9fafb;
-      }
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
 
-      .dark-mode .help-content {
-        background-color: #374151;
-        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
-      }
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            transition: color 0.2s;
+        }
 
-      .dark-mode .help-section h1 {
-        color: #60a5fa;
-        border-bottom-color: #60a5fa;
-      }
+        .sidebar ul li a:hover {
+            color: #e0e0e0;
+        }
 
-      .dark-mode .help-section h2 {
-        color: #9ca3af; /* Darkened color for better visibility */
-      }
+        .sidebar ul li a i {
+            margin-right: 8px;
+        }
 
-      .dark-mode .faq-question {
-        color: #60a5fa;
-        border-bottom-color: #4b5563;
-      }
+        @media (max-width: 768px) {
+            .main-content {
+                width: 100%;
+                padding: 1rem;
+            }
 
-      .dark-mode .faq-answer {
-        color: #d1d5db;
-      }
-
-      .dark-mode .cta-button {
-        background-color: #60a5fa;
-      }
-
-      .dark-mode .cta-button:hover {
-        background-color: #3b82f6;
-      }
+            .sidebar {
+                display: none;
+            }
+        }
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
     <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
 
-    <div class="help-content">
-      <section class="help-section">
-        <h1>Help Center</h1>
-        <p>
-          Welcome to our Help Center! Our website is designed to offer a
-          comprehensive platform where users can manage and interact with our
-          services efficiently. Whether you’re here to browse resources, manage
-          your account, or contact support, we are here to assist.
-        </p>
+    <div style="display: flex;">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#introduction"><i class="fas fa-info-circle"></i> Introduction</a></li>
+                <li><a href="#getting-started"><i class="fas fa-info-circle"></i>Getting Started</a></li>
 
-        <h2>What is This Site About?</h2>
-        <p>
-          Our platform is built to help users easily buy, sell, and find local
-          products and services. By connecting communities through ads,
-          listings, and an intuitive interface, our platform makes local
-          commerce accessible and convenient for everyone. Whether you're
-          looking for housing, services, or items for sale, we’re here to
-          connect you with your local community.
-        </p>
+                <li><a href="#faq"><i class="fas fa-question-circle"></i> Frequently Asked Questions</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Support</a></li>
+                <li><a href="#feedback"><i class="fas fa-comments"></i> Feedback</a></li>
+            </ul>
+        </aside>
 
-        <h2>Getting Started</h2>
-        <p>
-          New to our platform? Start by creating an account and exploring
-          features designed to help you easily buy, sell, and find local
-          products and services. Discover how to connect with your community
-          through our ads and listings, and make the most of our guides to learn
-          how to navigate each section effectively for a seamless experience.
-        </p>
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="title-section">
+                <h1>Help Center</h1>
+                <p>Welcome to our Help Center! Here you can find answers to your questions and get support for our services.</p>
+            </div>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleAnswer(this)">
-            How do I reset my password?
-          </div>
-          <div class="faq-answer">
-            To reset your password, go to the login page and click on "Forgot
-            Password." Follow the instructions to reset your password through
-            your registered email.
-          </div>
-        </div>
+            <section id="introduction">
+                <h2><i class="fas fa-info-circle"></i> Introduction</h2>
+                <p>This Help Center provides resources to assist you with our services. Whether you have questions about our products or need assistance, you can find useful information here.</p>
+            </section>
+            <section id="getting-started">
+              <h2><i class="fas fa-user-plus"></i>Getting Started</h2>
+              <p class="mb-2">
+                New to our platform? Start by creating an account and exploring features designed to help you easily buy, sell, and find local products and services.
+            </p>
+            <p class="mb-2">
+                Discover how to connect with your community through our ads and listings, and make the most of our guides to learn how to navigate each section effectively for a seamless experience.
+            </p> </section>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleAnswer(this)">
-            Where can I view my account settings?
-          </div>
-          <div class="faq-answer">
-            Navigate to your profile by clicking on your avatar in the top-right
-            corner, and select "Account Settings" from the dropdown menu.
-          </div>
-        </div>
+            
+            <section id="faq">
+                <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question">What is your return policy?</div>
+                    <div class="faq-answer">Our return policy allows you to return products within 30 days of receipt for a full refund.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How can I contact customer support?</div>
+                    <div class="faq-answer">You can contact customer support via email at support@example.com or call us at 1-800-555-0199.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you offer technical support?</div>
+                    <div class="faq-answer">Yes, we offer technical support for all our products. Please visit our support page for more information.</div>
+                </div>
+            </section>
 
-        <div class="faq-item">
-          <div class="faq-question" onclick="toggleAnswer(this)">
-            How do I contact customer support?
-          </div>
-          <div class="faq-answer">
-            You can reach our support team through the "Contact Us" page. Fill
-            in the form, and we will respond within 24-48 hours.
-          </div>
-        </div>
+            <section id="contact">
+                <h2><i class="fas fa-envelope"></i> Contact Support</h2>
+                <p>If you have any questions or need further assistance, please reach out to our support team:</p>
+                <ul>
+                    <li>Email: <a href="mailto:support@example.com">support@example.com</a></li>
+                    <li>Phone: 1-800-555-0199</li>
+                    <li>Chat: Available on our website from 9 AM to 5 PM EST</li>
+                </ul>
+            </section>
 
-        <a href="/contact" class="cta-button">Contact Support</a>
-      </section>
+            <section id="feedback">
+                <h2><i class="fas fa-comments"></i> Feedback</h2>
+                <p>Your feedback is important to us! Please let us know how we can improve our services:</p>
+                <a href="/feedback-form" class="cta-button">Give Feedback</a>
+            </section>
+        </main>
     </div>
 
-    <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>
-
     <script>
-      function toggleAnswer(element) {
-        const answer = element.nextElementSibling;
-        answer.style.display =
-          answer.style.display === 'block' ? 'none' : 'block';
-      }
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrollPercent + '%';
+        });
     </script>
-  </body>
+
+    <%- include('partials/footer') %>
+</body>
 </html>
