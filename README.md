@@ -317,15 +317,27 @@ Big thanks to all the contributors who have helped make Scruter a better platfor
 <p align="center">Happy coding and thanks for your contributions! 🎉</p>
 
 
-## Connect with Me
+## Footer
 
-Feel free to connect with me on social platforms:
-
-[![Twitter](https://img.shields.io/badge/Twitter-Profile-blue?style=for-the-badge&logo=x)](https://x.com/sastatonystark)
-[![GitHub](https://img.shields.io/badge/GitHub-swarooppatilx-black?style=for-the-badge&logo=github)](https://github.com/swarooppatilx)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-swaroop-patil-x-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/swaroop-patil-x/)
-[![Threads](https://img.shields.io/badge/Threads-Profile-purple?style=for-the-badge&logo=threads)](https://www.threads.net/@swaroop.patil.x)
-[![Instagram](https://img.shields.io/badge/Instagram-Profile-pink?style=for-the-badge&logo=instagram)](https://www.instagram.com/swaroop.patil.x/)
+<div style="text-align: center; background-color: #f8f8f8; padding: 20px;">
+    <div style="display: flex; justify-content: center; gap: 15px;">
+        <a href="https://x.com/sastatonystark" target="_blank">
+            <img src="path/to/x-icon.png" alt="X" style="width: 30px; height: 30px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+        </a>
+        <a href="https://github.com/swarooppatilx" target="_blank">
+            <img src="path/to/github-icon.png" alt="GitHub" style="width: 30px; height: 30px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+        </a>
+        <a href="https://www.linkedin.com/in/swaroop-patil-x/" target="_blank">
+            <img src="path/to/linkedin-icon.png" alt="LinkedIn" style="width: 30px; height: 30px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+        </a>
+        <a href="https://www.threads.net/@swaroop.patil.x" target="_blank">
+            <img src="path/to/threads-icon.png" alt="Threads" style="width: 30px; height: 30px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+        </a>
+        <a href="https://www.instagram.com/swaroop.patil.x/" target="_blank">
+            <img src="path/to/instagram-icon.png" alt="Instagram" style="width: 30px; height: 30px; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+        </a>
+    </div>
+</div>
 
 
 
