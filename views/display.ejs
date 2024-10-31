@@ -67,10 +67,32 @@
         width: 0%;
         z-index: 9999;
       }
+          .scroll-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: none; /* Initially hidden */
+    }
+
+    .scroll-button.show-btn {
+      display: block; /* Show when class added */
+    }
+
+    .scroll-button:hover {
+      background-color: #0056b3; /* Darker shade on hover */
+    }
     </style>
 </head>
 
 <body>
+  <button class="scroll-button">Back to Top</button>
   <div id="progress-bar"></div>
   <%- include('partials/navbar') %>
     <section>
@@ -203,6 +225,35 @@
             var scrolled = (winScroll / height) * 100;
             document.getElementById("progress-bar").style.width = scrolled + "%";
           };
+          window.onscroll = function () {
+              // Scroll progress bar
+              var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+              var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+              var scrolled = (winScroll / height) * 100;
+              document.getElementById("progress-bar").style.width = scrolled + "%";
+
+              // Back to top button visibility
+              const scrollButton = document.querySelector(".scroll-button");
+              if (winScroll > 100) {
+                scrollButton.classList.add("show-btn");
+              } else {
+                scrollButton.classList.remove("show-btn");
+              }
+            };
+
+            function smoothScrollToTop() {
+              const scrollY = window.pageYOffset;
+              const scrollStep = Math.max(10, Math.floor(scrollY / 20));
+              if (scrollY > 0) {
+                window.scrollBy(0, -scrollStep);
+                requestAnimationFrame(smoothScrollToTop);
+              }
+            }
+
+            // When the button is clicked, scroll to the top smoothly
+            document.querySelector(".scroll-button")?.addEventListener("click", () => {
+              requestAnimationFrame(smoothScrollToTop);
+            });
         </script>
 </body>
 
