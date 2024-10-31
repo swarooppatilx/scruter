@@ -21,12 +21,12 @@ const Links = [
   {
     name: 'About us',
     id: 1,
-    href: '/About',
+    href: '/about',
   },
   {
     name: 'Our Teams',
     id: 2,
-    href: '/Teams',
+    href: '/team',
   },
   {
     name: 'Terms of service',
