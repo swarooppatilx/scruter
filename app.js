@@ -365,6 +365,12 @@ app.get('/terms-page', (req, res) => {
   });
 });
 
+app.get('/contactus', (req, res) => {
+  res.render('contact', {
+    activeLink: 'contact', // You can customize this based on your layout
+  });
+});
+
 app.get('/faq', (req, res) => {
   res.render('faq', {
     activeLink: 'faq', // You can customize this based on your layout
