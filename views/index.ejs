@@ -93,12 +93,33 @@
     .scroll-button:hover {
       background-color: #0056b3; /* Darker shade on hover */
     }
+    #intro-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #2e8030;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4rem;
+      font-weight: 500;
+      z-index: 9999;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+    
+
     </style>
 
 </head>
 
 <body>
   <button class="scroll-button">Back to Top</button>
+  <div id="intro-overlay">
+    Welcome to Scruter!
+  </div>
   <div id="progress-bar"></div>
   <%- include('partials/navbar') %>
     <!-- Carousel Section -->
@@ -325,6 +346,34 @@
                 requestAnimationFrame(smoothScrollToTop);
               });
             </script>
+<script>
+  // Fade out the intro overlay after a short delay
+  document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+        // Fade out the intro overlay after 3 seconds
+        document.getElementById("intro-overlay").classList.add("fade-out");
+        
+        // Remove the overflow restriction from the body to allow scrolling
+        document.body.style.overflow = "auto";
+      }, 800); // Adjust the timeout as needed
+    });
+</script>
+<script>
+  // Wait for the window to load completely before playing the animation
+  window.addEventListener("load", () => {
+    // GSAP animation to fade out and scale down the intro overlay
+    gsap.to("#intro-overlay", {
+      opacity: 0,
+      scale: 1,
+      duration: 2,
+      ease: "power2.out",
+      onComplete: () => {
+        // Hide the overlay completely after animation completes
+        document.getElementById("intro-overlay").style.display = "none";
+      }
+    });
+  });
+</script>
 
 </body>
 
