@@ -125,7 +125,7 @@ export function OtpForm({
               )}
             />
 
-            <Button className="bg-customTeal dark:bg-Green" type="submit">
+            <Button className="bg-black" type="submit">
               Submit
             </Button>
           </form>
