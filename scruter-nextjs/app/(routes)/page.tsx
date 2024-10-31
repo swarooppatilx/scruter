@@ -7,7 +7,7 @@ import CustomCursor from "@/components/ui/CustomCursor"; // Import your custom c
 const HomePage = () => {
     return (
         <>
-            <CustomCursor /> {/* Include the custom cursor */}
+             {/* Include the custom cursor */}
             <PageContainer>
                 <HeroCarousal />
                 <HeroCards />

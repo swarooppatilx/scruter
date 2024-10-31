@@ -86,7 +86,7 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
 // Function to generate and send OTP
 export const generateAndSendOTP = async (
   email: string,
-  role: string
+  role: "seller" | "user"
 ) => {
   const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate 6-digit OTP
 
