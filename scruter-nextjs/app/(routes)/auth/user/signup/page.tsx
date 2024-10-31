@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
-import { SellerSignupForm} from '../../components/signup-form';
+import { UserSignupForm } from '../../components/user/signup-form';
 
 export const metadata: Metadata = {
   title: 'Authentication',
@@ -31,6 +31,15 @@ export default function AuthenticationPage() {
         />
       </div>
       <div className="container relative hidden h-[700px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <Link
+          href="/auth/seller/signup"
+          className={cn(
+            buttonVariants({ variant: 'ghost' }),
+            'absolute right-32 top-8 md:right-32 md:top-8 bg-black text-white'
+          )}
+        >
+          Join Scruter as a seller
+        </Link>
         <Link
           href="/auth/seller/login"
           className={cn(
@@ -40,6 +49,7 @@ export default function AuthenticationPage() {
         >
           Login
         </Link>
+       
         <div className={`hidden mt-20 bg-[url("/userAuth1.svg")] bg-opacity-50 h-full flex-col bg-no-repeat bg-contain text-white dark:border-r lg:flex`}>
          
         </div>
@@ -53,7 +63,7 @@ export default function AuthenticationPage() {
                 Enter your email below to create your account
               </p>
             </div>
-            <SellerSignupForm authType='signup'/>
+            <UserSignupForm authType='signup'/>
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our{' '}
               <Link

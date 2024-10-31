@@ -17,7 +17,7 @@ model User {
   id           String  @id @default(uuid()) @map("_id")
   name         String
 
-  email String? @unique
+  email String @unique
   otp   String?
   role  String  @default("user")
 
