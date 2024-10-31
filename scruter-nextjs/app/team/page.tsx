@@ -2,10 +2,13 @@
 
 import { useEffect } from 'react';
 import Image from 'next/image';
-import PageContainer from '@/components/ui/pageContainer';
 import '../globals.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
+import Navbar from '@/components/NavBars&Footers/navbar';
+import { Providers } from '@/lib/providers';
+import Footer from '@/components/NavBars&Footers/footer';
+import CustomCursor from '@/components/ui/CustomCursor';
 
 const teamMembers = [
   {
@@ -90,7 +93,9 @@ export default function TeamPage() {
   }, []);
 
   return (
-    <PageContainer>
+    <Providers>
+    <CustomCursor />
+    <Navbar />
       <section className="team-section text-center mt-4 mb-5 pb-5">
         <div className="container mx-auto">
           <h2 className="mb-4 text-2xl font-bold">Meet the Team</h2>
@@ -142,6 +147,7 @@ export default function TeamPage() {
           </div>
         </div>
       </section>
-    </PageContainer>
+    <Footer />
+    </Providers>
   );
 }

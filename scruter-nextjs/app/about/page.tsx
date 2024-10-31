@@ -3,6 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PageContainer from '@/components/ui/pageContainer';
 import '../globals.css';
+import Navbar from '@/components/NavBars&Footers/navbar';
+import { Providers } from '@/lib/providers';
+import Footer from '@/components/NavBars&Footers/footer';
+import CustomCursor from '@/components/ui/CustomCursor';
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -12,8 +16,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <PageContainer>
-
+    <Providers>
+    <CustomCursor />
+    <Navbar />
       <div className="md:hidden">
         <Image
           src="/aboutPattern.svg"
@@ -31,12 +36,6 @@ export default function AboutPage() {
         />
       </div>
       <div className="bg-gray-100 min-h-screen">
-        <nav className="bg-white shadow sticky top-0 z-50 p-4 text-center">
-          <Link href="/" className="text-blue-800 font-bold px-4">Home</Link>
-          <Link href="/about" className="text-blue-800 font-bold px-4">About Us</Link>
-          <Link href="/contact" className="text-blue-800 font-bold px-4">Contact Us</Link>
-        </nav>
-
         <section className="about-us bg-white py-12">
           <div className="container mx-auto max-w-4xl px-4">
             <h1 className="text-4xl font-bold text-center text-blue-800 mb-6">About Us</h1>
@@ -85,8 +84,8 @@ export default function AboutPage() {
           </div>
         </section>
       </div>
-
-      </PageContainer>
+      <Footer />
+      </Providers>
     </>
   );
 }
