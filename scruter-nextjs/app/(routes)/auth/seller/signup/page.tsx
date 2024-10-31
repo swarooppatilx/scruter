@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
-import { SellerSignupForm} from '../../components/signup-form';
+import { SellerSignupForm } from '../../components/seller/signup-form';
 
 export const metadata: Metadata = {
   title: 'Authentication',
@@ -30,7 +30,16 @@ export default function AuthenticationPage() {
           className="hidden dark:block"
         />
       </div>
-      <div className="container relative hidden h-[700px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+      <div className="container relative  hidden h-[700px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2  lg:px-0">
+        <Link
+          href="/auth/user/signup"
+          className={cn(
+            buttonVariants({ variant: 'ghost' }),
+            'absolute right-32 top-8 md:right-32 md:top-8 bg-black text-white'
+          )}
+        >
+          Join Scruter as a user
+        </Link>
         <Link
           href="/auth/seller/login"
           className={cn(

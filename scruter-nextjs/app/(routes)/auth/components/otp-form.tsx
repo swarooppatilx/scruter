@@ -71,7 +71,7 @@ export function OtpForm({
     const result = await signIn("credentials", {
       email,
       otp: data.pin,
-      role: "seller",
+      role: roleType,
       redirect: false,
     });
     console.log(result);
@@ -99,6 +99,7 @@ export function OtpForm({
             <FormField
               control={form.control}
               name="pin"
+              disabled={isLoading}
               render={({ field }) => (
                 <FormItem className="flex gap-2 items-start justify-center flex-col">
                   <FormLabel className="text-2xl gap-2 flex items-center justify-center text-customTeal dark:text-Green font-bold">

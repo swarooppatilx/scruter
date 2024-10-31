@@ -1,12 +1,5 @@
 'use client';
 
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from '@/components/ui/input-otp';
-
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -15,14 +8,14 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Toaster, toast } from 'react-hot-toast';
-import { SellerCreate } from '@/actions/seller/signup-action';
-import { OtpForm } from './otp-form';
+import { OtpForm } from '../otp-form';
+import { UserCreate } from '@/actions/user/signup-action';
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   authType: 'signup' | 'login';
 }
 
-export function SellerSignupForm({
+export function UserSignupForm({
   className,
   authType,
   ...props
@@ -39,16 +32,18 @@ export function SellerSignupForm({
 
     if (!name || !email) {
       toast.error('missing details');
+      setIsLoading(false);
       return;
     }
     // toast.success(name+email);
-    const res = await SellerCreate({
+    const res = await UserCreate({
       name: name,
       email: email,
     });
 
     if (!res.success && res.error) {
       toast.error(res.error);
+      setIsLoading(false);
       return;
     }
 
@@ -113,7 +108,7 @@ export function SellerSignupForm({
         </form>
       )}
 
-      {otpOpen && <OtpForm email={email} setOtpOpen={setOtpOpen} roleType='seller'/>}
+      {otpOpen && <OtpForm email={email} setOtpOpen={setOtpOpen} roleType='user'/>}
     </div>
   );
 }
