@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
-import PageContainer from '@/components/ui/pageContainer';
 import '../globals.css';
 import Navbar from '@/components/NavBars&Footers/navbar';
 import { Providers } from '@/lib/providers';
