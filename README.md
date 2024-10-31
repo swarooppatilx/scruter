@@ -315,3 +315,31 @@ Big thanks to all the contributors who have helped make Scruter a better platfor
     <img src="https://media.giphy.com/media/Ll22OhMLAlVDb8UQWe/giphy.gif" width="60" height="60"/>
 </p>
 <p align="center">Happy coding and thanks for your contributions! 🎉</p>
+
+
+## 🌐 Connect with Me
+
+<div align="center">
+    <a href="https://x.com/sastatonystark">
+        <img src="https://img.shields.io/badge/X-1DA1F2?style=flat-square&logo=x&logoColor=white" alt="X" width="100" height="30"/>
+    </a>
+    <a href="https://github.com/swarooppatilx">
+        <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" width="100" height="30"/>
+    </a>
+    <a href="https://www.linkedin.com/in/swaroop-patil-x/">
+        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" width="100" height="30"/>
+    </a>
+    <a href="https://www.threads.net/@swaroop.patil.x">
+        <img src="https://img.shields.io/badge/Threads-000000?style=flat-square&logo=threads&logoColor=white" alt="Threads" width="100" height="30"/>
+    </a>
+    <a href="https://www.instagram.com/swaroop.patil.x/">
+        <img src="https://img.shields.io/badge/Instagram-E1306C?style=flat-square&logo=instagram&logoColor=white" alt="Instagram" width="100" height="30"/>
+    </a>
+</div>
+
+---
+
+Thank you for visiting! Feel free to reach out through any of the links above.
+
+
+
