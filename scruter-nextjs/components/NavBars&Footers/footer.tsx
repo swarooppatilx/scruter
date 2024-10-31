@@ -1,60 +1,70 @@
-"use client";
+'use client';
 
-import { ChevronRight, Copyright, Facebook, Heart, Instagram, Mail, MapPin, Phone, Twitter } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import {
+  ChevronRight,
+  Copyright,
+  Facebook,
+  Heart,
+  Instagram,
+  Mail,
+  MapPin,
+  Phone,
+  Twitter,
+} from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
 
 const Links = [
   {
-    name: "About us",
+    name: 'About us',
     id: 1,
-    href: "/About",
+    href: '/About',
   },
   {
-    name: "Our Teams",
+    name: 'Our Teams',
     id: 2,
-    href: "/Teams",
+    href: '/Teams',
   },
   {
-    name: "Terms of service",
+    name: 'Terms of service',
     id: 3,
-    href: "/Terms",
+    href: '/Terms',
   },
   {
-    name: "Our Contributors",
+    name: 'Our Contributors',
     id: 4,
-    href: "/contributors",
+    href: '/contributors',
   },
   {
-    name: "Privacy and Policy",
+    name: 'Privacy and Policy',
     id: 5,
-    href: "/Policy",
+    href: '/Policy',
   },
 ];
 const Helpdesk = [
   {
-    name: "HelpCenter",
+    name: 'HelpCenter',
     id: 1,
-    href: "/HelpCenter",
+    href: '/HelpCenter',
   },
   {
-    name: "FAQ",
+    name: 'FAQ',
     id: 2,
-    href: "/FAQ",
+    href: '/FAQ',
   },
   {
-    name: "ContactUs",
+    name: 'ContactUs',
     id: 3,
-    href: "/ContactUs",
+    href: '/ContactUs',
   },
   {
-    name: "Support",
+    name: 'Support',
     id: 4,
-    href: "/Support",
-  }
+    href: '/Support',
+  },
 ];
 
 const Footer = () => {
@@ -66,7 +76,6 @@ const Footer = () => {
         {/* section1 */}
         <div className="flex gap-4 items-start justify-between lg:px-4 pb-4 flex-col">
           <div className="flex justify-center items-center">
-            
             <Link href="/" className="ml-4 lg:ml:0 gap-x-2">
               <p className="font-bold text-5xl  dark:text-Green font-nunito">
                 About Scruter
@@ -74,7 +83,9 @@ const Footer = () => {
             </Link>
           </div>
           <div className=" ">
-          Scruter is your local platform for buying, selling, and discovering everything you need. Whether it's products, services, or community activities, we connect people for a better local experience.
+            Scruter is your local platform for buying, selling, and discovering
+            everything you need. Whether it's products, services, or community
+            activities, we connect people for a better local experience.
           </div>
         </div>
         {/* section 2 */}
@@ -83,7 +94,7 @@ const Footer = () => {
             Quick Links
           </p>
           <div className=" flex flex-col gap-2">
-            {Links.map((link) => (
+            {Links.map(link => (
               <Link
                 key={link.id}
                 href={link.href}
@@ -96,21 +107,21 @@ const Footer = () => {
                 className="flex items-center  gap-2"
               >
                 <ChevronRight className="h-4 w-4" />
-                <div className={id === link.id ? "underline" : ""}>
+                <div className={id === link.id ? 'underline' : ''}>
                   {link.name}
                 </div>
               </Link>
             ))}
           </div>
         </div>
-        
+
         {/* section 3 */}
         <div className="flex flex-col w-full items-start py-4  lg:ml-10 lg:p-4 gap-5">
           <p className="font-bold text-3xl text-customTeal dark:text-Green font-handlee">
             Helpdesk
           </p>
           <div className=" flex flex-col gap-2">
-            {Helpdesk.map((link) => (
+            {Helpdesk.map(link => (
               <Link
                 key={link.id}
                 href={link.href}
@@ -123,7 +134,7 @@ const Footer = () => {
                 className="flex items-center  gap-2"
               >
                 <ChevronRight className="h-4 w-4" />
-                <div className={id === link.id ? "underline" : ""}>
+                <div className={id === link.id ? 'underline' : ''}>
                   {link.name}
                 </div>
               </Link>
@@ -137,21 +148,21 @@ const Footer = () => {
           </p>
           <div className="flex gap-2 items-center justify-center">
             <div className="rounded-full bg-gray-200 flex items-center justify-center h-10 w-10">
-              <Facebook/>
+              <Facebook />
             </div>
             <div className="rounded-full bg-gray-200 flex items-center justify-center h-10 w-10">
-              <Twitter/>
+              <Twitter />
             </div>
             <div className="rounded-full bg-gray-200 flex items-center justify-center h-10 w-10">
-              <Instagram/>
+              <Instagram />
             </div>
           </div>
         </div>
       </div>
       <div className="flex flex-col lg:flex-row pt-5 items-center justify-center">
         <div className="flex items-center  justify-center">
-          Made with   <Heart fill="red" className="mx-2"/>   by Team Scruter
-          </div>
+          Made with <Heart fill="red" className="mx-2" /> by Team Scruter
+        </div>
       </div>
     </div>
   );

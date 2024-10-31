@@ -51,9 +51,13 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <!-- Bootstrap Bundle with Popper -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <!-- GSAP -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/ScrollTrigger.min.js"></script>
    <!-- Font Awesome CSS -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Custom CSS -->
+ <!-- Custom CSS -->
      <link rel="stylesheet" href="css/global.css">
      <link rel="stylesheet" href="css/preloader.css">
 
@@ -162,6 +166,8 @@ html {
     }
    </style>
    <% } %>
+
+   
        <!-- preloader -->
        <div id="preloader">
         <div class="wrapper">
@@ -175,10 +181,34 @@ html {
             </div>
         </div>
       </div>
-      <script>
-        // /preloader js styling
-        let preloader = document.querySelector("#preloader");
+
+<!-- Scroll to top Button -->
+<button id="scrollTopButton" class="scroll-button d-none d-md-block z-3">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 4L4 12H8V20H16V12H20L12 4Z" fill="white"/>
+  </svg>
+</button>
+<script>
+  // Show the scroll-to-top button when scrolled down
+  window.onscroll = function() { toggleScrollTopButton() };
+
+  function toggleScrollTopButton() {
+    const button = document.getElementById("scrollTopButton");
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      button.classList.add("show-btn");
+    } else {
+      button.classList.remove("show-btn");
+    }
+  }
+
+  // Scroll to the top when button is clicked
+  document.getElementById("scrollTopButton").onclick = function() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+          // /preloader js styling
+          let preloader = document.querySelector("#preloader");
         window.addEventListener("load", function (e) {
           preloader.style.display = "none";
         });
-      </script>
+</script>
