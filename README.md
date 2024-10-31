@@ -322,8 +322,8 @@ Big thanks to all the contributors who have helped make Scruter a better platfor
 [![X (formerly Twitter)](https://img.shields.io/badge/X-1DA1F2?style=flat-square&logo=x&logoColor=white)](https://x.com/sastatonystark)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/swaroop-patil-x/)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/swarooppatilx)
-[![Threads](https://img.shields.io/badge/Threads-Profile-lightgrey?style=flat-square&logo=threads)](https://www.threads.net/@swaroop.patil.x)
-[![Instagram](https://img.shields.io/badge/Instagram-Profile-pink?style=flat-square&logo=instagram)](https://www.instagram.com/swaroop.patil.x/)
+[![Threads](https://img.shields.io/badge/Threads-@swaroop.patil.x-1DA1F2?style=flat-square&logo=threads&logoColor=white)](https://www.threads.net/@swaroop.patil.x)
+[![Instagram](https://img.shields.io/badge/Instagram-@swaroop.patil.x-E4405F?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/swaroop.patil.x/)
 
 ---
 
