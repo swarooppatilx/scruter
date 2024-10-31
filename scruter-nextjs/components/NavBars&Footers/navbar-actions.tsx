@@ -1,34 +1,53 @@
 "use client"
 
-import { LogIn} from "lucide-react";
+import { LogIn, LogInIcon} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 const NavbarActions = () => {
     //prevention for hydration error
 
     const [isMounted,setIsMounted]=useState(false);
 
+    const session=useSession();
+
+
     useEffect(()=>{
         setIsMounted(true);
     },[])
 
-    const router=useRouter();
 
     if(!isMounted) return null;
 
-    return ( 
-        <div className="ml-auto flex items-center gap-x-4">
-            <Button
-                onClick={()=>router.push("/auth/seller/login")}
-                className="flex items-center rounded-full bg-black px-4 py-2">
-                <LogIn
+ 
+        return (
+            <div className="ml-auto flex items-center gap-x-4">
+              {session.status == "unauthenticated" && (
+                <Link className="bg-black p-4 rounded-full" href={"/auth/user/login"}>
+                  <LogInIcon
                     size={20}
                     color="white"
                 />
-            </Button>
-        </div>
+                </Link>
+              )}
+              {session.status == "authenticated" && (
+                <>
+                  <div>Hi! {session.data.user?.name}</div>
+                  <Button
+                    className="rounded-full"
+                    variant={"outline"}
+                    onClick={() => {
+                      signOut();
+                    }}
+                  >
+                    Log out
+                  </Button>
+                </>
+              )}
+            </div>
      );
 }
  

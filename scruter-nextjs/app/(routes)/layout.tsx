@@ -4,6 +4,7 @@ import '../globals.css';
 import Navbar from '@/components/NavBars&Footers/navbar';
 import Footer from '@/components/NavBars&Footers/footer';
 import CustomCursor from '@/components/ui/CustomCursor';
+import { Providers } from '@/lib/providers';
 
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
@@ -28,13 +29,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
-        <CustomCursor />
+      <body className={`antialiased`}>
+        <Providers>
+          <CustomCursor />
           <Navbar />
           {children}
           <Footer />
+        </Providers>
       </body>
     </html>
   );
