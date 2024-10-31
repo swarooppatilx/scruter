@@ -315,3 +315,15 @@ Big thanks to all the contributors who have helped make Scruter a better platfor
     <img src="https://media.giphy.com/media/Ll22OhMLAlVDb8UQWe/giphy.gif" width="60" height="60"/>
 </p>
 <p align="center">Happy coding and thanks for your contributions! 🎉</p>
+
+
+## Connect with Me
+
+Feel free to connect with me on social platforms:
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/swaroop-patil-x/)
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-black?style=for-the-badge&logo=github)](https://github.com/swarooppatilx/)
+[![X](https://img.shields.io/badge/X-Profile-blue?style=for-the-badge&logo=x)](https://x.com/sastatonystark)
+[![Threads](https://img.shields.io/badge/Threads-Profile-lightgrey?style=for-the-badge&logo=threads)](https://www.threads.net/@swaroop.patil.x)
+[![Instagram](https://img.shields.io/badge/Instagram-Profile-pink?style=for-the-badge&logo=instagram)](https://www.instagram.com/swaroop.patil.x/)
+
