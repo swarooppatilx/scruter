@@ -305,13 +305,16 @@ Here are a few tips to ensure a smooth contribution process:
 5. **Engage in Discussions**  
    If you're unsure about a feature or want to suggest improvements, engage with the maintainers via the [Discussions](https://github.com/swarooppatilx/scruter/discussions) section.
 
-<div><h2><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Red%20Heart.png" width="35" height="35"> Contributors</h2></div>
-
-Big thanks to all the contributors who have helped make Scruter a better platform! 🎉
-
-<a href="https://github.com/swarooppatilx/scruter/graphs/contributors"> <img align="center" src="https://contrib.rocks/image?max=100&repo=swarooppatilx/scruter" /> </a> <p align="right"><a href="#top"><img src="https://img.shields.io/badge/Move%20to%20top-Blue?style=plastic" alt="Back To Top"></a></p>
+## 🌍 Our Valuable Contributors
 
 <p align="center">
-    <img src="https://media.giphy.com/media/Ll22OhMLAlVDb8UQWe/giphy.gif" width="60" height="60"/>
+      <a href="https://github.com/swarooppatilx/scruter/graphs/contributors">
+         <img src="https://api.vaunt.dev/v1/github/entities/swarooppatilx/repositories/scruter/contributors?format=svg&limit=54" width="700" height="250" />
+      </a>
 </p>
-<p align="center">Happy coding and thanks for your contributions! 🎉</p>
+
+<br>
+    
+### 🎉 Thank You to All Our Amazing Contributors! 🎉
+
+We are incredibly grateful for your dedication and hard work. Your contributions have been invaluable in making this project a success. Thank you for being a part of our journey!
