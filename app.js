@@ -10,6 +10,10 @@ const MongoStore = require('connect-mongo');
 const bcrypt = require('bcrypt');
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
+const MicrosoftStrategy = require('passport-microsoft').Strategy;
 const app = express();
 
 // Import the database.js file
@@ -30,6 +34,98 @@ app.use(
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
     cookie: { secure: false }, // Set to true if using HTTPS
   })
+);
+
+// Passport initialization
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Passport serialization
+passport.serializeUser((user, done) => done(null, user.id));
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .then(user => done(null, user))
+    .catch(err => done(err, null));
+});
+
+// Google Strategy
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: '/auth/google/callback',
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ googleId: profile.id });
+        if (!user) {
+          user = await User.create({
+            googleId: profile.id,
+            username: profile.displayName,
+            email: profile.emails[0].value,
+          });
+        }
+        done(null, user);
+      } catch (error) {
+        done(error, null);
+      }
+    }
+  )
+);
+
+// Facebook Strategy
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      callbackURL: '/auth/facebook/callback',
+      profileFields: ['id', 'displayName', 'email'],
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ facebookId: profile.id });
+        if (!user) {
+          user = await User.create({
+            facebookId: profile.id,
+            username: profile.displayName,
+            email: profile.emails[0].value,
+          });
+        }
+        done(null, user);
+      } catch (error) {
+        done(error, null);
+      }
+    }
+  )
+);
+
+// Microsoft Strategy
+passport.use(
+  new MicrosoftStrategy(
+    {
+      clientID: process.env.MICROSOFT_CLIENT_ID,
+      clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
+      callbackURL: '/auth/microsoft/callback',
+      scope: ['user.read'],
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ microsoftId: profile.id });
+        if (!user) {
+          user = await User.create({
+            microsoftId: profile.id,
+            username: profile.displayName,
+            email: profile._json.mail,
+          });
+        }
+        done(null, user);
+      } catch (error) {
+        done(error, null);
+      }
+    }
+  )
 );
 
 // Middleware to set user object for views
@@ -53,26 +149,46 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'uploads',
-    format: async (req, file) => 'jpeg', // Supports promises as well
+    format: async (req, file) => 'jpeg',
     public_id: (req, file) =>
-      Date.now() +
-      '-' +
-      file.originalname.replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 100),
+      Date.now() + '-' + file.originalname.replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 100),
   },
 });
 
-// Initialize multer with the Cloudinary storage
 const upload = multer({ storage });
 
 // Authentication middleware
 const ensureAuthenticated = (req, res, next) => {
-  if (req.session.user) {
+  if (req.session.user || req.isAuthenticated()) {
     return next();
   }
   res.redirect('/auth?action=login');
 };
 
-// Routes
+// OAuth Routes
+
+// Google OAuth
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+app.get('/auth/google/callback', passport.authenticate('google', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+}));
+
+// Facebook OAuth
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+}));
+
+// Microsoft OAuth
+app.get('/auth/microsoft', passport.authenticate('microsoft'));
+app.get('/auth/microsoft/callback', passport.authenticate('microsoft', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+}));
+
+// Routes (existing routes, like '/', '/team', etc., remain the same)
 
 // Home route
 app.get('/', (req, res) => {
@@ -83,140 +199,6 @@ app.get('/', (req, res) => {
     activeLink: 'home',
   });
 });
-
-// Team route
-app.get('/team', (req, res) => {
-  res.render('team', {
-    searchAction: '/food',
-    selectedType: req.query.type || 'food',
-    q: req.query.q || '',
-    activeLink: '',
-  });
-});
-
-// Render authentication page
-app.get('/login', (req, res) => {
-  const action = req.query.action || 'login';
-  res.render('auth', { action, errors: [], activeLink: '' });
-});
-
-// Render authentication page
-app.get('/auth', (req, res) => {
-  const action = req.query.action || 'login';
-  res.render('auth', { action, errors: [], activeLink: '' });
-});
-
-// Handle login form submission
-app.post(
-  '/login',
-  [
-    body('username').notEmpty().withMessage('Username is required'),
-    body('password').notEmpty().withMessage('Password is required'),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).render('auth', {
-        action: 'login',
-        errors: errors.array(),
-        activeLink: '',
-      });
-    }
-
-    const { username, password } = req.body;
-    try {
-      const user = await User.findOne({ username });
-      console.log('Fetched User from MongoDB: ', user);
-      if (user && (await bcrypt.compare(password, user.password))) {
-        req.session.user = user;
-        res.redirect('/');
-      } else {
-        res.status(400).render('auth', {
-          action: 'login',
-          errors: [{ msg: 'Invalid credentials' }],
-          activeLink: '',
-        });
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-      res.status(500).render('500');
-    }
-  }
-);
-
-// Handle signup form submission
-app.post(
-  '/signup',
-  [
-    body('username').notEmpty().withMessage('Username is required'),
-    body('email').isEmail().withMessage('Email is required and must be valid'),
-    body('password').notEmpty().withMessage('Password is required'),
-    body('confirmPassword')
-      .notEmpty()
-      .withMessage('Confirm Password is required'),
-    body('phone').notEmpty().withMessage('Phone number is required'),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).render('auth', {
-        action: 'signup',
-        errors: errors.array(),
-        activeLink: '',
-      });
-    }
-
-    const { username, email, password, confirmPassword, phone } = req.body;
-
-    if (password !== confirmPassword) {
-      return res.status(400).render('auth', {
-        action: 'signup',
-        errors: [{ msg: 'Passwords do not match' }],
-        activeLink: '',
-      });
-    }
-
-    try {
-      const existingUser = await User.findOne({
-        $or: [{ username }, { email }, { phone }],
-      });
-      if (existingUser) {
-        const errors = [];
-        if (existingUser.username === username) {
-          errors.push({ msg: 'Username is already taken' });
-        }
-        if (existingUser.phone === phone) {
-          errors.push({ msg: 'Phone is already taken' });
-        }
-        if (existingUser.email === email) {
-          errors.push({ msg: 'Email is already registered' });
-        }
-        return res
-          .status(400)
-          .render('auth', { action: 'signup', errors, activeLink: '' });
-      }
-
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const newUser = new User({
-        username,
-        email,
-        password: hashedPassword,
-        phone,
-      });
-      await newUser.save();
-
-      req.session.user = newUser;
-      res.redirect('/');
-    } catch (error) {
-      console.error('Error during signup:', error);
-      res.status(500).render('auth', {
-        action: 'signup',
-        errors: [{ msg: 'Internal Server Error' }],
-        activeLink: '',
-      });
-    }
-  }
-);
 
 //Change in Dashboard Stuff
 
