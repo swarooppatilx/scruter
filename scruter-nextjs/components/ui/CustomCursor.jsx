@@ -1,13 +1,12 @@
-
 import React from 'react';
 import AnimatedCursor from 'react-animated-cursor';
 
 const CustomCursor = () => {
-    return (
-        <AnimatedCursor
+  return (
+    <AnimatedCursor
       innerSize={10}
       outerSize={25}
-      color='128, 128, 128'
+      color="128, 128, 128"
       outerAlpha={0.2}
       innerScale={0.7}
       outerScale={5}
@@ -22,10 +21,10 @@ const CustomCursor = () => {
         'select',
         'textarea',
         'button',
-        '.link'
+        '.link',
       ]}
     />
-    );
+  );
 };
 
 export default CustomCursor;

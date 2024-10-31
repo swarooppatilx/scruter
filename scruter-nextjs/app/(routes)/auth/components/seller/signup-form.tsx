@@ -106,7 +106,9 @@ export function SellerSignupForm({
         </form>
       )}
 
-      {otpOpen && <OtpForm email={email} setOtpOpen={setOtpOpen} roleType='seller'/>}
+      {otpOpen && (
+        <OtpForm email={email} setOtpOpen={setOtpOpen} roleType="seller" />
+      )}
     </div>
   );
 }

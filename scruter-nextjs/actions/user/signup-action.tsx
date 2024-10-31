@@ -1,15 +1,15 @@
-"use server"
+'use server';
 import { generateAndSendOTP } from '@/lib/auth';
 import prismadb from '@/lib/prismadb';
 import { Prisma, User } from '@prisma/client';
 
 export async function UserCreate({
-  name,email
-}:{
-  name:string,
-  email:string
-}): Promise<{ success: boolean; error?: string ; data?:User}> {
-
+  name,
+  email,
+}: {
+  name: string;
+  email: string;
+}): Promise<{ success: boolean; error?: string; data?: User }> {
   const exitingUser = await prismadb.user.findUnique({
     where: {
       email: email,
@@ -31,18 +31,17 @@ export async function UserCreate({
       },
     });
 
-    if(!res||!res.email){
-      return {success:false, error:"Error occured in User creation"};
+    if (!res || !res.email) {
+      return { success: false, error: 'Error occured in User creation' };
     }
 
-    const resp=await generateAndSendOTP(res.email,"user");
+    const resp = await generateAndSendOTP(res.email, 'user');
 
-    if(!resp){
-      return {success:false, error:"Error occured in sending otp"};
+    if (!resp) {
+      return { success: false, error: 'Error occured in sending otp' };
     }
 
-    return { success: true , data:res};
-
+    return { success: true, data: res };
   } catch (err) {
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
       console.log(err.message);

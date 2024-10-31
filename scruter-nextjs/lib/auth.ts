@@ -1,27 +1,26 @@
-
-import CredentialsProvider from "next-auth/providers/credentials";
-import { NextAuthOptions } from "next-auth"; 
-import prismadb from "./prismadb";
-import sendEmail from "./sendEmail";
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { NextAuthOptions } from 'next-auth';
+import prismadb from './prismadb';
+import sendEmail from './sendEmail';
 
 // const prisma = new PrismaClient();
 
 export const NEXT_AUTH_CONFIG: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: 'Credentials',
       credentials: {
-        email: { label: "Email", type: "text" },
-        otp: { label: "OTP", type: "text" },
-        role: { label: "Role", type: "text" },
+        email: { label: 'Email', type: 'text' },
+        otp: { label: 'OTP', type: 'text' },
+        role: { label: 'Role', type: 'text' },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.otp || !credentials?.role) {
-          throw new Error("Invalid credentials");
+          throw new Error('Invalid credentials');
         }
 
         let account;
-        if (credentials.role === "user") {
+        if (credentials.role === 'user') {
           account = await prismadb.user.findUnique({
             where: { email: credentials.email },
           });
@@ -43,7 +42,7 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
 
         const updateData = { otp: null };
         // Clear OTP after successful login
-        if (credentials.role === "user") {
+        if (credentials.role === 'user') {
           await prismadb.user.update({
             where: { email: credentials.email },
             data: updateData, // Reset OTP or delete it after use
@@ -59,7 +58,7 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
           id: account.id,
           name: account.name,
           email: account.email,
-          role: account.role == "user" ? "user" : "seller",
+          role: account.role == 'user' ? 'user' : 'seller',
         };
       },
     }),
@@ -86,13 +85,13 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
 // Function to generate and send OTP
 export const generateAndSendOTP = async (
   email: string,
-  role: "seller" | "user"
+  role: 'seller' | 'user'
 ) => {
   const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate 6-digit OTP
 
   // Store OTP in the user or seller record
 
-  if (role === "user") {
+  if (role === 'user') {
     try {
       await prismadb.user.update({
         where: { email },
@@ -100,12 +99,12 @@ export const generateAndSendOTP = async (
       });
     } catch (err) {
       console.error(
-        "DB Error sending OTP for user:",
+        'DB Error sending OTP for user:',
         err instanceof Error ? err.message : err
       );
       return false;
     }
-  } else if (role === "seller") {
+  } else if (role === 'seller') {
     try {
       await prismadb.seller.update({
         where: { email },
@@ -113,7 +112,7 @@ export const generateAndSendOTP = async (
       });
     } catch (err) {
       console.error(
-        "DB Error sending OTP for seller:",
+        'DB Error sending OTP for seller:',
         err instanceof Error ? err.message : err
       );
       return false;
@@ -123,19 +122,18 @@ export const generateAndSendOTP = async (
   try {
     const response = await sendEmail({
       to: email,
-      subject: "Your OTP Code",
+      subject: 'Your OTP Code',
       text: `Your OTP code is ${otp}`,
       html: `<strong>Your OTP code is ${otp}</strong>`,
     });
 
-    console.log("OTP email sent successfully:", response);
+    console.log('OTP email sent successfully:', response);
     return true;
   } catch (err) {
     console.error(
-      "Error sending OTP:",
+      'Error sending OTP:',
       err instanceof Error ? err.message : err
     );
     return false;
   }
 };
-

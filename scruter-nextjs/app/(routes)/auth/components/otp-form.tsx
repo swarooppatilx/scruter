@@ -12,14 +12,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+} from '@/components/ui/form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Toaster, toast } from 'react-hot-toast';
-import { signIn } from "next-auth/react";
+import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { ChevronLeftCircleIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation'; // use 'next/navigation' for Next.js 13 App Router
@@ -31,7 +31,9 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const FormSchema = z.object({
-  pin: z.string().length(6, { message: "Your one-time password must be 6 characters." }),
+  pin: z
+    .string()
+    .length(6, { message: 'Your one-time password must be 6 characters.' }),
 });
 
 export function OtpForm({
@@ -46,13 +48,13 @@ export function OtpForm({
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: { pin: "" },
+    defaultValues: { pin: '' },
   });
 
   async function onOTPSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true);
-    
-    const result = await signIn("credentials", {
+
+    const result = await signIn('credentials', {
       email,
       otp: data.pin,
       role: roleType,
@@ -60,7 +62,7 @@ export function OtpForm({
     });
 
     if (!result?.ok) {
-      toast.error("Invalid email or OTP");
+      toast.error('Invalid email or OTP');
     } else {
       toast.success(`Welcome!`);
       if (roleType === 'user') {
@@ -84,7 +86,10 @@ export function OtpForm({
             render={({ field }) => (
               <FormItem className="flex gap-2 items-start justify-center flex-col">
                 <FormLabel className="text-2xl gap-2 flex items-center justify-center text-customTeal dark:text-Green font-bold">
-                  <ChevronLeftCircleIcon onClick={() => setOtpOpen(false)} className="h-5 w-5" />
+                  <ChevronLeftCircleIcon
+                    onClick={() => setOtpOpen(false)}
+                    className="h-5 w-5"
+                  />
                   One-Time Password
                 </FormLabel>
                 <FormControl>
@@ -104,7 +109,7 @@ export function OtpForm({
             )}
           />
           <Button className="bg-black" type="submit" disabled={isLoading}>
-            {isLoading ? "Loading..." : "Submit"}
+            {isLoading ? 'Loading...' : 'Submit'}
           </Button>
         </form>
       </Form>
