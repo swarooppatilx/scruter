@@ -139,7 +139,6 @@ body.dark-mode .icon-circle {
 }
 
 body.dark-mode .icon-circle:hover {
-  
   background-color: #fff !important;
 }
 
@@ -218,9 +217,10 @@ body.dark-mode .card {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: none;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
 }
-
 
 .scroll-button.show-btn {
   display: flex;

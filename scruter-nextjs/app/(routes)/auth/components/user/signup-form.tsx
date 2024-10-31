@@ -108,7 +108,9 @@ export function UserSignupForm({
         </form>
       )}
 
-      {otpOpen && <OtpForm email={email} setOtpOpen={setOtpOpen} roleType='user'/>}
+      {otpOpen && (
+        <OtpForm email={email} setOtpOpen={setOtpOpen} roleType="user" />
+      )}
     </div>
   );
 }

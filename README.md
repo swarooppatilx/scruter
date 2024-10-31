@@ -10,8 +10,6 @@
 Scruter is a local classifieds and community platform where people can connect, buy, sell, and exchange services.
 </p>
 
-
-
 ## Table of Contents
 
 - [Join our Discord Server](#join-our-discord-server)
@@ -316,7 +314,6 @@ Big thanks to all the contributors who have helped make Scruter a better platfor
 </p>
 <p align="center">Happy coding and thanks for your contributions! 🎉</p>
 
-
 ## 🌐 Connect with Me
 
 <div align="center">
@@ -340,6 +337,3 @@ Big thanks to all the contributors who have helped make Scruter a better platfor
 ---
 
 Thank you for visiting! Feel free to reach out through any of the links above.
-
-
-
