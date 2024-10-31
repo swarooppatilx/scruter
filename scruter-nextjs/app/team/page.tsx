@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import PageContainer from '@/components/ui/pageContainer';
 import '../globals.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faTwitter, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 const teamMembers = [
   {
@@ -108,31 +110,31 @@ export default function TeamPage() {
                 <div className="social-icons mt-2 flex space-x-4">
                   <a
                     href={member.social.instagram}
-                    className="transition-transform duration-300 text-black hover:text-white hover:scale-110"
+                    className="transition-transform duration-300 text-black hover:scale-110"
                     aria-label="Instagram"
                   >
-                    <i className="fab fa-instagram text-2xl"></i>
+                    <FontAwesomeIcon icon={faInstagram} size="x" />
                   </a>
                   <a
                     href={member.social.twitter}
-                    className="transition-transform duration-300 text-black hover:text-white hover:scale-110"
+                    className="transition-transform duration-300 text-black hover:scale-110"
                     aria-label="Twitter"
                   >
-                    <i className="fab fa-x-twitter text-2xl"></i>
+                    <FontAwesomeIcon icon={faTwitter} size="x" />
                   </a>
                   <a
                     href={member.social.linkedin}
-                    className="transition-transform duration-300 text-black hover:text-white hover:scale-110"
+                    className="transition-transform duration-300 text-black hover:scale-110"
                     aria-label="LinkedIn"
                   >
-                    <i className="fab fa-linkedin text-2xl"></i>
+                    <FontAwesomeIcon icon={faLinkedin} size="x" />
                   </a>
                   <a
                     href={member.social.github}
-                    className="transition-transform duration-300 text-black hover:text-white hover:scale-110"
+                    className="transition-transform duration-300 text-black hover:scale-110"
                     aria-label="GitHub"
                   >
-                    <i className="fab fa-github text-2xl"></i>
+                    <FontAwesomeIcon icon={faGithub} size="x" />
                   </a>
                 </div>
               </div>
