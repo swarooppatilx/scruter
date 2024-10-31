@@ -113,28 +113,28 @@ export default function TeamPage() {
                     className="transition-transform duration-300 text-black hover:scale-110"
                     aria-label="Instagram"
                   >
-                    <FontAwesomeIcon icon={faInstagram} size="x" />
+                    <FontAwesomeIcon icon={faInstagram} />
                   </a>
                   <a
                     href={member.social.twitter}
                     className="transition-transform duration-300 text-black hover:scale-110"
                     aria-label="Twitter"
                   >
-                    <FontAwesomeIcon icon={faTwitter} size="x" />
+                    <FontAwesomeIcon icon={faTwitter} />
                   </a>
                   <a
                     href={member.social.linkedin}
                     className="transition-transform duration-300 text-black hover:scale-110"
                     aria-label="LinkedIn"
                   >
-                    <FontAwesomeIcon icon={faLinkedin} size="x" />
+                    <FontAwesomeIcon icon={faLinkedin} />
                   </a>
                   <a
                     href={member.social.github}
                     className="transition-transform duration-300 text-black hover:scale-110"
                     aria-label="GitHub"
                   >
-                    <FontAwesomeIcon icon={faGithub} size="x" />
+                    <FontAwesomeIcon icon={faGithub} />
                   </a>
                 </div>
               </div>
