@@ -31,7 +31,7 @@ const Links = [
   {
     name: 'Terms of service',
     id: 3,
-    href: '/Terms',
+    href: '/terms',
   },
   {
     name: 'Our Contributors',
