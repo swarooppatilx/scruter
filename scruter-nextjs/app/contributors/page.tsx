@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../globals.css'; // Ensure your global styles are imported
+import Navbar from '@/components/NavBars&Footers/navbar';
 import { Providers } from '@/lib/providers';
 import Footer from '@/components/NavBars&Footers/footer';
+import CustomCursor from '@/components/ui/CustomCursor';
 
 const ContributorsPage: React.FC = () => {
   const [contributors, setContributors] = useState<any[]>([]);
@@ -35,9 +37,10 @@ const ContributorsPage: React.FC = () => {
 
   return (
     <Providers>
+    <CustomCursor />
+    <Navbar />
     <div className="bg-gray-50 text-gray-800">
       <div id="progress-bar" className="fixed top-0 left-0 h-1 bg-green-600 w-0 z-50"></div>
-
       <section className="relative h-[70vh] flex items-center justify-center bg-blue-300 text-white">
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative z-10 max-w-3xl p-4 text-center">
