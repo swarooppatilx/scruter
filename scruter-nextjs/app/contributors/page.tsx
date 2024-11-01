@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../globals.css'; // Ensure your global styles are imported
+import { Providers } from '@/lib/providers';
+import Footer from '@/components/NavBars&Footers/footer';
 
 const ContributorsPage: React.FC = () => {
   const [contributors, setContributors] = useState<any[]>([]);
@@ -32,6 +34,7 @@ const ContributorsPage: React.FC = () => {
   }, []);
 
   return (
+    <Providers>
     <div className="bg-gray-50 text-gray-800">
       <div id="progress-bar" className="fixed top-0 left-0 h-1 bg-green-600 w-0 z-50"></div>
 
@@ -75,6 +78,8 @@ const ContributorsPage: React.FC = () => {
         </div>
       </section>
     </div>
+    <Footer />
+    </Providers>
   );
 };
 
