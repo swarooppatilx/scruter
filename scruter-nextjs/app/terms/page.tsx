@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUserCheck,
@@ -20,20 +19,6 @@ import Footer from '@/components/NavBars&Footers/footer';
 import CustomCursor from '@/components/ui/CustomCursor';
 
 const TermsPage = () => {
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
-      document.getElementById('progress-bar').style.width = scrollPercent + '%';
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
     <Providers>
       <CustomCursor />
