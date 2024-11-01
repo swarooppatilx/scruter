@@ -41,7 +41,7 @@ const Links = [
   {
     name: 'Privacy and Policy',
     id: 5,
-    href: '/Policy',
+    href: '/policy',
   },
 ];
 const Helpdesk = [
