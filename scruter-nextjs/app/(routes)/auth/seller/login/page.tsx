@@ -40,10 +40,10 @@ export default function AuthenticationPage() {
         >
           Signup
         </Link>
-       
-        <div className={`hidden bg-[url("/signupPattern.svg")] bg-opacity-50 h-full flex-col   p-10 text-white dark:border-r lg:flex`}>
-        
-        </div>
+
+        <div
+          className={`hidden bg-[url("/signupPattern.svg")] bg-opacity-50 h-full flex-col   p-10 text-white dark:border-r lg:flex`}
+        ></div>
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
@@ -54,8 +54,7 @@ export default function AuthenticationPage() {
                 Enter your email below to Log into your account
               </p>
             </div>
-            <SellerLoginForm authType='login'/>
-            
+            <SellerLoginForm authType="login" />
           </div>
         </div>
       </div>

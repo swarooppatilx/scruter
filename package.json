@@ -8,22 +8,29 @@
     "start": "node app.js",
     "lint": "eslint .",
     "lint:ejs": "npx ejs-lint views/**/*.ejs",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build": "webpack",
+    "serve": "webpack serve --open"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.41.3",
     "connect-mongo": "^5.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "ejs-lint": "^2.0.0",
     "express": "^4.21.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.4.1",
     "express-session": "^1.18.1",
     "express-validator": "^7.1.0",
-    "mongodb": "^6.9.0",
+    "helmet": "^8.0.0",
+    "mongodb": "^6.10.0",
     "mongoose": "^8.7.0",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
@@ -34,10 +41,19 @@
   "description": "Scruter is a local classifieds and community site designed to bring people together for buying, selling, and exchanging goods and services.",
   "keywords": [],
   "devDependencies": {
-    "eslint": "^9.12.0",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "babel-loader": "^9.2.1",
+    "ejs-loader": "^0.5.0",
+    "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-ejs": "^0.0.2",
     "eslint-plugin-html": "^8.1.2",
-    "prettier": "^3.3.3"
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.11.0",
+    "prettier": "^3.3.3",
+    "webpack": "^5.96.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
   }
 }

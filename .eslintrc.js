@@ -7,7 +7,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:ejs/recommended', // Enables EJS linting
-    'prettier', // Make sure to put this last
+    "plugin:prettier/recommended"
   ],
   parserOptions: {
     ecmaVersion: 12,

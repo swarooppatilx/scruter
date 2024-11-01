@@ -30,7 +30,7 @@ export function SellerLoginForm({
 
     if (!email) {
       toast.error('missing details');
-      setIsLoading(false)
+      setIsLoading(false);
       return;
     }
     const res = await SellerVerify({
@@ -39,7 +39,7 @@ export function SellerLoginForm({
 
     if (!res.success && res.error) {
       toast.error(res.error);
-      setIsLoading(false)
+      setIsLoading(false);
       return;
     }
 
@@ -51,7 +51,7 @@ export function SellerLoginForm({
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
-      <Toaster/>
+      <Toaster />
       {!otpOpen && (
         <form onSubmit={onSubmit}>
           <div className="grid gap-2">
@@ -73,7 +73,7 @@ export function SellerLoginForm({
                 }}
               />
             </div>
-            <Button type="submit" className='bg-black' disabled={isLoading}>
+            <Button type="submit" className="bg-black" disabled={isLoading}>
               {isLoading && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}

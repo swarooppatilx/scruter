@@ -1,5 +1,4 @@
-
-import transporter from "./nodemailerConfig";
+import transporter from './nodemailerConfig';
 
 interface EmailOptions {
   to: string;
@@ -12,10 +11,10 @@ const sendEmail = async ({ to, subject, text, html }: EmailOptions) => {
   // Mail options object
   const mailOptions = {
     from: process.env.SMTP_USER, // Sender email address from environment variable
-    to,                          // Recipient email
-    subject,                     // Email subject
-    text,                        // Plain text body (optional)
-    html,                        // HTML body (optional)
+    to, // Recipient email
+    subject, // Email subject
+    text, // Plain text body (optional)
+    html, // HTML body (optional)
   };
 
   try {

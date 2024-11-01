@@ -1,7 +1,7 @@
-"use client"
+'use client';
 
 import * as React from 'react';
-import Autoplay from "embla-carousel-autoplay"
+import Autoplay from 'embla-carousel-autoplay';
 
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -13,17 +13,17 @@ import {
 } from '@/components/ui/carousel';
 import Image from 'next/image';
 
-const illustrations=[
-    {
-        src:"shop.svg"
-    },
-    {
-        src:"search.svg"
-    },
-    {
-        src:"chatting.svg"
-    },
-]
+const illustrations = [
+  {
+    src: 'shop.svg',
+  },
+  {
+    src: 'search.svg',
+  },
+  {
+    src: 'chatting.svg',
+  },
+];
 
 export function HeroCarousal() {
   return (
@@ -33,7 +33,6 @@ export function HeroCarousal() {
         align: 'start',
         loop: true,
       }}
-      
       plugins={[
         Autoplay({
           delay: 2000,
@@ -46,7 +45,13 @@ export function HeroCarousal() {
             <div className="p-1">
               <Card className="w-f">
                 <CardContent className="flex aspect-[4/1] bg-black items-center justify-center p-6">
-                  <Image width={1000} height={1000} src={item.src} alt='carousal images' className='h-96 w-96'/>
+                  <Image
+                    width={1000}
+                    height={1000}
+                    src={item.src}
+                    alt="carousal images"
+                    className="h-96 w-96"
+                  />
                 </CardContent>
               </Card>
             </div>

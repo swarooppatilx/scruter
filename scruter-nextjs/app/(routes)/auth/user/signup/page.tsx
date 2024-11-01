@@ -31,7 +31,7 @@ export default function AuthenticationPage() {
         />
       </div>
       <div className="container relative hidden h-[700px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <Link
+        <Link
           href="/auth/seller/signup"
           className={cn(
             buttonVariants({ variant: 'ghost' }),
@@ -49,10 +49,10 @@ export default function AuthenticationPage() {
         >
           Login
         </Link>
-       
-        <div className={`hidden mt-20 bg-[url("/userAuth1.svg")] bg-opacity-50 h-full flex-col bg-no-repeat bg-contain text-white dark:border-r lg:flex`}>
-         
-        </div>
+
+        <div
+          className={`hidden mt-20 bg-[url("/userAuth1.svg")] bg-opacity-50 h-full flex-col bg-no-repeat bg-contain text-white dark:border-r lg:flex`}
+        ></div>
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
@@ -63,7 +63,7 @@ export default function AuthenticationPage() {
                 Enter your email below to create your account
               </p>
             </div>
-            <UserSignupForm authType='signup'/>
+            <UserSignupForm authType="signup" />
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our{' '}
               <Link
