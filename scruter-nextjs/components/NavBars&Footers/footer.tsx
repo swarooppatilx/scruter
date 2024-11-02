@@ -31,7 +31,7 @@ const Links = [
   {
     name: 'Terms of service',
     id: 3,
-    href: '/Terms',
+    href: '/terms',
   },
   {
     name: 'Our Contributors',
@@ -41,7 +41,7 @@ const Links = [
   {
     name: 'Privacy and Policy',
     id: 5,
-    href: '/Policy',
+    href: '/policy',
   },
 ];
 const Helpdesk = [

@@ -5,7 +5,7 @@ import NavbarActions from './navbar-actions';
 
 export const revalidate = 0;
 
-const Navbar = async () => {
+const Navbar = () => {
   return (
     <div className="border-b">
       <Container>

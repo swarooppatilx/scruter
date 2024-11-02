@@ -12,7 +12,7 @@ const MainNav = () => {
   const routes = [
     {
       href: `/`,
-      label: 'HomePage',
+      label: 'Home',
       active: pathname.startsWith(`/`),
     },
   ];
