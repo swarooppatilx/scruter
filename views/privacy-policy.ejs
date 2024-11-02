@@ -1,275 +1,206 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy</title>
-    <link href="styles.css" rel="stylesheet">
+    <%- include('partials/head') %>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f9fafb;
             color: #1f2937;
-            line-height: 1.6;
-            padding: 2rem;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        h1,
-        h2,
-        h3 {
-            color: #2563eb;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-top: 2rem;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-        }
-
-        a {
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .button {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: #2563eb;
-            color: white;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 9999px;
-            transition: background-color 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .button:hover {
-            background-color: #3b82f6;
-            text-decoration: none;
-        }
-
-        .theme-toggle {
             display: flex;
-            justify-content: flex-end;
-            margin-bottom: 1.5rem;
+            flex-direction: column;
         }
 
-        .theme-toggle button {
-            padding: 0.5rem 1rem;
-            background-color: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .theme-toggle button:hover {
-            background-color: #3b82f6;
-        }
-
-        .card {
+        .main-content {
+            width: 90%;
+            padding-left: 8rem;
+            padding-right: 8rem;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
             background-color: #ffffff;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 1rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            .button {
-                padding: 0.5rem 1rem;
-            }
-        }
-
-        /* Dark mode styles */
-        body.dark-mode {
-            background-color: #1f2937;
-            color: #f9fafb;
-        }
-
-        body.dark-mode .card {
-            background-color: #2d3748;
-            color: #f9fafb;
-        }
-
-        body.dark-mode .button {
-            background-color: #4f46e5;
-            color: #ffff;
-        }
-
-        body.dark-mode .button:hover {
-            background-color: #4338ca;
-        }
-
-        body.dark-mode a {
-            color: #3b82f6;
-        }
-
-        body.dark-mode h1,
-        body.dark-mode h2,
-        body.dark-mode h3 {
-            color: #bbf7d0; /* Light color for headings in dark mode */
-        }
-
-        .welcome-message {
-            padding: 1rem;
-            border-radius: 0.5rem;
-            background-color: #dbeafe;
+        .title-section {
+            text-align: center;
             margin-bottom: 2rem;
         }
 
-        body.dark-mode .welcome-message {
-            background-color: #4b5563;
-            color: #f9fafb;
+        .title-section h1 {
+            font-size: 2.4rem;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .title-section p {
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        section {
+            margin-top: 2rem;
+        }
+
+        section h2 {
+            font-size: 1.8rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+            border-left: 4px solid #2563eb;
+            padding-left: 8px;
+            margin-bottom: 1rem;
+        }
+
+        section h2 i {
+            margin-right: 8px;
+            color: #6f42c1;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 25%;
+            background: linear-gradient(to bottom, #007bff, #6f42c1);
+            color: #fff;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            transition: color 0.2s;
+        }
+
+        .sidebar ul li a:hover {
+            color: #e0e0e0;
+        }
+
+        .sidebar ul li a i {
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .sidebar {
+                display: none;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="theme-toggle">
-            <button id="theme-toggle">Switch to Light Mode</button>
-        </div>
+    <div id="progress-bar"></div>
+    <%- include('partials/navbar') %>
 
-        <div class="welcome-message">
-            <h1>Welcome to Scruter's Privacy Policy</h1>
-            <p>This policy outlines how we handle your personal data and protect your privacy when you use our website and services.</p>
-        </div>
-
-        <div class="card">
-            <h2>Information We Collect</h2>
-            <p>We collect the following types of information:</p>
+    <div style="display: flex;">
+        <aside class="sidebar">
             <ul>
-                <li><strong>Personal Information:</strong> Information you provide us directly, such as your name, email address, and phone number when you contact us or sign up for our services.</li>
-                <li><strong>Usage Data:</strong> Information on how you access and use our website, including your IP address, browser type, pages visited, and the time spent on each page.</li>
+                <li><a href="#introduction"><i class="fas fa-book-open"></i> Introduction</a></li>
+                <li><a href="#information-collected"><i class="fas fa-info-circle"></i> Information Collected</a></li>
+                <li><a href="#how-we-use"><i class="fas fa-cogs"></i> How We Use Your Information</a></li>
+                <li><a href="#data-protection"><i class="fas fa-shield-alt"></i> Data Protection</a></li>
+                <li><a href="#user-rights"><i class="fas fa-user-shield"></i> User Rights</a></li>
+                <li><a href="#cookies"><i class="fas fa-cookie"></i> Cookies</a></li>
+                <li><a href="#third-party"><i class="fas fa-external-link-alt"></i> Third-Party Services</a></li>
+                <li><a href="#changes"><i class="fas fa-pencil-alt"></i> Changes to This Policy</a></li>
             </ul>
-        </div>
+        </aside>
 
-        <div class="card">
-            <h2>How We Use Your Information</h2>
-            <p>Your information is used for the following purposes:</p>
-            <ul>
-                <li>To provide and maintain our services;</li>
-                <li>To notify you about changes to our services;</li>
-                <li>To monitor the usage of our website;</li>
-                <li>To detect, prevent, and address technical issues;</li>
-                <li>To provide customer support;</li>
-                <li>To comply with legal obligations.</li>
-            </ul>
-        </div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="title-section">
+                <h1>Privacy Policy</h1>
+                <p>Your privacy is important to us. This privacy policy explains how we collect, use, and protect your information.</p>
+            </div>
 
-        <div class="card">
-            <h2>How We Protect Your Information</h2>
-            <p>We take data protection seriously and use industry-standard security measures to protect your information. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
-        </div>
+            <section id="introduction">
+                <h2><i class="fas fa-book-open"></i> Introduction</h2>
+                <p>Welcome to our Privacy Policy page. We are committed to protecting your personal data and your right to privacy. This policy outlines how we handle your information when you visit our website, engage with our services, and make use of our products.</p>
+            </section>
 
-        <div class="card">
-            <h2>Sharing Your Information</h2>
-            <p>We do not share your personal information with third parties, except in the following circumstances:</p>
-            <ul>
-                <li>With your consent;</li>
-                <li>To comply with legal obligations;</li>
-                <li>To protect the rights and property of Scruter;</li>
-                <li>To provide our services through trusted third-party providers.</li>
-            </ul>
-        </div>
+            <section id="information-collected">
+                <h2><i class="fas fa-info-circle"></i> Information Collected</h2>
+                <p>We may collect personal information such as your name, email address, phone number, and payment information when you use our services. Additionally, we gather data on your usage of our website, including your IP address, browser type, and access times, to help us improve our services.</p>
+                <p>We also collect data through cookies and similar technologies to enhance your user experience.</p>
+            </section>
 
-        <div class="card">
-            <h2>Cookies</h2>
-            <p>Our website uses cookies to enhance your experience and collect information about your usage patterns. You can choose to disable cookies through your browser settings, but this may affect your ability to use certain features of the site.</p>
-        </div>
+            <section id="how-we-use">
+                <h2><i class="fas fa-cogs"></i> How We Use Your Information</h2>
+                <p>Your information helps us to provide better services, including:</p>
+                <ul>
+                    <li>Enhancing user experience through personalized content.</li>
+                    <li>Improving our website's functionality and services based on user feedback.</li>
+                    <li>Communicating with you about updates, promotions, and news related to our services.</li>
+                    <li>Processing transactions and sending you related information, including purchase confirmations and invoices.</li>
+                </ul>
+            </section>
 
-        <div class="card">
-            <h2>Changes to This Policy</h2>
-            <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. It is recommended to review this policy periodically for any updates.</p>
-        </div>
+            <section id="data-protection">
+                <h2><i class="fas fa-shield-alt"></i> Data Protection</h2>
+                <p>We take appropriate security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. We regularly review our practices to ensure data security and compliance with applicable laws and regulations.</p>
+                <p>We limit access to your personal information to those employees, agents, contractors, and other third parties who have a business need to know. They will only process your personal data on our instructions and are subject to a duty of confidentiality.</p>
+            </section>
 
-        <div class="card">
-            <h2>Contact Us</h2>
-            <p>If you have any questions or concerns about this Privacy Policy, please contact us at:</p>
-            <ul>
-                <li>Email: scruter@gmail.com</li>
-                <li>Phone: 999999999</li>
-                <li>Address:</li>
-            </ul>
-        </div>
+            <section id="user-rights">
+                <h2><i class="fas fa-user-shield"></i> User Rights</h2>
+                <p>You have the right to request access to the personal information we hold about you. You may also request correction or deletion of your personal data in certain circumstances. Additionally, you have the right to object to or restrict the processing of your data.</p>
+                <p>If you wish to exercise any of these rights, please contact us using the details provided below.</p>
+            </section>
 
-        <a href="/" class="button">Back to Home</a>
+            <section id="cookies">
+                <h2><i class="fas fa-cookie"></i> Cookies</h2>
+                <p>Our website uses cookies to enhance your browsing experience. Cookies are small files placed on your device to help us recognize your browser and capture certain information. You can choose to accept or decline cookies through your browser settings.</p>
+                <p>By using our website, you consent to our use of cookies in accordance with this policy.</p>
+            </section>
+
+            <section id="third-party">
+                <h2><i class="fas fa-external-link-alt"></i> Third-Party Services</h2>
+                <p>We may employ third-party companies and individuals to facilitate our services, provide the service on our behalf, perform service-related services, or assist us in analyzing how our service is used. These third parties may have access to your personal data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
+            </section>
+
+            <section id="changes">
+                <h2><i class="fas fa-pencil-alt"></i> Changes to This Policy</h2>
+                <p>We may update this privacy policy periodically. Any changes will be posted on this page with an updated effective date. We encourage you to review this page regularly for the latest information on our privacy practices.</p>
+                <p>If there are significant changes, we may provide additional notice or seek your consent where required by law.</p>
+            </section>
+        </main>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const toggleButton = document.getElementById('theme-toggle');
-
-            // Load the user's preference from local storage
-            if (localStorage.getItem('dark-mode') === 'enabled') {
-                document.body.classList.add('dark-mode');
-                toggleButton.textContent = 'Switch to Light Mode';
-            }
-
-            toggleButton.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-
-                // Save the user's preference
-                if (document.body.classList.contains('dark-mode')) {
-                    localStorage.setItem('dark-mode', 'enabled');
-                    toggleButton.textContent = 'Switch to Light Mode';
-                } else {
-                    localStorage.removeItem('dark-mode');
-                    toggleButton.textContent = 'Switch to Dark Mode';
-                }
-            });
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrollPercent + '%';
         });
     </script>
-</body>
 
+    <%- include('partials/footer') %>
+</body>
 </html>
