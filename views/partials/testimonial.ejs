@@ -1,0 +1,167 @@
+
+<% let currentIndex = 1; %>
+<% let isTransitioning = true; %>
+<% const reviews = [
+{
+  name: 'Anjali Verma',
+  role: 'Local Seller',
+  image: 'https://i.pinimg.com/1200x/13/40/27/13402720889bacede3da6e0a0ff59023.jpg',
+  quote: 'A great place to sell my handmade items!',
+  review: 'This platform has allowed me to reach more customers locally, and I couldn’t be happier with the sales I’ve made.',
+  rating: 5,
+},
+{
+  name: 'Rajesh Kumar',
+  role: 'Local Buyer',
+  image: 'https://r2.erweima.ai/imgcompressed/img/compressed_0bf14e00cfcb51fab531dda39f371848.webp',
+  quote: 'Found exactly what I needed!',
+  review: 'I was able to find quality second-hand furniture at a great price. The local sellers are fantastic!',
+  rating: 4,
+},
+{
+  name: 'Sita Patel',
+  role: 'Community Member',
+  image: 'https://imgcdn.stablediffusionweb.com/2024/4/22/eda6d0dd-797d-4892-9aa4-fe32b5f54740.jpg',
+  quote: 'Highly recommend this platform!',
+  review: 'The variety of items available is impressive, and I love supporting local businesses!',
+  rating: 5,
+},
+{
+  name: 'Manoj Singh',
+  role: 'Local Entrepreneur',
+  image: 'https://imgcdn.stablediffusionweb.com/2024/4/17/0c8e1043-2f97-4994-b7c7-fb3a1a9b6bbf.jpg',
+  quote: 'An excellent platform for networking!',
+  review: 'This has been an invaluable resource for connecting with local customers and other entrepreneurs.',
+  rating: 5,
+},
+{
+  name: 'Nisha Mehta',
+  role: 'Local Buyer',
+  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_U5qIn8aWtg_5kBb35n7vZwqOIbBGy1GDHQ&s',
+  quote: 'Love the convenience!',
+  review: 'I can find everything I need for my home without having to drive all over town. It’s so easy!',
+  rating: 4,
+},
+];
+%>
+
+<style>
+    .overflow-visible {
+      transition: transform 0.5s ease; /* Add transition effect */
+    }
+  </style>
+  
+  <section class="py-5 px-4 overflow-hidden shadow">
+    <div class="container">
+      <h2 class="display-6 font-weight-bold text-center mb-4">What Our Community Says</h2>
+      <div class="position-relative">
+        <div class="d-flex overflow-visible" style="transform: translateX(-<%= (currentIndex - 1) * 33 %>%)">
+          <% reviews.forEach((review, index) => { %>
+            <div class="col-12 col-md-4 px-2 flex-shrink-0">
+              <div class="card shadow-sm h-100">
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-3">
+                    <img src="<%= review.image %>" alt="<%= review.name %>" class="rounded-circle border mr-3" style="width: 64px; height: 64px;">
+                    <div>
+                      <h5 class="card-title"><%= review.name %></h5>
+                      <p class="text-danger"><%= review.role %></p>
+                    </div>
+                  </div>
+                  <p class="font-weight-bold">"<%= review.quote %>"</p>
+                  <p class="text-secondary"><%= review.review %></p>
+                </div>
+                <div class="card-footer">
+                  <div class="d-flex">
+                    <% for (let i = 0; i < 5; i++) { %>
+                      <span class="text-warning mr-1"><i class="fas fa-star <%= i < review.rating ? '' : 'text-muted' %>"></i></span>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+        <button id="prevButton" onclick="prevReview()" class="btn btn-secondary rounded-circle position-absolute" style="top: 50%; left: -20px;">
+          <i class="fas fa-chevron-left text-light"></i>
+        </button>
+        <button id="nextButton" onclick="nextReview()" class="btn btn-secondary rounded-circle position-absolute" style="top: 50%; right: -20px;">
+          <i class="fas fa-chevron-right text-light"></i>
+        </button>
+      </div>
+      <div class="d-flex justify-content-center mt-4">
+        <% for (let i = 1; i <= reviews.length-2; i++) { %>
+          <span
+            id="indicator-<%= i %>"
+            onclick="setCurrentIndex(<%= i %>)"
+            class="mx-1 rounded-circle"
+            style="
+              width: 8px;
+              height: 8px;
+              background-color: <%= i === currentIndex ? 'red' : 'gray' %>;
+              display: inline-block;
+            "
+          ></span>
+        <% } %>
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    let currentIndex = 1;
+    let autoScrollInterval;
+
+    function updateIndicators() {
+      for (let i = 1; i <= <%= reviews.length %>; i++) {
+        const indicator = document.getElementById(`indicator-${i}`);
+        indicator.style.backgroundColor = (i === currentIndex) ? 'red' : 'gray'; // Update color
+      }
+    }
+  
+    function updateButtonVisibility() {
+      document.getElementById('prevButton').style.display = currentIndex === 1 ? 'none' : 'block'; // Hide or show left button
+      document.getElementById('nextButton').style.display = currentIndex === (<%= reviews.length-2 %> )? 'none' : 'block'; // Hide or show right button
+
+    }
+  
+    function nextReview() {
+      currentIndex = (currentIndex % <%= reviews.length-2 %>) + 1; // Increment index
+      document.querySelector('.overflow-visible').style.transform = `translateX(-${(currentIndex - 1) * 33}%)`;
+      updateButtonVisibility(); // Call function to update button visibility
+      updateIndicators(); // Call function to update indicators
+      
+    }
+  
+    function prevReview() {
+      currentIndex = (currentIndex - 2 + <%= reviews.length %>) % <%= reviews.length %> + 1; // Decrement index
+      document.querySelector('.overflow-visible').style.transform = `translateX(-${(currentIndex - 1) * 33}%)`;
+      updateButtonVisibility(); // Call function to update button visibility
+      updateIndicators(); // Call function to update indicators
+    }
+  
+    function setCurrentIndex(index) {
+      currentIndex = index; // Set current index
+      document.querySelector('.overflow-visible').style.transform = `translateX(-${(currentIndex - 1) * 33}%)`;
+      updateIndicators(); // Call function to update indicators
+      updateButtonVisibility(); // Call function to update button visibility
+    }
+  
+    function startAutoScroll() {
+        autoScrollInterval = setInterval(nextReview, 4000); // Auto-scroll every 4000 ms
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval); // Stop auto-scroll
+    }
+
+    // Initial button visibility and auto-scroll
+    updateButtonVisibility();
+    startAutoScroll();
+
+    // Add event listeners to stop auto-scroll on user interaction
+    document.getElementById('prevButton').addEventListener('click', stopAutoScroll);
+    document.getElementById('nextButton').addEventListener('click', stopAutoScroll);
+    document.querySelectorAll('.indicator').forEach(indicator => {
+        indicator.addEventListener('click', stopAutoScroll);
+    });
+  </script>
+  
