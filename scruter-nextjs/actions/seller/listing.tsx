@@ -180,8 +180,8 @@ export async function getSpecificListing({
       },
     });
 
-    if(!resp){
-      return { success: false, error:"Error fetching this specific listing"};
+    if (!resp) {
+      return { success: false, error: 'Error fetching this specific listing' };
     }
     return { success: true, data: resp };
   } catch (err) {

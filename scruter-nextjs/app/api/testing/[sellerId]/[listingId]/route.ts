@@ -20,13 +20,11 @@ export async function GET(
       listingId: listingId,
     });
 
-    if(resp.success){
-
+    if (resp.success) {
       return NextResponse.json(resp.data);
-    }else{
-      return NextResponse.json({"err":resp.error},{status:400});
+    } else {
+      return NextResponse.json({ err: resp.error }, { status: 400 });
     }
-
   } catch (err) {
     console.log('[LISTINGS_GET_SPECIFIC', err);
     return new NextResponse('Internal Server Error', { status: 500 });

@@ -24,7 +24,7 @@ export async function POST(
   try {
     const body = await req.json();
 
-    const { sellerId } = await  params;
+    const { sellerId } = await params;
 
     if (!sellerId) {
       return new NextResponse('necessary params are required', { status: 400 });
