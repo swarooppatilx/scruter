@@ -9,6 +9,28 @@
         body {
             overflow-y: auto;  // Changed from hidden to auto to allow scrolling
         }
+        .container{
+            position: relative;
+            width: 100%;
+            height: 100vh; 
+            min-height: 100vh;
+            min-width: 100vw;
+            background-image: url('/login-pre.jpeg');
+            background-size:cover;
+            background-position:center;
+            transition: background-image 0.5s ease;
+        }
+        
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            display: none;
+}
         .input-submit {
             display: flex;
             justify-content: center;
@@ -28,6 +50,12 @@
     <%- include('partials/navbar') %>
 
     <div class="container">
+        <video id="bgVideo" aria-hidden="true" muted autoplay loop playsinline>
+            <source src="https://cdn.pixabay.com/video/2024/03/18/204565-924698132_small.mp4" type="video/mp4">
+            <!-- <source src="https://cdn.pixabay.com/video/2023/03/02/152820-804130696_small.mp4" type="video/mp4">       <-- ALT CLIP -->
+
+            Your browser does not support the video tag.
+        </video>
         <div class="box">
             <div class="header">
                 <p><%= action === 'login' ? 'Log In' : 'Sign Up' %></p>
@@ -194,6 +222,24 @@
             document.getElementById('rememberMe').checked = true;
         }
     };
+</script>
+<script>
+    // background switch script
+    const video = document.getElementById('bgVideo');
+    const container = document.querySelector('.container');
+
+    video.addEventListener('loadeddata', () => {
+        container.style.backgroundImage = "none"; 
+
+        video.style.display = 'block'; 
+        video.play(); 
+});
+
+    video.addEventListener('ended', () => {
+        video.currentTime = 0; 
+        video.play();
+});
+
 </script>
 
 
