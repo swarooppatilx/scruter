@@ -12,7 +12,7 @@ import {
   faEnvelope,
   faLink,
 } from '@fortawesome/free-solid-svg-icons';
-import '../globals.css'; // Ensure your global styles are imported
+import '../../globals.css'; // Ensure your global styles are imported
 import Navbar from '@/components/NavBars&Footers/navbar';
 import { Providers } from '@/lib/providers';
 import Footer from '@/components/NavBars&Footers/footer';
