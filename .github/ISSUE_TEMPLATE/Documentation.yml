@@ -1,6 +1,6 @@
 name: 📝 Documentation Update
 description: Improve Documentation
-title: "[Doc]: "
+title: '[Doc]: '
 labels: [documentation]
 body:
   - type: checkboxes
@@ -66,6 +66,3 @@ body:
           required: true
         - label: 'I am willing to work on this issue (optional)'
           required: false
-        
-        
-    

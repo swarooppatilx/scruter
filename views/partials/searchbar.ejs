@@ -1,26 +1,39 @@
 <!-- Custom Search Bar -->
 <div id="search-bar" class="container my-3 gsap-main">
   <form id="search-form" method="GET" action="<%= searchAction %>">
-    <div class="d-flex justify-content-center align-items-center">
+    <div class="row justify-content-center align-items-center gx-2"> <!-- Increased spacing with gx-2 -->
       <!-- Search Input -->
-      <input type="text" class="form-control me-2 w-25" id="search-input" name="query" placeholder="Search" value="<%= query %>">  
+      <div class="col-12 col-md-auto mb-2 mb-md-0">
+        <input type="text" class="form-control" id="search-input" name="query" placeholder="Search" value="<%= query %>">  
+      </div>
 
       <!-- Inline Dropdown for Search Action -->
-      <select class="form-select me-2" id="search-action" name="type" style="width: 100px;">
-        <option value="food" <%= activeLink === 'food' ? 'selected' : '' %>>Food</option>
-        <option value="house" <%= activeLink === 'house' ? 'selected' : '' %>>House</option>
-        <option value="market" <%= activeLink === 'market' ? 'selected' : '' %>>Market</option>
-      </select>
+      <div class="col-6 col-md-auto mb-2 mb-md-0">
+        <select class="form-select" id="search-action" name="type">
+          <option value="food" <%= activeLink === 'food' ? 'selected' : '' %>>Food</option>
+          <option value="house" <%= activeLink === 'house' ? 'selected' : '' %>>House</option>
+          <option value="market" <%= activeLink === 'market' ? 'selected' : '' %>>Market</option>
+        </select>
+      </div>
+
       <!-- Sort by Price Dropdown -->
-      <select class="form-select me-2" id="sort-by-price" name="sort" style="width: 180px;">
-        <option value="">Sort by Price</option>
-        <option value="asc">Price: Low to High</option>
-        <option value="desc">Price: High to Low</option>
-      </select>
+      <div class="col-6 col-md-auto mb-2 mb-md-0">
+        <select class="form-select" id="sort-by-price" name="sort">
+          <option value="">Sort by Price</option>
+          <option value="asc">Low to High</option>
+          <option value="desc">High to Low</option>
+        </select>
+      </div>
+
       <!-- Search Button -->
-      <button class="btn btn-dark text-light" id="search-button" type="submit">Search</button>
+      <div class="col-12 col-md-auto">
+        <button class="btn btn-dark text-light w-100" id="search-button" type="submit">Search</button>
+      </div>
     </div>
-    <div id="validation-message" class="text-danger mt-2 text-center" style="display: none;">Please enter a search term or select a sort option. </div>  </form>
+    <div id="validation-message" class="text-danger mt-2 text-center" style="display: none;">
+      Please enter a search term or select a sort option.
+    </div>
+  </form>
 </div>
 
 <!-- JavaScript to Update Form Action and Validate Input -->

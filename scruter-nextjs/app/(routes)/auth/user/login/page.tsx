@@ -41,10 +41,10 @@ export default function AuthenticationPage() {
         >
           Signup
         </Link>
-       
-        <div className={`hidden mt-20 bg-[url("/userAuth1.svg")] bg-opacity-50 h-full flex-col bg-no-repeat bg-contain text-white dark:border-r lg:flex`}>
-        
-        </div>
+
+        <div
+          className={`hidden mt-20 bg-[url("/userAuth1.svg")] bg-opacity-50 h-full flex-col bg-no-repeat bg-contain text-white dark:border-r lg:flex`}
+        ></div>
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
@@ -55,8 +55,7 @@ export default function AuthenticationPage() {
                 Enter your email below to Log into your account
               </p>
             </div>
-            <UserLoginForm authType='login'/>
-            
+            <UserLoginForm authType="login" />
           </div>
         </div>
       </div>

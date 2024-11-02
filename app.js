@@ -365,6 +365,12 @@ app.get('/terms-page', (req, res) => {
   });
 });
 
+app.get('/contactus', (req, res) => {
+  res.render('contact', {
+    activeLink: 'contact', // You can customize this based on your layout
+  });
+});
+
 app.get('/faq', (req, res) => {
   res.render('faq', {
     activeLink: 'faq', // You can customize this based on your layout
@@ -403,18 +409,19 @@ app.get('/market/form', ensureAuthenticated, (req, res) => {
 });
 
 app.get('/:type/edit/:id', ensureAuthenticated, async (req, res) => {
-  const { id, type } = req.params
-  if (!['food', 'house', 'market'].includes(type)) return res.status(400).render('400');
+  const { id, type } = req.params;
+  if (!['food', 'house', 'market'].includes(type))
+    return res.status(400).render('400');
 
-  const Model = type === 'food' ? Food : type === 'house' ? House : Market
-  const item = await Model.findById(id).catch(() => { });
+  const Model = type === 'food' ? Food : type === 'house' ? House : Market;
+  const item = await Model.findById(id).catch(() => {});
   if (!item) return res.status(404).render('404');
 
   if (req.session.user.username !== item.username)
     return res.status(500).render('500');
 
-  res.render("edit", { item, type, activeLink: type });
-})
+  res.render('edit', { item, type, activeLink: type });
+});
 
 // Handle search and display for houses
 app.get('/house', async (req, res) => {
@@ -529,22 +536,28 @@ app.post(
     body('description').notEmpty().withMessage('Description is required'),
     body('email').isEmail().withMessage('Email is required and must be valid'),
     body('phone').notEmpty().withMessage('Phone number is required'),
-    body('rent').custom((value, { req }) => req.params.type === 'house' ? value !== '' && !isNaN(value) : true),
-    body('price').custom((value, { req }) => req.params.type === 'market' ? value !== '' && !isNaN(value) : true),
+    body('rent').custom((value, { req }) =>
+      req.params.type === 'house' ? value !== '' && !isNaN(value) : true
+    ),
+    body('price').custom((value, { req }) =>
+      req.params.type === 'market' ? value !== '' && !isNaN(value) : true
+    ),
   ],
   async (req, res) => {
     const { type, id } = req.params;
-    if (!['food', 'house', 'market'].includes(type)) return res.status(400).render('400');
+    if (!['food', 'house', 'market'].includes(type))
+      return res.status(400).render('400');
 
     const errors = validationResult(req);
-    if (!errors.isEmpty()) return res.status(400).render(`/edit/${type}/${id}`, {
-      type: req.params.type,
-      errors: errors.array(),
-      activeLink: req.params.activeLink,
-    });    
+    if (!errors.isEmpty())
+      return res.status(400).render(`/edit/${type}/${id}`, {
+        type: req.params.type,
+        errors: errors.array(),
+        activeLink: req.params.activeLink,
+      });
 
-    const Model = type === 'food' ? Food : type === 'house' ? House : Market
-    const item = await Model.findById(id).catch(() => { });
+    const Model = type === 'food' ? Food : type === 'house' ? House : Market;
+    const item = await Model.findById(id).catch(() => {});
     if (!item) return res.status(404).render('404');
 
     if (req.session.user.username !== item.username)
@@ -559,7 +572,8 @@ app.post(
     await item.save();
 
     return res.redirect(`/${type}`);
-  })
+  }
+);
 
 // Handle search and display for market
 // Handle search and display for market
@@ -600,7 +614,6 @@ app.get('/market', async (req, res) => {
     res.status(500).render('500');
   }
 });
-
 
 // Handle form submission for market
 app.post(
@@ -804,7 +817,6 @@ app.post('/delete/:type/:id', ensureAuthenticated, async (req, res) => {
     res.status(500).render('500');
   }
 });
-
 
 // 404 Error Handler
 app.use((req, res) => {
