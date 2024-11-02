@@ -48,13 +48,13 @@ export function OtpForm({
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: { pin: '' },
+    defaultValues: { pin: "" },
   });
 
   async function onOTPSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true);
-
-    const result = await signIn('credentials', {
+    
+    const result = await signIn("credentials", {
       email,
       otp: data.pin,
       role: roleType,
@@ -62,7 +62,7 @@ export function OtpForm({
     });
 
     if (!result?.ok) {
-      toast.error('Invalid email or OTP');
+      toast.error("Invalid email or OTP");
     } else {
       toast.success(`Welcome!`);
       if (roleType === 'user') {

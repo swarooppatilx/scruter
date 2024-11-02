@@ -33,6 +33,32 @@ model Seller {
   otp          String?
   role         String  @default("Seller")
 
+  Listings Listing[] @relation("SellerToListing")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Category {
+  Housing 
+  Fooding
+  For_Sale
+}
+
+model Listing {
+  id String @id @default(uuid()) @map("_id")
+
+  SellerId String
+  Seller   Seller  @relation("SellerToListing", fields: [SellerId], references: [id])
+
+  name        String
+  price       Int
+  description String
+
+  category Category
+  // add is featured feature
+  isArchived  Boolean @default(false)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

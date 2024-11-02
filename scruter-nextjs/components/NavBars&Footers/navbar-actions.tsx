@@ -1,11 +1,10 @@
 'use client';
 
-import { LogIn, LogInIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Button } from '../ui/button';
+import { LogInIcon } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Button } from '../ui/button';
 
 const NavbarActions = () => {
   //prevention for hydration error
