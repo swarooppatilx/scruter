@@ -548,12 +548,6 @@ app.post(
     if (!['food', 'house', 'market'].includes(type))
       return res.status(400).render('400');
 
-    // Validate id parameter
-    const idRegex = /^[a-zA-Z0-9]+$/;
-    if (!idRegex.test(id)) {
-      return res.status(400).render('400');
-    }
-
     const errors = validationResult(req);
     if (!errors.isEmpty())
       return res.status(400).render(`/edit/${type}/${id}`, {
