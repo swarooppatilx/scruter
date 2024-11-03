@@ -2,69 +2,27 @@
 
 import {
   ChevronRight,
-  Copyright,
   Facebook,
   Heart,
   Instagram,
-  Mail,
-  MapPin,
-  Phone,
   Twitter,
 } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
 
 const Links = [
-  {
-    name: 'About us',
-    id: 1,
-    href: '/about',
-  },
-  {
-    name: 'Our Teams',
-    id: 2,
-    href: '/team',
-  },
-  {
-    name: 'Terms of service',
-    id: 3,
-    href: '/terms',
-  },
-  {
-    name: 'Our Contributors',
-    id: 4,
-    href: '/contributors',
-  },
-  {
-    name: 'Privacy and Policy',
-    id: 5,
-    href: '/policy',
-  },
+  { name: 'About us', id: 1, href: '/about' },
+  { name: 'Our Teams', id: 2, href: '/team' },
+  { name: 'Terms of service', id: 3, href: '/terms' },
+  { name: 'Our Contributors', id: 4, href: '/contributors' },
+  { name: 'Privacy and Policy', id: 5, href: '/policy' },
 ];
+
 const Helpdesk = [
-  {
-    name: 'HelpCenter',
-    id: 1,
-    href: '/HelpCenter',
-  },
-  {
-    name: 'FAQ',
-    id: 2,
-    href: '/FAQ',
-  },
-  {
-    name: 'ContactUs',
-    id: 3,
-    href: '/ContactUs',
-  },
-  {
-    name: 'Support',
-    id: 4,
-    href: '/Support',
-  },
+  { name: 'HelpCenter', id: 1, href: '/HelpCenter' },
+  { name: 'FAQ', id: 2, href: '/FAQ' },
+  { name: 'ContactUs', id: 3, href: '/ContactUs' },
+  { name: 'Support', id: 4, href: '/Support' },
 ];
 
 const Footer = () => {
@@ -73,38 +31,34 @@ const Footer = () => {
   return (
     <div className="flex items-center flex-col p-5 bg-customBlue dark:bg-DarkGray">
       <div className="border-y border-customTeal dark:border-Green flex items-start justify-start flex-col lg:grid lg:grid-cols-4 py-2 gap-4">
-        {/* section1 */}
+        {/* Section 1 */}
         <div className="flex gap-4 items-start justify-between lg:px-4 pb-4 flex-col">
           <div className="flex justify-center items-center">
             <Link href="/" className="ml-4 lg:ml:0 gap-x-2">
-              <p className="font-bold text-5xl  dark:text-Green font-nunito">
+              <p className="font-bold text-5xl dark:text-Green font-nunito">
                 About Scruter
               </p>
             </Link>
           </div>
-          <div className=" ">
+          <div>
             Scruter is your local platform for buying, selling, and discovering
-            everything you need. Whether it's products, services, or community
+            everything you need. Whether it&apos;s products, services, or community
             activities, we connect people for a better local experience.
           </div>
         </div>
-        {/* section 2 */}
-        <div className="flex flex-col w-full items-start py-4  lg:ml-10 lg:p-4 gap-5">
+        {/* Section 2 */}
+        <div className="flex flex-col w-full items-start py-4 lg:ml-10 lg:p-4 gap-5">
           <p className="font-bold text-3xl text-customTeal dark:text-Green font-handlee">
             Quick Links
           </p>
-          <div className=" flex flex-col gap-2">
+          <div className="flex flex-col gap-2">
             {Links.map(link => (
               <Link
                 key={link.id}
                 href={link.href}
-                onMouseOver={() => {
-                  setId(link.id);
-                }}
-                onMouseLeave={() => {
-                  setId(0);
-                }}
-                className="flex items-center  gap-2"
+                onMouseOver={() => setId(link.id)}
+                onMouseLeave={() => setId(0)}
+                className="flex items-center gap-2"
               >
                 <ChevronRight className="h-4 w-4" />
                 <div className={id === link.id ? 'underline' : ''}>
@@ -115,23 +69,19 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* section 3 */}
-        <div className="flex flex-col w-full items-start py-4  lg:ml-10 lg:p-4 gap-5">
+        {/* Section 3 */}
+        <div className="flex flex-col w-full items-start py-4 lg:ml-10 lg:p-4 gap-5">
           <p className="font-bold text-3xl text-customTeal dark:text-Green font-handlee">
             Helpdesk
           </p>
-          <div className=" flex flex-col gap-2">
+          <div className="flex flex-col gap-2">
             {Helpdesk.map(link => (
               <Link
                 key={link.id}
                 href={link.href}
-                onMouseOver={() => {
-                  setId(link.id);
-                }}
-                onMouseLeave={() => {
-                  setId(0);
-                }}
-                className="flex items-center  gap-2"
+                onMouseOver={() => setId(link.id)}
+                onMouseLeave={() => setId(0)}
+                className="flex items-center gap-2"
               >
                 <ChevronRight className="h-4 w-4" />
                 <div className={id === link.id ? 'underline' : ''}>
@@ -141,8 +91,9 @@ const Footer = () => {
             ))}
           </div>
         </div>
-        {/* section 4 */}
-        <div className="flex flex-col w-full lg:w-10/12 items-start py-4  lg:ml-10 lg:p-4 gap-5">
+
+        {/* Section 4 */}
+        <div className="flex flex-col w-full lg:w-10/12 items-start py-4 lg:ml-10 lg:p-4 gap-5">
           <p className="font-bold text-3xl text-customTeal dark:text-Green font-handlee">
             Follow Us
           </p>
@@ -160,7 +111,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="flex flex-col lg:flex-row pt-5 items-center justify-center">
-        <div className="flex items-center  justify-center">
+        <div className="flex items-center justify-center">
           Made with <Heart fill="red" className="mx-2" /> by Team Scruter
         </div>
       </div>

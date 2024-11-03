@@ -52,7 +52,7 @@ export default function AboutPage() {
             </h2>
             <ul className="flex flex-wrap justify-center list-none p-0">
               <li className="bg-gray-200 m-2 p-4 rounded-lg shadow hover:bg-blue-400 transition duration-300 text-center flex-1 max-w-xs">
-                Buy & Sell Locally: Find great deals on items you need or sell
+                Buy &amp; Sell Locally: Find great deals on items you need or sell
                 your own goods easily.
               </li>
               <li className="bg-gray-200 m-2 p-4 rounded-lg shadow hover:bg-blue-400 transition duration-300 text-center flex-1 max-w-xs">
@@ -60,7 +60,7 @@ export default function AboutPage() {
                 allowing for safe exchanges.
               </li>
               <li className="bg-gray-200 m-2 p-4 rounded-lg shadow hover:bg-blue-400 transition duration-300 text-center flex-1 max-w-xs">
-                Community Focused: We're here to support local businesses and
+                Community Focused: We&apos;re here to support local businesses and
                 promote neighborhood connections.
               </li>
             </ul>
@@ -94,7 +94,7 @@ export default function AboutPage() {
             </ul>
 
             <p className="text-center mt-6 text-gray-700">
-              Thank you for choosing our company—where local communities come
+              Thank you for choosing our company&mdash;where local communities come
               together!
             </p>
           </div>

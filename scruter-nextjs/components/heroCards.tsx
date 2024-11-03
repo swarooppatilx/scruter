@@ -1,11 +1,7 @@
 import {
-  Car,
-  CreditCard,
   SendToBack,
   ShieldQuestion,
   ShoppingCart,
-  Store,
-  TicketPercent,
 } from 'lucide-react';
 import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
 
