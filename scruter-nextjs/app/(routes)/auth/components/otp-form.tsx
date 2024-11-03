@@ -19,7 +19,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Toaster, toast } from 'react-hot-toast';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
 import { ChevronLeftCircleIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation'; // use 'next/navigation' for Next.js 13 App Router
@@ -44,7 +44,9 @@ export function OtpForm({
   ...props
 }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const router = useRouter(); // Ensure this is declared outside of useEffect
+  const [redirectUrl, setRedirectUrl] = React.useState<string | null>(null);
+  const { data: session } = useSession(); // Access the session
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -64,13 +66,28 @@ export function OtpForm({
     if (!result?.ok) {
       toast.error('Invalid email or OTP');
     } else {
-      toast.success(`Welcome!`);
+      toast.success('Welcome!');
+
+      // Set redirect URL based on user role
       if (roleType === 'user') {
-        router.push('/'); // Redirect to home for user
+        setRedirectUrl('/'); // Redirect to home for user
+      } else if (roleType === 'seller') {
+        setRedirectUrl(`/seller/${email}`); // Temporarily set to seller's page
       }
     }
     setIsLoading(false);
   }
+
+  React.useEffect(() => {
+    if (redirectUrl && session) {
+      const sellerId = session.user?.id; // Retrieve the sellerId from session
+      if (sellerId) {
+        router.push(`/seller/${sellerId}`); // Redirect to seller's page
+      } else if (redirectUrl === '/') {
+        router.push(redirectUrl); // Redirect to home for user
+      }
+    }
+  }, [redirectUrl, session, router]);
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
