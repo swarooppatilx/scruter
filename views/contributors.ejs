@@ -294,9 +294,12 @@
         async function fetchData() {
           loadingIndicator.style.display = 'flex';
 
+          // Generate a new timestamp to bypass caching
+          const timestamp = new Date().getTime();
+
           try {
             const contributorsResponse = await axios.get(
-              'https://api.github.com/repos/swarooppatilx/scruter/contributors'
+              `https://api.github.com/repos/swarooppatilx/scruter/contributors?per_page=100&timestamp=${timestamp}`
             );
             const contributorsData = contributorsResponse.data;
 
