@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import MainNav from '@/components/NavBars&Footers/main-nav';
+import MainNav from '@/components/common/main-nav';
 import Container from '../ui/container';
 import NavbarActions from './navbar-actions';
 

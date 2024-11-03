@@ -10,10 +10,6 @@ import {
   faLinkedin,
   faGithub,
 } from '@fortawesome/free-brands-svg-icons';
-import Navbar from '@/components/NavBars&Footers/navbar';
-import { Providers } from '@/lib/providers';
-import Footer from '@/components/NavBars&Footers/footer';
-import CustomCursor from '@/components/ui/CustomCursor';
 
 const teamMembers = [
   {
@@ -98,66 +94,61 @@ export default function TeamPage() {
   }, []);
 
   return (
-    <Providers>
-      <CustomCursor />
-      <Navbar />
-      <section className="team-section text-center mt-4 mb-5 pb-5">
-        <div className="container mx-auto">
-          <h2 className="mb-4 text-2xl font-bold">Meet the Team</h2>
-          <p className="lead mb-6 text-lg">
-            Get to know the amazing team behind Scruter.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {teamMembers.map(member => (
-              <div
-                className="bg-white shadow-md rounded-lg p-4 mb-4 flex flex-col items-center"
-                key={member.name}
-              >
-                <Image
-                  src={member.image}
-                  className="rounded-full mb-3"
-                  alt={`Team Member: ${member.name}`}
-                  width={150}
-                  height={150}
-                />
-                <h4 className="text-lg font-semibold">{member.name}</h4>
-                <p className="text-gray-600">{member.role}</p>
-                <div className="social-icons mt-2 flex space-x-4">
-                  <a
-                    href={member.social.instagram}
-                    className="transition-transform duration-300 text-black hover:scale-110"
-                    aria-label="Instagram"
-                  >
-                    <FontAwesomeIcon icon={faInstagram} />
-                  </a>
-                  <a
-                    href={member.social.twitter}
-                    className="transition-transform duration-300 text-black hover:scale-110"
-                    aria-label="Twitter"
-                  >
-                    <FontAwesomeIcon icon={faTwitter} />
-                  </a>
-                  <a
-                    href={member.social.linkedin}
-                    className="transition-transform duration-300 text-black hover:scale-110"
-                    aria-label="LinkedIn"
-                  >
-                    <FontAwesomeIcon icon={faLinkedin} />
-                  </a>
-                  <a
-                    href={member.social.github}
-                    className="transition-transform duration-300 text-black hover:scale-110"
-                    aria-label="GitHub"
-                  >
-                    <FontAwesomeIcon icon={faGithub} />
-                  </a>
-                </div>
+    <section className="team-section text-center mt-4 mb-5 pb-5">
+      <div className="container mx-auto">
+        <h2 className="mb-4 text-2xl font-bold">Meet the Team</h2>
+        <p className="lead mb-6 text-lg">
+          Get to know the amazing team behind Scruter.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {teamMembers.map(member => (
+            <div
+              className="bg-white shadow-md rounded-lg p-4 mb-4 flex flex-col items-center"
+              key={member.name}
+            >
+              <Image
+                src={member.image}
+                className="rounded-full mb-3"
+                alt={`Team Member: ${member.name}`}
+                width={150}
+                height={150}
+              />
+              <h4 className="text-lg font-semibold">{member.name}</h4>
+              <p className="text-gray-600">{member.role}</p>
+              <div className="social-icons mt-2 flex space-x-4">
+                <a
+                  href={member.social.instagram}
+                  className="transition-transform duration-300 text-black hover:scale-110"
+                  aria-label="Instagram"
+                >
+                  <FontAwesomeIcon icon={faInstagram} />
+                </a>
+                <a
+                  href={member.social.twitter}
+                  className="transition-transform duration-300 text-black hover:scale-110"
+                  aria-label="Twitter"
+                >
+                  <FontAwesomeIcon icon={faTwitter} />
+                </a>
+                <a
+                  href={member.social.linkedin}
+                  className="transition-transform duration-300 text-black hover:scale-110"
+                  aria-label="LinkedIn"
+                >
+                  <FontAwesomeIcon icon={faLinkedin} />
+                </a>
+                <a
+                  href={member.social.github}
+                  className="transition-transform duration-300 text-black hover:scale-110"
+                  aria-label="GitHub"
+                >
+                  <FontAwesomeIcon icon={faGithub} />
+                </a>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </section>
-      <Footer />
-    </Providers>
+      </div>
+    </section>
   );
 }
