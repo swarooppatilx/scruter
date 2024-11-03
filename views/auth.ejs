@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <%- include('partials/head') %> 
@@ -7,30 +7,8 @@
     <script src="js/client-validation.js" defer></script>
     <style>
         body {
-            overflow-y: auto;  // Changed from hidden to auto to allow scrolling
+            overflow-y: auto;  
         }
-        .container{
-            position: relative;
-            width: 100%;
-            height: 100vh; 
-            min-height: 100vh;
-            min-width: 100vw;
-            background-image: url('/login-pre.jpeg');
-            background-size:cover;
-            background-position:center;
-            transition: background-image 0.5s ease;
-        }
-        
-        video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none;
-            display: none;
-}
         .input-submit {
             display: flex;
             justify-content: center;
@@ -50,12 +28,6 @@
     <%- include('partials/navbar') %>
 
     <div class="container">
-        <video id="bgVideo" aria-hidden="true" muted autoplay loop playsinline>
-            <source src="https://cdn.pixabay.com/video/2024/03/18/204565-924698132_small.mp4" type="video/mp4">
-            <!-- <source src="https://cdn.pixabay.com/video/2023/03/02/152820-804130696_small.mp4" type="video/mp4">       <-- ALT CLIP -->
-
-            Your browser does not support the video tag.
-        </video>
         <div class="box">
             <div class="header">
                 <p><%= action === 'login' ? 'Log In' : 'Sign Up' %></p>
@@ -91,7 +63,7 @@
                     </div>
                     <div class="input-box">
                         <label for="phone">Phone</label>
-                        <input type="phone" class="input-field" id="phone" name="phone" placeholder="Enter Phone" required>
+                        <input type="tel" class="input-field" id="phone" name="phone" placeholder="Enter Phone" required>
                         <i class="bx bx-phone"></i>
                     </div>
                     <div class="input-box">
@@ -134,15 +106,13 @@
                 <% if (action === 'login') { %>
                     <span><a href="#">Forgot Password?</a></span>
                 <% } %>
-                </div>
- 
+            </div>
         </div>
-        
     </div>
  
     <%- include('partials/bottom_nav') %>
     <script>
-        // /preloader js styling
+        // Preloader JS styling
         let preloader = document.querySelector("#preloader");
         window.addEventListener("load",function(e){
             preloader.style.display = "none";
@@ -177,6 +147,20 @@
             const phone = document.getElementById('phone').value;
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validate email format
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Validate phone number (basic check)
+            const phonePattern = /^[0-9]{10}$/; // Adjust according to your phone number format
+            if (!phonePattern.test(phone)) {
+                alert('Please enter a valid 10-digit phone number.');
+                return;
+            }
 
             if (password !== confirmPassword) {
                 alert('Passwords do not match');
@@ -222,24 +206,6 @@
             document.getElementById('rememberMe').checked = true;
         }
     };
-</script>
-<script>
-    // background switch script
-    const video = document.getElementById('bgVideo');
-    const container = document.querySelector('.container');
-
-    video.addEventListener('loadeddata', () => {
-        container.style.backgroundImage = "none"; 
-
-        video.style.display = 'block'; 
-        video.play(); 
-});
-
-    video.addEventListener('ended', () => {
-        video.currentTime = 0; 
-        video.play();
-});
-
 </script>
 
 

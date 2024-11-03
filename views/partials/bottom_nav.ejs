@@ -1,36 +1,153 @@
- <nav class="navbar navbar-b fixed-bottom navbar-light bg-light d-block d-md-none">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <title>Responsive Navbar with Dark/Light Mode</title>
+    <style>
+        /* Base colors */
+        :root {
+            --bg-light: #ffffff;
+            --bg-dark: #1c1c1c;
+            --text-light: #000000; /* Black text for light mode */
+            --text-dark: #ffffff;  /* White text for dark mode */
+        }
+
+        body {
+            margin: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Navbar styles */
+        .navbar-light {
+            background-color: var(--bg-light) !important;
+        }
+
+        .navbar-dark {
+            background-color: var(--bg-dark) !important;
+        }
+
+        /* Icon color */
+        .nav-link i {
+            transition: color 0.3s ease; /* Smooth transition for color */
+        }
+
+        .text-dark {
+            color: var(--text-light) !important; /* Black for light mode */
+        }
+
+        .text-light {
+            color: var(--text-dark) !important; /* White for dark mode */
+        }
+
+        /* Ensure icons have visible color based on the theme */
+        .dark-mode .nav-link i {
+            color: var(--text-dark); /* White icons for dark mode */
+        }
+
+        .light-mode .nav-link i {
+            color: var(--text-light); /* Black icons for light mode */
+        }
+    </style>
+</head>
+<body class="bg-light light-mode">
+
+<nav class="navbar navbar-b fixed-bottom navbar-light bg-light d-block d-md-none" id="navbar">
     <div class="container-fluid">
-      <ul class="nav justify-content-around w-100">
-        <li class="nav-item">
-          <a class="nav-link nav-link-b text-dark <%= activeLink === 'home' ? 'active' : '' %>" href="/"><i class="fa-solid fa-right-from-bracket"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-b text-dark <%= activeLink === 'house' ? 'active' : '' %>" href="/house"><i class="fa-solid fa-house"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-b text-dark <%= activeLink === 'food' ? 'active' : '' %>" href="/food"><i class="fa-solid fa-utensils"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-b text-dark <%= activeLink === 'market' ? 'active' : '' %>" href="/market"><i class="fa-solid fa-cart-shopping"></i></a>
-        </li>
-        <li class="nav-item dropup">
-            <a class="nav-link nav-link-b dropdown-toggle " href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-solid fa-user"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-b" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
-              <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
-              <li><a class="dropdown-item" href="/market/form">For Sale Ad</a></li>
-              <li>
-                <% if (user) { %>
-                  <a class="dropdown-item" href="/logout">Logout</a>
-                <% } else { %>
-                <a class="dropdown-item" href="/auth?action=login">Login</a>
-                <a class="dropdown-item" href="/auth?action=signup">Signup</a>
-                <% } %>
-              </li>
-            </ul>
-        </li>
-      </ul>
+        <ul class="nav justify-content-around w-100">
+            <li class="nav-item">
+                <a class="nav-link nav-link-b text-dark <%= activeLink === 'home' ? 'active' : '' %>" href="/">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link-b text-dark <%= activeLink === 'house' ? 'active' : '' %>" href="/house">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link-b text-dark <%= activeLink === 'food' ? 'active' : '' %>" href="/food">
+                    <i class="fa-solid fa-utensils"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link-b text-dark <%= activeLink === 'market' ? 'active' : '' %>" href="/market">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+            </li>
+            <li class="nav-item dropup">
+                <a class="nav-link nav-link-b dropdown-toggle" href="#" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="/house/form">House Ad</a></li>
+                    <li><a class="dropdown-item" href="/food/form">Food Ad</a></li>
+                    <li><a class="dropdown-item" href="/market/form">For Sale Ad</a></li>
+                    <li>
+                        <% if (user) { %>
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                        <% } else { %>
+                        <a class="dropdown-item" href="/auth?action=login">Login</a>
+                        <a class="dropdown-item" href="/auth?action=signup">Signup</a>
+                        <% } %>
+                    </li>
+                </ul>
+            </li>
+            <!-- Toggle switch for dark/light mode -->
+            <!-- <li class="nav-item">
+                <a id="darkModeToggle" class="nav-link nav-link-b" href="#">
+                    <i class="fa-solid fa-moon"></i> 
+                    <span id="toggleText">Switch to Dark Mode</span> 
+                </a>
+            </li> -->
+        </ul>
     </div>
-  </nav>
+</nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.getElementById("darkModeToggle");
+        const body = document.body;
+        const navbar = document.getElementById("navbar");
+        const toggleText = document.getElementById("toggleText");
+        let mode = localStorage.getItem("theme") || "light";
+
+        // Set initial theme based on saved preference
+        if (mode === "dark") {
+            body.classList.replace("light-mode", "dark-mode");
+            navbar.classList.replace("navbar-light", "navbar-dark");
+            toggleText.textContent = "Switch to Light Mode"; // Button text change
+            toggleButton.querySelector('i').classList.remove('fa-moon');
+            toggleButton.querySelector('i').classList.add('fa-sun'); // Sun icon for light mode
+        } else {
+            toggleText.textContent = "Switch to Dark Mode"; // Button text change
+        }
+
+        // Toggle dark/light mode on button click
+        toggleButton.addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent default anchor behavior
+            if (mode === "light") {
+                body.classList.replace("light-mode", "dark-mode");
+                navbar.classList.replace("navbar-light", "navbar-dark");
+                mode = "dark";
+                toggleText.textContent = "Switch to Light Mode"; // Button text change
+                toggleButton.querySelector('i').classList.remove('fa-moon');
+                toggleButton.querySelector('i').classList.add('fa-sun'); // Sun icon for light mode
+            } else {
+                body.classList.replace("dark-mode", "light-mode");
+                navbar.classList.replace("navbar-dark", "navbar-light");
+                mode = "light";
+                toggleText.textContent = "Switch to Dark Mode"; // Button text change
+                toggleButton.querySelector('i').classList.remove('fa-sun');
+                toggleButton.querySelector('i').classList.add('fa-moon'); // Moon icon for dark mode
+            }
+            localStorage.setItem("theme", mode);
+        });
+    });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

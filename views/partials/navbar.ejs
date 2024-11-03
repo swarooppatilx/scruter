@@ -155,6 +155,20 @@ a {
     }
 }
 
+/* Footer Styles */
+.footer {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark mode footer styling */
+.dark-mode .footer {
+  color: #ffffff !important;
+  /* background-color: #1c1c1c !important; */
+}
+
+
 
 </style>
   
@@ -293,6 +307,20 @@ a {
     
 </nav>
 
+
+<script>
+    const footer = document.getElementById("footer");
+if (mode === "dark") {
+  footer.classList.add("dark-mode");
+} else {
+  footer.classList.remove("dark-mode");
+}
+
+toggleButton.addEventListener("click", function () {
+  footer.classList.toggle("dark-mode");
+});
+
+</script>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
