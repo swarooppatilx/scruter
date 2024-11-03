@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
-import '../globals.css';
+import '../../globals.css';
 import Navbar from '@/components/NavBars&Footers/navbar';
 import { Providers } from '@/lib/providers';
 import Footer from '@/components/NavBars&Footers/footer';
