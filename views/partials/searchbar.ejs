@@ -17,12 +17,10 @@
         </select>
       </div>
 
-      <!-- Sort by Price Dropdown -->
+      <!-- sorting dropdown -->
       <div class="col-6 col-md-auto mb-2 mb-md-0">
         <select class="form-select" id="sort-by-price" name="sort">
-          <option value="">Sort by Price</option>
-          <option value="asc">Low to High</option>
-          <option value="desc">High to Low</option>
+          <!-- The JavaScript will populate these options -->
         </select>
       </div>
 
@@ -37,49 +35,103 @@
   </form>
 </div>
 
-<!-- JavaScript to Update Form Action and Validate Input -->
+<!-- JavaScript to Update Form Action, Validate Input, and Handle Sorting -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const searchForm = document.getElementById('search-form');
-    const searchInput = document.getElementById('search-input');
-    const searchAction = document.getElementById('search-action');
-    const sortByPrice = document.getElementById('sort-by-price');
-    const validationMessage = document.getElementById('validation-message');
-    const cards = document.querySelectorAll('.card');
+  const searchForm = document.getElementById('search-form');
+  const searchInput = document.getElementById('search-input');
+  const searchAction = document.getElementById('search-action');
+  const sortSelect = document.getElementById('sort-by-price');
+  const validationMessage = document.getElementById('validation-message');
+  const cards = document.querySelectorAll('.card');
 
-    searchInput.addEventListener('input', function () {
-      const query = searchInput.value.toLowerCase();
+  // Update the sort dropdown HTML to include name sorting options
+  sortSelect.innerHTML = `
+    <option value="">Sort by...</option>
+    <optgroup label="Price">
+      <option value="price_asc">Price - Low to High</option>
+      <option value="price_desc">Price - High to Low</option>
+    </optgroup>
+    <optgroup label="Name">
+      <option value="name_asc">Name - A to Z</option>
+      <option value="name_desc">Name - Z to A</option>
+    </optgroup>
+  `;
 
-      cards.forEach(card => {
-        const title = card.querySelector('.card-title').textContent.toLowerCase();
+  function filterAndSortCards() {
+    const query = searchInput.value.toLowerCase().trim();
+    const sortOption = sortSelect.value;
 
-        if (title.includes(query)) {
-          card.parentElement.style.display = 'block';
-        } else {
-          card.parentElement.style.display = 'none';
+    // Convert NodeList to Array and filter
+    let filteredCards = Array.from(cards).filter(card => {
+      const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+      return title.includes(query);
+    });
+
+    // Sort cards based on selected option
+    if (sortOption) {
+      filteredCards.sort((a, b) => {
+        const titleA = a.querySelector('.card-title')?.textContent.toLowerCase() || '';
+        const titleB = b.querySelector('.card-title')?.textContent.toLowerCase() || '';
+        const priceA = parseFloat(a.dataset.price) || 0;
+        const priceB = parseFloat(b.dataset.price) || 0;
+
+        switch (sortOption) {
+          case 'price_asc':
+            return priceA - priceB;
+          case 'price_desc':
+            return priceB - priceA;
+          case 'name_asc':
+            return titleA.localeCompare(titleB);
+          case 'name_desc':
+            return titleB.localeCompare(titleA);
+          default:
+            return 0;
         }
       });
-    });
+    }
+
+    // Update visibility using a document fragment for better performance
+    const container = cards[0].parentElement.parentElement;
+    const fragment = document.createDocumentFragment();
     
-    // Update form action based on the selected search action
-    searchAction.addEventListener('change', function () {
-      const activeLink = this.value;
-      searchForm.action = `/${activeLink}?type=${activeLink}`;
+    // Hide all cards first
+    cards.forEach(card => {
+      const wrapper = card.parentElement;
+      wrapper.style.display = 'none';
     });
+
+    // Show and reorder filtered cards
+    filteredCards.forEach(card => {
+      const wrapper = card.parentElement;
+      wrapper.style.display = 'block';
+      fragment.appendChild(wrapper);
+    });
+
+    container.appendChild(fragment);
+  }
+
+  searchInput.addEventListener('input', filterAndSortCards);
+  sortSelect.addEventListener('change', filterAndSortCards);
+
+  // Update form action based on the selected search action
+  searchAction.addEventListener('change', function () {
+    const activeLink = this.value;
+    searchForm.action = `/${activeLink}?type=${activeLink}`;
+  });
 
     // Validate input before submitting the form
-    searchForm.addEventListener('submit', function (event) {
-      const queryInput = searchInput.value.trim();
-
-      // If the input is empty and no sorting option is selected, prevent form submission and show the validation message
-      if (queryInput === '' && sortByPrice.value === '') {
-        event.preventDefault();
-        validationMessage.style.display = 'block';
-        searchInput.classList.add('is-invalid');
-      } else {
-        validationMessage.style.display = 'none';
-        searchInput.classList.remove('is-invalid');
-      }
-    });
+  searchForm.addEventListener('submit', function (event) {
+    const queryInput = searchInput.value.trim();
+    
+    if (queryInput === '' && !sortSelect.value) {
+      event.preventDefault();
+      validationMessage.style.display = 'block';
+      searchInput.classList.add('is-invalid');
+    } else {
+      validationMessage.style.display = 'none';
+      searchInput.classList.remove('is-invalid');
+    }
   });
+});
 </script>
