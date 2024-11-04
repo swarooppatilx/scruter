@@ -217,6 +217,41 @@ app.post(
     }
   }
 );
+const feedbackSchema = new mongoose.Schema({
+  feedbackText: {
+      type: String,
+      required: true,
+      trim: true,
+  },
+  email: {
+      type: String,
+      trim: true,
+      match: /.+\@.+\..+/,
+  },
+  createdAt: {
+      type: Date,
+      default: Date.now,
+  },
+});
+
+const Feedback = mongoose.model('Feedback', feedbackSchema);
+
+// POST route to handle feedback submission
+app.post('/submit-feedback', async (req, res) => {
+  const { feedbackText, email } = req.body;
+
+  try {
+      const feedback = new Feedback({
+          feedbackText,
+          email,
+      });
+      await feedback.save();
+      res.status(201).json({ message: 'Feedback submitted successfully!' });
+  } catch (error) {
+      console.error('Error saving feedback:', error); // Log the error for debugging
+      res.status(500).json({ message: 'Error submitting feedback' });
+  }
+});
 
 //Change in Dashboard Stuff
 
