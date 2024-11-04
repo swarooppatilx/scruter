@@ -58,7 +58,7 @@ const Sidebar = () => (
 );
 
 const MainContent = () => (
-  <main className="main-content flex-1 p-10 bg-white shadow-md">
+  <main className="main-content flex-1 p-4 bg-white shadow-md">
     <TitleSection />
     <Section id="introduction" icon="fas fa-info-circle" title="Introduction">
       <p>This Help Center provides resources to assist you with our services. Whether you have questions about our products or need assistance, you can find useful information here.</p>
