@@ -60,8 +60,8 @@ const Sidebar = () => {
           return (
             <div
               key={index}
-              className="flex items-center bg-black rounded-lg p-2 space-x-4 leading-4 sm:mb-8">
-              <div onClick={() => changeStep(id)} className={`md:w-8 cursor-pointer md:h-8 w-10 h-10 rounded-full flex items-center justify-center font-medium ${currentStep === id ? 'border border-customBlue bg-customTeal text-gray-200' : 'border border-primary-lightBlue text-secondary-lightGray' }`}>
+              className={`flex items-center rounded-lg p-2 space-x-4 leading-4 sm:mb-8 ${currentStep === id ? 'border border-black bg-gray-400 ' : '' }`}>
+              <div onClick={() => changeStep(id)} className={`md:w-8 cursor-pointer md:h-8 w-10 h-10 rounded-full flex items-center justify-center font-medium `}>
                 {id}
               </div>
               <div className="hidden md:block">
