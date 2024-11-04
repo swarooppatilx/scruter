@@ -8,7 +8,6 @@ export async function middleware(request: NextRequest) {
   // Check if the pathname is in the (seller) route and contains a sellerId
   // console.log("control")
   const isSellerRoute = pathname.startsWith('/seller');
-  const sellerIdMatch = pathname.match(/\/seller\/([^/]+)/);
 
   if (isSellerRoute) {
     // Get the token from the request

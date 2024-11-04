@@ -3,195 +3,224 @@
 
 <head>
     <%- include('partials/head') %>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9fafb;
-            color: #1f2937;
-            display: flex;
-            flex-direction: column;
-        }
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f9fafb;
+                color: #1f2937;
+                display: flex;
+                flex-direction: column;
+            }
 
-        .main-content {
-            width: 90%;
-            padding-left: 8rem;
-            padding-right: 8rem;
-            padding-top: 5rem;
-            padding-bottom: 5rem;
-            background-color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .title-section {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .title-section h1 {
-            font-size: 2.4rem;
-            color: #2563eb;
-            font-weight: bold;
-        }
-
-        .title-section p {
-            color: #555;
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
-
-        section {
-            margin-top: 2rem;
-        }
-
-        section h2 {
-            font-size: 1.8rem;
-            color: #333;
-            display: flex;
-            align-items: center;
-            border-left: 4px solid #2563eb;
-            padding-left: 8px;
-            margin-bottom: 1rem;
-        }
-
-        section h2 i {
-            margin-right: 8px;
-            color: #6f42c1;
-        }
-
-        /* Sidebar styles */
-        .sidebar {
-            width: 25%;
-            background: linear-gradient(to bottom, #007bff, #6f42c1);
-            color: #fff;
-            padding: 20px;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 15px;
-        }
-
-        .sidebar ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            transition: color 0.2s;
-        }
-
-        .sidebar ul li a:hover {
-            color: #e0e0e0;
-        }
-
-        .sidebar ul li a i {
-            margin-right: 8px;
-        }
-
-        @media (max-width: 768px) {
             .main-content {
-                width: 100%;
-                padding: 1rem;
+                width: 90%;
+                padding-left: 8rem;
+                padding-right: 8rem;
+                padding-top: 5rem;
+                padding-bottom: 5rem;
+                background-color: #ffffff;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .dark-mode .main-content {
+                background-color: #1c2535;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            }
+
+            .title-section h1 {
+                font-size: 2.4rem;
+                color: #2563eb;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .dark-mode .title-section h1 {
+                color: #3b82f6;
+                text-align: center;
+            }
+
+            .title-section p {
+                color: #555;
+                text-align: center;
+                max-width: 700px;
+                margin: 0 auto;
+                font-size: 1.1rem;
+            }
+
+            .dark-mode .title-section p {
+                color: #d1d5db;
+                text-align: center;
+            }
+
+            section {
+                margin-top: 2rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+                color: #333;
+                display: flex;
+                align-items: center;
+                border-left: 4px solid #2563eb;
+                padding-left: 8px;
+                margin-bottom: 1rem;
+            }
+
+            .dark-mode section h2 {
+                color: #e5e7eb;
+                border-left-color: #3b82f6;
+            }
+
+            section h2 i {
+                margin-right: 8px;
+                color: #6f42c1;
             }
 
             .sidebar {
-                display: none;
+                width: 25%;
+                background: linear-gradient(to bottom, #007bff, #6f42c1);
+                color: #fff;
+                padding: 20px;
+                position: sticky;
+                top: 0;
+                height: 100vh;
             }
-        }
-    </style>
+
+            .dark-mode .sidebar {
+                background: linear-gradient(to bottom, #1a1b4e, #1f1f1f);
+            }
+
+            .sidebar ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .sidebar ul li {
+                margin-bottom: 15px;
+                margin-left: 5px;
+            }
+
+            .sidebar ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 1rem;
+                gap: 5px;
+                display: flex;
+                align-items: center;
+                padding: 8px;
+                transition: color 0.2s;
+            }
+
+            .dark-mode .sidebar ul li a {
+                color: #e0e0e0;
+            }
+
+            .sidebar ul li a:hover {
+                color: #e0e0e0;
+            }
+
+            .dark-mode .sidebar ul li a:hover {
+                color: #ffffff;
+            }
+
+            @media (max-width: 768px) {
+                .main-content {
+                    width: 100%;
+                    padding: 1rem;
+                }
+
+                .sidebar {
+                    display: none;
+                }
+            }
+        </style>
 </head>
 
 <body>
     <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
 
-    <div style="display: flex;">
-        <aside class="sidebar">
-            <ul>
-                <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQs</a></li>
-                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Support</a></li>
-                <li><a href="#feedback"><i class="fas fa-comments"></i> Feedback</a></li>
-                <li><a href="#resources"><i class="fas fa-book"></i> Resources</a></li>
-                <li><a href="#troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</a></li>
-            </ul>
-        </aside>
+        <div style="display: flex;">
+            <aside class="sidebar">
+                <ul>
+                    <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQs</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Support</a></li>
+                    <li><a href="#feedback"><i class="fas fa-comments"></i> Feedback</a></li>
+                    <li><a href="#resources"><i class="fas fa-book"></i> Resources</a></li>
+                    <li><a href="#troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</a></li>
+                </ul>
+            </aside>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="title-section">
-                <h1>Support Page</h1>
-                <p>We're here to help! Browse our resources or reach out for assistance.</p>
-            </div>
-
-            <section id="faq">
-                <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions (FAQs)</h2>
-                <p>Here are some common questions we receive from users:</p>
-                <div class="faq-section">
-                    <div class="question">How do I reset my password?</div>
-                    <div class="answer">To reset your password, go to the login page and click on "Forgot Password." Follow the instructions to reset your password.</div>
-                    <div class="question">Where can I find my order history?</div>
-                    <div class="answer">You can find your order history in your account dashboard under "Order History."</div>
-                    <!-- Add more FAQs as needed -->
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="title-section">
+                    <h1>Support Page</h1>
+                    <p>We're here to help! Browse our resources or reach out for assistance.</p>
                 </div>
-            </section>
 
-            <section id="contact">
-                <h2><i class="fas fa-envelope"></i> Contact Support</h2>
-                <p>If you need further assistance, please contact our support team:</p>
-                <div class="contact-info-header">Support Email:</div>
-                <div class="contact-info">support@example.com</div>
-            </section>
+                <section id="faq">
+                    <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions (FAQs)</h2>
+                    <p>Here are some common questions we receive from users:</p>
+                    <div class="faq-section">
+                        <div class="question">How do I reset my password?</div>
+                        <div class="answer">To reset your password, go to the login page and click on "Forgot Password."
+                            Follow the instructions to reset your password.</div>
+                        <div class="question">Where can I find my order history?</div>
+                        <div class="answer">You can find your order history in your account dashboard under "Order
+                            History."</div>
+                        <!-- Add more FAQs as needed -->
+                    </div>
+                </section>
 
-            <section id="feedback">
-                <h2><i class="fas fa-comments"></i> Feedback</h2>
-                <p>Your feedback is important to us! Please let us know how we can improve our services.</p>
-                <a href="mailto:feedback@example.com" class="cta-button">Send Feedback</a>
-            </section>
+                <section id="contact">
+                    <h2><i class="fas fa-envelope"></i> Contact Support</h2>
+                    <p>If you need further assistance, please contact our support team:</p>
+                    <div class="contact-info-header">Support Email:</div>
+                    <div class="contact-info">support@example.com</div>
+                </section>
 
-            <section id="resources">
-                <h2><i class="fas fa-book"></i> Helpful Resources</h2>
-                <p>Explore our resources to help you navigate our services:</p>
-                <ul>
-                    <li><a href="#">User Guide</a></li>
-                    <li><a href="#">Video Tutorials</a></li>
-                    <li><a href="#">Community Forum</a></li>
-                </ul>
-            </section>
+                <section id="feedback">
+                    <h2><i class="fas fa-comments"></i> Feedback</h2>
+                    <p>Your feedback is important to us! Please let us know how we can improve our services.</p>
+                    <a href="mailto:feedback@example.com" class="cta-button">Send Feedback</a>
+                </section>
 
-            <section id="troubleshooting">
-                <h2><i class="fas fa-wrench"></i> Troubleshooting</h2>
-                <p>If you're experiencing issues, check our troubleshooting guide:</p>
-                <ul>
-                    <li>Clear your browser's cache and cookies.</li>
-                    <li>Ensure your browser is updated to the latest version.</li>
-                    <li>Disable any browser extensions that may interfere with the website.</li>
-                </ul>
-            </section>
-        </main>
-    </div>
+                <section id="resources">
+                    <h2><i class="fas fa-book"></i> Helpful Resources</h2>
+                    <p>Explore our resources to help you navigate our services:</p>
+                    <ul>
+                        <li><a href="#">User Guide</a></li>
+                        <li><a href="#">Video Tutorials</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                    </ul>
+                </section>
 
-    <script>
-        // Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.body.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            document.getElementById('progress-bar').style.width = scrollPercent + '%';
-        });
-    </script>
+                <section id="troubleshooting">
+                    <h2><i class="fas fa-wrench"></i> Troubleshooting</h2>
+                    <p>If you're experiencing issues, check our troubleshooting guide:</p>
+                    <ul>
+                        <li>Clear your browser's cache and cookies.</li>
+                        <li>Ensure your browser is updated to the latest version.</li>
+                        <li>Disable any browser extensions that may interfere with the website.</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
 
-    <%- include('partials/footer') %>
+        <script>
+            // Scroll Progress Bar
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                document.getElementById('progress-bar').style.width = scrollPercent + '%';
+            });
+        </script>
+
+        <%- include('partials/footer') %>
 </body>
+
 </html>
