@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,16 +7,14 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ChevronDown } from 'lucide-react';
+import { useGlobalListing } from '@/context/GlobalListingProvider';
 
 const SelectCategory = () => {
-  // State to hold the selected category
-  const [selectedCategory, setSelectedCategory] = useState('');
-
-  // Function to handle category selection
-  const handleSelectCategory = (category: string) => {
-    setSelectedCategory(category);
-    // You can also add any additional logic here, such as updating the context or validation
-  };
+  
+  const {
+    listingCategory,
+    setListingCategory
+  } = useGlobalListing();
 
   return (
     <div className='h-3/4 flex  flex-col items-start gap-8 justify-start'>
@@ -29,14 +26,14 @@ const SelectCategory = () => {
       </h3>
       <DropdownMenu>
         <DropdownMenuTrigger className='bg-black h-10 text-gray-200 w-full rounded-full flex items-center justify-center'>
-          {selectedCategory || 'Category'} <ChevronDown />
+          {listingCategory || 'Category'} <ChevronDown />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>Select the Category for your listing</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => handleSelectCategory('Housing')}>Housing</DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleSelectCategory('Fooding')}>Fooding</DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleSelectCategory('For Sale')}>For Sale</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setListingCategory('Housing')}>Housing</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setListingCategory('Fooding')}>Fooding</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setListingCategory('For_Sale')}>For Sale</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

@@ -9,5 +9,10 @@ export const data = [
       step: "step 2",
       title: "select category",
     },
+    {
+      id: 3,
+      step: "step 3",
+      title: "Upload Immages",
+    },
   ];
   
