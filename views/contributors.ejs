@@ -1,11 +1,16 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <%- include('partials/head') %>
+
+<head>
+  <%- include('partials/head') %>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
     <style>
+
+      *{
+        scrollbar-color: #bb1338 black !important;
+      }
       /* Scoped styles for contributors page */
       .contributors-content * {
         margin: 0;
@@ -19,19 +24,24 @@
         color: #1f2937;
         line-height: 1.5;
       }
+
       .cta-button {
         display: inline-block;
         padding: 1rem 2rem;
         background-color: white;
-        color: #2563eb;
-        font-weight: bold;
+        color: #000000;
+        font-weight: light;
         text-decoration: none;
         border-radius: 9999px;
         transition: background-color 0.3s ease;
       }
 
       .cta-button:hover {
-        background-color: #bfdbfe;
+        background-color: transparent;
+        color: white;
+        border-color: white;
+        border-width: 10px;
+        box-shadow: 0 0 10px rgba(51, 51, 51, 0.6);
       }
 
       .contributors-content .hero {
@@ -47,8 +57,27 @@
 
       .hero-overlay {
         position: absolute;
-        inset: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2;
+      }
+
+      #hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-image: url(/contri-pre.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
       }
 
       .hero-content {
@@ -58,15 +87,34 @@
         padding: 0 1rem;
       }
 
+      #heroVideo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+      }
+
       .hero h1 {
         font-size: 3rem;
         font-weight: bold;
         margin-bottom: 1rem;
+        background: linear-gradient(90deg, hsla(233, 100%, 90%, 1) 0%, hsla(0, 0%, 89%, 1) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
       }
 
       .hero p {
         font-size: 1.5rem;
-        color: #bfdbfe;
+        background: linear-gradient(90deg, hsla(228, 17%, 53%, 1) 0%, hsla(229, 28%, 88%, 1) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
         margin-bottom: 2rem;
       }
 
@@ -76,11 +124,13 @@
       }
 
       .stats {
-        background-color: white;
+        background-color: #ffffff;
+        color: black;
       }
 
       .contributors {
-        background-color: #f3f4f6;
+        background-color: #ffffff;
+        color: black;
       }
 
       .stats h2,
@@ -89,6 +139,7 @@
         font-weight: bold;
         text-align: center;
         margin-bottom: 3rem;
+        color: black;
       }
 
       .stats-container,
@@ -98,12 +149,34 @@
         gap: 2rem;
         max-width: 80rem;
         margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid transparent;
+        padding: 10px;
       }
 
-      .stat-card,
-      .contributor-card {
-        background-color: white;
-        border-radius: 0.5rem;
+      .contributors-container::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 12px solid rgb(248, 0, 0);
+        border-radius: 5px;
+        z-index: -1;
+        transform: scaleY(0);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .contributors-container:hover::after {
+        transform: scaleY(1);
+      }
+
+      .stat-card {
+        background-color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+        border-radius: 15px;
         padding: 1.5rem;
         box-shadow:
           0 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -111,11 +184,49 @@
         transition:
           transform 0.3s ease,
           box-shadow 0.3s ease;
-        display: flex;
+        position: relative;
+        overflow: hidden;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
+        z-index: 1;
+      }
+
+      .stat-card::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        width: 100%;
+        background: linear-gradient(to right, #7670AC, #3bf3f6);
+        z-index: 1;
+        transform: translateX(-100%);
+        animation: stats 4s linear infinite;
+      }
+
+      @keyframes stats {
+        0% {
+          transform: translateX(-100%);
+        }
+
+        50% {
+          transform: translateX(0);
+        }
+
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      .stat-card::after {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        background: rgb(12, 10, 10);
+        border-radius: 15px;
+        z-index: 0;
       }
 
       .contributor-card:hover {
@@ -125,12 +236,62 @@
           0 4px 6px -2px rgba(0, 0, 0, 0.05);
       }
 
+      .contributor-card {
+        position: relative;
+        overflow: hidden;
+        background-color: rgb(255, 255, 255);
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        color: rgb(0, 0, 0);
+        z-index: 1;
+      }
+
+      .contributor-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(from 0deg,
+            transparent,
+            #7670AC,
+            transparent 30%);
+        animation: rotate 4s linear infinite;
+        z-index: 0;
+      }
+
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .contributor-card::after {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        background: rgb(12, 10, 10);
+        border-radius: 15px;
+      }
+
+      .contributor-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        color: white;
+      }
+
       .contributor-card img {
         width: 6rem;
         height: 6rem;
         border-radius: 50%;
         margin: 0 auto 1rem;
         border: 4px solid #3b82f6;
+        z-index: 1;
       }
 
       .card-link {
@@ -138,44 +299,52 @@
         flex-direction: column;
         align-items: center;
         text-decoration: none;
-        color: inherit; /* Inherit color for the card text */
-        width: 100%; /* Ensure the entire card is clickable */
+        color: inherit;
+        /* Inherit color for the card text */
+        width: 100%;
+        /* Ensure the entire card is clickable */
       }
 
       .card-link:hover {
-        color: inherit; /* Maintain color on hover */
+        color: inherit;
+        /* Maintain color on hover */
       }
 
       .stat-card h3 {
         font-size: 2rem;
         font-weight: bold;
-        color: #1f2937;
+        color: #cccccc;
+        z-index: 1;
+        position: relative;
       }
 
       .stat-card p {
-        color: #6b7280;
+        color: #e4e4e4;
+        z-index: 1;
+        position: relative;
       }
 
       .contributor-card h3 {
         font-size: 1.25rem;
         font-weight: bold;
         margin-bottom: 0.5rem;
+        z-index: 1;
+        color: white;
       }
 
       .contributor-card p {
         font-size: 0.875rem;
-        color: #3b82f6;
+        color: #848485;
         margin-bottom: 1rem;
+        z-index: 1;
       }
 
       .contributor-card .contributions {
         display: inline-block;
-        background-color: #dbeafe;
-        color: #1e40af;
-        font-weight: 600;
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
+        color: #cfcfcf;
+        font-weight: 300;
         font-size: 0.875rem;
+        z-index: 1;
       }
 
       .loading {
@@ -233,6 +402,7 @@
           font-size: 1.875rem;
         }
       }
+
       /* Scroll Progress Bar */
       #progress-bar {
         position: fixed;
@@ -243,17 +413,75 @@
         width: 0%;
         z-index: 9999;
       }
-    </style>
-  </head>
 
-  <body>
-    <div id="progress-bar"></div>
-    <%- include('partials/navbar') %>
+      /* Dark Mode */
+      .dark-mode .contributors-content {
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+      .dark-mode .cta-button {
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+      .dark-mode .cta-button:hover {
+        background-color: transparent;
+        color: white;
+        border-color: white;
+        border-width: 10px;
+        box-shadow: 0 0 10px rgba(51, 51, 51, 0.6);
+      }
+
+      .dark-mode .hero {
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+      .dark-mode .stats,
+      .dark-mode .contributors {
+        background-color: #000000;
+        color: white;
+      }
+
+      .dark-mode .stats h2,
+      .dark-mode .contributors h2 {
+        color: white;
+      }
+
+      .dark-mode .stat-card,
+      .dark-mode .contributor-card {
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+      .dark-mode .contributor-card h3,
+      .dark-mode .contributor-card p,
+      .dark-mode .stat-card h3 {
+        color: #ffffff;
+      }
+
+      .dark-mode .stat-card p {
+        color: #848485;
+      }
+    </style>
+</head>
+
+<body>
+  <div id="progress-bar"></div>
+  <%- include('partials/navbar') %>
 
     <div class="contributors-content">
       <!-- Hero Section -->
-      <section class="hero">
-        <div class="hero-overlay"></div>
+      <section class="hero" id="hero">
+
+        <div class="hero-overlay">
+        </div>
+        <video id="heroVideo" autoplay muted loop playsinline style="display: none;">
+          <source src="https://cdn.pixabay.com/video/2021/10/10/91562-629172467_small.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
         <div class="hero-content">
           <h1 id="heroTitle">Our Amazing Contributors</h1>
           <p id="heroSubtitle">
@@ -261,15 +489,34 @@
           </p>
           <a href="#contribute" class="cta-button">Become a Contributor</a>
         </div>
+
+
       </section>
 
       <!-- Stats Section -->
       <section class="stats">
         <h2>Project Statistics</h2>
-<button style="background-color: #007bff; border: 0; border-radius: 50%; padding:0.2w; margin-left:95%; z-index:9999999; position:fixed; bottom:0;">
-      </button>
+        <button
+          style="background-color: #007bff; border: 0; border-radius: 50%; padding:0.2w; margin-left:95%; z-index:9999999; position:fixed; bottom:0;">
+        </button>
         <div id="stats" class="stats-container">
           <!-- Stat Cards will be inserted here -->
+          <div class="stat-card">
+            <h3>something here</h3>
+            <p>124124</p>
+          </div>
+          <div class="stat-card">
+            <h3>something here</h3>
+            <p>124124</p>
+          </div>
+          <div class="stat-card">
+            <h3>something here</h3>
+            <p>124124</p>
+          </div>
+          <div class="stat-card">
+            <h3>something here</h3>
+            <p>124124</p>
+          </div>
         </div>
       </section>
 
@@ -277,8 +524,10 @@
       <section class="contributors">
         <h2>Meet Our Contributors</h2>
         <div id="contributors" class="contributors-container">
-          <div id="loading" class="loading">
-            <div class="spinner"></div>
+          <div class="contributors-inner">
+            <div id="loading" class="loading">
+              <div class="spinner"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -362,7 +611,19 @@
         fetchData();
       });
     </script>
+    <script>
+      setTimeout(() => {
+        document.getElementById('hero').style.backgroundImage = 'none';
+
+        const video = document.getElementById('heroVideo');
+        video.style.display = 'block';
+        video.play();
+        console.log("10 seconds done")    // intensionally added 10 seconds delay
+      }, 10000);
+
+    </script>
     <%- include('partials/footer') %>
-    <%- include('partials/bottom_nav') %>
-  </body>
+      <%- include('partials/bottom_nav') %>
+</body>
+
 </html>
