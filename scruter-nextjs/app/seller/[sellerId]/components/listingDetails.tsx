@@ -10,8 +10,6 @@ const ListingDetails = () => {
     setListingPrice,
     listingDescription,
     setListingDescription,
-    listingCategory,
-    setListingCategory,
 
     validListingName,
     setValidListingName,
@@ -19,8 +17,6 @@ const ListingDetails = () => {
     setValidListingPrice,
     validListingDescription,
     setValidListingDescription,
-    validListingCategory,
-    setValidListingCategory,
   } = useGlobalListing()
 
   const setListingNameLogic = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +37,7 @@ const ListingDetails = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col gap-8">
       <h1 className="text-primary-marineBlue font-bold text-[1.6rem] md:text-4xl leading-9">
         Listing Info
       </h1>
@@ -49,9 +45,9 @@ const ListingDetails = () => {
         Please provide your listing name, description and price
       </h3>
 
-      <div className="">
+      <div className="flex flex-col gap-5">
         <FormControl
-          label={"Listing Name"}
+          label={"Listing Title"}
           type={"text"}
           id={"ListingName"}
           placeholder={"Home in Lonavala"}

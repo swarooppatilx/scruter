@@ -31,7 +31,7 @@ const FormControl: React.FC<FormControlProps> = ({
         {valid ? null : (
           <div>
             <label
-              className="text-primary-strawberryRed font-medium"
+              className="text-red-500 font-medium"
               htmlFor={id}
             >
               This field is required

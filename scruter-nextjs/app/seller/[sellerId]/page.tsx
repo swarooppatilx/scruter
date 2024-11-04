@@ -8,7 +8,7 @@ interface SellerPageProps{
   params:{
     sellerId:string,
   },
-};
+}
 
 const SellerPage:React.FC<SellerPageProps> = async({params}) => {
 
@@ -28,13 +28,17 @@ const SellerPage:React.FC<SellerPageProps> = async({params}) => {
     );
   }
 
-    // if (Listings.length){
-    //     return <SellerDashboard Listings={Listings}/>
-    // }
+    if (Listings.length){
+        return <div>
+          {Listings.map((listing)=>(
+            <div key={listing.id}>{listing.name}</div>
+          ))}
+        </div>
+    }
   
-    // else{
-      return <SetUpListing params={params}/>
-    // }
+    else{
+      return <SetUpListing sellerId={sellerId}/>
+    }
  
 }
  

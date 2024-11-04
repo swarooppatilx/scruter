@@ -7,12 +7,7 @@ export const data = [
     {
       id: 2,
       step: "step 2",
-      title: "your cover URL",
+      title: "select category",
     },
-    {
-      id: 3,
-      step: "step 3",
-      title: "Store Address",
-    }
   ];
   
