@@ -1,241 +1,226 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <%- include('partials/head') %>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
-    <style>
-      /* Global Light Mode Styles */
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f9fafb;
-        color: #1f2937;
-        line-height: 1.6;
-      }
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f9fafb;
+                color: #1f2937;
+                display: flex;
+                flex-direction: column;
+            }
 
-      .support-content {
-        padding: 3rem 2rem;
-        max-width: 800px;
-        margin: 2rem auto;
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      }
+            .main-content {
+                width: 90%;
+                padding-left: 8rem;
+                padding-right: 8rem;
+                padding-top: 5rem;
+                padding-bottom: 5rem;
+                background-color: #ffffff;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
 
-      .support-section h1,
-      .support-section h2 {
-        font-weight: bold;
-        margin-bottom: 1rem;
-        color: #2563eb;
-      }
+            .dark-mode .main-content {
+                background-color: #1c2535;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            }
 
-      .support-section h1 {
-        font-size: 2.8rem;
-        border-bottom: 2px solid #2563eb;
-        padding-bottom: 0.5rem;
-      }
+            .title-section h1 {
+                font-size: 2.4rem;
+                color: #2563eb;
+                font-weight: bold;
+                text-align: center;
+            }
 
-      .support-section h2 {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-        color: #1f2937;
-      }
+            .dark-mode .title-section h1 {
+                color: #3b82f6;
+                text-align: center;
+            }
 
-      .support-section p {
-        margin-bottom: 1.5rem;
-        text-align: justify;
-        line-height: 1.8;
-      }
+            .title-section p {
+                color: #555;
+                text-align: center;
+                max-width: 700px;
+                margin: 0 auto;
+                font-size: 1.1rem;
+            }
 
-      .faq-section {
-        font-size: 1.1rem;
-        margin-top: 2rem;
-        color: #1f2937;
-      }
+            .dark-mode .title-section p {
+                color: #d1d5db;
+                text-align: center;
+            }
 
-      .faq-section .question {
-        font-weight: bold;
-        margin-top: 1rem;
-        color: #2563eb;
-      }
+            section {
+                margin-top: 2rem;
+            }
 
-      .faq-section .answer {
-        margin-top: 0.5rem;
-        color: #4b5563;
-      }
+            section h2 {
+                font-size: 1.8rem;
+                color: #333;
+                display: flex;
+                align-items: center;
+                border-left: 4px solid #2563eb;
+                padding-left: 8px;
+                margin-bottom: 1rem;
+            }
 
-      .contact-info-header {
-        font-size: 1.2rem;
-        color: #1f2937;
-        font-weight: bold;
-        margin-top: 2rem;
-        text-align: center;
-      }
+            .dark-mode section h2 {
+                color: #e5e7eb;
+                border-left-color: #3b82f6;
+            }
 
-      .contact-info {
-        font-size: 1.1rem;
-        color: #2563eb;
-        font-weight: bold;
-        text-align: center;
-        margin-top: 0.5rem;
-        border-top: 2px solid #e2e8f0;
-        padding-top: 1.5rem;
-      }
+            section h2 i {
+                margin-right: 8px;
+                color: #6f42c1;
+            }
 
-      .contact-info span {
-        display: block;
-        margin-top: 0.5rem;
-        color: #4b5563;
-        font-weight: normal;
-      }
+            .sidebar {
+                width: 25%;
+                background: linear-gradient(to bottom, #007bff, #6f42c1);
+                color: #fff;
+                padding: 20px;
+                position: sticky;
+                top: 0;
+                height: 100vh;
+            }
 
-      .cta-button {
-        display: inline-block;
-        padding: 1rem 2rem;
-        background-color: #2563eb;
-        color: white;
-        font-weight: bold;
-        text-decoration: none;
-        border-radius: 9999px;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-        margin-bottom: 2rem; /* Margin moved to bottom */
-        text-align: center;
-        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-      }
+            .dark-mode .sidebar {
+                background: linear-gradient(to bottom, #1a1b4e, #1f1f1f);
+            }
 
-      .cta-button:hover {
-        background-color: #1d4ed8;
-        transform: scale(1.05);
-      }
+            .sidebar ul {
+                list-style: none;
+                padding: 0;
+            }
 
-      /* Dark Mode Styles */
-      .dark-mode {
-        background-color: #1c1c1c;
-        color: #f9fafb;
-      }
+            .sidebar ul li {
+                margin-bottom: 15px;
+                margin-left: 5px;
+            }
 
-      .dark-mode .support-content {
-        background-color: #374151;
-        box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
-      }
+            .sidebar ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 1rem;
+                gap: 5px;
+                display: flex;
+                align-items: center;
+                padding: 8px;
+                transition: color 0.2s;
+            }
 
-      .dark-mode .support-section h1 {
-        color: #60a5fa;
-        border-bottom-color: #60a5fa;
-      }
+            .dark-mode .sidebar ul li a {
+                color: #e0e0e0;
+            }
 
-      .dark-mode .support-section h2 {
-        color: #9ca3af;
-      }
+            .sidebar ul li a:hover {
+                color: #e0e0e0;
+            }
 
-      .dark-mode .faq-section .question {
-        color: #60a5fa;
-      }
+            .dark-mode .sidebar ul li a:hover {
+                color: #ffffff;
+            }
 
-      .dark-mode .faq-section .answer {
-        color: #d1d5db;
-      }
+            @media (max-width: 768px) {
+                .main-content {
+                    width: 100%;
+                    padding: 1rem;
+                }
 
-      .dark-mode .contact-info-header {
-        color: #e5e7eb;
-      }
+                .sidebar {
+                    display: none;
+                }
+            }
+        </style>
+</head>
 
-      .dark-mode .contact-info {
-        color: #e5e7eb;
-        border-top-color: #4b5563;
-      }
-
-      .dark-mode .contact-info span {
-        color: #d1d5db;
-      }
-
-      .dark-mode .cta-button {
-        background-color: #60a5fa;
-      }
-
-      .dark-mode .cta-button:hover {
-        background-color: #3b82f6;
-      }
-
-      .faq-section .question {
-        border-bottom: 2px solid #4b5563; /* Add underline */
-        padding-bottom: 0.2rem; /* Optional padding */
-        cursor: pointer; /* Change cursor to hand */
-      }
-
-      .faq-section .answer {
-        margin-top: 0.5rem;
-        color: #4b5563;
-        cursor: pointer; /* Change cursor to hand */
-      }
-
-      .faq-section .answer:hover {
-        text-decoration: underline; /* Underline on hover for answers */
-      }
-
-    </style>
-  </head>
-
-  <body>
+<body>
+    <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
 
-    <div class="support-content">
-      <section class="support-section">
-        <h1>Support Us</h1>
-        <p>
-          We’re dedicated to fostering connections and supporting local commerce.
-          Your involvement helps us grow, improve, and provide the best possible
-          experience for our community. Consider spreading the word, engaging with us
-          on social media, or leaving feedback. Interested in partnering? Reach out to 
-          explore collaboration opportunities.
-        </p>
+        <div style="display: flex;">
+            <aside class="sidebar">
+                <ul>
+                    <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQs</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Support</a></li>
+                    <li><a href="#feedback"><i class="fas fa-comments"></i> Feedback</a></li>
+                    <li><a href="#resources"><i class="fas fa-book"></i> Resources</a></li>
+                    <li><a href="#troubleshooting"><i class="fas fa-wrench"></i> Troubleshooting</a></li>
+                </ul>
+            </aside>
 
-        <a href="/contact" class="cta-button">Support Our Mission</a>
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="title-section">
+                    <h1>Support Page</h1>
+                    <p>We're here to help! Browse our resources or reach out for assistance.</p>
+                </div>
 
-        <h2>Reach Out to Us</h2>
-        <p>
-          Need help or have a question? We’re here to assist you with navigating our
-          features, managing your account, or any other inquiries. Don’t hesitate to 
-          get in touch—our team is committed to ensuring you have a smooth and efficient 
-          experience on our platform.
-        </p>
+                <section id="faq">
+                    <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions (FAQs)</h2>
+                    <p>Here are some common questions we receive from users:</p>
+                    <div class="faq-section">
+                        <div class="question">How do I reset my password?</div>
+                        <div class="answer">To reset your password, go to the login page and click on "Forgot Password."
+                            Follow the instructions to reset your password.</div>
+                        <div class="question">Where can I find my order history?</div>
+                        <div class="answer">You can find your order history in your account dashboard under "Order
+                            History."</div>
+                        <!-- Add more FAQs as needed -->
+                    </div>
+                </section>
 
-        <div class="faq-section">
-          <div class="question" onclick="toggleAnswer(this)">How can I create an account?</div>
-          <div class="answer" style="display: none;">To create an account, click on the 'Sign Up' button at the top right corner of the homepage and follow the registration steps.</div>
-        
-          <div class="question" onclick="toggleAnswer(this)">What should I do if I forget my password?</div>
-          <div class="answer" style="display: none;">If you forget your password, click on 'Forgot Password' on the login page. You'll receive an email to reset your password.</div>
-        
-          <div class="question" onclick="toggleAnswer(this)">Can I delete my account?</div>
-          <div class="answer" style="display: none;">Yes, you can delete your account by going to the account settings and selecting 'Delete Account.' Please note this action is irreversible.</div>
-        
-          <div class="question" onclick="toggleAnswer(this)">How do I report a problem?</div>
-          <div class="answer" style="display: none;">If you encounter an issue, reach out to our support team via the contact information below, or use the 'Report Issue' button available in your account settings.</div>
+                <section id="contact">
+                    <h2><i class="fas fa-envelope"></i> Contact Support</h2>
+                    <p>If you need further assistance, please contact our support team:</p>
+                    <div class="contact-info-header">Support Email:</div>
+                    <div class="contact-info">support@example.com</div>
+                </section>
+
+                <section id="feedback">
+                    <h2><i class="fas fa-comments"></i> Feedback</h2>
+                    <p>Your feedback is important to us! Please let us know how we can improve our services.</p>
+                    <a href="mailto:feedback@example.com" class="cta-button">Send Feedback</a>
+                </section>
+
+                <section id="resources">
+                    <h2><i class="fas fa-book"></i> Helpful Resources</h2>
+                    <p>Explore our resources to help you navigate our services:</p>
+                    <ul>
+                        <li><a href="#">User Guide</a></li>
+                        <li><a href="#">Video Tutorials</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                    </ul>
+                </section>
+
+                <section id="troubleshooting">
+                    <h2><i class="fas fa-wrench"></i> Troubleshooting</h2>
+                    <p>If you're experiencing issues, check our troubleshooting guide:</p>
+                    <ul>
+                        <li>Clear your browser's cache and cookies.</li>
+                        <li>Ensure your browser is updated to the latest version.</li>
+                        <li>Disable any browser extensions that may interfere with the website.</li>
+                    </ul>
+                </section>
+            </main>
         </div>
-        
+
         <script>
-          function toggleAnswer(questionElement) {
-            const answerElement = questionElement.nextElementSibling; // Get the corresponding answer
-            if (answerElement.style.display === "none" || answerElement.style.display === "") {
-              answerElement.style.display = "block"; // Show the answer
-            } else {
-              answerElement.style.display = "none"; // Hide the answer
-            }
-          }
+            // Scroll Progress Bar
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                document.getElementById('progress-bar').style.width = scrollPercent + '%';
+            });
         </script>
-        
 
-        <div class="contact-info-header">Contact Info</div>
-        <div class="contact-info">
-          <span>Email: support@ourwebsite.com</span>
-          <span>Phone: +123-456-7890</span>
-          <span>Address: 123 Commerce Lane, Suite 400, Cityville</span>
-        </div>
-      </section>
-    </div>
+        <%- include('partials/footer') %>
+</body>
 
-    <%- include('partials/footer') %> <%- include('partials/bottom_nav') %>
-  </body>
 </html>

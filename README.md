@@ -10,8 +10,6 @@
 Scruter is a local classifieds and community platform where people can connect, buy, sell, and exchange services.
 </p>
 
-
-
 ## Table of Contents
 
 - [Join our Discord Server](#join-our-discord-server)
@@ -327,9 +325,38 @@ Here are a few tips to ensure a smooth contribution process:
 | <img src="https://github.com/amanver45.png" alt="Aman Ver" width="80"/> <br> <p align="center">[Aman Ver](https://github.com/amanver45) 👨‍💻</p> | <img src="https://github.com/AkshatSharma5.png" alt="Akshat Sharma" width="80"/> <br> <p align="center">[Akshat Sharma](https://github.com/AkshatSharma5) 👨‍💻</p> | <img src="https://github.com/PulkitShubham.png" alt="Pulkit Shubham" width="80"/> <br> <p align="center">[Pulkit Shubham](https://github.com/PulkitShubham) 👨‍💻</p> | <img src="https://github.com/sourabhmajoka.png" alt="Sourabh Majoka" width="80"/> <br> <p align="center">[Sourabh Majoka](https://github.com/sourabhmajoka) 👨‍💻</p> |
 | <img src="https://github.com/ABHISIKTAcommits.png" alt="Abhisikta" width="80"/> <br> <p align="center">[Abhisikta](https://github.com/ABHISIKTAcommits) 👩‍💻</p> | <img src="https://github.com/shubhagarwal1.png" alt="Shubham Agarwal" width="80"/> <br> <p align="center">[Shubham Agarwal](https://github.com/shubhagarwal1) 👨‍💻</p> | <img src="https://github.com/KiranBaliga.png" alt="Kiran Baliga" width="80"/> <br> <p align="center">[Kiran Baliga](https://github.com/KiranBaliga) 👨‍💻</p> |                                                                                      |
 
+<div align="center">
+    <img src="https://media.giphy.com/media/Ll22OhMLAlVDb8UQWe/giphy.gif" width="60" height="60"/>
 </div>
 
-    
 ### 🎉 Thank You to All Our Amazing Contributors! 🎉
 
 We are incredibly grateful for your dedication and hard work. Your contributions have been invaluable in making this project a success. Thank you for being a part of our journey!
+
+---
+
+<p align="center">Happy coding and thanks for your contributions! 🎉</p>
+
+## 🌐 Connect with Me
+
+<div align="center">
+    <a href="https://x.com/sastatonystark">
+        <img src="https://img.shields.io/badge/X-1DA1F2?style=flat-square&logo=x&logoColor=white" alt="X" width="100" height="30"/>
+    </a>
+    <a href="https://github.com/swarooppatilx">
+        <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" width="100" height="30"/>
+    </a>
+    <a href="https://www.linkedin.com/in/swaroop-patil-x/">
+        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" width="100" height="30"/>
+    </a>
+    <a href="https://www.threads.net/@swaroop.patil.x">
+        <img src="https://img.shields.io/badge/Threads-000000?style=flat-square&logo=threads&logoColor=white" alt="Threads" width="100" height="30"/>
+    </a>
+    <a href="https://www.instagram.com/swaroop.patil.x/">
+        <img src="https://img.shields.io/badge/Instagram-E1306C?style=flat-square&logo=instagram&logoColor=white" alt="Instagram" width="100" height="30"/>
+    </a>
+</div>
+
+---
+
+Thank you for visiting! Feel free to reach out through any of the links above.

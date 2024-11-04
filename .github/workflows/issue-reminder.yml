@@ -1,0 +1,37 @@
+name: 'Open-Issue Reminder'
+
+on:
+  schedule:
+    - cron: '15 4 * * *'
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write  # Ensures the token has permission to comment on issues
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run script
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { github, context } = require('@actions/github');
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open'
+            });
+            for (const issue of issues) {
+              const issueComment = `Hi there! This issue is still open. We are looking forward to your response.
+              Assignees: ${issue.assignees.map(assignee => '@' + assignee.login).join(', ') || 'None'}`;
+              await github.rest.issues.createComment({
+                issue_number: issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: issueComment
+              });
+            }

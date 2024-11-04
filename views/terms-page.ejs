@@ -1,129 +1,283 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <%- include('partials/head') %>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
-    <style>
-        /* Scoped styles for terms and conditions page */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
-            background-color: #f9fafb; /* Light background */
-            color: #1f2937; /* Dark text color */
-            line-height: 1.6;
-        }
-
-        .terms-content {
-            padding: 3rem 2rem; /* More padding for spacious layout */
-            max-width: 800px; /* Limit the width for better readability */
-            margin: 2rem auto; /* Center the content with some margin */
-            background-color: #ffffff; /* White background for content area */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: #2563eb; /* Button color */
-            color: white; /* White text */
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 9999px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            margin-top: 2rem; /* More margin for spacing */
-            text-align: center; /* Center text in button */
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2); /* Button shadow */
-        }
-
-        .cta-button:hover {
-            background-color: #1d4ed8; /* Darker shade on hover */
-            transform: scale(1.05); /* Scale up on hover */
-        }
-
-        .terms-section {
-            margin-top: 2rem;
-        }
-
-        .terms-section h1 {
-            font-size: 2.8rem; /* Responsive heading size */
-            font-weight: bold;
-            color: #2563eb; /* Color for the main heading */
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #2563eb; /* Underline effect */
-            padding-bottom: 0.5rem; /* Space under the heading */
-        }
-
-        .terms-section h2 {
-            font-size: 2rem; /* Section heading size */
-            font-weight: bold;
-            margin-bottom: 0.5rem; /* Space between headings */
-            color: #1f2937; /* Dark color for subheadings */
-        }
-
-        .terms-section p {
-            margin-bottom: 1.5rem; /* More space between paragraphs */
-            text-align: justify; /* Justify text for better readability */
-            line-height: 1.8; /* Increased line height for clarity */
-        }
-
-        @media (min-width: 640px) {
-            .terms-section h1 {
-                font-size: 3rem; /* Larger heading for wider screens */
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f9fafb;
+                color: #1f2937;
+                display: flex;
+                flex-direction: column;
             }
-        }
 
-        /* Scroll Progress Bar */
-        #progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 6px;
-            background-color: #2e8030; /* Progress bar color */
-            width: 0%; /* Initial width */
-            z-index: 9999;
-        }
-    </style>
+            .main-content {
+                width: 90%;
+                padding-left: 8rem;
+                padding-right: 8rem;
+                padding-top: 5rem;
+                padding-bottom: 5rem;
+                background-color: #ffffff;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .title-section {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            .title-section h1 {
+                font-size: 2.4rem;
+                color: #2563eb;
+                font-weight: bold;
+            }
+
+            .title-section p {
+                color: #555;
+                max-width: 700px;
+                margin: 0 auto;
+                font-size: 1.1rem;
+            }
+
+            section {
+                margin-top: 2rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+                color: #333;
+                display: flex;
+                align-items: center;
+                border-left: 4px solid #2563eb;
+                padding-left: 8px;
+                margin-bottom: 1rem;
+            }
+
+            section h2 i {
+                margin-right: 8px;
+                color: #6f42c1;
+            }
+
+            section p {
+                font-size: 1rem;
+                line-height: 1.8;
+                color: #444;
+                text-align: justify;
+            }
+
+            /* Sidebar styles */
+            .sidebar {
+                width: 25%;
+                background: linear-gradient(to bottom, #007bff, #6f42c1);
+                color: #fff;
+                padding: 20px;
+                position: sticky;
+                top: 0;
+                height: 100vh;
+            }
+
+            .sidebar ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .sidebar ul li {
+                margin-bottom: 15px;
+            }
+
+            .sidebar ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 1rem;
+                display: flex;
+                align-items: center;
+                padding: 8px;
+                transition: color 0.2s;
+            }
+
+            .sidebar ul li a:hover {
+                color: #e0e0e0;
+            }
+
+            .sidebar ul li a i {
+                margin-right: 8px;
+            }
+
+            @media (max-width: 768px) {
+                .main-content {
+                    width: 100%;
+                    padding: 1rem;
+                }
+
+                .sidebar {
+                    display: none;
+                }
+            }
+
+            .dark-mode .main-content {
+                background-color: #1c2535;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            .dark-mode .main-content p {
+                color: #e2e8f0;
+            }
+
+            .dark-mode .title-section h1 {
+                color: #e2e8f0;
+            }
+
+            .dark-mode .title-section p {
+                color: #e2e8f0;
+            }
+
+            .dark-mode section h2 {
+                color: #e2e8f0;
+            }
+
+            .dark-mode .contact-form input,
+            .dark-mode .contact-form textarea {
+                background-color: #4a5568;
+                border-color: #a0aec0;
+                color: #fff;
+            }
+
+            .dark-mode .contact-form label {
+                color: #e2e8f0;
+            }
+
+            .dark-mode .contact-form button {
+                background-color: #2b6cb0;
+            }
+
+            .dark-mode .contact-form button:hover {
+                background-color: #2c5282;
+            }
+
+            .dark-mode .sidebar {
+                background: linear-gradient(to bottom, #1a1b4e, #1f1f1f);
+            }
+        </style>
 </head>
 
 <body>
     <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
 
-    <div class="terms-content">
-        <!-- Terms and Conditions Main Heading -->
-        <section class="terms-section">
-            <h1>Terms and Conditions</h1>
-            <p>Please read these terms and conditions carefully before using our service. These terms outline your rights and responsibilities when using our platform.</p>
+        <div style="display: flex;">
+            <aside class="sidebar">
+                <ul>
+                    <li><a href="#acceptance"><i class="fas fa-user-check"></i> Acceptance of Terms</a></li>
+                    <li><a href="#use-services"><i class="fas fa-shield-alt"></i> Use of Platform and Services</a></li>
+                    <li><a href="#intellectual-property"><i class="fas fa-gavel"></i> Intellectual Property</a></li>
+                    <li><a href="#postings"><i class="fas fa-list-alt"></i> Posting Guidelines</a></li>
+                    <li><a href="#security"><i class="fas fa-lock"></i> Account Security</a></li>
+                    <li><a href="#external-links"><i class="fas fa-external-link-alt"></i> External Links</a></li>
+                    <li><a href="#liability"><i class="fas fa-exclamation-triangle"></i> Limitation of Liability</a>
+                    </li>
+                    <li><a href="#privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="#changes"><i class="fas fa-link"></i> Changes to Terms</a></li>
+                    <li><a href="#termination"><i class="fas fa-lock"></i> Termination of Access</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Information</a></li>
+                </ul>
+            </aside>
 
-            <h2>1. Acceptance of Terms</h2>
-            <p>By accessing or using the service, you agree to be bound by these terms. This acceptance applies to all visitors, users, and others who access or use the service. If you are using the service on behalf of a company or organization, you represent that you have the authority to bind that entity to these terms, in which case the terms "you" and "your" will refer to that entity.</p>
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="title-section">
+                    <h1>Terms and Conditions for Scruter</h1>
+                    <p>Welcome to Scruter, a platform for local classifieds where you can buy, sell, and exchange
+                        services
+                        within your community. By accessing and using Scruter, you agree to these Terms & Conditions.
+                    </p>
+                </div>
 
-            <h2>2. Modifications to Terms</h2>
-            <p>We reserve the right to modify these terms at any time. Changes will be effective immediately upon posting the revised terms on our website. Your continued use of the service after any such changes constitutes your acceptance of the new terms. It is your responsibility to review these terms periodically for any updates.</p>
+                <section id="acceptance">
+                    <h2><i class="fas fa-user-check"></i> Acceptance of Terms</h2>
+                    <p>By using Scruter, you agree to these Terms & Conditions. If you do not accept any of these terms,
+                        please refrain from using our platform.</p>
+                </section>
 
-            <h2>3. User Responsibilities</h2>
-            <p>You agree to use the service in compliance with all applicable laws and regulations. You are responsible for your conduct and any content you provide while using the service. You must not use the service for any illegal or unauthorized purpose, and you agree to comply with all applicable local, state, national, and international laws.</p>
+                <section id="use-services">
+                    <h2><i class="fas fa-shield-alt"></i> Use of Platform and Services</h2>
+                    <p>Scruter provides a marketplace for users to connect locally for buying, selling, and exchanging
+                        services. Users agree to conduct all transactions legally and ethically.</p>
+                </section>
 
-            <h2>4. Limitation of Liability</h2>
-            <p>Our liability is limited to the maximum extent permitted by law. In no event shall we be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, use, goodwill, or other intangible losses, arising out of or related to your access to or use of (or inability to access or use) the service.</p>
+                <section id="intellectual-property">
+                    <h2><i class="fas fa-gavel"></i> Intellectual Property</h2>
+                    <p>All content on Scruter, including logos and trademarks, is owned by Scruter and protected under
+                        copyright laws. Unauthorized use is prohibited.</p>
+                </section>
 
-            <h2>5. Privacy Policy</h2>
-            <p>We are committed to protecting your privacy. Our privacy policy explains how we collect, use, and disclose your information. By using our service, you consent to the collection and use of information in accordance with our privacy policy. We encourage you to review the privacy policy to understand our practices regarding your personal data.</p>
+                <section id="postings">
+                    <h2><i class="fas fa-list-alt"></i> Posting Guidelines</h2>
+                    <p>Users are responsible for the content they post and must ensure it complies with our guidelines,
+                        which prohibit spam, inappropriate content, and illegal activities.</p>
+                </section>
 
-            <h2>6. Payment Terms</h2>
-            <p>All payments must be made in full prior to service delivery. Payment methods accepted include credit cards and PayPal. You agree to provide accurate and complete payment information and to promptly update any information to keep your account current.</p>
+                <section id="security">
+                    <h2><i class="fas fa-lock"></i> Account Security</h2>
+                    <p>Users must secure their accounts by keeping their login credentials private. Scruter is not
+                        responsible for any loss due to compromised accounts.</p>
+                </section>
 
-            <h2>7. Cancellation Policy</h2>
-            <p>Users may cancel their subscription at any time. Refunds will be processed according to our refund policy, which outlines the conditions under which refunds will be issued. To cancel your subscription, please follow the cancellation instructions provided in your account settings.</p>
+                <section id="external-links">
+                    <h2><i class="fas fa-external-link-alt"></i> External Links</h2>
+                    <p>Scruter may include links to external websites. We are not responsible for content on these
+                        third-party sites.</p>
+                </section>
 
-            <h2>8. Contact Us</h2>
-            <p>If you have any questions about these terms, please contact us. Our customer support team is available to assist you.</p>
-        </section>
-    </div>
+                <section id="liability">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Limitation of Liability</h2>
+                    <p>Scruter is not liable for any damages resulting from transactions between users. All transactions
+                        are
+                        at the users’ discretion.</p>
+                </section>
 
-    <%- include('partials/footer') %>
-    <%- include('partials/bottom_nav') %>
+                <section id="privacy">
+                    <h2><i class="fas fa-shield-alt"></i> Privacy Policy</h2>
+                    <p>We respect your privacy. Please read our Privacy Policy to understand how we collect, use, and
+                        protect your information.</p>
+                </section>
+
+                <section id="changes">
+                    <h2><i class="fas fa-link"></i> Changes to Terms</h2>
+                    <p>Scruter reserves the right to update these Terms & Conditions at any time. Users will be notified
+                        of significant
+                        changes, but continued use of the platform constitutes acceptance of any modifications.</p>
+                </section>
+
+                <section id="termination">
+                    <h2><i class="fas fa-lock"></i> Termination of Access</h2>
+                    <p>We reserve the right to suspend or terminate accounts for violations of our Terms & Conditions,
+                        including but not limited to posting prohibited content or engaging in fraudulent activities.
+                    </p>
+                </section>
+
+                <section id="contact">
+                    <h2><i class="fas fa-envelope"></i> Contact Information</h2>
+                    <p>If you have any questions about these Terms & Conditions, please contact us at
+                        support@scruter.com.</p>
+                </section>
+            </main>
+        </div>
+
+        <script>
+            // Scroll Progress Bar
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                document.getElementById('progress-bar').style.width = scrollPercent + '%';
+            });
+        </script>
+
+        <%- include('partials/footer') %>
 </body>
+
 </html>
