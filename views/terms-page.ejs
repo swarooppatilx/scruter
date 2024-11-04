@@ -8,118 +8,159 @@
 
         <style>
             body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f9fafb;
-        color: #1f2937;
-        display: flex;
-        flex-direction: column;
-    }
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f9fafb;
+                color: #1f2937;
+                display: flex;
+                flex-direction: column;
+            }
 
-    .main-content {
-        width: 90%;
-        /* max-width: 900px; */
-        /* margin: 2rem auto; */
-        padding-left: 8rem;
-        padding-right: 8rem;
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-        background-color: #ffffff;
-        /* border-radius: 8px; */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
+            .main-content {
+                width: 90%;
+                padding-left: 8rem;
+                padding-right: 8rem;
+                padding-top: 5rem;
+                padding-bottom: 5rem;
+                background-color: #ffffff;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
 
-    .title-section {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
+            .title-section {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
 
-    .title-section h1 {
-        font-size: 2.4rem;
-        color: #2563eb;
-        font-weight: bold;
-    }
+            .title-section h1 {
+                font-size: 2.4rem;
+                color: #2563eb;
+                font-weight: bold;
+            }
 
-    .title-section p {
-        color: #555;
-        max-width: 700px;
-        margin: 0 auto;
-        font-size: 1.1rem;
-    }
+            .title-section p {
+                color: #555;
+                max-width: 700px;
+                margin: 0 auto;
+                font-size: 1.1rem;
+            }
 
-    section {
-        margin-top: 2rem;
-    }
+            section {
+                margin-top: 2rem;
+            }
 
-    section h2 {
-        font-size: 1.8rem;
-        color: #333;
-        display: flex;
-        align-items: center;
-        border-left: 4px solid #2563eb;
-        padding-left: 8px;
-        margin-bottom: 1rem;
-    }
+            section h2 {
+                font-size: 1.8rem;
+                color: #333;
+                display: flex;
+                align-items: center;
+                border-left: 4px solid #2563eb;
+                padding-left: 8px;
+                margin-bottom: 1rem;
+            }
 
-    section h2 i {
-        margin-right: 8px;
-        color: #6f42c1;
-    }
+            section h2 i {
+                margin-right: 8px;
+                color: #6f42c1;
+            }
 
-    section p {
-        font-size: 1rem;
-        line-height: 1.8;
-        color: #444;
-        text-align: justify;
-    }
+            section p {
+                font-size: 1rem;
+                line-height: 1.8;
+                color: #444;
+                text-align: justify;
+            }
 
-    /* Sidebar styles */
-    .sidebar {
-        width: 25%;
-        background: linear-gradient(to bottom, #007bff, #6f42c1);
-        color: #fff;
-        padding: 20px;
-        position: sticky;
-        top: 0;
-        height: 100vh;
-    }
+            /* Sidebar styles */
+            .sidebar {
+                width: 25%;
+                background: linear-gradient(to bottom, #007bff, #6f42c1);
+                color: #fff;
+                padding: 20px;
+                position: sticky;
+                top: 0;
+                height: 100vh;
+            }
 
-    .sidebar ul {
-        list-style: none;
-        padding: 0;
-    }
+            .sidebar ul {
+                list-style: none;
+                padding: 0;
+            }
 
-    .sidebar ul li {
-        margin-bottom: 15px;
-    }
+            .sidebar ul li {
+                margin-bottom: 15px;
+            }
 
-    .sidebar ul li a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-        padding: 8px;
-        transition: color 0.2s;
-    }
+            .sidebar ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 1rem;
+                display: flex;
+                align-items: center;
+                padding: 8px;
+                transition: color 0.2s;
+            }
 
-    .sidebar ul li a:hover {
-        color: #e0e0e0;
-    }
+            .sidebar ul li a:hover {
+                color: #e0e0e0;
+            }
 
-    .sidebar ul li a i {
-        margin-right: 8px;
-    }
+            .sidebar ul li a i {
+                margin-right: 8px;
+            }
 
-    @media (max-width: 768px) {
-        .main-content {
-            width: 100%;
-            padding: 1rem;
-        }
+            @media (max-width: 768px) {
+                .main-content {
+                    width: 100%;
+                    padding: 1rem;
+                }
 
-        .sidebar {
-            display: none;
-        }
-    }
+                .sidebar {
+                    display: none;
+                }
+            }
+
+            .dark-mode .main-content {
+                background-color: #1c2535;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            .dark-mode .main-content p {
+                color: #e2e8f0;
+            }
+
+            .dark-mode .title-section h1 {
+                color: #e2e8f0;
+            }
+
+            .dark-mode .title-section p {
+                color: #e2e8f0;
+            }
+
+            .dark-mode section h2 {
+                color: #e2e8f0;
+            }
+
+            .dark-mode .contact-form input,
+            .dark-mode .contact-form textarea {
+                background-color: #4a5568;
+                border-color: #a0aec0;
+                color: #fff;
+            }
+
+            .dark-mode .contact-form label {
+                color: #e2e8f0;
+            }
+
+            .dark-mode .contact-form button {
+                background-color: #2b6cb0;
+            }
+
+            .dark-mode .contact-form button:hover {
+                background-color: #2c5282;
+            }
+
+            .dark-mode .sidebar {
+                background: linear-gradient(to bottom, #1a1b4e, #1f1f1f);
+            }
         </style>
 </head>
 
@@ -127,107 +168,116 @@
     <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
 
-    <div style="display: flex;">
-        <aside class="sidebar">
-            <ul>
-                <li><a href="#acceptance"><i class="fas fa-user-check"></i> Acceptance of Terms</a></li>
-                <li><a href="#use-services"><i class="fas fa-shield-alt"></i> Use of Platform and Services</a></li>
-                <li><a href="#intellectual-property"><i class="fas fa-gavel"></i> Intellectual Property</a></li>
-                <li><a href="#postings"><i class="fas fa-list-alt"></i> Posting Guidelines</a></li>
-                <li><a href="#security"><i class="fas fa-lock"></i> Account Security</a></li>
-                <li><a href="#external-links"><i class="fas fa-external-link-alt"></i> External Links</a></li>
-                <li><a href="#liability"><i class="fas fa-exclamation-triangle"></i> Limitation of Liability</a></li>
-                <li><a href="#privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
-                <li><a href="#changes"><i class="fas fa-link"></i> Changes to Terms</a></li>
-                <li><a href="#termination"><i class="fas fa-lock"></i> Termination of Access</a></li>
-                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Information</a></li>
-            </ul>
-        </aside>
+        <div style="display: flex;">
+            <aside class="sidebar">
+                <ul>
+                    <li><a href="#acceptance"><i class="fas fa-user-check"></i> Acceptance of Terms</a></li>
+                    <li><a href="#use-services"><i class="fas fa-shield-alt"></i> Use of Platform and Services</a></li>
+                    <li><a href="#intellectual-property"><i class="fas fa-gavel"></i> Intellectual Property</a></li>
+                    <li><a href="#postings"><i class="fas fa-list-alt"></i> Posting Guidelines</a></li>
+                    <li><a href="#security"><i class="fas fa-lock"></i> Account Security</a></li>
+                    <li><a href="#external-links"><i class="fas fa-external-link-alt"></i> External Links</a></li>
+                    <li><a href="#liability"><i class="fas fa-exclamation-triangle"></i> Limitation of Liability</a>
+                    </li>
+                    <li><a href="#privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="#changes"><i class="fas fa-link"></i> Changes to Terms</a></li>
+                    <li><a href="#termination"><i class="fas fa-lock"></i> Termination of Access</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Information</a></li>
+                </ul>
+            </aside>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="title-section">
-                <h1>Terms and Conditions for Scruter</h1>
-                <p>Welcome to Scruter, a platform for local classifieds where you can buy, sell, and exchange services
-                    within your community. By accessing and using Scruter, you agree to these Terms & Conditions.</p>
-            </div>
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="title-section">
+                    <h1>Terms and Conditions for Scruter</h1>
+                    <p>Welcome to Scruter, a platform for local classifieds where you can buy, sell, and exchange
+                        services
+                        within your community. By accessing and using Scruter, you agree to these Terms & Conditions.
+                    </p>
+                </div>
 
-            <section id="acceptance">
-                <h2><i class="fas fa-user-check"></i> Acceptance of Terms</h2>
-                <p>By using Scruter, you agree to these Terms & Conditions. If you do not accept any of these terms,
-                    please refrain from using our platform.</p>
-            </section>
+                <section id="acceptance">
+                    <h2><i class="fas fa-user-check"></i> Acceptance of Terms</h2>
+                    <p>By using Scruter, you agree to these Terms & Conditions. If you do not accept any of these terms,
+                        please refrain from using our platform.</p>
+                </section>
 
-            <section id="use-services">
-                <h2><i class="fas fa-shield-alt"></i> Use of Platform and Services</h2>
-                <p>Scruter provides a marketplace for users to connect locally for buying, selling, and exchanging
-                    services. Users agree to conduct all transactions legally and ethically.</p>
-            </section>
+                <section id="use-services">
+                    <h2><i class="fas fa-shield-alt"></i> Use of Platform and Services</h2>
+                    <p>Scruter provides a marketplace for users to connect locally for buying, selling, and exchanging
+                        services. Users agree to conduct all transactions legally and ethically.</p>
+                </section>
 
-            <section id="intellectual-property">
-                <h2><i class="fas fa-gavel"></i> Intellectual Property</h2>
-                <p>All content on Scruter, including logos and trademarks, is owned by Scruter and protected under
-                    copyright laws. Unauthorized use is prohibited.</p>
-            </section>
+                <section id="intellectual-property">
+                    <h2><i class="fas fa-gavel"></i> Intellectual Property</h2>
+                    <p>All content on Scruter, including logos and trademarks, is owned by Scruter and protected under
+                        copyright laws. Unauthorized use is prohibited.</p>
+                </section>
 
-            <section id="postings">
-                <h2><i class="fas fa-list-alt"></i> Posting Guidelines</h2>
-                <p>Users are responsible for the content they post and must ensure it complies with our guidelines,
-                    which prohibit spam, inappropriate content, and illegal activities.</p>
-            </section>
+                <section id="postings">
+                    <h2><i class="fas fa-list-alt"></i> Posting Guidelines</h2>
+                    <p>Users are responsible for the content they post and must ensure it complies with our guidelines,
+                        which prohibit spam, inappropriate content, and illegal activities.</p>
+                </section>
 
-            <section id="security">
-                <h2><i class="fas fa-lock"></i> Account Security</h2>
-                <p>Users must secure their accounts by keeping their login credentials private. Scruter is not
-                    responsible for any loss due to compromised accounts.</p>
-            </section>
+                <section id="security">
+                    <h2><i class="fas fa-lock"></i> Account Security</h2>
+                    <p>Users must secure their accounts by keeping their login credentials private. Scruter is not
+                        responsible for any loss due to compromised accounts.</p>
+                </section>
 
-            <section id="external-links">
-                <h2><i class="fas fa-external-link-alt"></i> External Links</h2>
-                <p>Scruter may include links to external websites. We are not responsible for content on these
-                    third-party sites.</p>
-            </section>
+                <section id="external-links">
+                    <h2><i class="fas fa-external-link-alt"></i> External Links</h2>
+                    <p>Scruter may include links to external websites. We are not responsible for content on these
+                        third-party sites.</p>
+                </section>
 
-            <section id="liability">
-                <h2><i class="fas fa-exclamation-triangle"></i> Limitation of Liability</h2>
-                <p>Scruter is not liable for any damages resulting from transactions between users. All transactions are
-                    at the users’ discretion.</p>
-            </section>
+                <section id="liability">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Limitation of Liability</h2>
+                    <p>Scruter is not liable for any damages resulting from transactions between users. All transactions
+                        are
+                        at the users’ discretion.</p>
+                </section>
 
-            <section id="privacy">
-                <h2><i class="fas fa-shield-alt"></i> Privacy Policy</h2>
-                <p>We respect your privacy. Please read our Privacy Policy to understand how we collect, use, and
-                    protect your information.</p>
-            </section>
+                <section id="privacy">
+                    <h2><i class="fas fa-shield-alt"></i> Privacy Policy</h2>
+                    <p>We respect your privacy. Please read our Privacy Policy to understand how we collect, use, and
+                        protect your information.</p>
+                </section>
 
-            <section id="changes">
-                <h2><i class="fas fa-link"></i> Changes to Terms</h2>
-                <p>Scruter reserves the right to update these Terms & Conditions at any time. Users will be notified of significant
-                    changes, but continued use of the platform constitutes acceptance of any modifications.</p>
-            </section>
+                <section id="changes">
+                    <h2><i class="fas fa-link"></i> Changes to Terms</h2>
+                    <p>Scruter reserves the right to update these Terms & Conditions at any time. Users will be notified
+                        of significant
+                        changes, but continued use of the platform constitutes acceptance of any modifications.</p>
+                </section>
 
-            <section id="termination">
-                <h2><i class="fas fa-lock"></i> Termination of Access</h2>
-                <p>We reserve the right to suspend or terminate accounts for violations of our Terms & Conditions, including but not limited to posting prohibited content or engaging in fraudulent activities.</p>
-            </section>
+                <section id="termination">
+                    <h2><i class="fas fa-lock"></i> Termination of Access</h2>
+                    <p>We reserve the right to suspend or terminate accounts for violations of our Terms & Conditions,
+                        including but not limited to posting prohibited content or engaging in fraudulent activities.
+                    </p>
+                </section>
 
-            <section id="contact">
-                <h2><i class="fas fa-envelope"></i> Contact Information</h2>
-                <p>If you have any questions about these Terms & Conditions, please contact us at support@scruter.com.</p>
-            </section>
-        </main>
-    </div>
+                <section id="contact">
+                    <h2><i class="fas fa-envelope"></i> Contact Information</h2>
+                    <p>If you have any questions about these Terms & Conditions, please contact us at
+                        support@scruter.com.</p>
+                </section>
+            </main>
+        </div>
 
-    <script>
-        // Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.body.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            document.getElementById('progress-bar').style.width = scrollPercent + '%';
-        });
-    </script>
+        <script>
+            // Scroll Progress Bar
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                document.getElementById('progress-bar').style.width = scrollPercent + '%';
+            });
+        </script>
 
-    <%- include('partials/footer') %>
+        <%- include('partials/footer') %>
 </body>
+
 </html>
