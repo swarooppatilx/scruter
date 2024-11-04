@@ -22,7 +22,7 @@ const Helpdesk = [
   { name: 'HelpCenter', id: 1, href: '/help' },
   { name: 'FAQ', id: 2, href: '/faq' },
   { name: 'ContactUs', id: 3, href: '/contactus' },
-  { name: 'Support', id: 4, href: '/Support' },
+  { name: 'Support', id: 4, href: '/support' },
 ];
 
 const Footer = () => {
