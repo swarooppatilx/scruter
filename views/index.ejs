@@ -4,7 +4,9 @@
   <!-- Bootstrap JS and jQuery -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  
 <head>
   <script src="js/gsap.js"></script>
 
@@ -161,6 +163,8 @@
           <a href="/auth" class="btn btn-lg cta-button btn-outline-success mx-2">Join Now</a>
         <% } %>
         <a href="/team" class="btn btn-lg cta-button btn-outline-success">Our Team</a>
+        <button class="btn btn-lg cta-button btn-outline-success mx-2" data-toggle="modal" data-target="#feedbackModal">We Value Your Feedback</button>
+  
       </div>
     </section>
 
@@ -248,46 +252,44 @@
   </div>
 </div>
 
-
-
+<!-- Feedback Form Submission Script -->
 <script>
- $(document).ready(function() {
-    // Show the feedback modal after 15 seconds
-    setTimeout(function() {
-        $('#feedbackModal').modal('show');
-    }, 15000); // 15000ms = 15 seconds
+  $(document).ready(function() {
+    // Show feedback modal after 15 seconds
+    // setTimeout(function() {
+    //   $('#feedbackModal').modal('show');
+    // }, 15000);
 
-    // Handle the form submission
+    // Handle form submission
     $('#feedbackForm').on('submit', function(e) {
-        e.preventDefault();
+      e.preventDefault();
 
-        // Collect feedback data
-        const feedback = $('#feedbackText').val();
-        const email = $('#email').val();
+      const feedback = $('#feedbackText').val();
+      const email = $('#email').val();
 
-        // Send feedback data to the server via AJAX
-        $.ajax({
-            url: '/submit-feedback', // Update this to your endpoint
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ feedbackText: feedback, email: email }),
-            success: function(response) {
-                // Handle success
-                alert('Thank you for your feedback!');
-                $('#feedbackModal').modal('hide');
-                $('#feedbackForm')[0].reset();
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                // Handle error
-                console.error('Error:', textStatus, errorThrown);
-                alert('There was an error submitting your feedback. Please try again.');
-            }
-        });
+      // Send feedback to server
+      $.ajax({
+        url: '/submit-feedback', // Replace with your actual endpoint
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ feedbackText: feedback, email: email }),
+        success: function(response) {
+          alert('Thank you for your feedback!');
+          $('#feedbackModal').modal('hide');
+          $('#feedbackForm')[0].reset();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.error('Error:', textStatus, errorThrown);
+          alert('There was an error submitting your feedback. Please try again.');
+        }
+      });
     });
+
+    // Close modal on clicking close button
     $('.close').on('click', function() {
-        $('#feedbackModal').modal('hide');
+      $('#feedbackModal').modal('hide');
     });
-});
+  });
 </script>
 
   <%- include('partials/footer') %> 
