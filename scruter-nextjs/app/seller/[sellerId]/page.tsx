@@ -33,7 +33,7 @@ const SellerPage:React.FC<SellerPageProps> = async({params}) => {
   }
   // console.log(Listings+"SFeeeeeeeeeeeeeeeeeeeeeeee")
     if (Listings.length){
-       return <ListingsPage listings={Listings}/>
+       return <ListingsPage sellerId={sellerId} listings={Listings}/>
     }
   
     else{
