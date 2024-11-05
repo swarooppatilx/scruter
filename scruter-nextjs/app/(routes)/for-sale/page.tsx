@@ -5,6 +5,9 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'; // Import FontAwesomeIcon
 import '../../globals.css'; // Ensure your global styles are imported
+import toast, { Toaster } from 'react-hot-toast';
+import { GetAllListing } from '@/actions/seller/listing';
+import ListingCardFE from '@/components/listingCardFE';
 
 const ForSalePage: React.FC = () => {
   const [items, setItems] = useState<any[]>([]);
@@ -17,24 +20,28 @@ const ForSalePage: React.FC = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        // Example API call to fetch for sale data
-        const response = await axios.get('/api/sale', {
-          params: { query, type, sort },
-        });
-        setItems(response.data);
+        // Example API call to fetch food data
+        const forSaleResp = await GetAllListing('For_Sale');
+
+        if (!forSaleResp || !forSaleResp.data) {
+          toast.error('No data fetched from BE');
+          return;
+        }
+        setItems(forSaleResp.data);
       } catch (error) {
-        console.error('Error fetching sale items:', error);
+        console.error('Error fetching food data:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    //fetchData();
+    fetchData();
   }, [query, type, sort]);
 
   return (
     <div className="bg-gray-50 text-gray-800">
       {/* Hero Section with Banner Image */}
+      <Toaster/>
       <section
         className="relative h-[60vh] bg-cover bg-center text-white"
         style={{ backgroundImage: 'url(/market.jpg)' }}
@@ -113,43 +120,49 @@ const ForSalePage: React.FC = () => {
         <h2 className="text-2xl font-bold text-center mb-12">
           Available Items
         </h2>
-        {/*
+        
         <div
           id="items-for-sale"
-          className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {loading ? (
             <div className="loading flex justify-center items-center h-48">
               <div className="spinner border-4 border-t-4 border-blue-600 rounded-full w-10 h-10 animate-spin"></div>
             </div>
           ) : (
-            items.map((item) => (
-              <ForSaleCard key={item.id} item={item} />
+            items.map(food => (
+              <ListingCardFE
+                key={food.id}
+                name={food.name}
+                price={food.price}
+                description={food.description}
+                images={food.images}
+              />
             ))
           )}
-        </div> */}
+        </div>
       </section>
     </div>
   );
 };
 
-const ForSaleCard: React.FC<{ item: any }> = ({ item }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
-    <img
-      src={item.imageUrl}
-      alt={item.title}
-      className="w-full h-48 object-cover rounded-lg mb-4"
-    />
-    <h3 className="text-xl font-bold text-gray-800 mb-4">{item.title}</h3>
-    <p className="text-gray-600 mb-4">{item.description}</p>
-    <p className="text-lg font-semibold text-gray-800 mb-4">{item.price}</p>
-    <a
-      href={`/sale/${item.id}`}
-      className="text-blue-500 hover:text-blue-700 transition"
-    >
-      View Details
-    </a>
-  </div>
-);
+// const ForSaleCard: React.FC<{ item: any }> = ({ item }) => (
+//   <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+//     <img
+//       src={item.imageUrl}
+//       alt={item.title}
+//       className="w-full h-48 object-cover rounded-lg mb-4"
+//     />
+//     <h3 className="text-xl font-bold text-gray-800 mb-4">{item.title}</h3>
+//     <p className="text-gray-600 mb-4">{item.description}</p>
+//     <p className="text-lg font-semibold text-gray-800 mb-4">{item.price}</p>
+//     <a
+//       href={`/sale/${item.id}`}
+//       className="text-blue-500 hover:text-blue-700 transition"
+//     >
+//       View Details
+//     </a>
+//   </div>
+// );
 
 export default ForSalePage;

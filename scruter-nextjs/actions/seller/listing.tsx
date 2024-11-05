@@ -1,6 +1,6 @@
 'use server';
 import prismadb from '@/lib/prismadb';
-import { Image, Listing } from '@prisma/client';
+import { Category, Image, Listing } from '@prisma/client';
 
 export interface ListingWithImages extends Listing {
   images: Image[];
@@ -184,19 +184,28 @@ export async function DeleteListing({
   }
 }
 
-export async function GetAllListing(): Promise<{
+export async function GetAllListing(category?: Category): Promise<{ 
   success: boolean;
   error?: string;
   data?: ListingWithImages[];
 }> {
-  const resp = await prismadb.listing.findMany({
+  // Set no-cache headers to ensure fresh data
+  const headers = new Headers();
+  headers.append('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  headers.append('Pragma', 'no-cache');
+  headers.append('Expires', '0');
+  
+  const resp:ListingWithImages[] = await prismadb.listing.findMany({
     include: {
-      images: true,
+      images: true
     },
+    where:{
+      category: category? category : {}
+    }
   });
 
   if (!resp) {
-    return { success: false, error: 'Error occured in fetching all listing' };
+    return { success: false, error: 'Error occurred in fetching all listings' };
   }
 
   return { success: true, data: resp };
