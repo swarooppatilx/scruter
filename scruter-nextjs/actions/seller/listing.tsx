@@ -2,8 +2,8 @@
 import prismadb from '@/lib/prismadb';
 import { Image, Listing } from '@prisma/client';
 
-export interface ListingWithImages extends Listing{
-  images:Image[]
+export interface ListingWithImages extends Listing {
+  images: Image[];
 }
 
 export async function PostListing({
@@ -176,9 +176,9 @@ export async function GetAllListing(): Promise<{
   data?: ListingWithImages[];
 }> {
   const resp = await prismadb.listing.findMany({
-    include:{
-      images:true
-    }
+    include: {
+      images: true,
+    },
   });
 
   if (!resp) {

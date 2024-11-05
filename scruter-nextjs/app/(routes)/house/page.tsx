@@ -19,7 +19,7 @@ const HousePage: React.FC = () => {
       try {
         // Example API call to fetch houses data
         const housesResponse = await axios.get('/api/houses', {
-          params: { query, type, sort }
+          params: { query, type, sort },
         });
         setHouses(housesResponse.data);
       } catch (error) {
@@ -72,7 +72,7 @@ const HousePage: React.FC = () => {
               name="query"
               placeholder="Search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={e => setQuery(e.target.value)}
             />
             <FontAwesomeIcon
               icon={faSearch} // Using FontAwesomeIcon component
@@ -87,7 +87,7 @@ const HousePage: React.FC = () => {
               id="sort-by-price"
               name="sort"
               value={sort}
-              onChange={(e) => setSort(e.target.value)}
+              onChange={e => setSort(e.target.value)}
             >
               <option value="">Sort by Price</option>
               <option value="asc">Low to High</option>
@@ -101,7 +101,8 @@ const HousePage: React.FC = () => {
               className="btn btn-dark text-light p-3 rounded-md w-full md:w-auto transition-colors duration-300 hover:bg-gray-400 border border-gray-300 hover:border-gray-600 focus:ring-2 focus:ring-gray-500 focus:outline-none"
               id="search-button"
               type="submit"
-            >Search
+            >
+              Search
             </button>
           </div>
         </form>
@@ -109,7 +110,9 @@ const HousePage: React.FC = () => {
 
       {/* Houses Section */}
       <section className="py-16 bg-white">
-        <h2 className="text-2xl font-bold text-center mb-12">Available Houses</h2>
+        <h2 className="text-2xl font-bold text-center mb-12">
+          Available Houses
+        </h2>
 
         {/*
         <div

@@ -1,16 +1,13 @@
 'use client';
-import * as z from 'zod';
-import { Trash } from 'lucide-react';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import axios from 'axios';
+import * as z from 'zod';
 
+import { PostListing } from '@/actions/seller/listing';
 import { Button } from '@/components/ui/button';
-import { Heading } from '@/components/ui/heading';
-import { Separator } from '@/components/ui/separator';
 import {
   Form,
   FormControl,
@@ -19,10 +16,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { AlertModal } from '@/components/ui/alertModal';
+import { Heading } from '@/components/ui/heading';
 import ImageUpload from '@/components/ui/imageUpload';
-import { PostListing } from '@/actions/seller/listing';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 
 
 const formSchema = z.object({

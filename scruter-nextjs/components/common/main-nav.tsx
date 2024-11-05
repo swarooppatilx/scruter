@@ -5,7 +5,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faHouseUser, faCutlery, faTag } from '@fortawesome/free-solid-svg-icons'; // Import relevant icons
+import {
+  faHome,
+  faHouseUser,
+  faCutlery,
+  faTag,
+} from '@fortawesome/free-solid-svg-icons'; // Import relevant icons
 
 const MainNav = () => {
   const pathname = usePathname();
@@ -57,7 +62,8 @@ const MainNav = () => {
             route.active ? 'text-black' : 'text-neutral-500'
           )}
         >
-          <FontAwesomeIcon icon={route.icon} className="text-lg" /> {/* Display the icon */}
+          <FontAwesomeIcon icon={route.icon} className="text-lg" />{' '}
+          {/* Display the icon */}
           <span>{route.label}</span> {/* Display the label */}
         </Link>
       ))}
