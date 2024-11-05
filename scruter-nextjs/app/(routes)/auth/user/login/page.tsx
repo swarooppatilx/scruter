@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { UserLoginForm } from '../../components/user/login-form';
@@ -13,51 +12,40 @@ export const metadata: Metadata = {
 
 export default function AuthenticationPage() {
   return (
-    <>
-      <div className="sm:hidden">
-        <Image
-          src="/userAuth1.svg"
-          width={1280}
-          height={843}
-          alt="Authentication"
-          className="block dark:hidden"
-        />
-        <Image
-          src="/userAuth1.svg"
-          width={1280}
-          height={843}
-          alt="Authentication"
-          className="hidden dark:block"
-        />
-      </div>
-      <div className="container relative hidden h-[700px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <Link
-          href="/auth/user/signup"
-          className={cn(
-            buttonVariants({ variant: 'ghost' }),
-            'absolute right-4 top-4 md:right-8 md:top-8  bg-black text-white'
-          )}
-        >
-          Signup
-        </Link>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-teal-300 to-lime-400">
+      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 ease-in-out hover:scale-105">
+        <div className="hidden md:flex items-center justify-center bg-blue-50 p-6">
+          <Image
+            src="/userAuth1.svg"
+            alt="Authentication"
+            layout="responsive"
+            width={350}
+            height={350}
+            className="rounded-lg"
+          />
+        </div>
+        <div className="p-8 md:p-10 flex flex-col justify-center bg-white">
+          <h2 className="text-3xl font-semibold text-center text-blue-700 mb-3">
+            Welcome back dear User!
+          </h2>
+          <p className="text-center text-gray-600 mb-6">
+            Enter your email below to log into your account.
+          </p>
+          <UserLoginForm authType="login" />
 
-        <div
-          className={`hidden mt-20 bg-[url("/userAuth1.svg")] bg-opacity-50 h-full flex-col bg-no-repeat bg-contain text-white dark:border-r lg:flex`}
-        ></div>
-        <div className="lg:p-8">
-          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-            <div className="flex flex-col space-y-2 text-center">
-              <h1 className="text-2xl font-semibold tracking-tight">
-                Welcome back dear User!
-              </h1>
-              <p className="text-sm text-muted-foreground">
-                Enter your email below to Log into your account
-              </p>
-            </div>
-            <UserLoginForm authType="login" />
+          <div className="text-center mt-4 space-y-2">
+            <p className="text-sm text-black">
+              Don’t have an account?{' '}
+              <Link
+                href="/auth/user/signup"
+                className="text-green-500 hover:underline"
+              >
+                Sign Up
+              </Link>
+            </p>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
