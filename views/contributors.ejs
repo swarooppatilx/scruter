@@ -533,10 +533,12 @@
             const contributorsResponse = await axios.get(
               `https://api.github.com/repos/swarooppatilx/scruter/contributors?per_page=100&timestamp=${timestamp}`
             );
-            const contributorsData = contributorsResponse.data;
+            const contributorsData = contributorsResponse.data.filter(
+              contributor => !contributor.login.includes('dependabot')
+            );
 
             const repoResponse = await axios.get(
-              'https://api.github.com/repos/swarooppatilx/scruter'
+              `https://api.github.com/repos/swarooppatilx/scruter?timestamp=${timestamp}`
             );
             const repoData = repoResponse.data;
 
