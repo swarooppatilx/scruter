@@ -1,6 +1,6 @@
-"use server";
+'use server';
 
-import transporter from "@/lib/nodemailerConfig";
+import transporter from '@/lib/nodemailerConfig';
 
 interface EmailOptions {
   name: string;
@@ -9,7 +9,12 @@ interface EmailOptions {
   message: string;
 }
 
-const sendContactEmail = async ({ name, email, subject, message }: EmailOptions) => {
+const sendContactEmail = async ({
+  name,
+  email,
+  subject,
+  message,
+}: EmailOptions) => {
   const mailOptions = {
     from: process.env.SMTP_USER,
     to: process.env.SMTP_USER,
@@ -36,7 +41,7 @@ const sendContactEmail = async ({ name, email, subject, message }: EmailOptions)
         <li><strong>Email:</strong> ${email}</li>
         <li><strong>Subject:</strong> ${subject}</li>
       </ul>
-      <p><strong>Message:</strong><br>${message.replace(/\n/g, "<br>")}</p>
+      <p><strong>Message:</strong><br>${message.replace(/\n/g, '<br>')}</p>
       <p>Please review and respond as necessary.</p>
     `,
   };
@@ -45,8 +50,8 @@ const sendContactEmail = async ({ name, email, subject, message }: EmailOptions)
     const info = await transporter.sendMail(mailOptions);
     return { success: true, info };
   } catch (error) {
-    console.error("Error sending email:", error);
-    throw new Error("Failed to send email");
+    console.error('Error sending email:', error);
+    throw new Error('Failed to send email');
   }
 };
 

@@ -27,8 +27,8 @@ interface GlobalContextType {
   imageUrl: string[];
   setImageUrl: (url: string[]) => void;
 
-  handleImageChange:(url:string)=>void
-  handleImageRemove:(url:string)=>void
+  handleImageChange: (url: string) => void;
+  handleImageRemove: (url: string) => void;
 
   validListingName: boolean;
   setValidListingName: (name: boolean) => void;
@@ -39,7 +39,7 @@ interface GlobalContextType {
   validListingCategory: boolean;
   setValidListingCategory: (category: boolean) => void;
   validImageUrls: boolean; // New state for image URL validation
-  setValidImageUrls: (valid: boolean) => void; 
+  setValidImageUrls: (valid: boolean) => void;
 
   checkedBox: boolean;
   setCheckedBox: (checkedBox: boolean) => void;
@@ -88,13 +88,12 @@ export const GlobalListingProvider = ({
   const [imageUrl, setImageUrl] = useState<string[]>([]);
 
   const handleImageChange = useCallback((url: string) => {
-    setImageUrl((prevUrls) => [...prevUrls, url]); // Use the previous state
+    setImageUrl(prevUrls => [...prevUrls, url]); // Use the previous state
   }, []);
-  
+
   const handleImageRemove = useCallback((url: string) => {
-    setImageUrl((prevUrls) => prevUrls.filter(image => image !== url)); // Use the previous state
+    setImageUrl(prevUrls => prevUrls.filter(image => image !== url)); // Use the previous state
   }, []);
-  
 
   const [checkedBox, setCheckedBox] = useState(false);
   const [formCompleted, setFormCompleted] = useState(false);
@@ -159,7 +158,7 @@ export const GlobalListingProvider = ({
             price: listingPrice,
             description: listingDescription,
             category: listingCategory,
-            images:imageUrl
+            images: imageUrl,
           },
         });
 

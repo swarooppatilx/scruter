@@ -7,7 +7,9 @@ export async function PostListing({
   listingData,
 }: {
   sellerId: string;
-  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category' > & { images: string[] };
+  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category'> & {
+    images: string[];
+  };
 }): Promise<{ success: boolean; error?: string; data?: Listing }> {
   // console.log(listingData);
 
@@ -28,7 +30,7 @@ export async function PostListing({
         SellerId: sellerId,
         ...listingData,
         images: {
-          create: listingData.images.map((url) => ({ url })), // Assuming you're passing URLs
+          create: listingData.images.map(url => ({ url })), // Assuming you're passing URLs
         },
       },
     });
@@ -48,13 +50,15 @@ export async function UpdateListing({
 }: {
   sellerId: string;
   listingId: string;
-  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category'>& { images: string[] };
+  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category'> & {
+    images: string[];
+  };
 }): Promise<{ success: boolean; error?: string; data?: Listing }> {
   if (
     !listingData.name ||
     !listingData.category ||
     !listingData.description ||
-    !listingData.price||
+    !listingData.price ||
     !listingData.images || // Check for images array
     listingData.images.length === 0 // Ensure images array is not empty
   ) {
@@ -94,7 +98,7 @@ export async function UpdateListing({
       data: {
         ...listingData,
         images: {
-          create: listingData.images.map((url) => ({ url })), // Assuming you're passing URLs
+          create: listingData.images.map(url => ({ url })), // Assuming you're passing URLs
         },
       },
     });

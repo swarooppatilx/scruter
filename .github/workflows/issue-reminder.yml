@@ -8,7 +8,7 @@ jobs:
   reminder:
     runs-on: ubuntu-latest
     permissions:
-      issues: write  # Ensures the token has permission to comment on issues
+      issues: write # Ensures the token has permission to comment on issues
 
     steps:
       - name: Checkout repository

@@ -12,10 +12,7 @@ type RouteContext = {
   };
 };
 
-export async function GET(
-  request: NextRequest,
-  context: RouteContext
-) {
+export async function GET(request: NextRequest, context: RouteContext) {
   const { listingId } = context.params;
   if (!listingId) {
     return new NextResponse('Necessary params are required', { status: 400 });
@@ -34,10 +31,7 @@ export async function GET(
   }
 }
 
-export async function PATCH(
-  request: NextRequest,
-  context: RouteContext
-) {
+export async function PATCH(request: NextRequest, context: RouteContext) {
   try {
     const body = await request.json();
     const { sellerId, listingId } = context.params;
@@ -60,10 +54,7 @@ export async function PATCH(
   }
 }
 
-export async function DELETE(
-  request: NextRequest,
-  context: RouteContext
-) {
+export async function DELETE(request: NextRequest, context: RouteContext) {
   try {
     const { sellerId, listingId } = context.params;
     if (!sellerId || !listingId) {
