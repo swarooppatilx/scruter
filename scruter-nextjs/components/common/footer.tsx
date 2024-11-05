@@ -19,10 +19,10 @@ const Links = [
 ];
 
 const Helpdesk = [
-  { name: 'HelpCenter', id: 1, href: '/HelpCenter' },
-  { name: 'FAQ', id: 2, href: '/FAQ' },
-  { name: 'ContactUs', id: 3, href: '/ContactUs' },
-  { name: 'Support', id: 4, href: '/Support' },
+  { name: 'Help', id: 1, href: '/help' },
+  { name: 'FAQ', id: 2, href: '/faq' },
+  { name: 'Contact Us', id: 3, href: '/contact' },
+  { name: 'Support', id: 4, href: '/support' },
 ];
 
 const Footer = () => {
@@ -42,8 +42,9 @@ const Footer = () => {
           </div>
           <div>
             Scruter is your local platform for buying, selling, and discovering
-            everything you need. Whether it&apos;s products, services, or community
-            activities, we connect people for a better local experience.
+            everything you need. Whether it&apos;s products, services, or
+            community activities, we connect people for a better local
+            experience.
           </div>
         </div>
         {/* Section 2 */}

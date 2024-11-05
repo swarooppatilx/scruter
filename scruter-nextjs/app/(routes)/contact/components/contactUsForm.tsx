@@ -1,51 +1,53 @@
-"use client";
+'use client';
 
-import sendContactEmail from "@/actions/sendContactUsEmail";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import sendContactEmail from '@/actions/sendContactUsEmail';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ContactUsForm = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
   });
 
   const [loading, setLoading] = useState(false);
 
   // Handle input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setFormData(prevData => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     setLoading(true); // Set loading to true when the form is submitted
 
     try {
       await sendContactEmail(formData);
       // console.log(response);
-      toast.success("Your message has been sent successfully!"); // Success message
+      toast.success('Your message has been sent successfully!'); // Success message
     } catch (error) {
       // console.error(error);
-      toast.error("There was an error sending your message. Please try again."); // Error message
+      toast.error('There was an error sending your message. Please try again.'); // Error message
     } finally {
       setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: ""
-      })
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
       setLoading(false); // Set loading to false after the request completes
     }
   };
@@ -59,7 +61,6 @@ const ContactUsForm = () => {
       <h1 className="text-xl md:text-2xl font-semibold mb-2">
         Have a question or need assistance?
       </h1>
-
       <Input
         name="name"
         value={formData.name}
@@ -96,7 +97,7 @@ const ContactUsForm = () => {
         className="w-full mt-4"
         disabled={loading}
       >
-        {loading ? "Sending..." : "Send Message"}
+        {loading ? 'Sending...' : 'Send Message'}
       </Button>
     </form>
   );

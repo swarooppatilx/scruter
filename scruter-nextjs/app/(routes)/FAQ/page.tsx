@@ -1,7 +1,7 @@
-"use client";
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { FAQs } from "./faqs";
+'use client';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { FAQs } from './faqs';
 
 const FAQForum = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -10,7 +10,7 @@ const FAQForum = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  const roseGoldColor = "bg-gray-200"; // Adjust this to the desired shade of rose gold
+  const roseGoldColor = 'bg-gray-200'; // Adjust this to the desired shade of rose gold
 
   return (
     <motion.div
@@ -44,10 +44,12 @@ const FAQForum = () => {
                   onClick={() => toggleFAQ(index)}
                 >
                   <div className="flex justify-between items-center">
-                    <span className="text-lg font-semibold">{faq.question}</span>
+                    <span className="text-lg font-semibold">
+                      {faq.question}
+                    </span>
                     <span
                       className={`text-3xl transition-transform duration-300 transform ${
-                        activeIndex === index ? "rotate-180" : ""
+                        activeIndex === index ? 'rotate-180' : ''
                       }`}
                     >
                       +
@@ -56,7 +58,7 @@ const FAQForum = () => {
                 </button>
                 <motion.div
                   className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                    activeIndex === index ? "max-h-96" : "max-h-0"
+                    activeIndex === index ? 'max-h-96' : 'max-h-0'
                   }`}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: activeIndex === index ? 1 : 0 }}

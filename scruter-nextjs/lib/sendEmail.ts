@@ -1,4 +1,4 @@
-import transporter from './nodemailerConfig';
+import transporter from "./nodemailerConfig";
 
 interface EmailOptions {
   to: string;
