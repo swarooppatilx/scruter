@@ -29,7 +29,7 @@ const ForSalePage: React.FC = () => {
       }
     };
 
-    fetchData();
+    //fetchData();
   }, [query, type, sort]);
 
   return (
@@ -111,6 +111,7 @@ const ForSalePage: React.FC = () => {
       {/* Items For Sale Section */}
       <section className="py-16 bg-white">
         <h2 className="text-2xl font-bold text-center mb-12">Available Items</h2>
+        {/*
         <div
           id="items-for-sale"
           className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -124,7 +125,7 @@ const ForSalePage: React.FC = () => {
               <ForSaleCard key={item.id} item={item} />
             ))
           )}
-        </div>
+        </div> */}
       </section>
     </div>
   );

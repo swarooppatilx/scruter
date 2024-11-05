@@ -29,7 +29,7 @@ const FoodPage: React.FC = () => {
       }
     };
 
-    fetchData();
+    //fetchData();
   }, [query, type, sort]);
 
   return (
@@ -111,6 +111,7 @@ const FoodPage: React.FC = () => {
       {/* Food Items Section */}
       <section className="py-16 bg-white">
         <h2 className="text-2xl font-bold text-center mb-12">Available Food</h2>
+        {/*
         <div
           id="food-items"
           className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -124,7 +125,7 @@ const FoodPage: React.FC = () => {
               <FoodCard key={food.id} food={food} />
             ))
           )}
-        </div>
+        </div> */}
       </section>
     </div>
   );
