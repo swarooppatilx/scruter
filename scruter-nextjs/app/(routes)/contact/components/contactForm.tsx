@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-const ContactUsForm = () => {
+const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -102,4 +102,4 @@ const ContactUsForm = () => {
   );
 };
 
-export default ContactUsForm;
+export default ContactForm;

@@ -19,9 +19,9 @@ const Links = [
 ];
 
 const Helpdesk = [
-  { name: 'HelpCenter', id: 1, href: '/help' },
+  { name: 'Help', id: 1, href: '/help' },
   { name: 'FAQ', id: 2, href: '/faq' },
-  { name: 'ContactUs', id: 3, href: '/contactus' },
+  { name: 'Contact Us', id: 3, href: '/contact' },
   { name: 'Support', id: 4, href: '/support' },
 ];
 

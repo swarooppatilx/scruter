@@ -1,6 +1,6 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
-import ContactUsForm from "./components/contactUsForm";
+import ContactForm from "./components/contactForm";
 import { ReactNode } from "react";
 
 const Contact = () => {
@@ -13,7 +13,7 @@ const Contact = () => {
         <div className="flex flex-col px-6 lg:gap-6 lg:px-32 md:w-11/12 items-center justify-center">
           <div className="border-2 border-gray-300 rounded-3xl shadow-lg flex md:flex-nowrap flex-col md:flex-row justify-center items-center md:w-9/12 overflow-hidden p-5 bg-white">
             <div className="md:w-3/4 w-full">
-              <ContactUsForm />
+              <ContactForm />
             </div>
             <div className="hidden md:flex lg:flex">
               <Image src="/contactUs.svg" width={500} height={600} alt="Contact Us Illustration" />
