@@ -15,6 +15,21 @@ const MainNav = () => {
       label: 'Home',
       active: pathname.startsWith(`/`),
     },
+    {
+        href: `/house`,
+        label: 'Housing',
+        active: pathname.startsWith(`/`),
+    },
+    {
+        href: `/food`,
+        label: 'Food',
+        active: pathname.startsWith(`/`),
+    },
+    {
+        href: `/sale`,
+        label: 'For Sale',
+        active: pathname.startsWith(`/`),
+    },
   ];
 
   useEffect(() => {
