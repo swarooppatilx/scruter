@@ -26,7 +26,7 @@ const MainNav = () => {
         active: pathname.startsWith(`/`),
     },
     {
-        href: `/sale`,
+        href: `/for-sale`,
         label: 'For Sale',
         active: pathname.startsWith(`/`),
     },
