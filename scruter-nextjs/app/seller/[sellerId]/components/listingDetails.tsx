@@ -1,6 +1,6 @@
-import React from "react";
-import FormControl from "./formControl";
-import { useGlobalListing } from "@/context/GlobalListingProvider";
+import React from 'react';
+import FormControl from './formControl';
+import { useGlobalListing } from '@/context/GlobalListingProvider';
 
 const ListingDetails = () => {
   const {
@@ -17,23 +17,23 @@ const ListingDetails = () => {
     setValidListingPrice,
     validListingDescription,
     setValidListingDescription,
-  } = useGlobalListing()
+  } = useGlobalListing();
 
   const setListingNameLogic = (e: React.ChangeEvent<HTMLInputElement>) => {
     setListingName(e.target.value);
     setValidListingName(e.target.value.length >= 1);
   };
 
-  const setListingDescriptionLogic = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const setListingDescriptionLogic = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setListingDescription(e.target.value);
     setValidListingDescription(e.target.value.length >= 1);
   };
 
   const setListingPriceLogic = (e: React.ChangeEvent<HTMLInputElement>) => {
     setListingPrice(Number(e.target.value));
-    setValidListingPrice(
-      e.target.value.length >= 1
-    );
+    setValidListingPrice(e.target.value.length >= 1);
   };
 
   return (
@@ -47,28 +47,28 @@ const ListingDetails = () => {
 
       <div className="flex flex-col gap-5">
         <FormControl
-          label={"Listing Title"}
-          type={"text"}
-          id={"ListingName"}
-          placeholder={"Home in Lonavala"}
+          label={'Listing Title'}
+          type={'text'}
+          id={'ListingName'}
+          placeholder={'Home in Lonavala'}
           onchange={setListingNameLogic}
           value={listingName}
           valid={validListingName}
         />
         <FormControl
-          label={"Listing Description"}
-          type={"text"}
-          id={"ListingDescription"}
-          placeholder={"3 BHK home"}
+          label={'Listing Description'}
+          type={'text'}
+          id={'ListingDescription'}
+          placeholder={'3 BHK home'}
           onchange={setListingDescriptionLogic}
           value={listingDescription}
           valid={validListingDescription}
         />
         <FormControl
-          label={"Listing Price"}
-          type={"number"}
-          id={"ListingPrice"}
-          placeholder={"e.g. example@upi"}
+          label={'Listing Price'}
+          type={'number'}
+          id={'ListingPrice'}
+          placeholder={'e.g. example@upi'}
           onchange={setListingPriceLogic}
           value={listingPrice.toString()}
           valid={validListingPrice}

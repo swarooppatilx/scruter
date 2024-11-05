@@ -42,8 +42,9 @@ const Footer = () => {
           </div>
           <div>
             Scruter is your local platform for buying, selling, and discovering
-            everything you need. Whether it&apos;s products, services, or community
-            activities, we connect people for a better local experience.
+            everything you need. Whether it&apos;s products, services, or
+            community activities, we connect people for a better local
+            experience.
           </div>
         </div>
         {/* Section 2 */}

@@ -1,55 +1,62 @@
 // import { useGlobalStore } from "@/context/storeContext";
-import { useGlobalListing } from "@/context/GlobalListingProvider";
-import { data } from "./sidebarConstants";
+import { useGlobalListing } from '@/context/GlobalListingProvider';
+import { data } from './sidebarConstants';
 
 const Sidebar = () => {
-  const { 
-    listingName,listingCategory,listingPrice,listingDescription,
-    setValidListingName,setValidListingCategory,setValidListingPrice,setValidListingDescription,
-    currentStep, setCurrentStep, setFormCompleted 
-  } = useGlobalListing()
-  
-  const changeStep = (id:number) => {
+  const {
+    listingName,
+    listingCategory,
+    listingPrice,
+    listingDescription,
+    setValidListingName,
+    setValidListingCategory,
+    setValidListingPrice,
+    setValidListingDescription,
+    currentStep,
+    setCurrentStep,
+    setFormCompleted,
+  } = useGlobalListing();
+
+  const changeStep = (id: number) => {
     let allValid = true;
-  
+
     // Validate each field and update validity states
     if (listingName.trim().length < 1) {
-        setValidListingName(false);
+      setValidListingName(false);
       allValid = false;
     } else {
-        setValidListingName(true);
+      setValidListingName(true);
     }
-  
+
     if (listingDescription.trim().length < 1) {
       setValidListingDescription(false);
       allValid = false;
     } else {
       setValidListingDescription(true);
     }
-  
-    if (listingPrice< 1) {
+
+    if (listingPrice < 1) {
       setValidListingPrice(false);
       allValid = false;
     } else {
       setValidListingPrice(true);
     }
-  
+
     if (listingCategory.trim().length < 1) {
-        setValidListingCategory(false);
+      setValidListingCategory(false);
       allValid = false;
     } else {
-        setValidListingCategory(true);
+      setValidListingCategory(true);
     }
-  
+
     // Move to the next step only if all fields are valid
     if (allValid) {
       setCurrentStep(id);
     }
-  
+
     // Reset the form completion status
-    setFormCompleted (false);
+    setFormCompleted(false);
   };
-  
 
   return (
     <>
@@ -60,8 +67,12 @@ const Sidebar = () => {
           return (
             <div
               key={index}
-              className={`flex items-center rounded-lg p-2 space-x-4 leading-4 sm:mb-8 ${currentStep === id ? 'border border-black bg-gray-400 ' : '' }`}>
-              <div onClick={() => changeStep(id)} className={`md:w-8 cursor-pointer md:h-8 w-10 h-10 rounded-full flex items-center justify-center font-medium `}>
+              className={`flex items-center rounded-lg p-2 space-x-4 leading-4 sm:mb-8 ${currentStep === id ? 'border border-black bg-gray-400 ' : ''}`}
+            >
+              <div
+                onClick={() => changeStep(id)}
+                className={`md:w-8 cursor-pointer md:h-8 w-10 h-10 rounded-full flex items-center justify-center font-medium `}
+              >
                 {id}
               </div>
               <div className="hidden md:block">
