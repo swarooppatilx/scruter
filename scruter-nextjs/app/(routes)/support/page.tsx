@@ -86,7 +86,7 @@ const SupportPage = () => (
       <div className="title-section text-center mb-8">
         <h1 className="text-4xl text-blue-600 font-bold">Support Page</h1>
         <p className="text-gray-600 max-w-2xl mx-auto mt-2">
-          We're here to help! Browse our resources or reach out for assistance.
+          We&apos;re here to help! Browse our resources or reach out for assistance.
         </p>
       </div>
 
@@ -101,15 +101,15 @@ const SupportPage = () => (
             How do I reset my password?
           </div>
           <div className="answer">
-            To reset your password, go to the login page and click on "Forgot
-            Password." Follow the instructions to reset your password.
+            To reset your password, go to the login page and click on &quot;Forgot
+            Password.&quot; Follow the instructions to reset your password.
           </div>
           <div className="question font-semibold mt-4">
             Where can I find my order history?
           </div>
           <div className="answer">
             You can find your order history in your account dashboard under
-            "Order History."
+            &quot;Order History.&quot;
           </div>
           {/* Add more FAQs as needed */}
         </div>
@@ -160,9 +160,9 @@ const SupportPage = () => (
         icon="fas fa-wrench"
         title="Troubleshooting"
       >
-        <p>If you're experiencing issues, check our troubleshooting guide:</p>
+        <p>If you&apos;re experiencing issues, check our troubleshooting guide:</p>
         <ul className="list-disc pl-5">
-          <li>Clear your browser's cache and cookies.</li>
+          <li>Clear your browser&apos;s cache and cookies.</li>
           <li>Ensure your browser is updated to the latest version.</li>
           <li>
             Disable any browser extensions that may interfere with the website.

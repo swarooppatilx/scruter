@@ -119,7 +119,7 @@ const MainContent: React.FC = () => (
       <ul>
         <li>Enhancing user experience through personalized content.</li>
         <li>
-          Improving our website's functionality and services based on user
+          Improving our website&#39;s functionality and services based on user
           feedback.
         </li>
         <li>

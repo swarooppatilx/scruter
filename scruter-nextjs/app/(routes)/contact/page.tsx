@@ -28,11 +28,11 @@ const Contact = () => {
           <div className="md:w-9/12 py-4 md:px-10 justify-center items-center flex flex-col mt-8">
             <div className="text-md text-center text-gray-700 md:mt-0 mt-5">
               <p>
-                We're here to help! Reach out to us for any inquiries regarding
+                We&apos;re here to help! Reach out to us for any inquiries regarding
                 your orders, deliveries, or shopping experience with Scruter.
               </p>
               <p className="font-semibold">
-                We're happy to assist you with all your needs.
+                We&apos;re happy to assist you with all your needs.
               </p>
             </div>
             <div className="flex items-center gap-5 mt-5 md:flex-nowrap flex-col md:flex-row w-full flex-wrap">

@@ -183,7 +183,7 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="How do I create an account?"
         >
-          To create an account, click on the "Sign Up" button and fill out the
+          To create an account, click on the &quot;Sign Up&quot; button and fill out the
           registration form with your details.
         </Section>
 
@@ -192,7 +192,7 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="How do I post an ad?"
         >
-          Once you are logged in, navigate to the "Post Ad" section, fill in the
+          Once you are logged in, navigate to the &quot;Post Ad&quot; section, fill in the
           necessary information, and submit your ad.
         </Section>
 
@@ -210,7 +210,7 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="How can I contact support?"
         >
-          You can reach out to our support team via the "Contact Us" section on
+          You can reach out to our support team via the &quot;Contact Us&quot; section on
           our website or email us at support@scruter.com.
         </Section>
 
@@ -219,7 +219,7 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="How do I reset my password?"
         >
-          If you forget your password, click on the "Forgot Password?" link on
+          If you forget your password, click on the &quot;Forgot Password?&quot; link on
           the login page and follow the instructions to reset it.
         </Section>
 
@@ -237,7 +237,7 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="What should I do if I encounter a problem?"
         >
-          If you encounter any issues, please refer to the "Help Center" or
+          If you encounter any issues, please refer to the &quot;Help Center&quot; or
           contact support for assistance.
         </Section>
 
@@ -255,7 +255,7 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="How do I report a user or an ad?"
         >
-          You can report a user or ad by clicking the "Report" button located
+          You can report a user or ad by clicking the &quot;Report&quot; button located
           next to the ad or user profile.
         </Section>
       </main>
