@@ -1,6 +1,8 @@
 import prismadb from "@/lib/prismadb";
 import { Listing } from "@prisma/client";
 import SetUpListing from "./components/setupListing";
+import ListingsPage from "./components/listingPage/listingPage";
+import { ListingWithImages } from "@/actions/seller/listing";
 // import SetUpGuide from "./components/setupListing";
 // import SellerDashboard from "./components/sellerDashboard";
 
@@ -12,7 +14,7 @@ interface SellerPageProps{
 
 const SellerPage:React.FC<SellerPageProps> = async({params}) => {
 
-  let Listings: Listing[] | null = [];
+  let Listings: ListingWithImages[] | null = [];
 
   const {sellerId} = await params
   try {
@@ -20,6 +22,9 @@ const SellerPage:React.FC<SellerPageProps> = async({params}) => {
       where: {
         SellerId:sellerId,
       },
+      include:{
+        images:true
+      }
     });
   } catch (err) {
     console.error(
@@ -27,13 +32,9 @@ const SellerPage:React.FC<SellerPageProps> = async({params}) => {
       err instanceof Error ? err.message : err
     );
   }
-
+  // console.log(Listings+"SFeeeeeeeeeeeeeeeeeeeeeeee")
     if (Listings.length){
-        return <div>
-          {Listings.map((listing)=>(
-            <div key={listing.id}>{listing.name}</div>
-          ))}
-        </div>
+       return <ListingsPage listings={Listings}/>
     }
   
     else{
