@@ -17,8 +17,9 @@ module.exports = {
     'next/core-web-vitals',
   ],
   rules: {
-    '@typescript-eslint/no-unused-vars': ['warn'],
-    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-unused-vars': 'off', // Allow unused vars for Now, chage it to error later
+    '@typescript-eslint/no-explicit-any': 'off', // Allow explicit any for Now, chage it to error later
+    '@next/next/no-img-element': 'off', // Allow img tag for Now, chage it to error later
   },
   settings: {
     react: {

@@ -27,7 +27,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/api/testing/[sellerId]/[listingId]/route.ts.skip"
   ],
   "exclude": ["node_modules"]
 }
