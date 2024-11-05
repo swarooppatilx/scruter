@@ -183,8 +183,8 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="How do I create an account?"
         >
-          To create an account, click on the &quot;Sign Up&quot; button and fill out the
-          registration form with your details.
+          To create an account, click on the &quot;Sign Up&quot; button and fill
+          out the registration form with your details.
         </Section>
 
         <Section
@@ -192,8 +192,8 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="How do I post an ad?"
         >
-          Once you are logged in, navigate to the &quot;Post Ad&quot; section, fill in the
-          necessary information, and submit your ad.
+          Once you are logged in, navigate to the &quot;Post Ad&quot; section,
+          fill in the necessary information, and submit your ad.
         </Section>
 
         <Section
@@ -210,8 +210,8 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="How can I contact support?"
         >
-          You can reach out to our support team via the &quot;Contact Us&quot; section on
-          our website or email us at support@scruter.com.
+          You can reach out to our support team via the &quot;Contact Us&quot;
+          section on our website or email us at support@scruter.com.
         </Section>
 
         <Section
@@ -219,8 +219,8 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="How do I reset my password?"
         >
-          If you forget your password, click on the &quot;Forgot Password?&quot; link on
-          the login page and follow the instructions to reset it.
+          If you forget your password, click on the &quot;Forgot Password?&quot;
+          link on the login page and follow the instructions to reset it.
         </Section>
 
         <Section
@@ -237,8 +237,8 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="What should I do if I encounter a problem?"
         >
-          If you encounter any issues, please refer to the &quot;Help Center&quot; or
-          contact support for assistance.
+          If you encounter any issues, please refer to the &quot;Help
+          Center&quot; or contact support for assistance.
         </Section>
 
         <Section
@@ -255,8 +255,8 @@ const FAQPage = () => {
           icon="fas fa-question-circle"
           title="How do I report a user or an ad?"
         >
-          You can report a user or ad by clicking the &quot;Report&quot; button located
-          next to the ad or user profile.
+          You can report a user or ad by clicking the &quot;Report&quot; button
+          located next to the ad or user profile.
         </Section>
       </main>
     </div>

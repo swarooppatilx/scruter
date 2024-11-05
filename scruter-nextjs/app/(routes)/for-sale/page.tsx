@@ -19,7 +19,7 @@ const ForSalePage: React.FC = () => {
       try {
         // Example API call to fetch for sale data
         const response = await axios.get('/api/sale', {
-          params: { query, type, sort }
+          params: { query, type, sort },
         });
         setItems(response.data);
       } catch (error) {
@@ -72,7 +72,7 @@ const ForSalePage: React.FC = () => {
               name="query"
               placeholder="Search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={e => setQuery(e.target.value)}
             />
             <FontAwesomeIcon
               icon={faSearch} // Using FontAwesomeIcon component
@@ -87,7 +87,7 @@ const ForSalePage: React.FC = () => {
               id="sort-by-price"
               name="sort"
               value={sort}
-              onChange={(e) => setSort(e.target.value)}
+              onChange={e => setSort(e.target.value)}
             >
               <option value="">Sort by Price</option>
               <option value="asc">Low to High</option>
@@ -110,7 +110,9 @@ const ForSalePage: React.FC = () => {
 
       {/* Items For Sale Section */}
       <section className="py-16 bg-white">
-        <h2 className="text-2xl font-bold text-center mb-12">Available Items</h2>
+        <h2 className="text-2xl font-bold text-center mb-12">
+          Available Items
+        </h2>
         {/*
         <div
           id="items-for-sale"

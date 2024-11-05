@@ -19,7 +19,7 @@ const FoodPage: React.FC = () => {
       try {
         // Example API call to fetch food data
         const foodResponse = await axios.get('/api/food', {
-          params: { query, type, sort }
+          params: { query, type, sort },
         });
         setFoodItems(foodResponse.data);
       } catch (error) {
@@ -72,7 +72,7 @@ const FoodPage: React.FC = () => {
               name="query"
               placeholder="Search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={e => setQuery(e.target.value)}
             />
             <FontAwesomeIcon
               icon={faSearch} // Using FontAwesomeIcon component
@@ -87,7 +87,7 @@ const FoodPage: React.FC = () => {
               id="sort-by-price"
               name="sort"
               value={sort}
-              onChange={(e) => setSort(e.target.value)}
+              onChange={e => setSort(e.target.value)}
             >
               <option value="">Sort by Price</option>
               <option value="asc">Low to High</option>

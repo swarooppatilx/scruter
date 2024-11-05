@@ -1,7 +1,11 @@
-"use client";
+'use client';
 import React from 'react';
 import { Image as ImageInterface } from '@prisma/client';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel';
 import Image from 'next/image';
 import Autoplay from 'embla-carousel-autoplay';
 import { Button } from '@/components/ui/button'; // Importing the Button component from Shadcn
@@ -14,13 +18,19 @@ interface ListingCardProps {
   images: ImageInterface[]; // Assuming images contain the URL property
 }
 
-const ListingCard: React.FC<ListingCardProps> = ({ name, price, description, category, images}) => {
+const ListingCard: React.FC<ListingCardProps> = ({
+  name,
+  price,
+  description,
+  category,
+  images,
+}) => {
   return (
     <div className="bg-white overflow-hidden shadow-lg rounded-lg">
       <Carousel
         className="h-48"
         opts={{
-          align: "start",
+          align: 'start',
           loop: true,
         }}
         plugins={[
@@ -50,7 +60,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ name, price, description, cat
         <p className="text-lg font-bold mb-2">Price: ₹{price}</p>
         <p className="text-sm text-gray-500 mb-4">Category: {category}</p>
         <div className="flex justify-between">
-          <Button  variant="outline" className="text-blue-600">
+          <Button variant="outline" className="text-blue-600">
             Edit
           </Button>
           <Button variant="outline" className="text-red-600">
