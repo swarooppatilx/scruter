@@ -95,15 +95,29 @@ export async function UpdateListing({
   }
 
   try {
-    const resp = await prismadb.listing.update({
+    await prismadb.listing.update({
       where: {
         id: listingId,
       },
       data: {
         ...listingData,
-        images: {
-          create: listingData.images.map(url => ({ url })), // Assuming you're passing URLs
-        },
+        images:{
+          deleteMany:{}
+        }
+      },
+    });
+    const resp = await prismadb.listing.update({
+      where: {
+        id: listingId,
+      },
+      data: {
+        images:{
+          createMany:{
+            data: listingData.images.map((imageUrl) => ({
+              url: imageUrl, // Correctly map each URL to an object with a `url` property
+            })),
+          }
+        }
       },
     });
     return { success: true, data: resp };
@@ -192,7 +206,7 @@ export async function getSpecificListing({
   listingId,
 }: {
   listingId: string;
-}): Promise<{ success: boolean; error?: string; data?: Listing }> {
+}): Promise<{ success: boolean; error?: string; data?: ListingWithImages }> {
   // console.log(listingId);
 
   try {
@@ -200,6 +214,9 @@ export async function getSpecificListing({
       where: {
         id: listingId,
       },
+      include:{
+        images:true
+      }
     });
 
     if (!resp) {

@@ -39,6 +39,8 @@ const ListingsPage = async ({
         {listings.map((listing, index) => (
           <ListingCard
             key={index}
+            sellerId={sellerId}
+            listingId={listing.id}
             name={listing.name}
             price={listing.price}
             description={listing.description}
