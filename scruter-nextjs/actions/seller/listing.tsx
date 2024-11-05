@@ -1,6 +1,10 @@
 'use server';
 import prismadb from '@/lib/prismadb';
-import { Listing } from '@prisma/client';
+import { Image, Listing } from '@prisma/client';
+
+export interface ListingWithImages extends Listing{
+  images:Image[]
+}
 
 export async function PostListing({
   sellerId,
@@ -169,9 +173,13 @@ export async function DeleteListing({
 export async function GetAllListing(): Promise<{
   success: boolean;
   error?: string;
-  data?: Listing[];
+  data?: ListingWithImages[];
 }> {
-  const resp = await prismadb.listing.findMany();
+  const resp = await prismadb.listing.findMany({
+    include:{
+      images:true
+    }
+  });
 
   if (!resp) {
     return { success: false, error: 'Error occured in fetching all listing' };

@@ -1,6 +1,7 @@
-import prismadb from '@/lib/prismadb';
-import { Listing } from '@prisma/client';
-import SetUpListing from './components/setupListing';
+import prismadb from "@/lib/prismadb";
+import SetUpListing from "./components/setupListing";
+import ListingsPage from "./components/listingPage/listingPage";
+import { ListingWithImages } from "@/actions/seller/listing";
 // import SetUpGuide from "./components/setupListing";
 // import SellerDashboard from "./components/sellerDashboard";
 
@@ -10,8 +11,9 @@ interface SellerPageProps {
   };
 }
 
-const SellerPage: React.FC<SellerPageProps> = async ({ params }) => {
-  let Listings: Listing[] | null = [];
+const SellerPage:React.FC<SellerPageProps> = async({params}) => {
+
+  let Listings: ListingWithImages[] | null = [];
 
   const { sellerId } = await params;
   try {
@@ -19,6 +21,9 @@ const SellerPage: React.FC<SellerPageProps> = async ({ params }) => {
       where: {
         SellerId: sellerId,
       },
+      include:{
+        images:true
+      }
     });
   } catch (err) {
     console.error(
@@ -26,18 +31,15 @@ const SellerPage: React.FC<SellerPageProps> = async ({ params }) => {
       err instanceof Error ? err.message : err
     );
   }
-
-  if (Listings.length) {
-    return (
-      <div>
-        {Listings.map(listing => (
-          <div key={listing.id}>{listing.name}</div>
-        ))}
-      </div>
-    );
-  } else {
-    return <SetUpListing sellerId={sellerId} />;
-  }
-};
-
+  // console.log(Listings+"SFeeeeeeeeeeeeeeeeeeeeeeee")
+    if (Listings.length){
+       return <ListingsPage listings={Listings}/>
+    }
+  
+    else{
+      return <SetUpListing sellerId={sellerId}/>
+    }
+ 
+}
+ 
 export default SellerPage;
