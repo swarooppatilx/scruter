@@ -38,15 +38,15 @@
 <!-- JavaScript to Update Form Action, Validate Input, and Handle Sorting -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-  const searchForm = document.getElementById('search-form');
-  const searchInput = document.getElementById('search-input');
-  const searchAction = document.getElementById('search-action');
-  const sortSelect = document.getElementById('sort-by-price');
-  const validationMessage = document.getElementById('validation-message');
-  const cards = document.querySelectorAll('.card');
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const searchAction = document.getElementById('search-action');
+    const sortSelect = document.getElementById('sort-by-price');
+    const validationMessage = document.getElementById('validation-message');
+    const cards = document.querySelectorAll('.card');
 
   // Update the sort dropdown HTML to include name sorting options
-  sortSelect.innerHTML = `
+    sortSelect.innerHTML = `
     <option value="">Sort by...</option>
     <optgroup label="Price">
       <option value="price_asc">Price - Low to High</option>
@@ -58,80 +58,87 @@
     </optgroup>
   `;
 
-  function filterAndSortCards() {
-    const query = searchInput.value.toLowerCase().trim();
-    const sortOption = sortSelect.value;
+    // Helper functions
+    const getCardTitle = (card) => {
+      const titleElement = card.querySelector('.card-title');
+      return titleElement ? titleElement.textContent.toLowerCase() : '';
+    };
 
-    // Convert NodeList to Array and filter
-    let filteredCards = Array.from(cards).filter(card => {
-      const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
-      return title.includes(query);
-    });
+    const getCardPrice = (card) => {
+      // Assuming price is coming from class 'card-price' refer latest commits
+      const priceElement = card.querySelector('.card-price');
+      if (!priceElement) return 0;
 
-    // Sort cards based on selected option
-    if (sortOption) {
-      filteredCards.sort((a, b) => {
-        const titleA = a.querySelector('.card-title')?.textContent.toLowerCase() || '';
-        const titleB = b.querySelector('.card-title')?.textContent.toLowerCase() || '';
-        const priceA = parseFloat(a.dataset.price) || 0;
-        const priceB = parseFloat(b.dataset.price) || 0;
+      const priceText = priceElement.textContent.replace(/[^0-9.-]+/g, '');
+      const price = parseFloat(priceText);
+      return isNaN(price) ? 0 : price;
+    };
 
-        switch (sortOption) {
-          case 'price_asc':
-            return priceA - priceB;
-          case 'price_desc':
-            return priceB - priceA;
-          case 'name_asc':
-            return titleA.localeCompare(titleB);
-          case 'name_desc':
-            return titleB.localeCompare(titleA);
-          default:
-            return 0;
+    const sortFunctions = {
+      price_asc: (a, b) => getCardPrice(a) - getCardPrice(b),
+      price_desc: (a, b) => getCardPrice(b) - getCardPrice(a),
+      name_asc: (a, b) => getCardTitle(a).localeCompare(getCardTitle(b)),
+      name_desc: (a, b) => getCardTitle(b).localeCompare(getCardTitle(a))
+    };
+
+    function filterAndSortCards() {
+      const query = searchInput.value.toLowerCase().trim();
+      const sortOption = sortSelect.value;
+
+      // Convert NodeList to Array and filter
+      let filteredCards = Array.from(cards);
+
+      if (query) {
+        filteredCards = filteredCards.filter(card => {
+          const title = getCardTitle(card);
+          return title.includes(query);
+        });
+      }
+
+      if (sortOption && sortFunctions[sortOption]) {
+        filteredCards.sort(sortFunctions[sortOption]);
+      }
+
+      const container = cards[0].parentElement.parentElement;
+      const fragment = document.createDocumentFragment();
+
+      cards.forEach(card => {
+        const wrapper = card.parentElement;
+        if (wrapper) {
+          wrapper.style.display = 'none';
         }
       });
+
+      filteredCards.forEach(card => {
+        const wrapper = card.parentElement;
+        if (wrapper) {
+          wrapper.style.display = 'block';
+          fragment.appendChild(wrapper);
+        }
+      });
+
+      container.appendChild(fragment);
     }
 
-    // Update visibility using a document fragment for better performance
-    const container = cards[0].parentElement.parentElement;
-    const fragment = document.createDocumentFragment();
-    
-    // Hide all cards first
-    cards.forEach(card => {
-      const wrapper = card.parentElement;
-      wrapper.style.display = 'none';
+    searchInput.addEventListener('input', filterAndSortCards);
+    sortSelect.addEventListener('change', filterAndSortCards);
+
+    searchAction.addEventListener('change', function () {
+      const activeLink = this.value;
+      searchForm.action = `/${activeLink}?type=${activeLink}`;
     });
 
-    // Show and reorder filtered cards
-    filteredCards.forEach(card => {
-      const wrapper = card.parentElement;
-      wrapper.style.display = 'block';
-      fragment.appendChild(wrapper);
+    searchForm.addEventListener('submit', function (event) {
+      const queryInput = searchInput.value.trim();
+
+      if (queryInput === '' && !sortSelect.value) {
+        event.preventDefault();
+        validationMessage.style.display = 'block';
+        searchInput.classList.add('is-invalid');
+      } else {
+        validationMessage.style.display = 'none';
+        searchInput.classList.remove('is-invalid');
+      }
     });
-
-    container.appendChild(fragment);
-  }
-
-  searchInput.addEventListener('input', filterAndSortCards);
-  sortSelect.addEventListener('change', filterAndSortCards);
-
-  // Update form action based on the selected search action
-  searchAction.addEventListener('change', function () {
-    const activeLink = this.value;
-    searchForm.action = `/${activeLink}?type=${activeLink}`;
   });
-
-    // Validate input before submitting the form
-  searchForm.addEventListener('submit', function (event) {
-    const queryInput = searchInput.value.trim();
-    
-    if (queryInput === '' && !sortSelect.value) {
-      event.preventDefault();
-      validationMessage.style.display = 'block';
-      searchInput.classList.add('is-invalid');
-    } else {
-      validationMessage.style.display = 'none';
-      searchInput.classList.remove('is-invalid');
-    }
-  });
-});
 </script>
