@@ -9,21 +9,26 @@ import {
 import Image from 'next/image';
 import Autoplay from 'embla-carousel-autoplay';
 import { Button } from '@/components/ui/button'; // Importing the Button component from Shadcn
+import Link from 'next/link';
 
 interface ListingCardProps {
   name: string;
   price: number;
   description: string;
+  sellerId:string
   category: 'Housing' | 'Fooding' | 'For_Sale';
   images: ImageInterface[]; // Assuming images contain the URL property
+  listingId: string
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({
   name,
+  sellerId,
   price,
   description,
   category,
   images,
+  listingId
 }) => {
   return (
     <div className="bg-white overflow-hidden shadow-lg rounded-lg">
@@ -60,9 +65,11 @@ const ListingCard: React.FC<ListingCardProps> = ({
         <p className="text-lg font-bold mb-2">Price: ₹{price}</p>
         <p className="text-sm text-gray-500 mb-4">Category: {category}</p>
         <div className="flex justify-between">
+          <Link href={`/seller/${sellerId}/${listingId}`}>
           <Button variant="outline" className="text-blue-600">
             Edit
           </Button>
+          </Link>
           <Button variant="outline" className="text-red-600">
             Delete
           </Button>
