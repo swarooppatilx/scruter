@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function AuthenticationPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-teal-300 to-lime-400">
+    <div className="min-h-screen flex items-center justify-center bg-gray-300">
       <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 ease-in-out hover:scale-105">
         <div className="hidden md:flex items-center justify-center bg-blue-50 p-6">
           <Image
