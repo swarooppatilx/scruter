@@ -5,22 +5,28 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'; // Import FontAwesomeIcon
 import '../../globals.css'; // Ensure your global styles are imported
+import { GetAllListing, ListingWithImages } from '@/actions/seller/listing';
+import { Listing } from '@prisma/client';
+import toast, { Toaster } from 'react-hot-toast';
+import ListingCardFE from '@/components/listingCardFE';
 
 const FoodPage: React.FC = () => {
-  const [foodItems, setFoodItems] = useState<any[]>([]);
+  const [foodItems, setFoodItems] = useState<ListingWithImages[]>([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
-  const [type, setType] = useState('food'); // Default search type is 'food'
-  const [sort, setSort] = useState('');
+  const [sort, setSort] = useState<"" | "asc" | "desc" | undefined>('');
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         // Example API call to fetch food data
-        const foodResponse = await axios.get('/api/food', {
-          params: { query, type, sort },
-        });
+        const foodResponse = await GetAllListing('Fooding',query,sort);
+
+        if (!foodResponse || !foodResponse.data) {
+          toast.error('No data fetched from BE');
+          return;
+        }
         setFoodItems(foodResponse.data);
       } catch (error) {
         console.error('Error fetching food data:', error);
@@ -29,11 +35,13 @@ const FoodPage: React.FC = () => {
       }
     };
 
-    //fetchData();
-  }, [query, type, sort]);
+    fetchData();
+  }, [query, sort]);
 
+  console.log(foodItems);
   return (
     <div className="bg-gray-50 text-gray-800">
+      <Toaster />
       {/* Hero Section with Banner Image */}
       <section
         className="relative h-[60vh] bg-cover bg-center text-white"
@@ -87,9 +95,11 @@ const FoodPage: React.FC = () => {
               id="sort-by-price"
               name="sort"
               value={sort}
-              onChange={e => setSort(e.target.value)}
+              onChange={e => {
+                const value = e.target.value as "" | "asc" | "desc" | undefined; // Type the value to be one of these options
+                setSort(value); // Update the sort state
+              }}
             >
-              <option value="">Sort by Price</option>
               <option value="asc">Low to High</option>
               <option value="desc">High to Low</option>
             </select>
@@ -111,43 +121,49 @@ const FoodPage: React.FC = () => {
       {/* Food Items Section */}
       <section className="py-16 bg-white">
         <h2 className="text-2xl font-bold text-center mb-12">Available Food</h2>
-        {/*
+
         <div
           id="food-items"
-          className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {loading ? (
             <div className="loading flex justify-center items-center h-48">
               <div className="spinner border-4 border-t-4 border-blue-600 rounded-full w-10 h-10 animate-spin"></div>
             </div>
           ) : (
-            foodItems.map((food) => (
-              <FoodCard key={food.id} food={food} />
+            foodItems.map(food => (
+              <ListingCardFE
+                key={food.id}
+                name={food.name}
+                price={food.price}
+                description={food.description}
+                images={food.images}
+              />
             ))
           )}
-        </div> */}
+        </div>
       </section>
     </div>
   );
 };
 
-const FoodCard: React.FC<{ food: any }> = ({ food }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
-    <img
-      src={food.imageUrl}
-      alt={food.title}
-      className="w-full h-48 object-cover rounded-lg mb-4"
-    />
-    <h3 className="text-xl font-bold text-gray-800 mb-4">{food.title}</h3>
-    <p className="text-gray-600 mb-4">{food.description}</p>
-    <p className="text-lg font-semibold text-gray-800 mb-4">{food.price}</p>
-    <a
-      href={`/food/${food.id}`}
-      className="text-blue-500 hover:text-blue-700 transition"
-    >
-      View Details
-    </a>
-  </div>
-);
+// const FoodCard: React.FC<{ food: any }> = ({ food }) => (
+//   <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
+//     <img
+//       src={food.imageUrl}
+//       alt={food.title}
+//       className="w-full h-48 object-cover rounded-lg mb-4"
+//     />
+//     <h3 className="text-xl font-bold text-gray-800 mb-4">{food.title}</h3>
+//     <p className="text-gray-600 mb-4">{food.description}</p>
+//     <p className="text-lg font-semibold text-gray-800 mb-4">{food.price}</p>
+//     <a
+//       href={`/food/${food.id}`}
+//       className="text-blue-500 hover:text-blue-700 transition"
+//     >
+//       View Details
+//     </a>
+//   </div>
+// );
 
 export default FoodPage;

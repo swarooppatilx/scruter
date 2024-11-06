@@ -4,10 +4,13 @@ import { GetAllListing, ListingWithImages } from '@/actions/seller/listing';
 import toast from 'react-hot-toast';
 import { Image } from '@prisma/client';
 import { Button } from '@/components/ui/button'; // Import the Shadcn Button component
+import Link from 'next/link';
 
 const ListingsPage = async ({
+  sellerId,
   listings,
 }: {
+  sellerId: string
   listings: ListingWithImages[];
 }) => {
   //   const [searchTerm, setSearchTerm] = useState('');
@@ -19,7 +22,7 @@ const ListingsPage = async ({
       <div className="flex flex-col gap-5 lg:gap-0 md:flex-row justify-between mb-4 p-5 bg-gray-200 items-center rounded-xl">
         <h1 className="text-4xl font-bold text-center">Your Listings</h1>
 
-        <Button className="md:ml-auto">Add New Listing</Button>
+        <Link href={`/seller/${sellerId}/createListing`} ><Button className="md:ml-auto">Add New Listing</Button></Link>
       </div>
 
       <div className="flex justify-center mb-4">
@@ -36,6 +39,8 @@ const ListingsPage = async ({
         {listings.map((listing, index) => (
           <ListingCard
             key={index}
+            sellerId={sellerId}
+            listingId={listing.id}
             name={listing.name}
             price={listing.price}
             description={listing.description}
