@@ -2,178 +2,80 @@
 <html lang="en">
 
 <head>
-  <%- include('partials/head') %>
+    <%- include('partials/head') %>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-
-    <style>
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f9fafb;
-        color: #1f2937;
-        display: flex;
-        flex-direction: column;
-        margin: 0;
-        padding: 0;
-      }
-
-      .main-content {
-        background-color: #ffffff;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        padding-left: 8rem;
-        padding-right: 8rem;
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-      }
-
-      .dark-mode .main-content {
-        background-color: #1c2535;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-      }
-
-      .title-section {
-        text-align: left;
-      }
-
-      .title-section h1 {
-        text-align: center;
-        font-size: 2.4rem;
-        color: #2563eb;
-        font-weight: bold;
-        margin-bottom: 1rem;
-      }
-
-      .dark-mode .title-section h1 {
-        color: #3b82f6;
-      }
-
-      .title-section p {
-        color: #555;
-        max-width: 700px;
-        font-size: 1.1rem;
-        line-height: 1.6;
-        text-align: left;
-      }
-
-      .dark-mode .title-section p {
-        color: #d1d5db;
-      }
-
-      section {
-        margin: 2rem 0;
-      }
-
-      section h2 {
-        font-size: 1.8rem;
-        color: #333;
-        display: flex;
-        align-items: start;
-        border-left: 4px solid #2563eb;
-        padding-left: 8px;
-        margin-bottom: 1rem;
-      }
-
-      .dark-mode section h2 {
-        color: #e5e7eb;
-        border-left-color: #3b82f6;
-      }
-
-      section h2 i {
-        margin-right: 8px;
-        color: #6f42c1;
-      }
-
-      .sidebar {
-        width: 25%;
-        background: linear-gradient(to bottom, #007bff, #6f42c1);
-        color: #fff;
-        padding: 20px;
-        position: sticky;
-        top: 0;
-        height: calc(100vh - 40px);
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-      }
-
-      .dark-mode .sidebar {
-        background: linear-gradient(to bottom, #1a1b4e, #1f1f1f);
-      }
-
-      .sidebar ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      .sidebar ul li {
-        margin-bottom: 15px;
-      }
-
-      .sidebar ul li a {
-        color: #fff;
-        text-decoration: none;
-        font-size: 1rem;
-        display: flex;
-        align-items: start;
-        padding: 8px;
-        transition: color 0.2s;
-        border-radius: 4px;
-      }
-
-      .sidebar ul li a:hover {
-        color: #e0e0e0;
-      }
-
-      .dark-mode .sidebar ul li a:hover {
-        color: #ffffff;
-      }
-
-      @media (max-width: 768px) {
-        .main-content {
-          width: 100%;
-          padding: 1rem;
-        }
-
-        .sidebar {
-          display: none;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="/css/infopage.css">
 </head>
 
 <body>
+    <div id="progress-bar"></div>
+    <%- include('partials/navbar') %>
 
-  <%- include('partials/navbar') %>
-    <main class="main-content">
-      <div class="title-section">
-        <h1>About Us</h1>
-        <div>
-          <h2>Our Mission</h2>
-          <p>At <%= appName %>, we believe in fostering strong local connections and promoting sustainable,
-              community-driven commerce. Our platform is built to make buying and selling easier, safer, and more
-              accessible for everyone.</p>
-        </div>
-        <h2>What We Offer</h2>
-        <ul>
-          <li>Buy & Sell Locally: Find great deals on items you need or sell your own goods easily.</li>
-          <li>Trusted Listings: All our listings are community-driven, allowing for safe exchanges.</li>
-          <li>Community Focused: We're here to support local businesses and promote neighborhood connections.</li>
-        </ul>
-        <div>
-          <h2>How It Works</h2>
-          <p>Simply create a free account, post your ads, browse listings, and connect with others in your community.
-            From finding food to housing, <%= appName %> brings your local market online.</p>
-        </div>
-        <h2>Our Values</h2>
-        <ul>
-          <li>Trust</li>
-          <li>Community</li>
-          <li>Convenience</li>
-        </ul>
-        <p>Thank you for choosing <%= appName %>—where local communities come together!</p>
-      </div>
-    </main>
+    <div style="display: flex;">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#mission"><i class="fas fa-bullseye"></i> Our Mission</a></li>
+                <li><a href="#offerings"><i class="fas fa-gift"></i> What We Offer</a></li>
+                <li><a href="#how-it-works"><i class="fas fa-cogs"></i> How It Works</a></li>
+                <li><a href="#values"><i class="fas fa-heart"></i> Our Values</a></li>
+                <li><a href="#team"><i class="fas fa-users"></i> Our Team</a></li>
+            </ul>
+        </aside>
 
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="title-section">
+                <h1>About Us</h1>
+                <p>Welcome to <%= appName %>! Learn more about our mission, what we offer, and the core values that drive us forward.</p>
+            </div>
+
+            <section id="mission">
+                <h2><i class="fas fa-bullseye"></i> Our Mission</h2>
+                <p>At <%= appName %>, we believe in fostering strong local connections and promoting sustainable, community-driven commerce. Our platform is built to make buying and selling easier, safer, and more accessible for everyone.</p>
+            </section>
+
+            <section id="offerings">
+                <h2><i class="fas fa-gift"></i> What We Offer</h2>
+                <ul>
+                    <li>Buy & Sell Locally: Find great deals on items you need or sell your own goods easily.</li>
+                    <li>Trusted Listings: All our listings are community-driven, allowing for safe exchanges.</li>
+                    <li>Community Focused: We're here to support local businesses and promote neighborhood connections.</li>
+                </ul>
+            </section>
+
+            <section id="how-it-works">
+                <h2><i class="fas fa-cogs"></i> How It Works</h2>
+                <p>Simply create a free account, post your ads, browse listings, and connect with others in your community. From finding food to housing, <%= appName %> brings your local market online.</p>
+            </section>
+
+            <section id="values">
+                <h2><i class="fas fa-heart"></i> Our Values</h2>
+                <ul>
+                    <li><b>Trust:</b> We prioritize safety and transparency in all interactions.</li>
+                    <li><b>Community:</b> Supporting and uplifting our local communities is at the heart of everything we do.</li>
+                    <li><b>Convenience:</b> Our platform is designed to make the buying and selling process seamless.</li>
+                </ul>
+            </section>
+
+            <section id="team">
+                <h2><i class="fas fa-users"></i> Our Team</h2>
+                <p>Our team is passionate about connecting people through technology. We are a group of dedicated professionals committed to building a community where local markets thrive and relationships flourish.</p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrollPercent + '%';
+        });
+    </script>
+
+    <%- include('partials/footer') %>
 </body>
-<%- include('partials/footer') %>
 
 </html>
