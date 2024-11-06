@@ -28,7 +28,7 @@ const TermsPage = () => {
       {/* Header Section */}
       <header className="bg-custom-gradient dark:bg-dark-custom-gradient pt-28 pb-28 pl-10 text-start w-full">
         <h1 className="text-4xl lg:text-7xl w-4/5 font-bold mb-2 bg-clip-text text-transparent bg-text-gradient">Terms of Service</h1>
-        <p className="text-gray-200 text-lg">Published and effective on: April 30, 2023</p>
+        <p className="text-gray-200 text-lg">Published and effective on: April 30, {new Date().getFullYear()}</p>
       </header>
 
       <div className="flex w-full">
