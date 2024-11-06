@@ -56,8 +56,24 @@ model Listing {
   description String
 
   category Category
+
+  images Image[]
   // add is featured feature
   isArchived  Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+
+
+model Image {
+  id String @id @default(uuid()) @map("_id")
+
+  listingId String
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  url String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

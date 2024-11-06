@@ -377,13 +377,7 @@ app.get('/terms', (req, res) => {
   });
 });
 
-app.get('/terms-page', (req, res) => {
-  res.render('terms-page', {
-    activeLink: 'terms-page', // You can customize this based on your layout
-  });
-});
-
-app.get('/contactus', (req, res) => {
+app.get('/contact', (req, res) => {
   res.render('contact', {
     activeLink: 'contact', // You can customize this based on your layout
   });
