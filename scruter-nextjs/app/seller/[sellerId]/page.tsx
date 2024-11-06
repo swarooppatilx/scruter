@@ -31,11 +31,14 @@ const SellerPage: React.FC<SellerPageProps> = async ({ params }) => {
     );
   }
   // console.log(Listings+"SFeeeeeeeeeeeeeeeeeeeeeeee")
-  if (Listings.length) {
-    return <ListingsPage listings={Listings} />;
-  } else {
-    return <SetUpListing sellerId={sellerId} />;
-  }
-};
-
+    if (Listings.length){
+       return <ListingsPage sellerId={sellerId} listings={Listings}/>
+    }
+  
+    else{
+      return <SetUpListing sellerId={sellerId}/>
+    }
+ 
+}
+ 
 export default SellerPage;

@@ -15,20 +15,14 @@ interface ListingCardProps {
   name: string;
   price: number;
   description: string;
-  sellerId:string
-  category: 'Housing' | 'Fooding' | 'For_Sale';
-  images: ImageInterface[]; // Assuming images contain the URL property
-  listingId: string
+  images: ImageInterface[]; 
 }
 
-const ListingCard: React.FC<ListingCardProps> = ({
+const ListingCardFE: React.FC<ListingCardProps> = ({
   name,
-  sellerId,
   price,
   description,
-  category,
   images,
-  listingId
 }) => {
   return (
     <div className="bg-white overflow-hidden shadow-lg rounded-lg">
@@ -63,15 +57,12 @@ const ListingCard: React.FC<ListingCardProps> = ({
         <h3 className="text-xl font-semibold mb-2">{name}</h3>
         <p className="text-gray-600 mb-2">{description}</p>
         <p className="text-lg font-bold mb-2">Price: ₹{price}</p>
-        <p className="text-sm text-gray-500 mb-4">Category: {category}</p>
         <div className="flex justify-between">
-          <Link href={`/seller/${sellerId}/${listingId}`}>
           <Button variant="outline" className="text-blue-600">
-            Edit
+            Add
           </Button>
-          </Link>
           <Button variant="outline" className="text-red-600">
-            Delete
+            Bookmark
           </Button>
         </div>
       </div>
@@ -79,4 +70,4 @@ const ListingCard: React.FC<ListingCardProps> = ({
   );
 };
 
-export default ListingCard;
+export default ListingCardFE;
