@@ -184,7 +184,12 @@ export async function DeleteListing({
   }
 }
 
-export async function GetAllListing(category?: Category): Promise<{ 
+
+export async function GetAllListing(
+  category?: Category, 
+  searchQuery?: string, 
+  sort?: "" | "asc" | "desc" | undefined
+): Promise<{
   success: boolean;
   error?: string;
   data?: ListingWithImages[];
@@ -195,21 +200,48 @@ export async function GetAllListing(category?: Category): Promise<{
   headers.append('Pragma', 'no-cache');
   headers.append('Expires', '0');
   
-  const resp:ListingWithImages[] = await prismadb.listing.findMany({
-    include: {
-      images: true
-    },
-    where:{
-      category: category? category : {}
-    }
-  });
-
-  if (!resp) {
-    return { success: false, error: 'Error occurred in fetching all listings' };
+  // Build the where clause based on provided parameters
+  let whereClause = {};
+  
+  if (category) {
+    whereClause = { ...whereClause, category };
   }
 
-  return { success: true, data: resp };
+  if (searchQuery) {
+    whereClause = {
+      ...whereClause,
+      OR: [
+        { name: { contains: searchQuery, mode: 'insensitive' } },
+        { description: { contains: searchQuery, mode: 'insensitive' } },
+      ],
+    };
+  }
+
+  try {
+    // Query the database for listings with optional filters and sorting
+    const resp: ListingWithImages[] = await prismadb.listing.findMany({
+      where: whereClause,
+      include: {
+        images: true,
+      },
+      orderBy: sort ? { price: sort } : undefined, // Sort by price if 'sort' is provided
+    });
+
+    if (!resp) {
+      return { success: false, error: 'Error occurred in fetching all listings' };
+    }
+
+    return { success: true, data: resp };
+  } catch (error: unknown) {
+    // Narrowing the error type to handle it properly
+    if (error instanceof Error) {
+      return { success: false, error: error.message || 'An error occurred' };
+    } else {
+      return { success: false, error: 'An unknown error occurred' };
+    }
+  }
 }
+
 
 export async function getSpecificListing({
   listingId,

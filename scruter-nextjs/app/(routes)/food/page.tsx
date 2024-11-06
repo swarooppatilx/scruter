@@ -14,15 +14,14 @@ const FoodPage: React.FC = () => {
   const [foodItems, setFoodItems] = useState<ListingWithImages[]>([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
-  const [type, setType] = useState('food'); // Default search type is 'food'
-  const [sort, setSort] = useState('');
+  const [sort, setSort] = useState<"" | "asc" | "desc" | undefined>('');
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         // Example API call to fetch food data
-        const foodResponse = await GetAllListing('Fooding');
+        const foodResponse = await GetAllListing('Fooding',query,sort);
 
         if (!foodResponse || !foodResponse.data) {
           toast.error('No data fetched from BE');
@@ -37,7 +36,7 @@ const FoodPage: React.FC = () => {
     };
 
     fetchData();
-  }, [query, type, sort]);
+  }, [query, sort]);
 
   console.log(foodItems);
   return (
@@ -96,9 +95,11 @@ const FoodPage: React.FC = () => {
               id="sort-by-price"
               name="sort"
               value={sort}
-              onChange={e => setSort(e.target.value)}
+              onChange={e => {
+                const value = e.target.value as "" | "asc" | "desc" | undefined; // Type the value to be one of these options
+                setSort(value); // Update the sort state
+              }}
             >
-              <option value="">Sort by Price</option>
               <option value="asc">Low to High</option>
               <option value="desc">High to Low</option>
             </select>
