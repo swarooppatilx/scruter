@@ -13,7 +13,7 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const app = express();
 
 // Import the database.js file
-const { User, Food, House, Market } = require('./database'); // Adjust path as needed
+const { User, Food, House, Market, Feedback } = require('./database'); // Adjust path as needed
 
 // Middleware to parse JSON and form data
 app.use(bodyParser.json());
@@ -217,24 +217,7 @@ app.post(
     }
   }
 );
-const feedbackSchema = new mongoose.Schema({
-  feedbackText: {
-      type: String,
-      required: true,
-      trim: true,
-  },
-  email: {
-      type: String,
-      trim: true,
-      match: /.+\@.+\..+/,
-  },
-  createdAt: {
-      type: Date,
-      default: Date.now,
-  },
-});
 
-const Feedback = mongoose.model('Feedback', feedbackSchema);
 
 // POST route to handle feedback submission
 app.post('/submit-feedback', async (req, res) => {

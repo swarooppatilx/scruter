@@ -57,10 +57,29 @@ const marketSchema = new mongoose.Schema({
   phone: { type: String, required: true },
 });
 
+// Define the Feedback schema
+const feedbackSchema = new mongoose.Schema({
+  feedbackText: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    trim: true,
+    match: /.+\@.+\..+/,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 // Export the models
 module.exports = {
   User: mongoose.model('User', userSchema),
   Food: mongoose.model('Food', foodSchema),
   House: mongoose.model('House', houseSchema),
   Market: mongoose.model('Market', marketSchema),
+  Feedback: mongoose.model('Feedback', feedbackSchema), // Add Feedback model here
 };

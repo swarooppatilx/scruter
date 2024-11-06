@@ -5,6 +5,9 @@
     <%- include('partials/head') %>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Add Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
         body {
@@ -14,7 +17,57 @@
             display: flex;
             flex-direction: column;
         }
+        .modal-content {
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
 
+.modal-header {
+  background: linear-gradient(to bottom, #2b91fe, #6f42c1); /* Change to your desired color */
+  color: white;
+}
+
+.modal-title {
+  font-weight: bold;
+}
+.close {
+  border: none;
+  border-radius: 50%; /* Make it round */
+  width: 35px; /* Adjust size */
+  height: 35px; /* Adjust size */
+  display: flex; /* Center the icon */
+  justify-content: center; /* Center the icon */
+  align-items: center; /* Center the icon */
+  background-color: transparent; /* Make background transparent */
+  color: #ffffff; 
+  font-size: 20px;/* Change color to match your modal header */
+  transition: background-color 0.3s, color 0.3s; /* Transition for hover effect */
+}
+
+.close:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
+  color: #ffcccc; /* Change icon color on hover for visibility */
+}
+.form-control {
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #2e8030; /* Change to match your theme */
+  box-shadow: 0 0 5px rgba(46, 128, 48, 0.5);
+}
+
+.btn-success {
+    background: linear-gradient(to bottom, #2b91fe, #6f42c1); /* Change to your desired color */
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-success:hover {
+    background: linear-gradient(to bottom, #2b91fe, #6f42c1); /* Darker shade for hover */
+}
         .main-content {
             width: 90%;
             padding-left: 8rem;
@@ -179,7 +232,8 @@
             <section id="feedback">
                 <h2><i class="fas fa-comments"></i> Feedback</h2>
                 <p>Your feedback is important to us! Please let us know how we can improve our services:</p>
-                <a href="/feedback-form" class="cta-button">Give Feedback</a>
+                <button class="btn btn-lg" style="color: rgb(79, 145, 208); margin-left: -10px; outline: none;" data-toggle="modal" data-target="#feedbackModal">Give Feedback</button>
+  
             </section>
         </main>
     </div>
@@ -193,7 +247,82 @@
             document.getElementById('progress-bar').style.width = scrollPercent + '%';
         });
     </script>
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="feedbackModalLabel">We'd Love Your Feedback!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="feedbackForm">
+            <div class="form-group">
+              <label for="feedbackText">Your Feedback</label>
+              <textarea class="form-control" id="feedbackText" rows="4" placeholder="Let us know what you think..." required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="email" style="margin-bottom: 5px;">Your Email (optional)</label>
+              <input type="email" style="margin-bottom: 10px;" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Submit Feedback</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Feedback Form Submission Script -->
+  <script>
+    $(document).ready(function() {
+      // Show feedback modal after 15 seconds
+      // setTimeout(function() {
+      //   $('#feedbackModal').modal('show');
+      // }, 15000);
+  
+      // Handle form submission
+      $('#feedbackForm').on('submit', function(e) {
+        e.preventDefault();
+  
+        const feedback = $('#feedbackText').val();
+        const email = $('#email').val();
+  
+        // Send feedback to server
+        $.ajax({
+          url: '/submit-feedback', // Replace with your actual endpoint
+          method: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify({ feedbackText: feedback, email: email }),
+          success: function(response) {
+            alert('Thank you for your feedback!');
+            $('#feedbackModal').modal('hide');
+            $('#feedbackForm')[0].reset();
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error:', textStatus, errorThrown);
+            alert('There was an error submitting your feedback. Please try again.');
+          }
+        });
+      });
+  
+      // Close modal on clicking close button
+      $('.close').on('click', function() {
+        $('#feedbackModal').modal('hide');
+      });
+    });
+  </script>
 
+<script>
+    // Scroll Progress Bar
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        document.getElementById('progress-bar').style.width = scrollPercent + '%';
+    });
+</script>
     <%- include('partials/footer') %>
 </body>
 </html>
