@@ -242,7 +242,7 @@ Contributions are welcome! Follow these steps to contribute:
 - **Submit a pull request**  
   Go to the original repository and click on the "Pull Request" button to submit your changes.
 
-For detailed guidelines on how to contribute to this project, please refer to the [Contributing.md](Contributing.md) file.
+For detailed guidelines on how to contribute to this project, please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 ---
 
