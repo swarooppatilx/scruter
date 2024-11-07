@@ -28,7 +28,7 @@ const NavbarActions = () => {
       )}
       {session.status == 'authenticated' && (
         <>
-          <div>Hi! {session.data.user?.name}</div>
+          <Link href={`${session.data.user.id}`}><Button variant={"secondary"}>Hi! {session.data.user?.name}</Button></Link>
           <Button
             className="rounded-full"
             variant={'outline'}
