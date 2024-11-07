@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scruter Chatbot</title>
+    <style>
+        /* Chatbot UI styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+        }
+        .chatbot-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+            font-size: 18px;
+        }
+        .chatbot-messages {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .message {
+            margin: 10px 0;
+        }
+        .user-message {
+            text-align: right;
+            color: #4CAF50;
+        }
+        .bot-message {
+            text-align: left;
+            color: black;
+        }
+        .chatbot-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 0 0 0 10px;
+        }
+        .chatbot-input button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 0 10px 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chatbot-container">
+    <div class="chatbot-header">Scruter Chatbot</div>
+    <div class="chatbot-messages" id="chatbotMessages">
+        <div class="bot-message message">Hello! 👋 I’m here to help you with Scruter.</div>
+    </div>
+    <div class="chatbot-input">
+        <input type="text" id="userInput" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    async function sendMessage() {
+        const userMessage = document.getElementById("userInput").value;
+        if (!userMessage.trim()) return;
+
+        // Display user's message
+        const messageContainer = document.getElementById("chatbotMessages");
+        const userMsgElement = document.createElement("div");
+        userMsgElement.className = "user-message message";
+        userMsgElement.textContent = userMessage;
+        messageContainer.appendChild(userMsgElement);
+        document.getElementById("userInput").value = "";
+
+        // Display bot's response
+        const botResponse = await fetchResponse(userMessage);
+        const botMsgElement = document.createElement("div");
+        botMsgElement.className = "bot-message message";
+        botMsgElement.textContent = botResponse;
+        messageContainer.appendChild(botMsgElement);
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+
+    async function fetchResponse(message) {
+        try {
+            const response = await fetch("http://localhost:5000/chatbot", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message })
+            });
+            const data = await response.json();
+            return data.response;
+        } catch (error) {
+            console.error("Error fetching response:", error);
+            return "Oops! Something went wrong. Please try again later.";
+        }
+    }
+</script>
+
+</body>
+</html>
