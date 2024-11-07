@@ -1,1 +1,13 @@
+Steps to Set Up the Chatbot:
+Frontend (HTML, CSS, JavaScript) for chatbot UI
+Backend API (Node.js with Express or Python with Flask) to handle responses based on Scruter's purpose.
 
+Running the Backend
+Install Flask if you haven’t already:
+pip install flask
+
+Run the Flask app:
+python app.py
+
+Integrate Chatbot on Website
+Once you deploy your Flask server, update the URL in the JavaScript function fetchResponse() in the HTML code with your server’s public IP or domain.
