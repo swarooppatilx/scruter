@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
 import { FiMail } from 'react-icons/fi';
 import { FaWhatsapp, FaInstagram as Instagram } from 'react-icons/fa';
 import { FaLinkedin as Linkedin } from 'react-icons/fa';
@@ -9,7 +8,14 @@ import { FaGithub as Github } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { HeartIcon } from 'lucide-react';
 
-const Links = [
+// Types for Links and Helpdesk
+interface LinkItem {
+  name: string;
+  id: number;
+  href: string;
+}
+
+const Links: LinkItem[] = [
   { name: 'About us', id: 1, href: '/about' },
   { name: 'Our Teams', id: 2, href: '/team' },
   { name: 'Terms of service', id: 3, href: '/terms' },
@@ -17,14 +23,21 @@ const Links = [
   { name: 'Privacy and Policy', id: 5, href: '/policy' },
 ];
 
-const Helpdesk = [
+const Helpdesk: LinkItem[] = [
   { name: 'HelpCenter', id: 1, href: '/help' },
   { name: 'FAQ', id: 2, href: '/faq' },
   { name: 'ContactUs', id: 3, href: '/contact' },
   { name: 'Support', id: 4, href: '/support' },
 ];
 
-const socialLinks = [
+// Types for social links
+interface SocialLink {
+  icon: JSX.Element;
+  color: string;
+  href: string;
+}
+
+const socialLinks: SocialLink[] = [
   {
     icon: <Instagram size={20} />,
     color: 'bg-gradient-to-br from-purple-600 to-pink-500',
@@ -57,16 +70,10 @@ const socialLinks = [
   },
 ];
 
+// Footer component
 const Footer = () => {
   return (
     <footer className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -right-12 -top-12 w-48 h-48 bg-blue-100 rounded-full opacity-20"></div>
-        <div className="absolute left-1/4 top-1/3 w-24 h-24 bg-green-100 rotate-45 opacity-20"></div>
-        <div className="absolute right-1/3 bottom-1/4 w-32 h-32 bg-yellow-100 rounded-lg opacity-20"></div>
-        <div className="absolute left-1/2 top-1/2 w-40 h-40 bg-red-100 rounded-full opacity-20"></div>
-      </div>
-
       <div className="relative mx-auto w-full max-w-7xl px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4 space-y-6 text-center md:text-left">
@@ -80,10 +87,7 @@ const Footer = () => {
               </div>
             </Link>
             <p className="text-gray-600 max-w-md mx-auto md:mx-0">
-              Scruter is your local platform for buying, selling, and
-              discovering everything you need. Whether it&apos;s products,
-              services, or community activities, we connect people for a better
-              local experience.
+              Scruter is your local platform for buying, selling, and discovering everything you need. Whether it&apos;s products, services, or community activities, we connect people for a better local experience.
             </p>
           </div>
 
@@ -127,12 +131,18 @@ const Footer = () => {
   );
 };
 
-const FooterSection = ({ title, links }) => (
+// FooterSection component prop types
+interface FooterSectionProps {
+  title: string;
+  links: LinkItem[];
+}
+
+const FooterSection = ({ title, links }: FooterSectionProps) => (
   <div className="flex flex-col items-start">
     <h2 className="text-lg font-semibold text-gray-800 mb-4">{title}</h2>
     <ul className="space-y-3">
-      {links.map((link, index) => (
-        <li key={index}>
+      {links.map((link) => (
+        <li key={link.id}>
           <Link
             href={link.href}
             className="text-gray-600 hover:text-blue-500 transition-colors duration-300 flex items-center gap-2 group"
@@ -146,7 +156,14 @@ const FooterSection = ({ title, links }) => (
   </div>
 );
 
-const SocialButton = ({ href, icon, color }) => (
+// SocialButton component prop types
+interface SocialButtonProps {
+  href: string;
+  icon: JSX.Element;
+  color: string;
+}
+
+const SocialButton = ({ href, icon, color }: SocialButtonProps) => (
   <Link
     href={href}
     className={`${color} p-2 sm:p-3 rounded-lg text-white transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center`}

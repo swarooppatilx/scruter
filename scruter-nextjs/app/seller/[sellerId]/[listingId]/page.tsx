@@ -1,8 +1,15 @@
 import { getSpecificListing } from "@/actions/seller/listing";
 import { EditListingForm } from "./components/editListingForm";
 
-const ListingPage = async ({ params }: { params: { listingId: string } }) => {
-  const { listingId } = await params; 
+type Params = Promise<{ 
+  listingId:string,
+}> 
+const ListingPage = async (props:{
+  params:Params
+}) => {
+
+  const params = await props.params
+  const { listingId } = params; 
   const listingData = await getSpecificListing({ listingId });
 
   if (!listingData.success || !listingData.data) {

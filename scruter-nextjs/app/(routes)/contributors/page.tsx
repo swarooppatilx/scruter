@@ -5,9 +5,8 @@ import axios from 'axios';
 import '../../globals.css'; // Ensure your global styles are imported
 import { Spinner } from '@/components/ui/spinner';
 
-import ReactConfetti from "react-confetti";
 import ContributorCardd from './components/contributorCard';
-
+import Image from 'next/image'
 interface Contributor {
   login: string;
   id: number;
@@ -32,36 +31,28 @@ interface Contributor {
 }
 
 const ContributorsPage: React.FC = () => {
-  const [contributors, setContributors] = useState<any[]>([]);
+  const [contributors, setContributors] = useState<Contributor[]>([]);
   const [repoStats, setRepoStats] = useState<any>({});
   const [loading, setLoading] = useState(true);
-  const [windowDimension, setDimension] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-  const [showConfetti, setShowConfetti] = useState(false);
   const [rowEnds, setRowEnds] = useState<number[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const detectSize = () => {
-    setDimension({ width: window.innerWidth, height: window.innerHeight });
-  };
+
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       try {
         const contributorsResponse = await axios.get(
           'https://api.github.com/repos/swarooppatilx/scruter/contributors?per_page=100&anon=true'
         );
-        // const contributorsData = contributorsResponse.data;
-
-        const contributorsData:Contributor[]  = contributorsResponse.data.filter(contributor => contributor.login !== 'dependabot[bot]');
-
+        const contributorsData: Contributor[] = contributorsResponse.data.filter(
+          (contributor: Contributor) => contributor.login !== 'dependabot[bot]'
+        );
+    
         const repoResponse = await axios.get(
           'https://api.github.com/repos/swarooppatilx/scruter'
         );
         const repoData = repoResponse.data;
-
+    
         setContributors(contributorsData);
         setRepoStats(repoData);
       } catch (error) {
@@ -70,9 +61,16 @@ const ContributorsPage: React.FC = () => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
+
+  
+
+  if(loading||!contributors){
+    return <Spinner/>
+  }
+
+  console.log(contributors)
 
   return (
     <div className="bg-gray-50 text-gray-800">
@@ -147,227 +145,240 @@ const ContributorsPage: React.FC = () => {
           )}
         </div> */}
         <>
-      <div className="bg-gray-100 dark:bg-DarkGray pb-10 text-gray-900 dark:text-white transition-colors duration-300">
-        <div className="flex justify-center flex-col items-center">
-          <div className="h-full w-full">
-            <div className="text-center my-8">
-              <h1 className="text-4xl font-bold text-customTeal dark:text-Green">
-                Meet Our Contributors
-              </h1>
-              <p className="text-lg mt-2 text-center w-1/2 mx-auto">
-                &quot;Meet our GitHub contributors who work around the clock,
-                blending day and night to add features, fix bugs, and make
-                Scruter a success!
-                {/* <i className="fas fa-heart">
+          <div className="bg-gray-100 dark:bg-DarkGray pb-10 text-gray-900 dark:text-white transition-colors duration-300">
+            <div className="flex justify-center flex-col items-center">
+              <div className="h-full w-full">
+                <div className="text-center my-8">
+                  <h1 className="text-4xl font-bold text-customTeal dark:text-Green">
+                    Meet Our Contributors
+                  </h1>
+                  <p className="text-lg mt-2 text-center w-1/2 mx-auto">
+                    &quot;Meet our GitHub contributors who work around the
+                    clock, blending day and night to add features, fix bugs, and
+                    make Scruter a success!
+                    {/* <i className="fas fa-heart">
     </i> */}
-                &quot;
-              </p>
-            </div>
-          </div>
-          {loading ? (
-            <div className="flex justify-center items-center">
-              <Spinner />
-            </div>
-          ) : (
-            <>
-              <div className="mt-10">
-                <div className="flex w-full justify-between items-center">
-                  {/* First Image on the Left */}
-                  <div className="flex md:w-1/4 md:mr-auto hidden md:block">
-                    <img
-                      src="contributorsPage/left_green.png"
-                      className="hidden dark:block"
-                      alt=""
-                    />
-                    <img src="contributorsPage/left_blue.png" className="dark:hidden" />
-                  </div>
-                  <div className="flex flex-col items-center md:flex-row  h-full md:pt-1">
-                    {/* First Contributor (index 2) */}
-
-                    <div className="text-center mt-5 w-64 mx-auto md:mx-3 md:w-48 md:mt-10 order-2 md:order-1">
-                      <div className="relative inline-block transform transition-transform duration-300 hover:scale-110 cursor-pointer">
-                        <img
-                          alt=""
-                          className="rounded-full border-8 border-customTeal dark:border-Green"
-                          onClick={() =>
-                            window.open(contributors[2].html_url, "_blank")
-                          }
-                          height="140"
-                          src={contributors[2].avatar_url}
-                          width="140"
-                        />
-                        <div className="absolute bottom-0 right-0 bg-customTeal dark:bg-[#e9be1e] text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">
-                          2
-                        </div>
-                      </div>
-                      <div className="mt-2">
-                        <span
-                          className="cursor-pointer"
-                          onClick={() =>
-                            window.open(
-                              `https://github.com/mdazfar2/Ezyshop/commits/main/?author=${contributors[2].login}`,
-                              "_blank"
-                            )
-                          }
-                        >
-                          Contributions {contributors[2].contributions}
-                        </span>
-                        <div className="bg-customTeal md:mt-2 dark:bg-gradient-to-r dark:from-[#4caf50] dark:to-[#e9be1e] text-black font-bold py-1 px-4 rounded-full whitespace-nowrap">
-                          <button
-                            onClick={() =>
-                              window.open(contributors[2].html_url, "_blank")
-                            }
-                          >
-                            {contributors[2].login}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Second Contributor (index 1) */}
-                    <div className="relative text-center w-64 mx-auto md:mx-5  md:w-64 flex-shrink-0 order-1 md:order-2">
-                      <img
-                        src="contributorsPage/glitter_green_right.png"
-                        alt="Glitter decoration"
-                        className="absolute -top-10 -right-10 w-16 h-16 hidden dark:block"
-                      />
-                      <img
-                        src="contributorsPage/glitter_blue_right.png"
-                        alt="Glitter decoration"
-                        className="absolute -top-10 -right-10 w-16 h-16 dark:hidden"
-                      />
-                      <img
-                        src="contributorsPage/glitter_green_left.png"
-                        alt="Glitter decoration"
-                        className="absolute -top-10 -left-10 w-16 h-16 hidden dark:block"
-                      />
-                      <img
-                        src="contributorsPage/glitter_blue_left.png"
-                        alt="Glitter decoration"
-                        className="absolute -top-10 -left-10 w-16 h-16 dark:hidden"
-                      />
-
-                      <div className="relative inline-block transform transition-transform duration-300 hover:scale-110 cursor-pointer">
-                        <img
-                          alt="A person in a suit working on a laptop and holding a phone"
-                          className="rounded-full border-8 border-customTeal dark:border-Green"
-                          onClick={() =>
-                            window.open(contributors[1].html_url, "_blank")
-                          }
-                          height="180"
-                          src={contributors[1].avatar_url}
-                          width="180"
-                        />
-                        <div className="absolute bottom-0 right-0 bg-customTeal dark:bg-[#e9be1e] text-white rounded-full w-12 h-12 flex items-center justify-center text-xl">
-                          1
-                        </div>
-                      </div>
-                      <div className="mt-2">
-                        <span
-                          className="cursor-pointer"
-                          onClick={() =>
-                            window.open(
-                              `https://github.com/mdazfar2/Ezyshop/commits/main/?author=${contributors[1].login}`,
-                              "_blank"
-                            )
-                          }
-                        >
-                          Contributions {contributors[1].contributions}
-                        </span>
-                        <div className="bg-customTeal md:mt-2 dark:bg-gradient-to-r dark:from-[#4caf50] dark:to-[#e9be1e]  text-black font-bold py-1 px-4 rounded-full whitespace-nowrap">
-                          <button
-                            onClick={() =>
-                              window.open(contributors[1].html_url, "_blank")
-                            }
-                          >
-                            {contributors[1].login}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Third Contributor (index 3) */}
-                    <div className="text-center mt-5 w-64 mx-auto md:mx-3 md:w-48 md:mt-10 order-3 md:order-3">
-                      <div className="relative inline-block transform transition-transform duration-300 hover:scale-110 cursor-pointer">
-                        <img
-                          alt="A person in a suit working on a laptop and holding a phone"
-                          className="rounded-full border-8 border-customTeal dark:border-Green"
-                          onClick={() =>
-                            window.open(contributors[3].html_url, "_blank")
-                          }
-                          height="140"
-                          src={contributors[3].avatar_url}
-                          width="140"
-                        />
-                        <div className="absolute bottom-0 right-0 bg-customTeal dark:bg-[#e9be1e] text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">
-                          3
-                        </div>
-                      </div>
-                      <div className="mt-2">
-                        <span
-                          className="cursor-pointer"
-                          onClick={() =>
-                            window.open(
-                              `https://github.com/mdazfar2/Ezyshop/commits/main/?author=${contributors[3].login}`,
-                              "_blank"
-                            )
-                          }
-                        >
-                          Contributions {contributors[3].contributions}
-                        </span>
-                        <div className="bg-customTeal md:mt-2 dark:bg-gradient-to-r dark:from-[#4caf50] dark:to-[#e9be1e] text-black font-bold py-1 px-4 rounded-full whitespace-nowrap">
-                          <button
-                            onClick={() =>
-                              window.open(contributors[3].html_url, "_blank")
-                            }
-                          >
-                            {contributors[3].login}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex md:h-auto md:w-1/4 hidden md:block">
-                    <img
-                      src="contributorsPage/right_green.png"
-                      className="hidden dark:block"
-                      alt=""
-                    />
-                    <img src="contributorsPage/right_blue.png" className="dark:hidden" />
-                  </div>
+                    &quot;
+                  </p>
                 </div>
               </div>
+              {loading ? (
+                <div className="flex justify-center items-center">
+                  <Spinner />
+                </div>
+              ) : (
+                <>
+                  <div className="mt-10">
+                    <div className="flex w-full justify-between items-center">
+                      {/* First Image
+                      width={100}
+                      height={100} on the Left */}
+                      <div className="flex md:w-1/4 md:mr-auto  md:block">
+                        <Image
+                        
+                          alt=""
+                          width={100}
+                          height={100}
+                          src="/contributorsPage/left_blue.png"
+                          className="dark:hidden"
+                        />
+                      </div>
+                      <div className="flex flex-col items-center md:flex-row  h-full md:pt-1">
+                        {/* First Contributor (index 2) */}
 
-              <div
-                ref={containerRef}
-                id="contributor-container"
-                className="flex flex-col flex-wrap justify-center md:flex-row md:mt-16"
-              >
-                {contributors.slice(4).map((contributor, index) => {
-                  const isRowEnd = rowEnds.includes(index);
-                  const hasNextCard = index < contributors.length - 1 && isRowEnd;
-                  return (
-                    <ContributorCardd
-                      key={contributor.id}
-                      contributor={contributor}
-                      hasNextCard={hasNextCard}
-                      index={index}
-                    />
-                  );
-                })}
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-      {showConfetti && (
+                        <div className="text-center mt-5 w-64 mx-auto md:mx-3 md:w-48 md:mt-10 order-2 md:order-1">
+                          <div className="relative inline-block transform transition-transform duration-300 hover:scale-110 cursor-pointer">
+                            <Image
+                            width={100}
+                            height={100}
+                              alt=""
+                              className="rounded-full border-8 border-customTeal dark:border-Green"
+                              onClick={() =>
+                                window.open(contributors[2].html_url, '_blank')
+                              }
+                              src={contributors[2].avatar_url}
+                            />
+                            <div className="absolute bottom-0 right-0 bg-customTeal dark:bg-[#e9be1e] text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">
+                              2
+                            </div>
+                          </div>
+                          <div className="mt-2">
+                            <span
+                              className="cursor-pointer"
+                              onClick={() =>
+                                window.open(
+                                  `https://github.com/swarooppatilx/scruter/commits/main/?author=${contributors[2].login}`,
+                                  '_blank'
+                                )
+                              }
+                            >
+                              Contributions {contributors[2].contributions}
+                            </span>
+                            <div className="bg-customTeal md:mt-2 dark:bg-gradient-to-r dark:from-[#4caf50] dark:to-[#e9be1e] text-black font-bold py-1 px-4 rounded-full whitespace-nowrap">
+                              <button
+                                onClick={() =>
+                                  window.open(
+                                    contributors[2].html_url,
+                                    '_blank'
+                                  )
+                                }
+                              >
+                                {contributors[2].login}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
 
-      <ReactConfetti width={windowDimension.width} height={2*windowDimension.height} 
-      tweenDuration={6000}/>
-      )}
-    </>
+                        {/* Second Contributor (index 1) */}
+                        <div className="relative text-center w-64 mx-auto md:mx-5  md:w-64 flex-shrink-0 order-1 md:order-2">
+                         
+                          <Image
+                          width={100}
+                          height={100}
+                            src="/contributorsPage/glitter_blue_right.png"
+                            alt="Glitter decoration"
+                            className="absolute -top-10 -right-10 w-16 h-16 dark:hidden"
+                          />
+                          <Image
+                          width={100}
+                          height={100}
+                            src="/contributorsPage/glitter_blue_left.png"
+                            alt="Glitter decoration"
+                            className="absolute -top-10 -left-10 w-16 h-16 dark:hidden"
+                          />
+
+                          <div className="relative inline-block transform transition-transform duration-300 hover:scale-110 cursor-pointer">
+                            <Image
+                            width={100}
+                            height={100}
+                              alt="A person in a suit working on a laptop and holding a phone"
+                              className="rounded-full border-8 border-customTeal dark:border-Green"
+                              onClick={() =>
+                                window.open(contributors[1].html_url, '_blank')
+                              }
+                              src={contributors[1].avatar_url}
+                        
+                            />
+                            <div className="absolute bottom-0 right-0 bg-customTeal dark:bg-[#e9be1e] text-white rounded-full w-12 h-12 flex items-center justify-center text-xl">
+                              1
+                            </div>
+                          </div>
+                          <div className="mt-2">
+                            <span
+                              className="cursor-pointer"
+                              onClick={() =>
+                                window.open(
+                                  `https://github.com/swarooppatilx/scruter/commits/main/?author=${contributors[1].login}`,
+                                  '_blank'
+                                )
+                              }
+                            >
+                              Contributions {contributors[1].contributions}
+                            </span>
+                            <div className="bg-customTeal md:mt-2 dark:bg-gradient-to-r dark:from-[#4caf50] dark:to-[#e9be1e]  text-black font-bold py-1 px-4 rounded-full whitespace-nowrap">
+                              <button
+                                onClick={() =>
+                                  window.open(
+                                    contributors[1].html_url,
+                                    '_blank'
+                                  )
+                                }
+                              >
+                                {contributors[1].login}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Third Contributor (index 3) */}
+                        <div className="text-center mt-5 w-64 mx-auto md:mx-3 md:w-48 md:mt-10 order-3 md:order-3">
+                          <div className="relative inline-block transform transition-transform duration-300 hover:scale-110 cursor-pointer">
+                            <Image
+                            width={100}
+                            height={100}
+                              alt="A person in a suit working on a laptop and holding a phone"
+                              className="rounded-full border-8 border-customTeal dark:border-Green"
+                              onClick={() =>
+                                window.open(contributors[3].html_url, '_blank')
+                              }
+                           
+                              src={contributors[3].avatar_url}
+          
+                            />
+                            <div className="absolute bottom-0 right-0 bg-customTeal dark:bg-[#e9be1e] text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">
+                              3
+                            </div>
+                          </div>
+                          <div className="mt-2">
+                            <span
+                              className="cursor-pointer"
+                              onClick={() =>
+                                window.open(
+                                  `https://github.com/swarooppatilx/scruter/commits/main/?author=${contributors[3].login}`,
+                                  '_blank'
+                                )
+                              }
+                            >
+                              Contributions {contributors[3].contributions}
+                            </span>
+                            <div className="bg-customTeal md:mt-2 dark:bg-gradient-to-r dark:from-[#4caf50] dark:to-[#e9be1e] text-black font-bold py-1 px-4 rounded-full whitespace-nowrap">
+                              <button
+                                onClick={() =>
+                                  window.open(
+                                    contributors[3].html_url,
+                                    '_blank'
+                                  )
+                                }
+                              >
+                                {contributors[3].login}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex md:h-auto md:w-1/4  md:block">
+                      
+                        <Image
+                        width={100}
+                        height={100}
+                          alt=""
+                          src="/contributorsPage/right_blue.png"
+                          className="dark:hidden"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    ref={containerRef}
+                    id="contributor-container"
+                    className="flex flex-col flex-wrap justify-center md:flex-row md:mt-16"
+                  >
+                    {contributors.slice(4).map((contributor, index) => {
+                      const isRowEnd = rowEnds.includes(index);
+                      const hasNextCard =
+                        index < contributors.length - 1 && isRowEnd;
+                      return (
+                        <ContributorCardd
+                          key={contributor.id}
+                          contributor={contributor}
+                          hasNextCard={hasNextCard}
+                          index={index}
+                        />
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </>
       </section>
     </div>
+
+    // <div>
+    //   HII
+    // </div>
   );
 };
 
@@ -381,20 +392,6 @@ const StatCard: React.FC<{ label: string; value: number }> = ({
   </div>
 );
 
-// const ContributorCard: React.FC<{ contributor: any }> = ({ contributor }) => (
-//   <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center">
-//     <a href={contributor.html_url} target="_blank" className="text-center">
-//       <img
-//         src={contributor.avatar_url}
-//         alt={contributor.login}
-//         className="w-24 h-24 rounded-full border-4 border-blue-500 mb-4"
-//       />
-//       <h3 className="text-xl font-bold">{contributor.login}</h3>
-//       <div className="bg-blue-100 text-blue-800 font-semibold py-1 px-3 rounded-full text-sm">
-//         {contributor.contributions} contributions
-//       </div>
-//     </a>
-//   </div>
-// );
+
 
 export default ContributorsPage;

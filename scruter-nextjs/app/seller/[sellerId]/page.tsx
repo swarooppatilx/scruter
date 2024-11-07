@@ -5,16 +5,20 @@ import { ListingWithImages } from '@/actions/seller/listing';
 // import SetUpGuide from "./components/setupListing";
 // import SellerDashboard from "./components/sellerDashboard";
 
-interface SellerPageProps {
-  params: {
-    sellerId: string;
-  };
-}
 
-const SellerPage: React.FC<SellerPageProps> = async ({ params }) => {
+type  Params=Promise<{
+    sellerId: string;
+  }>;
+
+
+const SellerPage= async (props:{
+  params:Params
+}) => {
   let Listings: ListingWithImages[] | null = [];
 
-  const { sellerId } = await params;
+  const params = await props.params;
+
+  const {sellerId} = params
   try {
     Listings = await prismadb.listing.findMany({
       where: {
