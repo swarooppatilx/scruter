@@ -106,7 +106,7 @@ export async function getAnsweredQuestions(
 // deletes a question and all its related answers if present
 
 export async function deleteQuestion(
-  questionId: UUID,
+  questionId: string,
 ): Promise<QuestionResponse> {
   try {
     const deletedQuestion = await prismadb.question.delete({

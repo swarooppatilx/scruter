@@ -11,7 +11,7 @@ type CreateAnswerResponse = {
 };
 
 export async function createAnswer(
-  questionId: UUID,
+  questionId: string,
   content: string
 ): Promise<CreateAnswerResponse> {
   try {
@@ -50,7 +50,7 @@ type DeleteAnswerResponse = {
   error?: string;
 };
 
-export async function deleteSpecificAnswer(answerId: UUID): Promise<DeleteAnswerResponse> {
+export async function deleteSpecificAnswer(answerId: string): Promise<DeleteAnswerResponse> {
   try {
     const deletedAnswer = await prismadb.answer.delete({
       where: {
