@@ -1,8 +1,12 @@
 'use server';
 
 import prismadb from '@/lib/prismadb';
-import { Question } from '@prisma/client';
+import { Answer, Question } from '@prisma/client';
 import { UUID } from 'crypto';
+
+interface QuestionWithAnswer extends Question{
+  answers?:Answer[]
+}
 
 type QuestionResponse = {
   success: boolean;
@@ -12,9 +16,10 @@ type QuestionResponse = {
 
 type getQuestionsResponse = {
   success: boolean;
-  data?: Question[];
+  data?: QuestionWithAnswer[];
   error?: string;
 };
+
 
 export async function createQuestion(
   content: string

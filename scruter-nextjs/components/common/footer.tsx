@@ -28,6 +28,7 @@ const Helpdesk: LinkItem[] = [
   { name: 'FAQ', id: 2, href: '/faq' },
   { name: 'ContactUs', id: 3, href: '/contact' },
   { name: 'Support', id: 4, href: '/support' },
+  { name: 'Forum', id: 5, href: '/forum' },
 ];
 
 // Types for social links

@@ -48,7 +48,7 @@ const ContributorCardd: React.FC<ContributorCardProps> = ({ contributor , hasNex
         />
       </div>
       <div className="mt-2">
-      <span className="cursor-pointer" onClick={() => window.open(`https://github.com/mdazfar2/Ezyshop/commits/main/?author=${contributor.login}`, "_blank")}>Contributions {contributor.contributions}</span>
+      <span className="cursor-pointer" onClick={() => window.open(`https://github.com/swarooppatilx/scruter/commits/main/?author=${contributor.login}`, "_blank")}>Contributions {contributor.contributions}</span>
         <div className="bg-customTeal md:mt-3 dark:bg-gradient-to-r dark:from-[#4caf50] dark:to-[#e9be1e] text-black font-bold py-1 px-4 rounded-full whitespace-nowrap">
           <button onClick={() => window.open(contributor.html_url, "_blank")}>{contributor.login}</button>
           
