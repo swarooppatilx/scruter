@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import '../../globals.css'; // Import your Tailwind CSS styles
+import Link from 'next/link';
 
 interface FAQItemProps {
   question: string;
@@ -157,12 +158,12 @@ const MainContent = () => (
         Your feedback is important to us! Please let us know how we can improve
         our services:
       </p>
-      <a
+      <Link
         href="/feedback-form"
         className="inline-block mt-2 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
       >
         Give Feedback
-      </a>
+      </Link>
     </Section>
   </main>
 );
