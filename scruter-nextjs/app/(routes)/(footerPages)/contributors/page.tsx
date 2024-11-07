@@ -2,11 +2,10 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import '../../globals.css'; // Ensure your global styles are imported
 import { Spinner } from '@/components/ui/spinner';
 
-import ContributorCardd from './components/contributorCard';
 import Image from 'next/image'
+import ContributorCardd from '../../contributors/components/contributorCard';
 interface Contributor {
   login: string;
   id: number;
