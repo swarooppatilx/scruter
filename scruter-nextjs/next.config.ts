@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+    domains: ['avatars.githubusercontent.com'],
   },
 };
 
