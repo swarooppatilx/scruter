@@ -5,7 +5,6 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'; // Import FontAwesomeIcon
 import { GetAllListing, ListingWithImages } from '@/actions/seller/listing';
-import { Listing } from '@prisma/client';
 import toast, { Toaster } from 'react-hot-toast';
 import ListingCardFE from '@/components/listingCardFE';
 
@@ -14,6 +13,8 @@ const FoodPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
   const [sort, setSort] = useState<"" | "asc" | "desc" | undefined>('');
+
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -132,6 +133,7 @@ const FoodPage: React.FC = () => {
           ) : (
             foodItems.map(food => (
               <ListingCardFE
+                id={food.id}
                 key={food.id}
                 name={food.name}
                 price={food.price}
