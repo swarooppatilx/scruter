@@ -1,6 +1,5 @@
 'use client';
 
-import '../../globals.css'; // Make sure to import your Tailwind styles
 
 const PolicyPage: React.FC = () => {
   return (

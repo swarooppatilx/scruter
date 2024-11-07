@@ -12,7 +12,6 @@ import {
   faEnvelope,
   faLink,
 } from '@fortawesome/free-solid-svg-icons';
-import '../../globals.css'; // Ensure your global styles are imported
 
 const TermsPage = () => {
   return (

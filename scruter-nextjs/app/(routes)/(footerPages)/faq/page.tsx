@@ -1,8 +1,6 @@
 'use client';
 
 import React from 'react';
-import '../../globals.css';
-
 // Define the props interface for the Section component
 interface SectionProps {
   id: string;

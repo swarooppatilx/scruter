@@ -1,7 +1,7 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect } from 'react';
-import '../../globals.css'; // Import your Tailwind CSS styles
 
 interface FAQItemProps {
   question: string;
@@ -49,44 +49,44 @@ const Sidebar = () => (
   <aside className="sidebar w-1/4 bg-gradient-to-b from-blue-500 to-purple-600 text-white p-5 sticky top-0 h-screen">
     <ul className="list-none p-0">
       <li>
-        <a
+        <Link
           href="#introduction"
           className="flex items-center py-2 text-white hover:text-gray-200"
         >
           <i className="fas fa-info-circle"></i> Introduction
-        </a>
+        </Link>
       </li>
       <li>
-        <a
+        <Link
           href="#getting-started"
           className="flex items-center py-2 text-white hover:text-gray-200"
         >
           <i className="fas fa-user-plus"></i> Getting Started
-        </a>
+        </Link>
       </li>
       <li>
-        <a
+        <Link
           href="#faq"
           className="flex items-center py-2 text-white hover:text-gray-200"
         >
           <i className="fas fa-question-circle"></i> Frequently Asked Questions
-        </a>
+        </Link>
       </li>
       <li>
-        <a
+        <Link
           href="#contact"
           className="flex items-center py-2 text-white hover:text-gray-200"
         >
           <i className="fas fa-envelope"></i> Contact Support
-        </a>
+        </Link>
       </li>
       <li>
-        <a
+        <Link
           href="#feedback"
           className="flex items-center py-2 text-white hover:text-gray-200"
         >
           <i className="fas fa-comments"></i> Feedback
-        </a>
+        </Link>
       </li>
     </ul>
   </aside>
@@ -144,9 +144,9 @@ const MainContent = () => (
       <ul className="list-disc ml-5">
         <li>
           Email:{' '}
-          <a href="mailto:support@example.com" className="text-blue-500">
+          <Link href="mailto:support@example.com" className="text-blue-500">
             support@example.com
-          </a>
+          </Link>
         </li>
         <li>Phone: 1-800-555-0199</li>
         <li>Chat: Available on our website from 9 AM to 5 PM EST</li>
@@ -157,12 +157,12 @@ const MainContent = () => (
         Your feedback is important to us! Please let us know how we can improve
         our services:
       </p>
-      <a
+      <Link
         href="/feedback-form"
         className="inline-block mt-2 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
       >
         Give Feedback
-      </a>
+      </Link>
     </Section>
   </main>
 );
