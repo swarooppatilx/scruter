@@ -14,67 +14,71 @@ datasource db {
 }
 
 model User {
-  id           String  @id @default(uuid()) @map("_id")
+  id           String     @id @default(uuid()) @map("_id")
   name         String
+  email        String     @unique
+  otp          String?
+  role         String     @default("user")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
-  email String @unique
-  otp   String?
-  role  String  @default("user")
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  // Many-to-many relationship with Listing via Bookmark
+  bookmarks    Bookmark[] @relation("UserBookmarks")
 }
 
 model Seller {
-  id String @id @default(uuid()) @map("_id")
-  name String
-
-  email        String  @unique
-  otp          String?
-  role         String  @default("Seller")
-
-  Listings Listing[] @relation("SellerToListing")
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String     @id @default(uuid()) @map("_id")
+  name        String
+  email       String     @unique
+  otp         String?
+  role        String     @default("Seller")
+  Listings    Listing[]  @relation("SellerToListing")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
 enum Category {
-  Housing 
+  Housing
   Fooding
   For_Sale
 }
 
 model Listing {
-  id String @id @default(uuid()) @map("_id")
-
-  SellerId String
-  Seller   Seller  @relation("SellerToListing", fields: [SellerId], references: [id])
-
+  id          String     @id @default(uuid()) @map("_id")
+  SellerId    String
+  Seller      Seller     @relation("SellerToListing", fields: [SellerId], references: [id])
   name        String
   price       Int
   description String
+  category    Category
+  images      Image[]
+  isArchived  Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
-  category Category
-
-  images Image[]
-  // add is featured feature
-  isArchived  Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  // Many-to-many relationship with User via Bookmark
+  bookmarks   Bookmark[] @relation("UserBookmarks")
 }
 
-
 model Image {
-  id String @id @default(uuid()) @map("_id")
+  id          String     @id @default(uuid()) @map("_id")
+  listingId   String
+  listing     Listing    @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  url         String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
 
-  listingId String
-  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+// Join table for the many-to-many relationship between User and Listing
+model Bookmark {
+  id          String   @id @default(uuid()) @map("_id")
+  userId      String
+  listingId   String
+  user        User     @relation("UserBookmarks", fields: [userId], references: [id])
+  listing     Listing  @relation("UserBookmarks", fields: [listingId], references: [id])
 
-  url String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@unique([userId, listingId]) // Ensures a user can only bookmark a listing once
 }
