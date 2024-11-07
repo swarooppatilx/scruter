@@ -1,5 +1,6 @@
 'use client';
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import { Image as ImageInterface } from '@prisma/client';
 import {
   Carousel,
@@ -8,22 +9,46 @@ import {
 } from '@/components/ui/carousel';
 import Image from 'next/image';
 import Autoplay from 'embla-carousel-autoplay';
-import { Button } from '@/components/ui/button'; // Importing the Button component from Shadcn
-import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { useBookmark } from '@/context/UserBookmarkProvider';
+import { useSession } from 'next-auth/react';
 
 interface ListingCardProps {
+  id: string;
   name: string;
   price: number;
   description: string;
-  images: ImageInterface[]; 
+  images: ImageInterface[];
 }
 
 const ListingCardFE: React.FC<ListingCardProps> = ({
+  id,
   name,
   price,
   description,
   images,
 }) => {
+  const { addToBookmarks, isBookmarked } = useBookmark();
+  const session = useSession();
+  const userId = session.data?.user.id;
+
+  // State to track if the listing is bookmarked
+  const [isAlreadyBookmarked, setIsAlreadyBookmarked] = useState<boolean>(false);
+
+  // Check if the listing is bookmarked when the component mounts
+  useEffect(() => {
+    const checkBookmarkStatus = async () => {
+      if (userId) {
+        const bookmarked = await isBookmarked(userId, id);
+        setIsAlreadyBookmarked(bookmarked);
+      }
+    };
+
+    if (userId && id) {
+      checkBookmarkStatus();
+    }
+  }, []); // Only rerun when userId or id changes
+
   return (
     <div className="bg-white overflow-hidden shadow-lg rounded-lg">
       <Carousel
@@ -61,9 +86,23 @@ const ListingCardFE: React.FC<ListingCardProps> = ({
           <Button variant="outline" className="text-blue-600">
             Add
           </Button>
-          <Button variant="outline" className="text-red-600">
-            Bookmark
-          </Button>
+          {userId && session.data?.user.role === 'user' && !isAlreadyBookmarked && (
+            <Button
+              onClick={() => {
+                addToBookmarks(userId, id);
+                setIsAlreadyBookmarked(true); // Update the state to reflect the bookmark status
+              }}
+              variant="outline"
+              className="text-red-600"
+            >
+              Bookmark
+            </Button>
+          )}
+          {userId && session.data?.user.role === 'user' && isAlreadyBookmarked && (
+            <Button variant="outline" className="text-green-600">
+              Bookmarked
+            </Button>
+          )}
         </div>
       </div>
     </div>

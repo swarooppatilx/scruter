@@ -130,6 +130,7 @@ const HousePage: React.FC = () => {
           ) : (
             houses.map(house => (
               <ListingCardFE
+                id={house.id}
                 key={house.id}
                 name={house.name}
                 price={house.price}

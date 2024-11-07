@@ -3,20 +3,13 @@
 import { createBookmark } from "@/actions/user/bookmarks/CREATE_bookmark";
 import { deleteBookmark } from "@/actions/user/bookmarks/DELETE_bookmark";
 import { checkBookmarkExists } from "@/actions/user/bookmarks/EXISTS_bookmark";
-import { getBookmarksByUser } from "@/actions/user/bookmarks/GETBYUSER_bookmark";
+import { BookmarkWithListing, getBookmarksByUser } from "@/actions/user/bookmarks/GETBYUSER_bookmark";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 
-// Define types for better type safety
-type Bookmark = {
-  id: string;
-  userId: string;
-  listingId: string;
-  // Add any other fields that Bookmark may contain
-};
 
 type BookmarkContextType = {
-  bookmarks: Bookmark[];
+  bookmarks: BookmarkWithListing[];
   loading: boolean;
   error: string | null;
   fetchBookmarks: (userId: string) => Promise<void>;
@@ -29,7 +22,7 @@ type BookmarkContextType = {
 const BookmarkContext = createContext<BookmarkContextType | null>(null);
 
 export function BookmarkProvider({ children }: { children: React.ReactNode }) {
-  const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
+  const [bookmarks, setBookmarks] = useState<BookmarkWithListing[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,7 +33,12 @@ export function BookmarkProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await getBookmarksByUser({ userId });
       if (response.success) {
-        setBookmarks(response.data || []);
+        console.log(response.data)
+
+        if(!response.data){
+          return
+        }
+        setBookmarks(response.data);
       } else {
         setError(response.error || "Unknown error");
       }
@@ -59,7 +57,7 @@ export function BookmarkProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await createBookmark({ userId, listingId });
       if (response.success && response.data) {
-        setBookmarks((prev) => [...prev, response.data as Bookmark]);
+        setBookmarks((prev) => [...prev, response.data as BookmarkWithListing]);
       } else {
         setError(response.error || "Unknown error");
       }

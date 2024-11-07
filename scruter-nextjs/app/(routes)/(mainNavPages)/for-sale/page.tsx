@@ -129,6 +129,7 @@ const ForSalePage: React.FC = () => {
           ) : (
             items.map(item => (
               <ListingCardFE
+                id={item.id}
                 key={item.id}
                 name={item.name}
                 price={item.price}
