@@ -1,7 +1,7 @@
 <!-- Custom Search Bar -->
 <div id="search-bar" class="container my-3 gsap-main">
   <form id="search-form" method="GET" action="<%= searchAction %>">
-    <div class="row justify-content-center align-items-center gx-2"> <!-- Increased spacing with gx-2 -->
+    <div class="row justify-content-center align-items-center gx-2">
       <!-- Search Input -->
       <div class="col-12 col-md-auto mb-2 mb-md-0">
         <input type="text" class="form-control" id="search-input" name="query" placeholder="Search"
@@ -17,12 +17,12 @@
         </select>
       </div>
 
-      <!-- Sort by Price Dropdown -->
+      <!-- sorting dropdown -->
       <div class="col-6 col-md-auto mb-2 mb-md-0">
-        <select class="form-select" id="sort-by-price" name="sort">
-          <option value="">Sort by Price</option>
-          <option value="asc">Low to High</option>
-          <option value="desc">High to Low</option>
+        <select class="form-select" id="sort-by-price">
+          <option value="">Sort by...</option>
+          <option value="price_asc">Price - Low to High</option>
+          <option value="price_desc">Price - High to Low</option>
         </select>
       </div>
 
@@ -37,49 +37,69 @@
   </form>
 </div>
 
-<!-- JavaScript to Update Form Action and Validate Input -->
+<!-- JavaScript to Update Form Action, Validate Input, and Handle Sorting -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
-    const searchAction = document.getElementById('search-action');
-    const sortByPrice = document.getElementById('sort-by-price');
-    const validationMessage = document.getElementById('validation-message');
+    const sortSelect = document.getElementById('sort-by-price');
     const cards = document.querySelectorAll('.card');
 
-    searchInput.addEventListener('input', function () {
-      const query = searchInput.value.toLowerCase();
-
-      cards.forEach(card => {
-        const title = card.querySelector('.card-title').textContent.toLowerCase();
-
-        if (title.includes(query)) {
-          card.parentElement.style.display = 'block';
-        } else {
-          card.parentElement.style.display = 'none';
-        }
-      });
-    });
-    
-    // Update form action based on the selected search action
-    searchAction.addEventListener('change', function () {
-      const activeLink = this.value;
-      searchForm.action = `/${activeLink}?type=${activeLink}`;
-    });
-
-    // Validate input before submitting the form
-    searchForm.addEventListener('submit', function (event) {
-      const queryInput = searchInput.value.trim();
-
-      // If the input is empty and no sorting option is selected, prevent form submission and show the validation message
-      if (queryInput === '' && sortByPrice.value === '') {
-        event.preventDefault();
-        validationMessage.style.display = 'block';
-        searchInput.classList.add('is-invalid');
-      } else {
-        validationMessage.style.display = 'none';
-        searchInput.classList.remove('is-invalid');
+    // Helper functions
+    const getCardPrice = (card) => {
+      const priceElement = card.querySelector('.card-price');
+      if (!priceElement) {
+        return 0;
       }
+
+      const priceText = priceElement.textContent;
+      console.log("Raw price text:", priceText); // Debug: Raw price
+
+      const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+      console.log("Parsed price:", price); // Debug: Parsed price
+
+      return isNaN(price) ? 0 : price;
+    };
+
+    const sortFunctions = {
+      price_asc: (a, b) => getCardPrice(a) - getCardPrice(b),
+      price_desc: (a, b) => getCardPrice(b) - getCardPrice(a)
+    };
+
+    function filterAndSortCards() {
+      const query = searchInput.value.toLowerCase().trim();
+      const sortOption = sortSelect.value;
+
+      // Convert NodeList to Array and filter
+      let filteredCards = Array.from(cards);
+
+      if (query) {
+        filteredCards = filteredCards.filter(card => {
+          const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+          return title.includes(query);
+        });
+      }
+
+      if (sortOption && sortFunctions[sortOption]) {
+        filteredCards.sort(sortFunctions[sortOption]);
+      }
+
+      const container = cards[0].parentElement.parentElement;
+      const fragment = document.createDocumentFragment();
+
+      cards.forEach(card => card.parentElement.style.display = 'none');
+      filteredCards.forEach(card => {
+        card.parentElement.style.display = 'block';
+        fragment.appendChild(card.parentElement);
+      });
+
+      container.appendChild(fragment);
+    }
+
+    searchInput.addEventListener('input', () => {
+      filterAndSortCards();
+    });
+    sortSelect.addEventListener('change', () => {
+      filterAndSortCards();
     });
   });
 </script>
