@@ -69,7 +69,6 @@ model Image {
   updatedAt   DateTime   @updatedAt
 }
 
-// Join table for the many-to-many relationship between User and Listing
 model Bookmark {
   id          String   @id @default(uuid()) @map("_id")
   userId      String
@@ -81,4 +80,23 @@ model Bookmark {
   updatedAt   DateTime @updatedAt
 
   @@unique([userId, listingId]) // Ensures a user can only bookmark a listing once
+}
+
+
+model Question {
+  id        String    @id @default(cuid()) @map("_id")
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  answers   Answer[]  @relation("QuestionAnswers")  // Removed onDelete: Cascade from here
+  answered  Boolean   @default(false)
+}
+
+model Answer {
+  id        String    @id @default(cuid()) @map("_id")
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  questionId String  
+  question  Question @relation("QuestionAnswers", fields: [questionId], references: [id], onDelete: Cascade) // Moved onDelete: Cascade to this side
 }
