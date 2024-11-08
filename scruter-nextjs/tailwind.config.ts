@@ -65,9 +65,9 @@ const config: Config = {
       animation: {
         'caret-blink': 'caret-blink 1.25s ease-out infinite',
       },
-      letterSpacing:{
-        widest:".5rem"
-      }
+      letterSpacing: {
+        widest: '.5rem',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],

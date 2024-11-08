@@ -1,13 +1,19 @@
 'use server';
 import prismadb from '@/lib/prismadb';
-import { Listing } from '@prisma/client';
+import { Category, Image, Listing } from '@prisma/client';
+
+export interface ListingWithImages extends Listing {
+  images: Image[];
+}
 
 export async function PostListing({
   sellerId,
   listingData,
 }: {
   sellerId: string;
-  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category' > & { images: string[] };
+  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category'> & {
+    images: string[];
+  };
 }): Promise<{ success: boolean; error?: string; data?: Listing }> {
   // console.log(listingData);
 
@@ -28,7 +34,7 @@ export async function PostListing({
         SellerId: sellerId,
         ...listingData,
         images: {
-          create: listingData.images.map((url) => ({ url })), // Assuming you're passing URLs
+          create: listingData.images.map(url => ({ url })), // Assuming you're passing URLs
         },
       },
     });
@@ -48,13 +54,15 @@ export async function UpdateListing({
 }: {
   sellerId: string;
   listingId: string;
-  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category'>& { images: string[] };
+  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category'> & {
+    images: string[];
+  };
 }): Promise<{ success: boolean; error?: string; data?: Listing }> {
   if (
     !listingData.name ||
     !listingData.category ||
     !listingData.description ||
-    !listingData.price||
+    !listingData.price ||
     !listingData.images || // Check for images array
     listingData.images.length === 0 // Ensure images array is not empty
   ) {
@@ -87,15 +95,29 @@ export async function UpdateListing({
   }
 
   try {
-    const resp = await prismadb.listing.update({
+    await prismadb.listing.update({
       where: {
         id: listingId,
       },
       data: {
         ...listingData,
-        images: {
-          create: listingData.images.map((url) => ({ url })), // Assuming you're passing URLs
-        },
+        images:{
+          deleteMany:{}
+        }
+      },
+    });
+    const resp = await prismadb.listing.update({
+      where: {
+        id: listingId,
+      },
+      data: {
+        images:{
+          createMany:{
+            data: listingData.images.map((imageUrl) => ({
+              url: imageUrl, // Correctly map each URL to an object with a `url` property
+            })),
+          }
+        }
       },
     });
     return { success: true, data: resp };
@@ -162,25 +184,70 @@ export async function DeleteListing({
   }
 }
 
-export async function GetAllListing(): Promise<{
+
+export async function GetAllListing(
+  category?: Category, 
+  searchQuery?: string, 
+  sort?: "" | "asc" | "desc" | undefined
+): Promise<{
   success: boolean;
   error?: string;
-  data?: Listing[];
+  data?: ListingWithImages[];
 }> {
-  const resp = await prismadb.listing.findMany();
-
-  if (!resp) {
-    return { success: false, error: 'Error occured in fetching all listing' };
+  // Set no-cache headers to ensure fresh data
+  const headers = new Headers();
+  headers.append('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  headers.append('Pragma', 'no-cache');
+  headers.append('Expires', '0');
+  
+  // Build the where clause based on provided parameters
+  let whereClause = {};
+  
+  if (category) {
+    whereClause = { ...whereClause, category };
   }
 
-  return { success: true, data: resp };
+  if (searchQuery) {
+    whereClause = {
+      ...whereClause,
+      OR: [
+        { name: { contains: searchQuery, mode: 'insensitive' } },
+        { description: { contains: searchQuery, mode: 'insensitive' } },
+      ],
+    };
+  }
+
+  try {
+    // Query the database for listings with optional filters and sorting
+    const resp: ListingWithImages[] = await prismadb.listing.findMany({
+      where: whereClause,
+      include: {
+        images: true,
+      },
+      orderBy: sort ? { price: sort } : undefined, // Sort by price if 'sort' is provided
+    });
+
+    if (!resp) {
+      return { success: false, error: 'Error occurred in fetching all listings' };
+    }
+
+    return { success: true, data: resp };
+  } catch (error: unknown) {
+    // Narrowing the error type to handle it properly
+    if (error instanceof Error) {
+      return { success: false, error: error.message || 'An error occurred' };
+    } else {
+      return { success: false, error: 'An unknown error occurred' };
+    }
+  }
 }
+
 
 export async function getSpecificListing({
   listingId,
 }: {
   listingId: string;
-}): Promise<{ success: boolean; error?: string; data?: Listing }> {
+}): Promise<{ success: boolean; error?: string; data?: ListingWithImages }> {
   // console.log(listingId);
 
   try {
@@ -188,6 +255,9 @@ export async function getSpecificListing({
       where: {
         id: listingId,
       },
+      include:{
+        images:true
+      }
     });
 
     if (!resp) {

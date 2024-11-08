@@ -1,190 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link href="styles.css" rel="stylesheet"> 
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f9fafb;
-            color: #1f2937;
-            line-height: 1.6;
-            padding: 2rem;
-        }
-
-        h1 {
-            color: #2563eb;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 1rem;
-        }
-
-        .card {
-            background-color: #ffffff;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        h2,
-        h3 {
-            color: #2563eb;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin: 1rem 0;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        p {
-            margin-bottom: 1rem;
-        }
-
-        a {
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: #2563eb;
-            color: white;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 9999px;
-            transition: background-color 0.3s ease;
-            margin-top: 1.5rem;
-            text-align: center;
-        }
-
-        .button:hover {
-            background-color: #3b82f6;
-        }
-
-        ul {
-            margin-left: 20px;
-            padding-left: 0;
-            list-style-type: disc;
-        }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .card {
-                margin: 1rem 0;
-                padding: 1rem;
-            }
-
-            .button {
-                width: 100%;
-                padding: 0.75rem;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.75rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            h3 {
-                font-size: 1.25rem;
-            }
-
-            .button {
-                padding: 0.5rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    <%- include('partials/head') %>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+        <link rel="stylesheet" href="/css/infopage.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1><%= heading %></h1>
-        <p><%= intro %></p>
+    <div id="progress-bar"></div>
+    <%- include('partials/navbar') %>
 
-        <div class="card">
-            <h2>Acceptance of Terms</h2>
-            <p><%= termsContent %></p>
+        <div style="display: flex;">
+            <aside class="sidebar">
+                <ul>
+                    <li><a href="#acceptance"><i class="fas fa-user-check"></i> Acceptance of Terms</a></li>
+                    <li><a href="#use-services"><i class="fas fa-shield-alt"></i> Use of Platform and Services</a></li>
+                    <li><a href="#intellectual-property"><i class="fas fa-gavel"></i> Intellectual Property</a></li>
+                    <li><a href="#postings"><i class="fas fa-list-alt"></i> Posting Guidelines</a></li>
+                    <li><a href="#security"><i class="fas fa-lock"></i> Account Security</a></li>
+                    <li><a href="#external-links"><i class="fas fa-external-link-alt"></i> External Links</a></li>
+                    <li><a href="#liability"><i class="fas fa-exclamation-triangle"></i> Limitation of Liability</a>
+                    </li>
+                    <li><a href="#privacy"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                    <li><a href="#changes"><i class="fas fa-link"></i> Changes to Terms</a></li>
+                    <li><a href="#termination"><i class="fas fa-lock"></i> Termination of Access</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact Information</a></li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="title-section">
+                    <h1>Terms and Conditions for Scruter</h1>
+                    <p>Welcome to Scruter, a platform for local classifieds where you can buy, sell, and exchange
+                        services
+                        within your community. By accessing and using Scruter, you agree to these Terms & Conditions.
+                    </p>
+                </div>
+
+                <section id="acceptance">
+                    <h2><i class="fas fa-user-check"></i> Acceptance of Terms</h2>
+                    <p>By using Scruter, you agree to these Terms & Conditions. If you do not accept any of these terms,
+                        please refrain from using our platform.</p>
+                </section>
+
+                <section id="use-services">
+                    <h2><i class="fas fa-shield-alt"></i> Use of Platform and Services</h2>
+                    <p>Scruter provides a marketplace for users to connect locally for buying, selling, and exchanging
+                        services. Users agree to conduct all transactions legally and ethically.</p>
+                </section>
+
+                <section id="intellectual-property">
+                    <h2><i class="fas fa-gavel"></i> Intellectual Property</h2>
+                    <p>All content on Scruter, including logos and trademarks, is owned by Scruter and protected under
+                        copyright laws. Unauthorized use is prohibited.</p>
+                </section>
+
+                <section id="postings">
+                    <h2><i class="fas fa-list-alt"></i> Posting Guidelines</h2>
+                    <p>Users are responsible for the content they post and must ensure it complies with our guidelines,
+                        which prohibit spam, inappropriate content, and illegal activities.</p>
+                </section>
+
+                <section id="security">
+                    <h2><i class="fas fa-lock"></i> Account Security</h2>
+                    <p>Users must secure their accounts by keeping their login credentials private. Scruter is not
+                        responsible for any loss due to compromised accounts.</p>
+                </section>
+
+                <section id="external-links">
+                    <h2><i class="fas fa-external-link-alt"></i> External Links</h2>
+                    <p>Scruter may include links to external websites. We are not responsible for content on these
+                        third-party sites.</p>
+                </section>
+
+                <section id="liability">
+                    <h2><i class="fas fa-exclamation-triangle"></i> Limitation of Liability</h2>
+                    <p>Scruter is not liable for any damages resulting from transactions between users. All transactions
+                        are
+                        at the users’ discretion.</p>
+                </section>
+
+                <section id="privacy">
+                    <h2><i class="fas fa-shield-alt"></i> Privacy Policy</h2>
+                    <p>We respect your privacy. Please read our Privacy Policy to understand how we collect, use, and
+                        protect your information.</p>
+                </section>
+
+                <section id="changes">
+                    <h2><i class="fas fa-link"></i> Changes to Terms</h2>
+                    <p>Scruter reserves the right to update these Terms & Conditions at any time. Users will be notified
+                        of significant
+                        changes, but continued use of the platform constitutes acceptance of any modifications.</p>
+                </section>
+
+                <section id="termination">
+                    <h2><i class="fas fa-lock"></i> Termination of Access</h2>
+                    <p>We reserve the right to suspend or terminate accounts for violations of our Terms & Conditions,
+                        including but not limited to posting prohibited content or engaging in fraudulent activities.
+                    </p>
+                </section>
+
+                <section id="contact">
+                    <h2><i class="fas fa-envelope"></i> Contact Information</h2>
+                    <p>If you have any questions about these Terms & Conditions, please contact us at
+                        support@scruter.com.</p>
+                </section>
+            </main>
         </div>
 
-        <div class="card">
-            <h2>Changes to the Terms</h2>
-            <p><%= changesContent %></p>
-        </div>
+        <script>
+            // Scroll Progress Bar
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                document.getElementById('progress-bar').style.width = scrollPercent + '%';
+            });
+        </script>
 
-        <div class="card">
-            <h2>Use of Website</h2>
-            <p><%= useOfWebsite %></p>
-        </div>
-
-        <div class="card">
-            <h3>Prohibited Use</h3>
-            <p>You are prohibited from using the site or its content:</p>
-            <ul>
-                <% prohibitedUses.forEach(function(use) { %>
-                    <li><%= use %></li>
-                <% }) %>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h2>Limitation of Liability</h2>
-            <p><%= liabilityContent %></p>
-        </div>
-
-        <div class="card">
-            <h2>Governing Law</h2>
-            <p><%= governingLaw %></p>
-        </div>
-
-        <div class="card">
-            <h2>Contact Us</h2>
-            <p>If you have any questions about these terms and conditions, you can contact us at:</p>
-            <ul>
-                <li>Email: <%= email %></li>
-                <li>Phone: <%= phone %></li>
-                <li>Address: <%= address %></li>
-            </ul>
-        </div>
-
-        <a href="/" class="button">Back to Home</a>
-    </div>
+        <%- include('partials/footer') %>
 </body>
 
 </html>

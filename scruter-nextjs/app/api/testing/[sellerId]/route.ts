@@ -1,7 +1,8 @@
 import { GetAllListing, PostListing } from '@/actions/seller/listing';
 import { NextResponse } from 'next/server';
+import { Params } from './[listingId]/route';
 
-// open for all to get all the listing
+// Open to all to get all listings
 export async function GET(req: Request) {
   try {
     const resp = await GetAllListing();
@@ -12,33 +13,35 @@ export async function GET(req: Request) {
 
     return NextResponse.json(resp.data);
   } catch (err) {
-    console.log('[LISTINGS_GET_ALL', err);
+    console.log('[LISTINGS_GET_ALL]', err);
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
 
 export async function POST(
   req: Request,
-  { params }: { params: { sellerId: string } }
+  paramData: {params:Params}
 ) {
+  const params= await paramData.params
+
+  const { sellerId } =  params;
+
   try {
     const body = await req.json();
 
-    const { sellerId } = params;
-
     if (!sellerId) {
-      return new NextResponse('necessary params are required', { status: 400 });
+      return new NextResponse('Necessary params are required', { status: 400 });
     }
 
-    const { name, price, description, category } = body;
-
+    const { name, price, description, category , images } = body;
     const resp = await PostListing({
-      sellerId: sellerId,
+      sellerId,
       listingData: {
         name,
         category,
         price,
         description,
+        images
       },
     });
 
