@@ -15,6 +15,7 @@ body {
   margin: 0px;
   padding: 0px;
   padding-bottom: 60px;
+  overflow-x: hidden;
 }
 
 /* Dark mode styles */

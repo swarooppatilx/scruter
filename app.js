@@ -13,7 +13,7 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const app = express();
 
 // Import the database.js file
-const { User, Food, House, Market } = require('./database'); // Adjust path as needed
+const { User, Food, House, Market, Feedback } = require('./database'); // Adjust path as needed
 
 // Middleware to parse JSON and form data
 app.use(bodyParser.json());
@@ -218,6 +218,23 @@ app.post(
   }
 );
 
+// POST route to handle feedback submission
+app.post('/submit-feedback', async (req, res) => {
+  const { feedbackText, email } = req.body;
+
+  try {
+    const feedback = new Feedback({
+      feedbackText,
+      email,
+    });
+    await feedback.save();
+    res.status(201).json({ message: 'Feedback submitted successfully!' });
+  } catch (error) {
+    console.error('Error saving feedback:', error); // Log the error for debugging
+    res.status(500).json({ message: 'Error submitting feedback' });
+  }
+});
+
 //Change in Dashboard Stuff
 
 //Updating Personal Information of Username and Email
@@ -359,13 +376,7 @@ app.get('/terms', (req, res) => {
   });
 });
 
-app.get('/terms-page', (req, res) => {
-  res.render('terms-page', {
-    activeLink: 'terms-page', // You can customize this based on your layout
-  });
-});
-
-app.get('/contactus', (req, res) => {
+app.get('/contact', (req, res) => {
   res.render('contact', {
     activeLink: 'contact', // You can customize this based on your layout
   });

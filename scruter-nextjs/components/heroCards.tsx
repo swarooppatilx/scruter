@@ -1,8 +1,4 @@
-import {
-  SendToBack,
-  ShieldQuestion,
-  ShoppingCart,
-} from 'lucide-react';
+import { SendToBack, ShieldQuestion, ShoppingCart } from 'lucide-react';
 import { Card, CardDescription, CardHeader, CardTitle } from './ui/card';
 
 const HeroCards = () => {

@@ -5,18 +5,20 @@ import {
 } from '@/actions/seller/listing';
 import { NextRequest, NextResponse } from 'next/server';
 
-type RouteContext = {
-  params: {
-    sellerId: string;
-    listingId: string;
-  };
-};
+export type Params = Promise<{ 
+  listingId?:string,
+  sellerId:string
+}>
 
 export async function GET(
   request: NextRequest,
-  context: RouteContext
+  paramData: {params:Params}
 ) {
-  const { listingId } = context.params;
+
+  const params= await paramData.params
+
+  const { listingId } =  params;
+
   if (!listingId) {
     return new NextResponse('Necessary params are required', { status: 400 });
   }
@@ -36,23 +38,29 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  context: RouteContext
+  paramData: {params:Params}
 ) {
+  const params= await paramData.params
+
+  const { listingId, sellerId } =  params;
+
   try {
     const body = await request.json();
-    const { sellerId, listingId } = context.params;
     if (!sellerId || !listingId) {
       return new NextResponse('Necessary params are required', { status: 400 });
     }
-    const { name, price, description, category } = body;
+
+    const { name, price, description, category , images } = body;
     const resp = await UpdateListing({
       sellerId,
       listingId,
-      listingData: { name, category, price, description },
+      listingData: { name, category, price, description , images },
     });
+
     if (resp.error) {
       return new NextResponse(resp.error, { status: 500 });
     }
+
     return NextResponse.json(resp.data);
   } catch (err) {
     console.log('[LISTING_UPDATE]', err);
@@ -62,17 +70,22 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  context: RouteContext
+  paramData:{params:Params}
 ) {
+  const params= await paramData.params
+
+  const { listingId ,sellerId } =  params;
+
   try {
-    const { sellerId, listingId } = context.params;
     if (!sellerId || !listingId) {
       return new NextResponse('Necessary params are required', { status: 400 });
     }
+
     const resp = await DeleteListing({ sellerId, listingId });
     if (resp.error) {
       return new NextResponse(resp.error, { status: 500 });
     }
+
     return NextResponse.json(resp.data);
   } catch (err) {
     console.log('[LISTING_DELETE]', err);

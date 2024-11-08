@@ -5,147 +5,7 @@
     <%- include('partials/head') %>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9fafb;
-            color: #1f2937;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .main-content {
-            width: 90%;
-            padding-left: 8rem;
-            padding-right: 8rem;
-            padding-top: 5rem;
-            padding-bottom: 5rem;
-            background-color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .title-section {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .title-section h1 {
-            font-size: 2.4rem;
-            color: #2563eb;
-            font-weight: bold;
-        }
-
-        .title-section p {
-            color: #555;
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
-
-        section {
-            margin-top: 2rem;
-        }
-
-        section h2 {
-            font-size: 1.8rem;
-            color: #333;
-            display: flex;
-            align-items: center;
-            border-left: 4px solid #2563eb;
-            padding-left: 8px;
-            margin-bottom: 1rem;
-        }
-
-        section h2 i {
-            margin-right: 8px;
-            color: #6f42c1;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 2rem auto;
-        }
-
-        .contact-form label {
-            display: block;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .contact-form button {
-            background-color: #2563eb;
-            color: #fff;
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .contact-form button:hover {
-            background-color: #1e4fbf;
-        }
-
-        /* Sidebar styles */
-        .sidebar {
-            width: 25%;
-            background: linear-gradient(to bottom, #007bff, #6f42c1);
-            color: #fff;
-            padding: 20px;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 15px;
-        }
-
-        .sidebar ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            transition: color 0.2s;
-        }
-
-        .sidebar ul li a:hover {
-            color: #e0e0e0;
-        }
-
-        .sidebar ul li a i {
-            margin-right: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                width: 100%;
-                padding: 1rem;
-            }
-
-            .sidebar {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/infopage.css">
 </head>
 
 <body>
@@ -160,11 +20,9 @@
                 <li><a href="#social-media"><i class="fas fa-hashtag"></i> Social Media</a></li>
                 <li><a href="#location"><i class="fas fa-map-marker-alt"></i> Our Location</a></li>
                 <li><a href="#contact-form"><i class="fas fa-envelope"></i> Send a Message</a></li>
-
             </ul>
         </aside>
 
-        <!-- Main Content -->
         <main class="main-content">
             <div class="title-section">
                 <h1>Contact Us</h1>
@@ -178,6 +36,7 @@
                 <p>Phone: (123) 456-7890</p>
                 <p>Address: 123 Main St, Springfield, USA</p>
             </section>
+
             <section id="support">
                 <h2><i class="fas fa-phone"></i> Customer Support</h2>
                 <p>Our customer support team is available Monday through Friday, 9:00 AM - 5:00 PM. For urgent inquiries, please contact us by phone.</p>
@@ -199,6 +58,7 @@
                 <p>123 Main Street, Suite 100</p>
                 <p>City, State, ZIP Code</p>
             </section>
+
             <section id="contact-form">
                 <h2><i class="fas fa-envelope"></i> Send a Message</h2>
                 <form class="contact-form" id="contactForm">
@@ -218,7 +78,6 @@
     </div>
 
     <script>
-        // Scroll Progress Bar
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
             const docHeight = document.body.scrollHeight - window.innerHeight;
@@ -226,24 +85,25 @@
             document.getElementById('progress-bar').style.width = scrollPercent + '%';
         });
 
-        // Handle form submission
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+        document.getElementById('toggle-dark-mode').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
 
-            axios.post('/send-message', { name, email, message })
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            axios.post('/api/contact', data)
                 .then(response => {
-                    alert('Your message has been sent successfully!');
-                    document.getElementById('contactForm').reset();
+                    alert('Message sent successfully!');
+                    this.reset();
                 })
                 .catch(error => {
-                    alert('There was an error sending your message. Please try again.');
+                    console.error('Error sending message:', error);
                 });
         });
     </script>
-
-    <%- include('partials/footer') %>
 </body>
+<%- include('partials/footer') %>
 </html>

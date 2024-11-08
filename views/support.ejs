@@ -5,112 +5,10 @@
     <%- include('partials/head') %>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9fafb;
-            color: #1f2937;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .main-content {
-            width: 90%;
-            padding-left: 8rem;
-            padding-right: 8rem;
-            padding-top: 5rem;
-            padding-bottom: 5rem;
-            background-color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .title-section {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .title-section h1 {
-            font-size: 2.4rem;
-            color: #2563eb;
-            font-weight: bold;
-        }
-
-        .title-section p {
-            color: #555;
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
-
-        section {
-            margin-top: 2rem;
-        }
-
-        section h2 {
-            font-size: 1.8rem;
-            color: #333;
-            display: flex;
-            align-items: center;
-            border-left: 4px solid #2563eb;
-            padding-left: 8px;
-            margin-bottom: 1rem;
-        }
-
-        section h2 i {
-            margin-right: 8px;
-            color: #6f42c1;
-        }
-
-        /* Sidebar styles */
-        .sidebar {
-            width: 25%;
-            background: linear-gradient(to bottom, #007bff, #6f42c1);
-            color: #fff;
-            padding: 20px;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 15px;
-        }
-
-        .sidebar ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            transition: color 0.2s;
-        }
-
-        .sidebar ul li a:hover {
-            color: #e0e0e0;
-        }
-
-        .sidebar ul li a i {
-            margin-right: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                width: 100%;
-                padding: 1rem;
-            }
-
-            .sidebar {
-                display: none;
-            }
-        }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Add Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/infopage.css">
 </head>
 
 <body>
@@ -157,7 +55,7 @@
             <section id="feedback">
                 <h2><i class="fas fa-comments"></i> Feedback</h2>
                 <p>Your feedback is important to us! Please let us know how we can improve our services.</p>
-                <a href="mailto:feedback@example.com" class="cta-button">Send Feedback</a>
+                <button class="btn btn-lg" style="color: rgb(79, 145, 208); margin-left: -10px; outline: none;" data-toggle="modal" data-target="#feedbackModal">Give Feedback</button>
             </section>
 
             <section id="resources">
@@ -181,7 +79,7 @@
             </section>
         </main>
     </div>
-
+    <%- include('partials/feedback') %>
     <script>
         // Scroll Progress Bar
         window.addEventListener('scroll', () => {

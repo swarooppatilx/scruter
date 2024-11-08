@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <%- include('partials/head') %>
-   
 </head>
+
 <body>
     <%- include('partials/navbar') %>
 
@@ -22,23 +23,26 @@
                                         <i class="fa-solid fa-<%= routeName === 'food' ? 'utensils' : routeName === 'house' ? 'house-user' : 'cart-shopping' %> me-2"></i>
                                         <%= routeName === 'food' ? 'Food Name' : routeName === 'house' ? 'House Name' : 'Item Name' %>:
                                     </label>
-                                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter <%= routeName === 'food' ? 'Food' : routeName === 'house' ? 'House' : 'Item' %> Name" required>
+                                    <input type="text" class="form-control" id="title" name="title"
+                                        placeholder="Enter <%= routeName === 'food' ? 'Food' : routeName === 'house' ? 'House' : 'Item' %> Name" required>
                                 </div>
 
                                 <div class="mb-3"> <!-- Item Image area -->
                                     <label for="image" class="form-label">
-                                        <i class="fa-solid fa-image me-2"></i><%= routeName === 'food' ? 'Food' : routeName === 'house' ? 'House' : 'Item' %> Image:
+                                        <i class="fa-solid fa-image me-2"></i>
+                                        <%= routeName === 'food' ? 'Food' : routeName === 'house' ? 'House' : 'Item' %> Image:
                                     </label>
                                     <input type="file" class="form-control" id="image" name="image" onchange="previewImage()" required>
                                     <img id="img-preview" class="img-fluid d-none mt-3" style="max-width: 200px;" />
                                 </div>
-                                
+
                                 <!-- New Email Input -->
                                 <div class="mb-3"> <!-- Email area -->
                                     <label for="email" class="form-label">
                                         <i class="fa-solid fa-envelope me-2"></i>Email:
                                     </label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" required>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="Enter Your Email" required>
                                 </div>
 
                                 <!-- New Phone Number Input -->
@@ -46,7 +50,8 @@
                                     <label for="phone" class="form-label">
                                         <i class="fa-solid fa-phone me-2"></i>Phone Number:
                                     </label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Phone Number" required>
+                                    <input type="tel" class="form-control" id="phone" name="phone"
+                                        placeholder="Enter Your Phone Number" required>
                                 </div>
 
                                 <div class="mb-3"> <!-- Location area -->
@@ -54,19 +59,35 @@
                                         <i class="fa-solid fa-map-marker-alt me-2"></i>Location:
                                     </label>
                                     <div class="input-group mb-3 position-relative">
-                                        <input type="text" class="form-control" id="location" name="location" placeholder="Enter Location" required>
-                                        <button type="button" class="btn btn-primary" id="use-location-btn"><i class="fa-solid fa-location-crosshairs me-2"></i></button>
+                                        <input type="text" class="form-control" id="location" name="location"
+                                            placeholder="Enter Location" required>
+                                        <button type="button" class="btn btn-primary" id="use-location-btn">
+                                            <i class="fa-solid fa-location-crosshairs me-2"></i>
+                                        </button>
                                     </div>
                                     <input type="hidden" id="latitude" name="latitude" required>
                                     <input type="hidden" id="longitude" name="longitude" required>
                                 </div>
 
+                                <% if (routeName === 'food') { %>
+                                <div class="mb-3"> <!-- Food Price area (For Food) -->
+                                    <label for="price" class="form-label">
+                                        <i class="fa-solid fa-indian-rupee-sign me-2"></i>Food Price:
+                                    </label>
+                                    <input type="number" class="form-control" id="price" name="price"
+                                        placeholder="Enter Food Price" required>
+                                </div>
+                                <% } %>
+
                                 <% if (routeName === 'house') { %>
-                                <div class="mb-3"> <!-- House Rent area  (For House) -->
+                                <div class="mb-3"> <!-- House Rent area (For House) -->
                                     <label for="rent" class="form-label">
                                         <i class="fa-solid fa-indian-rupee-sign me-2"></i>House Rent:
                                     </label>
-                                    <input type="number" class="form-control price-field" id="rent" name="rent" placeholder="Enter Rent" required>                                </div>
+
+                                    <input type="number" class="form-control price-field" id="rent" name="rent"
+                                        placeholder="Enter Rent" required>
+                                </div>
                                 <% } %>
 
                                 <% if (routeName === 'market') { %>
@@ -74,14 +95,18 @@
                                     <label for="price" class="form-label">
                                         <i class="fa-solid fa-indian-rupee-sign me-2"></i>Item Price:
                                     </label>
-                                    <input type="number" class="form-control price-field" id="price" name="price" placeholder="Enter Item Price" required>                                </div>
+
+                                    <input type="number" class="form-control price-field" id="price" name="price"
+                                        placeholder="Enter Item Price" required>
+                                </div>
                                 <% } %>
 
-                                <div class="mb-3">  <!-- Description area -->
+                                <div class="mb-3"> <!-- Description area -->
                                     <label for="description" class="form-label">
                                         <i class="fa-solid fa-align-left me-2"></i>Description:
                                     </label>
-                                    <textarea class="form-control" id="description" name="description" placeholder="Enter Description" required></textarea>
+                                    <textarea class="form-control" id="description" name="description"
+                                        placeholder="Enter Description" required></textarea>
                                 </div>
 
                                 <div class="text-center">
@@ -99,15 +124,29 @@
             </div>
         </div>
     </section>
+
     <script src="../js/search-auto.js"></script>
     <script src="../js/client-validation.js"></script>
     <script>
-        // /preloader js styling
+        // Preloader
         let preloader = document.querySelector("#preloader");
-        window.addEventListener("load",function(e){
+        window.addEventListener("load", function () {
             preloader.style.display = "none";
         });
+
+        // Image Preview
+        function previewImage() {
+            const imageInput = document.getElementById('image');
+            const preview = document.getElementById('img-preview');
+            const file = imageInput.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.classList.remove('d-none');
+            }
+        }
     </script>
+
     <%- include('partials/bottom_nav') %>
 </body>
+
 </html>
