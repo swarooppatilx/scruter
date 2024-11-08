@@ -47,22 +47,23 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+console.log(process.env.CLOUDINARY_CLOUD_NAME, process.env.CLOUDINARY_API_KEY, process.env.CLOUDINARY_API_SECRET);
 
-// Configure CloudinaryStorage
+// Set up CloudinaryStorage for Multer
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'uploads',
-    format: async (req, file) => 'jpeg', // Supports promises as well
+    folder: 'uploads', // Specify the folder in Cloudinary to store images
+    format: async (req, file) => 'png', // You can customize file format
     public_id: (req, file) =>
-      Date.now() +
-      '-' +
-      file.originalname.replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 100),
+      Date.now() + '-' + file.originalname.replace(/[^a-zA-Z0-9_.-]/g, '_').slice(0, 100), // Custom public ID for the file
   },
 });
 
 // Initialize multer with the Cloudinary storage
 const upload = multer({ storage });
+
+module.exports = User;
 
 // Authentication middleware
 const ensureAuthenticated = (req, res, next) => {
@@ -833,4 +834,75 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+});
+
+//profilce pic upload and update
+// Serve static files (if needed)
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Route to handle profile picture upload
+app.post('/update-profile-pic', upload.single('profilePic'), async (req, res) => {
+  try {
+    const user = req.session.user; // Get the logged-in user from session
+
+    if (req.file) {
+      // Save the new profile picture URL in the database
+      const updatedUser = await User.findByIdAndUpdate(
+        user._id,  // Use user ID from session
+        { profilePicture: req.file.path }, // Save the Cloudinary URL to profilePicture
+        { new: true } // Return the updated document
+      );
+
+      // Update the session with the new profile picture URL
+      req.session.user.profilePicture = updatedUser.profilePicture;
+
+      return res.json({
+        success: true,
+        filePath: req.file.path, // The new Cloudinary URL
+        message: 'Profile picture updated successfully!',
+      });
+    } else {
+      return res.json({ success: false, message: 'No file uploaded' });
+    }
+  } catch (error) {
+    console.error('Error updating profile picture:', error);
+    res.status(500).json({ success: false, message: 'Something went wrong during the upload.' });
+  }
+});
+
+// Route to handle saving the selected profile picture as the default
+app.post('/set-default-profile-pic', (req, res) => {
+  const { profileImage } = req.body;
+  if (profileImage) {
+    // Here, you would update the user's profile image in the database
+    User.findByIdAndUpdate(req.user.id, { profilePicture: profileImage }, { new: true })
+      .then((updatedUser) => {
+        res.json({
+          success: true,
+          message: 'Profile picture set as default successfully!',
+          filePath: profileImage, // Return the selected image URL (Cloudinary URL)
+        });
+      })
+      .catch((err) => {
+        console.error('Error updating profile picture:', err);
+        res.status(500).json({
+          success: false,
+          message: 'Failed to set profile picture as default.',
+        });
+      });
+  } else {
+    res.status(400).json({
+      success: false,
+      message: 'No profile image selected.',
+    });
+  }
+});
+
+// Error handler middleware for file upload issues
+app.use((err, req, res, next) => {
+  console.error(err);  // Log the error to the console
+  res.status(500).json({
+    success: false,
+    message: 'Something went wrong during the upload.',
+  });
 });
