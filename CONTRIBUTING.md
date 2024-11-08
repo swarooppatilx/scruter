@@ -27,7 +27,7 @@ Thank you for your interest in contributing to Scruter! Your contributions help 
 
 ## Setting up environment
 1. **Get your mongodb connection string**. Download mongodb compass if you're not having already and you can find your connection string there
-2. Register for cloudinary account and get yoru api key, api secret and cloud name
+2. Register for cloudinary account and get your api key, api secret and cloud name
 3. Give a session secret and you're good to go
 
 ## Getting your cloudinary keys
