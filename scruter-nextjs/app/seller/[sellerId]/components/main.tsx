@@ -4,6 +4,7 @@ import ListingDetails from './listingDetails';
 import SelectCategory from './selectCategory';
 import { Toaster } from 'react-hot-toast';
 import SelectImage from './selectImage';
+import MapLocationForm from './mapLocationForm';
 
 const Main = ({ sellerId }: { sellerId: string }) => {
   const {
@@ -83,6 +84,7 @@ const Main = ({ sellerId }: { sellerId: string }) => {
         {currentStep === 1 && <ListingDetails />}
         {currentStep === 2 && <SelectCategory />}
         {currentStep === 3 && <SelectImage />}
+        {currentStep === 3 && <MapLocationForm />}
         {!formCompleted && (
           <footer className="md:block hidden w-full left-0 right-0 bottom-0">
             <div className="flex">
@@ -99,7 +101,7 @@ const Main = ({ sellerId }: { sellerId: string }) => {
               <div className="text-right text-sm mt-2">
                 <button
                   onClick={
-                    currentStep === 3
+                    currentStep === 4
                       ? e => {
                           e.preventDefault();
                           submitListingForm(sellerId);
@@ -108,7 +110,7 @@ const Main = ({ sellerId }: { sellerId: string }) => {
                   }
                   className="bg-black text-gray-200 rounded-full p-3"
                 >
-                  {currentStep === 3 ? 'Confirm' : 'Next Step'}
+                  {currentStep === 4 ? 'Confirm' : 'Next Step'}
                 </button>
               </div>
             </div>
@@ -133,7 +135,7 @@ const Main = ({ sellerId }: { sellerId: string }) => {
               <div className="text-right">
                 <button
                   onClick={
-                    currentStep === 3
+                    currentStep === 4
                       ? e => {
                           e.preventDefault();
                           submitListingForm(sellerId);
@@ -142,7 +144,7 @@ const Main = ({ sellerId }: { sellerId: string }) => {
                   }
                   className="bg-black text-gray-200 rounded-full p-2"
                 >
-                  {currentStep === 3 ? 'Confirm' : 'Next Step'}
+                  {currentStep === 4 ? 'Confirm' : 'Next Step'}
                 </button>
               </div>
             </div>
