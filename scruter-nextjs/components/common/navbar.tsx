@@ -9,16 +9,23 @@ const Navbar = () => {
   return (
     <div className="border-b">
       <Container>
-        <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center">
+        <div className="px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
           <Link
             href="/"
-            className="ml-4 h-full items-center justify-center flex lg:ml:0 gap-x-2"
+            className="flex items-center gap-x-2 lg:gap-x-4"
           >
-            <p className="font-bold text-4xl">Scruter</p>
+            <p className="font-bold text-2xl sm:text-3xl lg:text-4xl">Scruter</p>
           </Link>
 
-          <MainNav />
-          <NavbarActions />
+          {/* Main Navigation */}
+          <div className="hidden lg:flex flex-1">
+            <MainNav />
+          </div>
+
+          {/* Navbar Actions - Responsive alignment */}
+          <div className="flex items-center space-x-4 lg:space-x-6">
+            <NavbarActions />
+          </div>
         </div>
       </Container>
     </div>
