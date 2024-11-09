@@ -81,9 +81,10 @@ const Footer = () => {
             <Link href="/" className="inline-block">
               <div className="flex justify-center md:justify-start items-center gap-3 mb-6">
                 <div className="flex flex-col">
-                  <span className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 via-blue-500 to-green-500 bg-clip-text text-transparent">
-                    Scruter
-                  </span>
+                <span className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 via-blue-500 to-green-500 bg-clip-text text-transparent transition-all duration-500 hover:bg-gradient-to-r hover:from-gray-900 hover:via-gray-800 hover:to-gray-900">
+  Scruter
+</span>
+
                 </div>
               </div>
             </Link>
@@ -167,10 +168,17 @@ interface SocialButtonProps {
 const SocialButton = ({ href, icon, color }: SocialButtonProps) => (
   <Link
     href={href}
-    className={`${color} p-3 rounded-lg text-white transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center`}
+    className={`relative ${color} p-3 rounded-lg text-white transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center overflow-hidden group`}
   >
-    <span className="text-lg sm:text-xl lg:text-2xl">{icon}</span>
+    <span className="text-lg sm:text-xl lg:text-2xl z-10">{icon}</span>
+    <span
+      className="absolute inset-0 rounded-lg bg-white opacity-0 transition duration-500 group-hover:opacity-20 group-hover:scale-125"
+    ></span>
+    <span
+      className="absolute inset-0 rounded-lg bg-white opacity-0 transition duration-500 group-hover:opacity-40 group-hover:scale-0"
+    ></span>
   </Link>
 );
+
 
 export default Footer;
