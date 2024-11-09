@@ -93,7 +93,7 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left mx-auto justify-center">
             <FooterSection title="Links" links={Links} />
             <FooterSection title="Helpdesk" links={Helpdesk} />
           </div>
@@ -118,15 +118,21 @@ const Footer = () => {
         </div>
 
         <div className="mt-16 pt-8 border-t border-gray-200">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-600 text-center md:text-left">
-              © {new Date().getFullYear()} Team Scruter
-            </p>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+            
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500">Made with</span>
+              <span className="text-sm text-gray-500">Made with </span>
               <HeartIcon color="red" />
+              <span className="text-sm text-gray-500">Team Scruter</span>
             </div>
+            
           </div>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+
+          <span className="text-sm text-gray-600 text-center md:text-left">
+              Reserved under <a href='https://fossa.com/blog/open-source-software-licenses-101-gpl-v3' target='_blank'>GPLv3</a> {new Date().getFullYear()} 
+            </span>
+            </div>
         </div>
       </div>
     </footer>
