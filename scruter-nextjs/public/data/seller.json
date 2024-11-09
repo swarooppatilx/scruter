@@ -1,0 +1,202 @@
+[
+  {
+    "id": "f42a9a12-3c63-4f75-9b8e-d92896b4c5d1",
+    "name": "Alice's Bakery",
+    "email": "alice@example.com",
+    "otp": "123456",
+    "role": "Seller",
+    "Listings": [
+      {
+        "id": "a1",
+        "name": "Chocolate Cake",
+        "price": 15,
+        "description": "Delicious chocolate cake",
+        "category": "Fooding",
+        "images": [
+          { "url": "https://example.com/images/chocolate-cake.jpg" }
+        ],
+        "listingLat": 40.7128,
+        "listingLng": -74.006,
+        "createdAt": "2024-11-09T10:00:00.000Z"
+      }
+    ],
+    "chats": [],
+    "createdAt": "2024-11-08T10:00:00.000Z",
+    "updatedAt": "2024-11-08T10:00:00.000Z"
+  },
+  {
+    "id": "b93f1b23-4d5e-4d29-b9c9-fd3e7a9132d4",
+    "name": "Bob's Burgers",
+    "email": "bob@example.com",
+    "otp": "654321",
+    "role": "Seller",
+    "Listings": [
+      {
+        "id": "b1",
+        "name": "Classic Burger",
+        "price": 10,
+        "description": "Juicy burger with lettuce, tomato, and cheese",
+        "category": "Fooding",
+        "images": [
+          { "url": "https://example.com/images/classic-burger.jpg" }
+        ],
+        "listingLat": 34.0522,
+        "listingLng": -118.2437,
+        "createdAt": "2024-11-09T10:00:00.000Z"
+      }
+    ],
+    "chats": [],
+    "createdAt": "2024-11-08T10:00:00.000Z",
+    "updatedAt": "2024-11-08T10:00:00.000Z"
+  },
+  {
+    "id": "c84g1h56-5e78-6i31-a4f5-ld2k6l8m8z9n",
+    "name": "Charlie's Pizza",
+    "email": "charlie@example.com",
+    "otp": "789456",
+    "role": "Seller",
+    "Listings": [
+      {
+        "id": "c1",
+        "name": "Margherita Pizza",
+        "price": 12,
+        "description": "Classic Margherita with fresh tomatoes and basil",
+        "category": "Fooding",
+        "images": [
+          { "url": "https://example.com/images/margherita-pizza.jpg" }
+        ],
+        "listingLat": 37.7749,
+        "listingLng": -122.4194,
+        "createdAt": "2024-11-09T10:00:00.000Z"
+      }
+    ],
+    "chats": [],
+    "createdAt": "2024-11-08T10:00:00.000Z",
+    "updatedAt": "2024-11-08T10:00:00.000Z"
+  },
+  {
+    "id": "d74g9i22-8k53-5r31-c4j9-xd4p5k2m3z1p",
+    "name": "Debbie's Desserts",
+    "email": "debbie@example.com",
+    "otp": "234567",
+    "role": "Seller",
+    "Listings": [
+      {
+        "id": "d1",
+        "name": "Strawberry Cheesecake",
+        "price": 18,
+        "description": "Creamy cheesecake with fresh strawberries",
+        "category": "Fooding",
+        "images": [
+          { "url": "https://example.com/images/strawberry-cheesecake.jpg" }
+        ],
+        "listingLat": 51.5074,
+        "listingLng": -0.1278,
+        "createdAt": "2024-11-09T10:00:00.000Z"
+      }
+    ],
+    "chats": [],
+    "createdAt": "2024-11-08T10:00:00.000Z",
+    "updatedAt": "2024-11-08T10:00:00.000Z"
+  },
+  {
+    "id": "e82g2j34-7h49-4a38-b4m8-rf3o6n9o7y2m",
+    "name": "Evan's Electronics",
+    "email": "evan@example.com",
+    "otp": "345678",
+    "role": "Seller",
+    "Listings": [
+      {
+        "id": "e1",
+        "name": "Wireless Earbuds",
+        "price": 45,
+        "description": "High-quality wireless earbuds with noise cancellation",
+        "category": "For_Sale",
+        "images": [
+          { "url": "https://example.com/images/wireless-earbuds.jpg" }
+        ],
+        "listingLat": 28.7041,
+        "listingLng": 77.1025,
+        "createdAt": "2024-11-09T10:00:00.000Z"
+      }
+    ],
+    "chats": [],
+    "createdAt": "2024-11-08T10:00:00.000Z",
+    "updatedAt": "2024-11-08T10:00:00.000Z"
+  },
+  {
+    "id": "f91g5l65-1p58-6t29-y7k1-bt5r7w1x8q3n",
+    "name": "Fiona's Flowers",
+    "email": "fiona@example.com",
+    "otp": "456789",
+    "role": "Seller",
+    "Listings": [
+      {
+        "id": "f1",
+        "name": "Rose Bouquet",
+        "price": 30,
+        "description": "Beautiful bouquet of red roses",
+        "category": "For_Sale",
+        "images": [
+          { "url": "https://example.com/images/rose-bouquet.jpg" }
+        ],
+        "listingLat": 48.8566,
+        "listingLng": 2.3522,
+        "createdAt": "2024-11-09T10:00:00.000Z"
+      }
+    ],
+    "chats": [],
+    "createdAt": "2024-11-08T10:00:00.000Z",
+    "updatedAt": "2024-11-08T10:00:00.000Z"
+  },
+  {
+    "id": "g21h8o78-2v64-9x34-j2p5-pk9u3x2s4v8m",
+    "name": "George's Gadgets",
+    "email": "george@example.com",
+    "otp": "567890",
+    "role": "Seller",
+    "Listings": [
+      {
+        "id": "g1",
+        "name": "Smartphone Holder",
+        "price": 20,
+        "description": "Adjustable smartphone holder for cars",
+        "category": "For_Sale",
+        "images": [
+          { "url": "https://example.com/images/smartphone-holder.jpg" }
+        ],
+        "listingLat": 40.7128,
+        "listingLng": -74.006,
+        "createdAt": "2024-11-09T10:00:00.000Z"
+      }
+    ],
+    "chats": [],
+    "createdAt": "2024-11-08T10:00:00.000Z",
+    "updatedAt": "2024-11-08T10:00:00.000Z"
+  },
+  {
+    "id": "h92k1l76-4n27-5t42-m3j8-py2s4r5b6z3l",
+    "name": "Hannah's Handicrafts",
+    "email": "hannah@example.com",
+    "otp": "678901",
+    "role": "Seller",
+    "Listings": [
+      {
+        "id": "h1",
+        "name": "Handmade Candle",
+        "price": 12,
+        "description": "Handmade lavender-scented candle",
+        "category": "For_Sale",
+        "images": [
+          { "url": "https://example.com/images/handmade-candle.jpg" }
+        ],
+        "listingLat": 52.5200,
+        "listingLng": 13.4050,
+        "createdAt": "2024-11-09T10:00:00.000Z"
+      }
+    ],
+    "chats": [],
+    "createdAt": "2024-11-08T10:00:00.000Z",
+    "updatedAt": "2024-11-08T10:00:00.000Z"
+  }
+]

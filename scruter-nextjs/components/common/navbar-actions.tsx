@@ -28,6 +28,7 @@ const NavbarActions = () => {
       )}
       {session.status == 'authenticated' && (
         <>
+          <Link href={`/${session.data.user.id}/dashboard`}><Button variant={"secondary"}>Dashboard</Button></Link>
           <Link href={`${session.data.user.id}`}><Button variant={"secondary"}>Hi! {session.data.user?.name}</Button></Link>
           <Button
             className="rounded-full"
