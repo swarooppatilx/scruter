@@ -30,6 +30,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.3.1",
     "embla-carousel-react": "^8.3.1",
+    "firebase": "^11.0.1",
     "framer-motion": "^11.11.11",
     "input-otp": "^1.2.5",
     "leaflet": "^1.9.4",

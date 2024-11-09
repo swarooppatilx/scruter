@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SellerLoginForm } from '../../components/seller/login-form';
+import SocialLoginButton from '../../components/SocialLoginButton';
 
 export const metadata: Metadata = {
   title: 'Authentication',
@@ -21,6 +22,9 @@ export default function AuthenticationPage() {
               Enter your email below to log into your account.
             </p>
             <SellerLoginForm authType="login" />
+
+            <SocialLoginButton roleType='seller'/>
+
             <div className="text-center mt-4 space-y-2 flex flex-col">
               <p>Don’t have an account?</p>
               <Link
