@@ -26,7 +26,7 @@ Scruter is a local classifieds and community platform where people can connect, 
 ## <div align="center">Join our Discord Server</div>
 
 <div align="center">
-  <a href="https://discord.gg/QC5BgjwK"><img src="https://img.shields.io/badge/Discord-7289DA?logo=discord&logoColor=white" width="200"></a>
+  <a href="https://discord.gg/7WVxqQcxHY"><img src="https://img.shields.io/badge/Discord-7289DA?logo=discord&logoColor=white" width="200"></a>
 </div>
 
 <!--Line-->
@@ -242,7 +242,7 @@ Contributions are welcome! Follow these steps to contribute:
 - **Submit a pull request**  
   Go to the original repository and click on the "Pull Request" button to submit your changes.
 
-For detailed guidelines on how to contribute to this project, please refer to the [Contributing.md](Contributing.md) file.
+For detailed guidelines on how to contribute to this project, please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 ---
 

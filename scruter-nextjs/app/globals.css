@@ -72,3 +72,27 @@ body,
     @apply bg-background text-foreground;
   }
 }
+
+::-webkit-scrollbar {
+  width: 1px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent ; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(136, 136, 136);
+  border-radius: 2px;
+}
+
+
+@layer utilities {
+  .bg-custom-gradient {
+    background: linear-gradient(165deg, rgb(255, 255, 255) 0%, rgba(0,1,98,1) 89%, rgba(255,71,107,1) 100%);
+  }
+  .bg-dark-custom-gradient {
+    background: linear-gradient(165deg, rgba(0,0,20,1) 0%, rgba(0,1,98,1) 89%, rgba(255,71,107,1) 100%);
+  }
+}

@@ -1,5 +1,6 @@
 import Navbar from '@/components/common/navbar';
 import Footer from '@/components/common/footer';
+import { BookmarkProvider } from '@/context/UserBookmarkProvider';
 
 export default function RootLayout({
   children,
@@ -8,9 +9,11 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <Navbar />
-      {children}
-      <Footer />
+      <BookmarkProvider>
+        <Navbar />
+        {children}
+        <Footer />
+      </BookmarkProvider>
     </>
   );
 }

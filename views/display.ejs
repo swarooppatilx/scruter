@@ -106,12 +106,12 @@
                           </a>
                         </p>
                         <% if (card.price) { %>
-                          <p class="card-text">
+                          <p class="card-text card-price">
                             <b>Price: <%= card.price %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b>
                           </p>
                           <% } %>
                             <% if (card.rent) { %>
-                              <p class="card-text">
+                              <p class="card-text card-price">
                                 <b>Rent: <%= card.rent %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b>
                               </p>
                               <% } %>
@@ -155,12 +155,12 @@
                             </a>
                           </p>
                           <% if (card.price) { %>
-                            <p class="card-text">
+                            <p class="card-text card-price">
                               <b>Price: <%= card.price %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b>
                             </p>
                             <% } %>
                               <% if (card.rent) { %>
-                                <p class="card-text">
+                                <p class="card-text card-price">
                                   <b>Rent: <%= card.rent %><i class="fa-solid fa-indian-rupee-sign ms-2"></i></b>
                                 </p>
                                 <% } %>
@@ -179,9 +179,20 @@
 
                               <!-- Buy Now Button at the bottom-right corner of the modal footer -->
                               <button type="button" class="btn btn-primary"
-                                style="background-color: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+                                style="background-color: #3498db; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;"
+                                onclick="openWhatsApp('<%= card.title %>', '<%= card.phone %>', '<%= card.description %>')">
                                 Buy Now
                               </button>
+                              <script>
+                                
+                                function openWhatsApp(productName, productPhone, productDescription) {
+                                  const message = `Hey, I am interested in this product you posted on Scruter:\n\n*${productName}*\n*${productDescription}*\n`;
+                                  const encodedMessage = encodeURIComponent(message);
+                                  const whatsappUrl = `https://wa.me/${productPhone}?text=${encodedMessage}`; 
+                              
+                                  window.open(whatsappUrl, "_blank");
+                                }
+                              </script>
                         </div>
                       </div>
                     </div>
