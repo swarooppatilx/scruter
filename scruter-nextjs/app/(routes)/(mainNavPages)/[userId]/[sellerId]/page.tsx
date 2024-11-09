@@ -25,6 +25,7 @@ const ListingsBySeller = () => {
   const [selectedsellerId, setSelectedsellerId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isMounted, setIsMounted] = useState(false);
+  
   const params = useParams<{ userId: string; sellerId: string }>();
 
   const { userId, sellerId } = params;
@@ -72,7 +73,7 @@ const ListingsBySeller = () => {
             <h1 className="text-6xl font-bold mb-2">Scruter Chat</h1>
             <p className='text-pink-500'>Discuss your queries, directly with the owners!</p>
           </div>
-          <div className="bg-gray-200 p-5 rounded-lg">
+          <div className="bg-gray-200 h-full p-5 rounded-lg">
             {customer && (
               <>
                 <div className="w-full flex items-center justify-center">
@@ -98,7 +99,7 @@ const ListingsBySeller = () => {
                     filteredListings.map(Listing => (
                       <Link
                         key={Listing.id}
-                        href={`/${userId}.${sellerId}/${Listing.id}`}
+                        href={`/${userId}/${sellerId}/${Listing.id}`}
                       >
                         <Card>
                           <CardContent className="p-6">
