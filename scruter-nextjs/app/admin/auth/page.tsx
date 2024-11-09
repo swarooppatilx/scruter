@@ -1,3 +1,5 @@
+
+
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { AdminLoginForm } from '@/app/admin/auth/components/login-form';
@@ -10,20 +12,20 @@ export const metadata: Metadata = {
 export default function AuthenticationPage() {
   return (
     <>
-      <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600">
+      <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600">
         {/* Background Image Section for larger screens */}
-        <div className="absolute inset-0 hidden lg:block">
+     
           <Image
-            src="/admin.svg"
+            src="/adminLogin.png"
             width={1280}
             height={843}
             alt="Authentication"
-            className="object-cover w-full h-full rounded-xl"
+            className="object-contain w-2/4 h-2/4 rounded-xl"
           />
-        </div>
+
 
         {/* Main Content Section */}
-        <div className="relative z-10 w-full max-w-lg px-6 py-8 mx-auto text-white bg-opacity-70 rounded-xl lg:bg-black lg:bg-opacity-90">
+        <div className="z-10 w-full max-w-2xl px-6 py-8 mx-auto text-white  rounded-xl bg-black bg-opacity-70">
           <div className="space-y-6">
             {/* Title and Description */}
             <div className="text-center">
@@ -32,11 +34,11 @@ export default function AuthenticationPage() {
             </div>
 
             {/* Admin Login Form */}
-            <AdminLoginForm authType="login" />
+            <AdminLoginForm className='w-full' authType="login" />
 
-            {/* Alternative Links */}
+            {/* Alternative Links
             <div className="flex justify-between text-sm text-center text-white">
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

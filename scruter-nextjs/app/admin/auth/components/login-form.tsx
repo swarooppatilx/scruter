@@ -73,7 +73,7 @@ export function AdminLoginForm({
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <Button type="submit" className="bg-black" disabled={isLoading}>
+            <Button type="submit" className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600" disabled={isLoading}>
               {isLoading ? (
                 <Spinner className="mr-2" />
               ) : authType === 'signup' ? (
@@ -89,3 +89,4 @@ export function AdminLoginForm({
     </div>
   );
 }
+
