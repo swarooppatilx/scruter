@@ -43,6 +43,19 @@
         "listingLat": 34.0522,
         "listingLng": -118.2437,
         "createdAt": "2024-11-09T10:00:00.000Z"
+      },
+      {
+        "id": "c1",
+        "name": "Margherita Pizza",
+        "price": 12,
+        "description": "Classic Margherita with fresh tomatoes and basil",
+        "category": "Fooding",
+        "images": [
+          { "url": "https://example.com/images/margherita-pizza.jpg" }
+        ],
+        "listingLat": 37.7749,
+        "listingLng": -122.4194,
+        "createdAt": "2024-11-09T10:00:00.000Z"
       }
     ],
     "chats": [],
