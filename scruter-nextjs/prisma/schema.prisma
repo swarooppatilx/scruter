@@ -14,27 +14,27 @@ datasource db {
 }
 
 model User {
-  id           String     @id @default(uuid()) @map("_id")
-  name         String
-  email        String     @unique
-  otp          String?
-  role         String     @default("user")
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  id        String   @id @default(uuid()) @map("_id")
+  name      String
+  email     String   @unique
+  otp       String?
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Many-to-many relationship with Listing via Bookmark
-  bookmarks    Bookmark[] @relation("UserBookmarks")
+  bookmarks Bookmark[] @relation("UserBookmarks")
 }
 
 model Seller {
-  id          String     @id @default(uuid()) @map("_id")
-  name        String
-  email       String     @unique
-  otp         String?
-  role        String     @default("Seller")
-  Listings    Listing[]  @relation("SellerToListing")
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id        String    @id @default(uuid()) @map("_id")
+  name      String
+  email     String    @unique
+  otp       String?
+  role      String    @default("Seller")
+  Listings  Listing[] @relation("SellerToListing")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 enum Category {
@@ -44,59 +44,61 @@ enum Category {
 }
 
 model Listing {
-  id          String     @id @default(uuid()) @map("_id")
+  id          String   @id @default(uuid()) @map("_id")
   SellerId    String
-  Seller      Seller     @relation("SellerToListing", fields: [SellerId], references: [id])
+  Seller      Seller   @relation("SellerToListing", fields: [SellerId], references: [id])
   name        String
   price       Int
   description String
   category    Category
   images      Image[]
-  isArchived  Boolean    @default(false)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  isArchived  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  listingLat Float? @default(28.61)
+  listingLng Float? @default(77.23)
 
   // Many-to-many relationship with User via Bookmark
-  bookmarks   Bookmark[] @relation("UserBookmarks")
+  bookmarks Bookmark[] @relation("UserBookmarks")
 }
 
 model Image {
-  id          String     @id @default(uuid()) @map("_id")
-  listingId   String
-  listing     Listing    @relation(fields: [listingId], references: [id], onDelete: Cascade)
-  url         String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id        String   @id @default(uuid()) @map("_id")
+  listingId String
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Bookmark {
-  id          String   @id @default(uuid()) @map("_id")
-  userId      String
-  listingId   String
-  user        User     @relation("UserBookmarks", fields: [userId], references: [id])
-  listing     Listing  @relation("UserBookmarks", fields: [listingId], references: [id])
+  id        String  @id @default(uuid()) @map("_id")
+  userId    String
+  listingId String
+  user      User    @relation("UserBookmarks", fields: [userId], references: [id])
+  listing   Listing @relation("UserBookmarks", fields: [listingId], references: [id])
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([userId, listingId]) // Ensures a user can only bookmark a listing once
 }
 
-
 model Question {
-  id        String    @id @default(cuid()) @map("_id")
+  id        String   @id @default(cuid()) @map("_id")
   content   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  answers   Answer[]  @relation("QuestionAnswers")  // Removed onDelete: Cascade from here
-  answered  Boolean   @default(false)
+  answers   Answer[] @relation("QuestionAnswers") // Removed onDelete: Cascade from here
+  answered  Boolean  @default(false)
 }
 
 model Answer {
-  id        String    @id @default(cuid()) @map("_id")
-  content   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  questionId String  
-  question  Question @relation("QuestionAnswers", fields: [questionId], references: [id], onDelete: Cascade) // Moved onDelete: Cascade to this side
+  id         String   @id @default(cuid()) @map("_id")
+  content    String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  questionId String
+  question   Question @relation("QuestionAnswers", fields: [questionId], references: [id], onDelete: Cascade) // Moved onDelete: Cascade to this side
 }

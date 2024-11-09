@@ -11,7 +11,7 @@ export async function PostListing({
   listingData,
 }: {
   sellerId: string;
-  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category'> & {
+  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category' | 'listingLat' | 'listingLng'> & {
     images: string[];
   };
 }): Promise<{ success: boolean; error?: string; data?: Listing }> {
@@ -23,7 +23,11 @@ export async function PostListing({
     !listingData.description ||
     !listingData.price ||
     !listingData.images || // Check for images array
-    listingData.images.length === 0 // Ensure images array is not empty
+    listingData.images.length === 0 ||// Ensure images array is not empty
+    !listingData.listingLat ||
+    !listingData.listingLng
+
+
   ) {
     return { success: false, error: 'All entries are required!' };
   }
@@ -54,7 +58,7 @@ export async function UpdateListing({
 }: {
   sellerId: string;
   listingId: string;
-  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category'> & {
+  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category' | 'listingLat' | 'listingLng'> & {
     images: string[];
   };
 }): Promise<{ success: boolean; error?: string; data?: Listing }> {
@@ -64,7 +68,9 @@ export async function UpdateListing({
     !listingData.description ||
     !listingData.price ||
     !listingData.images || // Check for images array
-    listingData.images.length === 0 // Ensure images array is not empty
+    listingData.images.length === 0 ||// Ensure images array is not empty
+    !listingData.listingLat ||
+    !listingData.listingLng
   ) {
     return { success: false, error: 'All entries are required!' };
   }
