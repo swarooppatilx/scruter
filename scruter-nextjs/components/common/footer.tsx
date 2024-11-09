@@ -74,21 +74,21 @@ const socialLinks: SocialLink[] = [
 // Footer component
 const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50">
-      <div className="relative mx-auto w-full max-w-7xl px-6 py-16">
+    <footer className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50 dark:from-blue-950 dark:via-black dark:to-blue-950">
+      <div className="relative mx-auto w-full px-10 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4 space-y-6 text-center md:text-left">
             <Link href="/" className="inline-block">
               <div className="flex justify-center md:justify-start items-center gap-3 mb-6">
                 <div className="flex flex-col">
-                  <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-green-500 bg-clip-text text-transparent">
+                  <span className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 via-blue-500 to-green-500 bg-clip-text text-transparent">
                     Scruter
                   </span>
                 </div>
               </div>
             </Link>
-            <p className="text-gray-600 max-w-md mx-auto md:mx-0">
-              Scruter is your local platform for buying, selling, and discovering everything you need. Whether it&apos;s products, services, or community activities, we connect people for a better local experience.
+            <p className="text-gray-600 max-w-md mx-auto md:mx-0 text-lg">
+              Scruter is your local platform for buying, selling, and discovering everything you need. Whether it's products, services, or community activities, we connect people for a better local experience.
             </p>
           </div>
 
@@ -167,7 +167,7 @@ interface SocialButtonProps {
 const SocialButton = ({ href, icon, color }: SocialButtonProps) => (
   <Link
     href={href}
-    className={`${color} p-2 sm:p-3 rounded-lg text-white transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center`}
+    className={`${color} p-3 rounded-lg text-white transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center`}
   >
     <span className="text-lg sm:text-xl lg:text-2xl">{icon}</span>
   </Link>
