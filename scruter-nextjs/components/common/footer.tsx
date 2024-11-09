@@ -74,25 +74,26 @@ const socialLinks: SocialLink[] = [
 // Footer component
 const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50">
-      <div className="relative mx-auto w-full max-w-7xl px-6 py-16">
+    <footer className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50 dark:from-blue-950 dark:via-black dark:to-blue-950">
+      <div className="relative mx-auto w-full px-10 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4 space-y-6 text-center md:text-left">
             <Link href="/" className="inline-block">
               <div className="flex justify-center md:justify-start items-center gap-3 mb-6">
                 <div className="flex flex-col">
-                  <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-green-500 bg-clip-text text-transparent">
-                    Scruter
-                  </span>
+                <span className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 via-blue-500 to-green-500 bg-clip-text text-transparent transition-all duration-500 hover:bg-gradient-to-r hover:from-gray-900 hover:via-gray-800 hover:to-gray-900">
+  Scruter
+</span>
+
                 </div>
               </div>
             </Link>
-            <p className="text-gray-600 max-w-md mx-auto md:mx-0">
+            <p className="text-gray-600 max-w-md mx-auto md:mx-0 text-lg">
               Scruter is your local platform for buying, selling, and discovering everything you need. Whether it&apos;s products, services, or community activities, we connect people for a better local experience.
             </p>
           </div>
 
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left mx-auto justify-center">
             <FooterSection title="Links" links={Links} />
             <FooterSection title="Helpdesk" links={Helpdesk} />
           </div>
@@ -117,15 +118,21 @@ const Footer = () => {
         </div>
 
         <div className="mt-16 pt-8 border-t border-gray-200">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-600 text-center md:text-left">
-              © {new Date().getFullYear()} Team Scruter
-            </p>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+            
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500">Made with</span>
+              <span className="text-sm text-gray-500">Made with </span>
               <HeartIcon color="red" />
+              <span className="text-sm text-gray-500">Team Scruter</span>
             </div>
+            
           </div>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+
+          <span className="text-sm text-gray-600 text-center md:text-left">
+              Reserved under <a href='https://fossa.com/blog/open-source-software-licenses-101-gpl-v3' target='_blank'>GPLv3</a> {new Date().getFullYear()} 
+            </span>
+            </div>
         </div>
       </div>
     </footer>
@@ -167,10 +174,17 @@ interface SocialButtonProps {
 const SocialButton = ({ href, icon, color }: SocialButtonProps) => (
   <Link
     href={href}
-    className={`${color} p-2 sm:p-3 rounded-lg text-white transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center`}
+    className={`relative ${color} p-3 rounded-lg text-white transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center overflow-hidden group`}
   >
-    <span className="text-lg sm:text-xl lg:text-2xl">{icon}</span>
+    <span className="text-lg sm:text-xl lg:text-2xl z-10">{icon}</span>
+    <span
+      className="absolute inset-0 rounded-lg bg-white opacity-0 transition duration-500 group-hover:opacity-20 group-hover:scale-125"
+    ></span>
+    <span
+      className="absolute inset-0 rounded-lg bg-white opacity-0 transition duration-500 group-hover:opacity-40 group-hover:scale-0"
+    ></span>
   </Link>
 );
+
 
 export default Footer;
