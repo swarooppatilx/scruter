@@ -89,7 +89,7 @@ const Footer = () => {
               </div>
             </Link>
             <p className="text-gray-600 max-w-md mx-auto md:mx-0 text-lg">
-              Scruter is your local platform for buying, selling, and discovering everything you need. Whether it's products, services, or community activities, we connect people for a better local experience.
+              Scruter is your local platform for buying, selling, and discovering everything you need. Whether it&apos;s products, services, or community activities, we connect people for a better local experience.
             </p>
           </div>
 
