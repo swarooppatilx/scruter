@@ -7,6 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'; // Import FontAwes
 import { GetAllListing, ListingWithImages } from '@/actions/seller/listing';
 import toast, { Toaster } from 'react-hot-toast';
 import ListingCardFE from '@/components/listingCardFE';
+import { Search } from 'lucide-react';
 
 const FoodPage: React.FC = () => {
   const [foodItems, setFoodItems] = useState<ListingWithImages[]>([]);
@@ -82,8 +83,7 @@ const FoodPage: React.FC = () => {
               value={query}
               onChange={e => setQuery(e.target.value)}
             />
-            <FontAwesomeIcon
-              icon={faSearch} // Using FontAwesomeIcon component
+            <Search
               className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
             />
           </div>

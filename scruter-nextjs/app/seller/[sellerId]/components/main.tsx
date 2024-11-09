@@ -84,7 +84,7 @@ const Main = ({ sellerId }: { sellerId: string }) => {
         {currentStep === 1 && <ListingDetails />}
         {currentStep === 2 && <SelectCategory />}
         {currentStep === 3 && <SelectImage />}
-        {currentStep === 3 && <MapLocationForm />}
+        {currentStep === 4 && <MapLocationForm />}
         {!formCompleted && (
           <footer className="md:block hidden w-full left-0 right-0 bottom-0">
             <div className="flex">

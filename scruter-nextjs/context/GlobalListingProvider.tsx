@@ -73,7 +73,7 @@ export const GlobalListingProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(4);
   const [completed, setCompleted] = useState(false);
 
   const [listingName, setListingName] = useState('');

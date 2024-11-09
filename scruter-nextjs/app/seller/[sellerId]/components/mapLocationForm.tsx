@@ -1,4 +1,6 @@
 import LazyMap from "@/components/Maps/PinDropInput/LazyMapWithPin";
+import StorePage from "@/components/Maps/PinDropInput/mapWithPin";
+import MapWithPin from "@/components/Maps/PinDropInput/mapWithPinComp";
 import { useGlobalListing } from "@/context/GlobalListingProvider";
 
 const MapLocationForm = () => {
@@ -13,12 +15,19 @@ const MapLocationForm = () => {
         {/* {ListingLat},{ListingLng} */}
       </h3>
       {/* <div className="w-full h-2/4"> */}
-      <LazyMap
+      {/* <LazyMap
+        latitude={listingLat}
+        longitude={listingLng}
+        setLatitude={(lat: number) => setListingLat(lat)}
+        setLongitude={(lng: number) => setListingLng(lng)}
+      /> */}
+      <StorePage
         latitude={listingLat}
         longitude={listingLng}
         setLatitude={(lat: number) => setListingLat(lat)}
         setLongitude={(lng: number) => setListingLng(lng)}
       />
+      
       {/* </div> */}
     </div>
   );
