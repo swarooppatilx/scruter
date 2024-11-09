@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { UserSignupForm } from '../../components/user/signup-form';
+import SocialLoginButton from '../../components/SocialLoginButton';
 
 export const metadata: Metadata = {
   title: 'Authentication',
@@ -21,6 +22,7 @@ export default function AuthenticationPage() {
               Enter your email below to create your account.
             </p>
             <UserSignupForm authType="signup" />
+            <SocialLoginButton roleType='user'/>
 
             <p className="px-8 text-center text-sm text-muted-foreground mt-4">
               By clicking continue, you agree to our{' '}

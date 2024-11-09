@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { UserLoginForm } from '../../components/user/login-form';
+import SocialLoginButton from '../../components/SocialLoginButton';
 
 export const metadata: Metadata = {
   title: 'Authentication',
@@ -32,6 +33,8 @@ export default function AuthenticationPage() {
             Enter your email below to log into your account.
           </p>
           <UserLoginForm authType="login" />
+
+          <SocialLoginButton roleType='user'/>
 
           <div className="text-center mt-4 space-y-2">
             <p className="text-sm text-black">
