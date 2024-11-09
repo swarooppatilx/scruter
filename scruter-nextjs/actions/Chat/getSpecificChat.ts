@@ -1,3 +1,4 @@
+"use server"
 import prismadb from "@/lib/prismadb";
 import { ChatResponse } from "./createChat";
 
