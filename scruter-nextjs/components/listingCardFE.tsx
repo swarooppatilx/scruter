@@ -19,6 +19,7 @@ interface ListingCardProps {
   price: number;
   description: string;
   images: ImageInterface[];
+  isStatic?: boolean;
 }
 
 const ListingCardFE: React.FC<ListingCardProps> = ({
@@ -27,13 +28,15 @@ const ListingCardFE: React.FC<ListingCardProps> = ({
   price,
   description,
   images,
+  isStatic,
 }) => {
   const { addToBookmarks, isBookmarked } = useBookmark();
   const session = useSession();
   const userId = session.data?.user.id;
 
   // State to track if the listing is bookmarked
-  const [isAlreadyBookmarked, setIsAlreadyBookmarked] = useState<boolean>(false);
+  const [isAlreadyBookmarked, setIsAlreadyBookmarked] =
+    useState<boolean>(false);
 
   // Check if the listing is bookmarked when the component mounts
   useEffect(() => {
@@ -83,25 +86,33 @@ const ListingCardFE: React.FC<ListingCardProps> = ({
         <p className="text-gray-600 mb-2">{description}</p>
         <p className="text-lg font-bold mb-2">Price: ₹{price}</p>
         <div className="flex justify-between">
-          <Button variant="outline" className="text-blue-600">
-            Add
-          </Button>
-          {userId && session.data?.user.role === 'user' && !isAlreadyBookmarked && (
-            <Button
-              onClick={() => {
-                addToBookmarks(userId, id);
-                setIsAlreadyBookmarked(true); // Update the state to reflect the bookmark status
-              }}
-              variant="outline"
-              className="text-red-600"
-            >
-              Bookmark
-            </Button>
-          )}
-          {userId && session.data?.user.role === 'user' && isAlreadyBookmarked && (
-            <Button variant="outline" className="text-green-600">
-              Bookmarked
-            </Button>
+          {!isStatic && (
+            <>
+              <Button variant="outline" className="text-blue-600">
+                Add
+              </Button>
+              {userId &&
+                session.data?.user.role === 'user' &&
+                !isAlreadyBookmarked && (
+                  <Button
+                    onClick={() => {
+                      addToBookmarks(userId, id);
+                      setIsAlreadyBookmarked(true); // Update the state to reflect the bookmark status
+                    }}
+                    variant="outline"
+                    className="text-red-600"
+                  >
+                    Bookmark
+                  </Button>
+                )}
+              {userId &&
+                session.data?.user.role === 'user' &&
+                isAlreadyBookmarked && (
+                  <Button variant="outline" className="text-green-600">
+                    Bookmarked
+                  </Button>
+                )}
+            </>
           )}
         </div>
       </div>

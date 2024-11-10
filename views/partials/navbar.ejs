@@ -168,7 +168,7 @@ a {
     <a class="navbar-brand" href="/">
       <img
         id="navbarLogo"
-        src="/banner.png"
+        src="/banner.webp"
         alt="Scruter Logo"
         width="90"
         height="30"
@@ -318,7 +318,7 @@ a {
         footer.classList.add("dark-mode")
       }
       image.src = moon;
-      logo.src = "/banner2.png"; // Change logo for dark mode
+      logo.src = "/banner2.webp"; // Change logo for dark mode
     } else {
       image.src = sun;
     }
@@ -335,11 +335,11 @@ a {
       if (mode === "dark") {
         localStorage.setItem("theme", "dark");
         image.src = moon;
-        logo.src = "/banner2.png"; // Change logo for dark mode
+        logo.src = "/banner2.webp"; // Change logo for dark mode
       } else {
         localStorage.setItem("theme", "light");
         image.src = sun;
-        logo.src = "/banner.png"; // Revert to original logo for light mode
+        logo.src = "/banner.webp"; // Revert to original logo for light mode
       }
     });
 
