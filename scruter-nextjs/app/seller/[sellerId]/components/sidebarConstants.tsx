@@ -14,4 +14,9 @@ export const data = [
     step: 'step 3',
     title: 'Upload Immages',
   },
+  {
+    id: 4,
+    step: 'step 4',
+    title: 'select Location',
+  },
 ];
