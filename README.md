@@ -94,7 +94,7 @@ Scruter is a local classifieds and community platform where people can connect, 
 
 <!-- Screenshot Section -->
 <div align="center">
-    <img src="/public/screenshot.png" alt="Scruter Preview" width="900" />
+    <img src="/public/screenshot.webp" alt="Scruter Preview" width="900" />
 </div>
 
 ## <div align="center">Live Demo 🎥</div>
