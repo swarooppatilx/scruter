@@ -4,6 +4,7 @@
     <div class="row justify-content-center align-items-center gx-2"> <!-- Increased spacing with gx-2 -->
       <!-- Search Input -->
       <div class="col-12 col-md-auto mb-2 mb-md-0">
+        <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" class="form-control" id="search-input" name="query" placeholder="Search"
           value="<%= query %>">
       </div>
@@ -36,6 +37,43 @@
     </div>
   </form>
 </div>
+<!--search bar style-->
+<style>
+  .col-12{
+    display: flex;
+    border: var(--bs-border-width) solid var(--bs-border-color);
+    border-radius: var(--bs--border-radius)
+    }
+
+  i.fa-solid fa-magnifying-glass{
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 10px;
+    width: 30px;
+    border-radius: var(--bs--border-radius);
+  }
+  .form-control{
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+
+
+
+
+</style>
 
 <!-- JavaScript to Update Form Action and Validate Input -->
 <script>
