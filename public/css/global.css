@@ -22,7 +22,7 @@ body {
 .dark-mode {
   --bg-color: #1c1c1c;
   --text-color: #ffffff;
-}
+} 
 
 .bg-dark {
   background-color: var(--bg-color) !important;

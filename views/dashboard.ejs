@@ -2,46 +2,333 @@
 <html lang="en">
 
 <head>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="/css/infopage.css">
     <%- include('partials/head') %>
-    <link rel="stylesheet" href="/css/infopage.css">
+
+        <style>
+            #user-dashboard {
+                z-index: 100;
+                background-color: rgb(243, 244, 246)
+            }
+
+            #profile-img {
+                box-shadow: 0 0 15px #4e545a;
+            }
+
+            .userDetails {
+                background-color: #acd2fb79;
+                padding: 20px 45px;
+                padding-top: 35px;
+                border-radius: 50px;
+            }
+
+            .userDetails p {
+                font-weight: 400;
+            }
+
+            #change-profile-img-btn {
+                background-color: #1ea236;
+                color: #ffffff;
+                font-weight: bold;
+                padding: 10px;
+                text-decoration: none;
+                border-radius: 10px;
+                font-size: 15px;
+                display: block;
+                margin: auto;
+                margin-bottom: 45px;
+            }
+
+            #change-profile-img-btn:hover {
+                background-color: #1f8b32;
+            }
+
+            #upload-btn {
+                background-color: #1385ff;
+                color: #ffffff;
+                font-weight: bold;
+                padding: 10px;
+                text-decoration: none;
+                border-radius: 10px;
+                font-size: 15px;
+            }
+
+            #upload-btn:hover {
+                background-color: #0575ed;
+                color: #ffffff;
+            }
+
+            #save-profile-pic-btn {
+                background-color: #1385ff;
+                color: #ffffff;
+                font-weight: bold;
+                padding: 10px;
+                text-decoration: none;
+                border-radius: 10px;
+                font-size: 15px;
+            }
+
+            #save-profile-pic-btn:hover {
+                background-color: #0575ed;
+                color: #ffffff;
+            }
+
+            /* Flex container to align items on the same line */
+            .upload-save-container {
+                margin-top: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                /* Spacing between the upload button and save form */
+            }
+        </style>
 </head>
 
 <body>
-    <div id="progress-bar"></div>
     <%- include('partials/navbar') %>
+        <div id="user-dashboard"
+            class="container d-flex flex-column align-items-center justify-content-center mb-5 pb-5 mt-5 pt-5 bg-dark">
 
-        <div class="main-content">
-            <div class="title-section">
-                <h1>Welcome to Your Dashboard, <strong>
-                        <%= user.username %>
-                    </strong>!</h1>
-                <p>Your registered email: <strong>
-                        <%= user.email %>
-                    </strong></p>
-                <p>Phone Number: <strong>
-                        <%= user.phone %>
-                    </strong></p>
-                <p>Plan: <strong>Basic</strong></p>
+            <!-- Profile Image Section (with current profile picture and Change button) -->
+            <div id="profile-img-section" class="text-center">
+                <img id="profile-img" src="<%= user.profilePicture || '/profile1.png' %>" alt="Profile Image"
+                    class="rounded-circle" width="150" height="150">
             </div>
 
-            <section class="form-section">
-                <h2>Update Your Information</h2>
-                <form class="contact-form" action="/update" method="POST">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" value="<%= user.username %>" required>
+            <h1 class="text-center mb-4 display-4"><span>&#x1F44B;</span> <!-- 👋 -->Welcome to Your Dashboard, <strong>
+                    <%= user.username %>
+                </strong>!</h1>
+            <div class="userDetails">
+                <p class="text-center lead"><span>&#x1F4E7;</span> <!-- 📧 --> Your registered email: <strong>
+                        <%= user.email %>
+                    </strong></p>
+                <p class="text-center lead"><span>&#x1F4F1;</span> <!-- 📱 -->Phone Number: <strong>
+                        <%= user.phone %>
+                    </strong></p>
+                <p class="text-center lead"><span>&#x1F3AB;</span> <!-- 🎫 -->Plan: <strong>Basic</strong></p>
+            </div>
 
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<%= user.email %>" required>
+        </div>
 
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" value="<%= user.phone %>" pattern="[0-9]{10}" required>
+        <div class="container my-5">
+            <div class="card shadow">
+                <div class="card-body">
+                    <!-- Profile Image Upload & Selection Section (hidden by default) -->
+                    <h2 class="text-2xl font-semibold mb-4 text-center"><span>&#129494;&#127995;</span> <!--🧖🏻-->
+                        Change
+                        Your Profile Picture </h2>
+                    <button type="button" class="btn btn-link" id="change-profile-img-btn">Change Profile
+                        Picture</button>
+                    <div id="img-upload-section" class="d-none" style="margin-bottom: 55px;">
+                        <div class="profile-image-options text-center">
+                            <button class="profile-img-option" data-img="/profile1.png"
+                                style="background-color: transparent; border:none; margin-left:10px">
+                                <img src="/profile1.png" alt="Profile 1" class="rounded-circle" width="95" height="90">
+                            </button>
+                            <button class="profile-img-option" data-img="/profile2.png"
+                                style="background-color: transparent; border:none; margin-left:10px">
+                                <img src="/profile2.png" alt="Profile 2" class="rounded-circle" width="95" height="90">
+                            </button>
+                            <button class="profile-img-option" data-img="/profile3.png"
+                                style="background-color: transparent; border:none; margin-left:10px">
+                                <img src="/profile3.png" alt="Profile 3" class="rounded-circle" width="95" height="90">
+                            </button>
+                            <button class="profile-img-option" data-img="/profile4.png"
+                                style="background-color: transparent; border:none; margin-left:10px">
+                                <img src="/profile4.png" alt="Profile 4" class="rounded-circle" width="95" height="90">
+                            </button>
+                            <button class="profile-img-option" data-img="/profile5.png"
+                                style="background-color: transparent; border:none; margin-left:10px">
+                                <img src="/profile5.png" alt="Profile 5" class="rounded-circle" width="95" height="90">
+                            </button>
+                            <button class="profile-img-option" data-img="/profile6.png"
+                                style="background-color: transparent; border:none; margin-left:10px">
+                                <img src="/profile6.png" alt="Profile 6" class="rounded-circle" width="95" height="90">
+                            </button>
+                        </div>
+                        <!-- Option to Upload a New Image -->
+                        <div class="upload-save-container">
+                            <!-- Option to Upload a New Image -->
+                            <div class="upload">
+                                <input type="file" id="profilePic" name="profilePic" class="form-control-file"
+                                    accept="image/*" style="display: none;">
+                                <button type="button" class="btn btn-link" id="upload-btn">
+                                    <span>&#x1F4C2;</span> <!-- 📂 --> Upload
+                                </button>
+                            </div>
 
-                    <button type="submit">Update Information</button>
-                </form>
-            </section>
+                            <!-- Form to save the selected profile picture -->
+                            <form id="profile-img-form" method="POST" action="/update-profile-pic"
+                                enctype="multipart/form-data" style="display: none;"></form>
+                            <button type="submit" id="save-profile-pic-btn" class="btn btn-primary">Save</button>
+                            </form>
+                        </div>
+
+
+                    </div>
+                    <h2 class="text-2xl font-semibold mb-4 text-center"><span>&#x1FAAA;</span> <!-- 🪪 -->Change Your
+                        User Data</h2>
+
+                    <form id="personal-info-form" method="POST" action="/update-personal-info" class="mb-4">
+                        <div class="mb-3">
+                            <label for="newUsername" class="form-label">New Username</label>
+                            <input type="text" id="newUsername" name="newUsername" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">New Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Info</button>
+                    </form>
+                    <h2 class="text-2xl font-semibold mb-4 text-center"><span>&#x1F512;</span> <!-- 🔒 --> Change
+                        Password</h2>
+                    <form id="password-change-form" method="POST" action="/change-password" class="mb-4">
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Current Password</label>
+                            <input type="password" id="currentPassword" name="currentPassword" class="form-control"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">New Password</label>
+                            <input type="password" id="newPassword" name="newPassword" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Change Password</button>
+                    </form>
+                    <h2 class="text-2xl font-semibold mb-4 text-center"><span>&#x1F4DE;</span> <!-- 📞 -->Update Contact
+                        Information</h2>
+                    <form id="contact-info-form" method="POST" action="/update-contact-info" class="mb-4">
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Update Contact</button>
+                    </form>
+                </div>
+            </div>
         </div>
 
         <%- include('partials/footer') %>
+
+
+        <script>
+            // Toggle the profile picture upload section visibility
+            const changeImgBtn = document.getElementById('change-profile-img-btn');
+            const imgUploadSection = document.getElementById('img-upload-section');
+            const profileImg = document.getElementById('profile-img');
+            const saveImgBtn = document.getElementById('save-profile-pic-btn');
+            const uploadBtn = document.getElementById('upload-btn');
+            const profilePicInput = document.getElementById('profilePic');
+            
+            // Show the image selection section when the "Change Profile Picture" button is clicked
+            changeImgBtn.addEventListener('click', () => {
+                imgUploadSection.classList.toggle('d-none'); // Toggle visibility
+            });
+            
+            // Handle profile image selection from the available options
+            document.querySelectorAll('.profile-img-option').forEach(button => {
+                button.addEventListener('click', function () {
+                    const selectedImage = this.getAttribute('data-img');
+                    // Update the profile image preview
+                    profileImg.src = selectedImage;
+            
+                    // Show the save button
+                    saveImgBtn.style.display = 'inline-block';
+                });
+            });
+            
+            // Handle new image upload by opening the file input dialog
+            uploadBtn.addEventListener('click', () => {
+                profilePicInput.click(); // Trigger the file input click
+            });
+            
+            // Handle the file selection event for new profile image upload
+            profilePicInput.addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        // Preview the selected image
+                        profileImg.src = e.target.result;
+                        // Show the save button
+                        saveImgBtn.style.display = 'inline-block';
+                    };
+                    reader.readAsDataURL(file); // Read file as data URL
+                }
+            });
+            
+            // Save the new profile picture when the "Save" button is clicked
+            saveImgBtn.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent form submission
+            
+                const profilePicFile = profilePicInput.files[0]; // Get the selected file
+            
+                if (profilePicFile) {
+                    const formData = new FormData();
+                    formData.append('profilePic', profilePicFile); // Add the file to the form data
+            
+                    // Send the form data (with the file) to the server
+                    fetch('/update-profile-pic', {
+                        method: 'POST',
+                        body: formData // Send the file as form data
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);  // Log the data to check if it is a valid JSON object
+                            if (data.success) {
+                                // Update the profile image source with the new Cloudinary URL
+                                profileImg.src = data.filePath;
+                                alert('Profile picture updated successfully!');
+                            } else {
+                                alert(data.message || 'Failed to update profile picture!');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Success');
+                            alert('Profile Picture Successfully changed!');
+                        });
+                } else {
+                    alert('No profile picture selected!');
+                }
+            });
+        
+            // Add functionality to save the selected profile image as the default on the backend
+            document.querySelectorAll('.profile-img-option').forEach(button => {
+                button.addEventListener('click', function () {
+                    const selectedImage = this.getAttribute('data-img');
+        
+                    // Save the selected image as the default profile picture on the server
+                    fetch('/set-default-profile-pic', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ profileImage: selectedImage })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Update the profile image source with the new default image
+                            profileImg.src = selectedImage;
+                            alert('Profile picture updated successfully!');
+                        } else {
+                            alert(data.message || 'Failed to set the default profile picture!');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Success');
+                        alert('Profile Picture Successfully changed!');
+                    });
+                });
+            });
+        </script>
+        
+        
+
+            <script src="https://cdn.jsdelivr.net/npm/twemoji@13.1.0/dist/twemoji.min.js"></script>
+
 </body>
 
 </html>
