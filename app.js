@@ -11,6 +11,9 @@ const bcrypt = require('bcrypt');
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const app = express();
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+const cors = require('cors');
 
 // Import the database.js file
 const { User, Food, House, Market, Feedback } = require('./database'); // Adjust path as needed
@@ -839,6 +842,18 @@ app.use((err, req, res, next) => {
   console.error('Internal Server Error:', err);
   res.status(500).render('500');
 });
+
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
+
+app.use(limiter);
+
+app.use(helmet());
+
+app.use(cors());
 
 // Start the server
 const PORT = process.env.PORT || 8080;
