@@ -12,28 +12,28 @@
 
         <div class="main-content">
             <div class="title-section">
-                <h1>Welcome to Your Dashboard, <strong>
+                <h1><span>&#x1F44B;</span> <!-- 👋 -->Welcome to Your Dashboard, <strong>
                         <%= user.username %>
                     </strong>!</h1>
-                <p>Your registered email: <strong>
+                <p><span>&#x1F4E7;</span> <!-- 📧 -->Your registered email: <strong>
                         <%= user.email %>
                     </strong></p>
-                <p>Phone Number: <strong>
+                <p><span>&#x1F4F1;</span> <!-- 📱 -->Phone Number: <strong>
                         <%= user.phone %>
                     </strong></p>
-                <p>Plan: <strong>Basic</strong></p>
+                <p><span>&#x1F3AB;</span> <!-- 🎫 -->Plan: <strong>Basic</strong></p>
             </div>
 
             <section class="form-section">
                 <h2>Update Your Information</h2>
                 <form class="contact-form" action="/update" method="POST">
-                    <label for="username">Username</label>
+                    <label for="username"><span>&#x1FAAA;</span> <!-- 🪪 -->Username</label>
                     <input type="text" id="username" name="username" value="<%= user.username %>" required>
 
-                    <label for="email">Email</label>
+                    <label for="email"><span>&#x1F4E7;</span> <!-- 📧 -->Email</label>
                     <input type="email" id="email" name="email" value="<%= user.email %>" required>
 
-                    <label for="phone">Phone Number</label>
+                    <label for="phone"><span>&#x1F4DE;</span> <!-- 📞 -->Phone Number</label>
                     <input type="tel" id="phone" name="phone" value="<%= user.phone %>" pattern="[0-9]{10}" required>
 
                     <button type="submit">Update Information</button>
