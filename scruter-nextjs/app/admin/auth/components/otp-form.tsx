@@ -56,13 +56,16 @@ export function OtpForm({
   async function onOTPSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true);
 
+    console.log(email,data,roleType)
+
+
     const result = await signIn('credentials', {
       email,
       otp: data.pin,
       role: roleType,
       redirect: false,
     });
-
+    console.log(result)
     if (!result?.ok) {
       toast.error('Invalid email or OTP');
     } else {
