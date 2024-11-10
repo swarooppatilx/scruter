@@ -37,12 +37,10 @@ export default function UserProfile() {
     }
   }, []);
 
- 
-
   // if(!loading&&bookmarks.length>0){
   //   console.log('BOOKMARKSSSSSSS' + bookmarks[0].listing);
   // }
-  
+
   return (
     <div className="flex flex-col items-center py-8 px-4 md:px-10 lg:px-20">
       {/* User Info Section */}
@@ -70,55 +68,56 @@ export default function UserProfile() {
             </CardHeader>
           </Card>
 
-          {loading && (
-            <div>Loading Bookmarks....</div>
-          )}
-          {!loading &&  (
-            
+          {loading && <div>Loading Bookmarks....</div>}
+          {!loading && (
             <div className="w-full max-w-7xl">
               <h2 className="text-2xl font-bold mb-4 flex items-center">
                 <Bookmark className="h-6 w-6 text-gray-600 mr-2" />
                 Bookmarked Listings
               </h2>
               <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                {bookmarks.length>0 && bookmarks.map(bookmark => (
-                <Card
-                  key={bookmark.id}
-                  className="shadow-md border border-gray-200 rounded-md"
-                >
-                  <CardHeader className="p-3">
-                    <CardTitle className="text-lg font-semibold">
-                      {bookmark.listing.name}
-                    </CardTitle>
-                    <p className="text-sm text-gray-600 truncate">
-                      {bookmark.listing.description}
-                    </p>
-                  </CardHeader>
-                  <CardContent className="p-3">
-                    <img
-                      src={bookmark.listing.images[0].url}
-                      className="h-32 w-full object-cover rounded-md mb-2"
-                      alt={bookmark.listing.name}
-                    />
-                    <p className="text-gray-700 font-bold">${bookmark.listing.price}</p>
-
-            
-                    <button
-                        onClick={() => removeFromBookmarks(user.id , bookmark.listing.id)}
-                      className="mt-4 bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 transition duration-200"
+                {bookmarks.length > 0 &&
+                  bookmarks.map(bookmark => (
+                    <Card
+                      key={bookmark.id}
+                      className="shadow-md border border-gray-200 rounded-md"
                     >
-                      <Trash className="h-5 w-5" />
-                    </button>
-                  </CardContent>
-                </Card>
-              ))}
+                      <CardHeader className="p-3">
+                        <CardTitle className="text-lg font-semibold">
+                          {bookmark.listing.name}
+                        </CardTitle>
+                        <p className="text-sm text-gray-600 truncate">
+                          {bookmark.listing.description}
+                        </p>
+                      </CardHeader>
+                      <CardContent className="p-3">
+                        <img
+                          src={bookmark.listing.images[0].url}
+                          className="h-32 w-full object-cover rounded-md mb-2"
+                          alt={bookmark.listing.name}
+                        />
+                        <p className="text-gray-700 font-bold">
+                          ${bookmark.listing.price}
+                        </p>
+
+                        <button
+                          onClick={() =>
+                            removeFromBookmarks(user.id, bookmark.listing.id)
+                          }
+                          className="mt-4 bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 transition duration-200"
+                        >
+                          <Trash className="h-5 w-5" />
+                        </button>
+                      </CardContent>
+                    </Card>
+                  ))}
               </div>
 
               {bookmarks.length === 0 && (
-              <p className="text-center text-gray-500 mt-4">
-                No bookmarks yet.
-              </p>
-            )}
+                <p className="text-center text-gray-500 mt-4">
+                  No bookmarks yet.
+                </p>
+              )}
             </div>
           )}
         </>

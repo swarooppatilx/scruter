@@ -26,11 +26,13 @@ Thank you for your interest in contributing to Scruter! Your contributions help 
 4. **🛠️ Make your changes** and test them locally.
 
 ## Setting up environment
+
 1. **Get your mongodb connection string**. Download mongodb compass if you're not having already and you can find your connection string there
 2. Register for cloudinary account and get your api key, api secret and cloud name
 3. Give a session secret and you're good to go
 
 ## Getting your cloudinary keys
+
 1. Sign up for cloudinary and go to [cloudinary console](https://console.cloudinary.com/)
 2. Create environment in cloudinary and go to settings by clicking gear icon in the left panel
 3. Find API keys in the sidebar and generate and copy your api keys and secret

@@ -1,6 +1,8 @@
-
-import { createQuestion, getUnansweredQuestions } from "@/actions/forum/Question";
-import { NextRequest, NextResponse } from "next/server";
+import {
+  createQuestion,
+  getUnansweredQuestions,
+} from '@/actions/forum/Question';
+import { NextRequest, NextResponse } from 'next/server';
 
 export type Params = Promise<{
   userId: string;

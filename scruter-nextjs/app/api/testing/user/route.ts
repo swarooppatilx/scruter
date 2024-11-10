@@ -1,16 +1,14 @@
-import { UserCreate } from "@/actions/user/signup-action";
-import { NextResponse } from "next/server";
-
+import { UserCreate } from '@/actions/user/signup-action';
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-  
 
     const { name, email } = body;
 
     if (!name || !email) {
-      return new NextResponse("All fields are required!", { status: 400 });
+      return new NextResponse('All fields are required!', { status: 400 });
     }
 
     const resp = await UserCreate({ name, email });

@@ -843,7 +843,6 @@ app.use((err, req, res, next) => {
   res.status(500).render('500');
 });
 
-
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,

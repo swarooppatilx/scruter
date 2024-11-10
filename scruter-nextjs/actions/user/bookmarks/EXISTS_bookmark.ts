@@ -17,6 +17,10 @@ export async function checkBookmarkExists({
     return { success: true, exists: !!existingBookmark };
   } catch (error) {
     console.error('[CHECK_BOOKMARK_EXISTS_ERROR]', error);
-    return { success: false, error: 'Error checking bookmark existence', exists: false };
+    return {
+      success: false,
+      error: 'Error checking bookmark existence',
+      exists: false,
+    };
   }
 }

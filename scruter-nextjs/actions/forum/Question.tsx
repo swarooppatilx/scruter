@@ -4,8 +4,8 @@ import prismadb from '@/lib/prismadb';
 import { Answer, Question } from '@prisma/client';
 import { UUID } from 'crypto';
 
-interface QuestionWithAnswer extends Question{
-  answers?:Answer[]
+interface QuestionWithAnswer extends Question {
+  answers?: Answer[];
 }
 
 type QuestionResponse = {
@@ -19,7 +19,6 @@ type getQuestionsResponse = {
   data?: QuestionWithAnswer[];
   error?: string;
 };
-
 
 export async function createQuestion(
   content: string
@@ -44,8 +43,7 @@ export async function createQuestion(
   }
 }
 
-export async function getUnansweredQuestions(
-): Promise<getQuestionsResponse> {
+export async function getUnansweredQuestions(): Promise<getQuestionsResponse> {
   try {
     const unAnsweredQuestions = await prismadb.question.findMany({
       where: {
@@ -73,17 +71,15 @@ export async function getUnansweredQuestions(
   }
 }
 
-
-export async function getAnsweredQuestions(
-): Promise<getQuestionsResponse> {
+export async function getAnsweredQuestions(): Promise<getQuestionsResponse> {
   try {
     const AnsweredQuestions = await prismadb.question.findMany({
       where: {
         answered: true,
       },
-      include:{
-        answers:true
-      }
+      include: {
+        answers: true,
+      },
     });
 
     if (!AnsweredQuestions.length) {
@@ -111,12 +107,12 @@ export async function getAnsweredQuestions(
 // deletes a question and all its related answers if present
 
 export async function deleteQuestion(
-  questionId: string,
+  questionId: string
 ): Promise<QuestionResponse> {
   try {
     const deletedQuestion = await prismadb.question.delete({
       where: {
-        id:questionId
+        id: questionId,
       },
     });
 

@@ -1,17 +1,14 @@
-
-import { SellerCreate } from "@/actions/seller/signup-action";
-import { NextResponse } from "next/server";
-
+import { SellerCreate } from '@/actions/seller/signup-action';
+import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-  
 
     const { name, email } = body;
 
     if (!name || !email) {
-      return new NextResponse("All fields are required!", { status: 400 });
+      return new NextResponse('All fields are required!', { status: 400 });
     }
 
     // Pass the sellerId along with the other data to SellerCreate function

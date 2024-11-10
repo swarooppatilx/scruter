@@ -32,4 +32,3 @@ export async function createBookmark({
     return { success: false, error: 'Error creating bookmark' };
   }
 }
-    

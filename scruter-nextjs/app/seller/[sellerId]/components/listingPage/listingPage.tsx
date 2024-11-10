@@ -10,7 +10,7 @@ const ListingsPage = async ({
   sellerId,
   listings,
 }: {
-  sellerId: string
+  sellerId: string;
   listings: ListingWithImages[];
 }) => {
   //   const [searchTerm, setSearchTerm] = useState('');
@@ -22,7 +22,9 @@ const ListingsPage = async ({
       <div className="flex flex-col gap-5 lg:gap-0 md:flex-row justify-between mb-4 p-5 bg-gray-200 items-center rounded-xl">
         <h1 className="text-4xl font-bold text-center">Your Listings</h1>
 
-        <Link href={`/seller/${sellerId}/createListing`} ><Button className="md:ml-auto">Add New Listing</Button></Link>
+        <Link href={`/seller/${sellerId}/createListing`}>
+          <Button className="md:ml-auto">Add New Listing</Button>
+        </Link>
       </div>
 
       <div className="flex justify-center mb-4">

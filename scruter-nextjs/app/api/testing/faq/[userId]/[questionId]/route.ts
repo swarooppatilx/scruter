@@ -1,18 +1,20 @@
-
-import { createAnswer } from "@/actions/forum/Answer";
-import { createQuestion, getUnansweredQuestions } from "@/actions/forum/Question";
-import { NextRequest, NextResponse } from "next/server";
+import { createAnswer } from '@/actions/forum/Answer';
+import {
+  createQuestion,
+  getUnansweredQuestions,
+} from '@/actions/forum/Question';
+import { NextRequest, NextResponse } from 'next/server';
 
 export type Params = Promise<{
   userId: string;
-  questionId : string
+  questionId: string;
 }>;
 
 export async function POST(
   request: NextRequest,
   { params }: { params: Params }
 ) {
-  const { userId , questionId } = await params;
+  const { userId, questionId } = await params;
 
   if (!userId) {
     return new NextResponse('User not authenticated', { status: 401 });
@@ -21,11 +23,13 @@ export async function POST(
   const { content } = await request.json();
 
   if (!content || !questionId) {
-    return new NextResponse('Content and questionId is required', { status: 400 });
+    return new NextResponse('Content and questionId is required', {
+      status: 400,
+    });
   }
 
   try {
-    const resp = await createAnswer(questionId,content);
+    const resp = await createAnswer(questionId, content);
 
     if (resp.success) {
       return NextResponse.json(resp.data);

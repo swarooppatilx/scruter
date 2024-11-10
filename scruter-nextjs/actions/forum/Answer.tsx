@@ -1,12 +1,12 @@
-"use server"
+'use server';
 
-import prismadb from "@/lib/prismadb";
-import { Answer } from "@prisma/client";
-import { UUID } from "crypto";
+import prismadb from '@/lib/prismadb';
+import { Answer } from '@prisma/client';
+import { UUID } from 'crypto';
 
 type CreateAnswerResponse = {
   success: boolean;
-  data?: Answer
+  data?: Answer;
   error?: string;
 };
 
@@ -15,7 +15,6 @@ export async function createAnswer(
   content: string
 ): Promise<CreateAnswerResponse> {
   try {
-
     const newAnswer = await prismadb.answer.create({
       data: {
         content,
@@ -30,19 +29,16 @@ export async function createAnswer(
 
     return {
       success: true,
-      data: newAnswer
+      data: newAnswer,
     };
   } catch (error) {
-    console.error("Error creating answer:", error);
+    console.error('Error creating answer:', error);
     return {
       success: false,
-      error: "Failed to create answer",
+      error: 'Failed to create answer',
     };
   }
 }
-
-
-
 
 type DeleteAnswerResponse = {
   success: boolean;
@@ -50,7 +46,9 @@ type DeleteAnswerResponse = {
   error?: string;
 };
 
-export async function deleteSpecificAnswer(answerId: string): Promise<DeleteAnswerResponse> {
+export async function deleteSpecificAnswer(
+  answerId: string
+): Promise<DeleteAnswerResponse> {
   try {
     const deletedAnswer = await prismadb.answer.delete({
       where: {
@@ -61,7 +59,7 @@ export async function deleteSpecificAnswer(answerId: string): Promise<DeleteAnsw
     if (!deletedAnswer) {
       return {
         success: false,
-        error: "Error in deleting the answer",
+        error: 'Error in deleting the answer',
       };
     }
 
@@ -70,10 +68,10 @@ export async function deleteSpecificAnswer(answerId: string): Promise<DeleteAnsw
       data: deletedAnswer,
     };
   } catch (error) {
-    console.error("Error deleting specific answer:", error);
+    console.error('Error deleting specific answer:', error);
     return {
       success: false,
-      error: "Failed to delete specific answer",
+      error: 'Failed to delete specific answer',
     };
   }
 }

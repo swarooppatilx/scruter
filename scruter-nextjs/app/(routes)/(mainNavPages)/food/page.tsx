@@ -12,16 +12,14 @@ const FoodPage: React.FC = () => {
   const [foodItems, setFoodItems] = useState<ListingWithImages[]>([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
-  const [sort, setSort] = useState<"" | "asc" | "desc" | undefined>('');
-
- 
+  const [sort, setSort] = useState<'' | 'asc' | 'desc' | undefined>('');
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         // Example API call to fetch food data
-        const foodResponse = await GetAllListing('Fooding',query,sort);
+        const foodResponse = await GetAllListing('Fooding', query, sort);
 
         if (!foodResponse || !foodResponse.data) {
           toast.error('No data fetched from BE');
@@ -96,7 +94,7 @@ const FoodPage: React.FC = () => {
               name="sort"
               value={sort}
               onChange={e => {
-                const value = e.target.value as "" | "asc" | "desc" | undefined; // Type the value to be one of these options
+                const value = e.target.value as '' | 'asc' | 'desc' | undefined; // Type the value to be one of these options
                 setSort(value); // Update the sort state
               }}
             >

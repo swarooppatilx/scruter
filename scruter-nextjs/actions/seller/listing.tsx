@@ -11,7 +11,10 @@ export async function PostListing({
   listingData,
 }: {
   sellerId: string;
-  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category' | 'listingLat' | 'listingLng'> & {
+  listingData: Pick<
+    Listing,
+    'name' | 'price' | 'description' | 'category' | 'listingLat' | 'listingLng'
+  > & {
     images: string[];
   };
 }): Promise<{ success: boolean; error?: string; data?: Listing }> {
@@ -23,11 +26,9 @@ export async function PostListing({
     !listingData.description ||
     !listingData.price ||
     !listingData.images || // Check for images array
-    listingData.images.length === 0 ||// Ensure images array is not empty
+    listingData.images.length === 0 || // Ensure images array is not empty
     !listingData.listingLat ||
     !listingData.listingLng
-
-
   ) {
     return { success: false, error: 'All entries are required!' };
   }
@@ -58,7 +59,10 @@ export async function UpdateListing({
 }: {
   sellerId: string;
   listingId: string;
-  listingData: Pick<Listing, 'name' | 'price' | 'description' | 'category' | 'listingLat' | 'listingLng'> & {
+  listingData: Pick<
+    Listing,
+    'name' | 'price' | 'description' | 'category' | 'listingLat' | 'listingLng'
+  > & {
     images: string[];
   };
 }): Promise<{ success: boolean; error?: string; data?: Listing }> {
@@ -68,7 +72,7 @@ export async function UpdateListing({
     !listingData.description ||
     !listingData.price ||
     !listingData.images || // Check for images array
-    listingData.images.length === 0 ||// Ensure images array is not empty
+    listingData.images.length === 0 || // Ensure images array is not empty
     !listingData.listingLat ||
     !listingData.listingLng
   ) {
@@ -107,9 +111,9 @@ export async function UpdateListing({
       },
       data: {
         ...listingData,
-        images:{
-          deleteMany:{}
-        }
+        images: {
+          deleteMany: {},
+        },
       },
     });
     const resp = await prismadb.listing.update({
@@ -117,13 +121,13 @@ export async function UpdateListing({
         id: listingId,
       },
       data: {
-        images:{
-          createMany:{
-            data: listingData.images.map((imageUrl) => ({
+        images: {
+          createMany: {
+            data: listingData.images.map(imageUrl => ({
               url: imageUrl, // Correctly map each URL to an object with a `url` property
             })),
-          }
-        }
+          },
+        },
       },
     });
     return { success: true, data: resp };
@@ -190,11 +194,10 @@ export async function DeleteListing({
   }
 }
 
-
 export async function GetAllListing(
-  category?: Category, 
-  searchQuery?: string, 
-  sort?: "" | "asc" | "desc" | undefined
+  category?: Category,
+  searchQuery?: string,
+  sort?: '' | 'asc' | 'desc' | undefined
 ): Promise<{
   success: boolean;
   error?: string;
@@ -202,13 +205,16 @@ export async function GetAllListing(
 }> {
   // Set no-cache headers to ensure fresh data
   const headers = new Headers();
-  headers.append('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  headers.append(
+    'Cache-Control',
+    'no-store, no-cache, must-revalidate, proxy-revalidate'
+  );
   headers.append('Pragma', 'no-cache');
   headers.append('Expires', '0');
-  
+
   // Build the where clause based on provided parameters
   let whereClause = {};
-  
+
   if (category) {
     whereClause = { ...whereClause, category };
   }
@@ -234,7 +240,10 @@ export async function GetAllListing(
     });
 
     if (!resp) {
-      return { success: false, error: 'Error occurred in fetching all listings' };
+      return {
+        success: false,
+        error: 'Error occurred in fetching all listings',
+      };
     }
 
     return { success: true, data: resp };
@@ -248,7 +257,6 @@ export async function GetAllListing(
   }
 }
 
-
 export async function getSpecificListing({
   listingId,
 }: {
@@ -261,9 +269,9 @@ export async function getSpecificListing({
       where: {
         id: listingId,
       },
-      include:{
-        images:true
-      }
+      include: {
+        images: true,
+      },
     });
 
     if (!resp) {

@@ -1,6 +1,5 @@
-
-import { deleteSpecificAnswer } from "@/actions/forum/Answer";
-import { NextRequest, NextResponse } from "next/server";
+import { deleteSpecificAnswer } from '@/actions/forum/Answer';
+import { NextRequest, NextResponse } from 'next/server';
 
 export type Params = Promise<{
   userId: string;

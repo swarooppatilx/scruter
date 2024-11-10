@@ -15,10 +15,10 @@ interface ListingCardProps {
   name: string;
   price: number;
   description: string;
-  sellerId:string
+  sellerId: string;
   category: 'Housing' | 'Fooding' | 'For_Sale';
   images: ImageInterface[]; // Assuming images contain the URL property
-  listingId: string
+  listingId: string;
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({
@@ -28,7 +28,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
   description,
   category,
   images,
-  listingId
+  listingId,
 }) => {
   return (
     <div className="bg-white overflow-hidden shadow-lg rounded-lg">
@@ -66,9 +66,9 @@ const ListingCard: React.FC<ListingCardProps> = ({
         <p className="text-sm text-gray-500 mb-4">Category: {category}</p>
         <div className="flex justify-between">
           <Link href={`/seller/${sellerId}/${listingId}`}>
-          <Button variant="outline" className="text-blue-600">
-            Edit
-          </Button>
+            <Button variant="outline" className="text-blue-600">
+              Edit
+            </Button>
           </Link>
           <Button variant="outline" className="text-red-600">
             Delete

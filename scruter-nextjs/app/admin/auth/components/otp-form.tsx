@@ -56,8 +56,7 @@ export function OtpForm({
   async function onOTPSubmit(data: z.infer<typeof FormSchema>) {
     setIsLoading(true);
 
-    console.log(email,data,roleType)
-
+    console.log(email, data, roleType);
 
     const result = await signIn('credentials', {
       email,
@@ -65,7 +64,7 @@ export function OtpForm({
       role: roleType,
       redirect: false,
     });
-    console.log(result)
+    console.log(result);
     if (!result?.ok) {
       toast.error('Invalid email or OTP');
     } else {
@@ -76,8 +75,7 @@ export function OtpForm({
         setRedirectUrl('/'); // Redirect to home for user
       } else if (roleType === 'seller') {
         setRedirectUrl(`/seller/${email}`); // Temporarily set to seller's page
-      }
-      else{
+      } else {
         setRedirectUrl(`/admin/${email}`);
       }
     }
@@ -88,17 +86,16 @@ export function OtpForm({
     if (redirectUrl && session) {
       const userId = session.user?.id;
       const userRole = session.user?.role;
-  
-      if (userRole === "seller" && userId) {
+
+      if (userRole === 'seller' && userId) {
         router.push(`/seller/${userId}`); // Redirect to seller's page
-      } else if (userRole === "user") {
+      } else if (userRole === 'user') {
         router.push(redirectUrl); // Redirect to the specified URL or home for a user
-      } else if (userRole === "admin") {
+      } else if (userRole === 'admin') {
         router.push(`/admin/${userId}`); // Redirect to admin dashboard
       }
     }
   }, [redirectUrl, session, router]);
-  
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
@@ -136,7 +133,11 @@ export function OtpForm({
               </FormItem>
             )}
           />
-          <Button className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 w-full" type="submit" disabled={isLoading}>
+          <Button
+            className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 w-full"
+            type="submit"
+            disabled={isLoading}
+          >
             {isLoading ? 'Loading...' : 'Submit'}
           </Button>
         </form>

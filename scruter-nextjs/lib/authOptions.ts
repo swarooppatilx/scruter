@@ -1,5 +1,5 @@
-import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaClient } from "@prisma/client";
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -7,10 +7,10 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
-      name: "OTP Login",
+      name: 'OTP Login',
       credentials: {
-        email: { label: "Email", type: "text" },
-        otp: { label: "OTP", type: "text" },
+        email: { label: 'Email', type: 'text' },
+        otp: { label: 'OTP', type: 'text' },
       },
       async authorize(credentials) {
         const { email, otp } = credentials;
@@ -20,7 +20,7 @@ export const authOptions = {
         });
 
         if (!user) {
-          throw new Error("User not found.");
+          throw new Error('User not found.');
         }
 
         // Check OTP if it's a login attempt
@@ -33,10 +33,10 @@ export const authOptions = {
             });
             return user;
           } else {
-            throw new Error("Invalid OTP.");
+            throw new Error('Invalid OTP.');
           }
         } else {
-          throw new Error("OTP is required for login.");
+          throw new Error('OTP is required for login.');
         }
       },
     }),

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { Spinner } from '@/components/ui/spinner';
 
-import Image from 'next/image'
+import Image from 'next/image';
 import ContributorCardd from '../../contributors/components/contributorCard';
 interface Contributor {
   login: string;
@@ -36,22 +36,23 @@ const ContributorsPage: React.FC = () => {
   const [rowEnds, setRowEnds] = useState<number[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const contributorsResponse = await axios.get(
           'https://api.github.com/repos/swarooppatilx/scruter/contributors?per_page=100&anon=true'
         );
-        const contributorsData: Contributor[] = contributorsResponse.data.filter(
-          (contributor: Contributor) => contributor.login !== 'dependabot[bot]'
-        );
-    
+        const contributorsData: Contributor[] =
+          contributorsResponse.data.filter(
+            (contributor: Contributor) =>
+              contributor.login !== 'dependabot[bot]'
+          );
+
         const repoResponse = await axios.get(
           'https://api.github.com/repos/swarooppatilx/scruter'
         );
         const repoData = repoResponse.data;
-    
+
         setContributors(contributorsData);
         setRepoStats(repoData);
       } catch (error) {
@@ -63,13 +64,11 @@ const ContributorsPage: React.FC = () => {
     fetchData();
   }, []);
 
-  
-
-  if(loading||!contributors){
-    return <Spinner/>
+  if (loading || !contributors) {
+    return <Spinner />;
   }
 
-  console.log(contributors)
+  console.log(contributors);
 
   return (
     <div className="bg-gray-50 text-gray-800">
@@ -174,7 +173,6 @@ const ContributorsPage: React.FC = () => {
                       height={100} on the Left */}
                       <div className="flex md:w-1/4 md:mr-auto  md:block">
                         <Image
-                        
                           alt=""
                           width={100}
                           height={100}
@@ -188,8 +186,8 @@ const ContributorsPage: React.FC = () => {
                         <div className="text-center mt-5 w-64 mx-auto md:mx-3 md:w-48 md:mt-10 order-2 md:order-1">
                           <div className="relative inline-block transform transition-transform duration-300 hover:scale-110 cursor-pointer">
                             <Image
-                            width={100}
-                            height={100}
+                              width={100}
+                              height={100}
                               alt=""
                               className="rounded-full border-8 border-customTeal dark:border-Green"
                               onClick={() =>
@@ -230,17 +228,16 @@ const ContributorsPage: React.FC = () => {
 
                         {/* Second Contributor (index 1) */}
                         <div className="relative text-center w-64 mx-auto md:mx-5  md:w-64 flex-shrink-0 order-1 md:order-2">
-                         
                           <Image
-                          width={100}
-                          height={100}
+                            width={100}
+                            height={100}
                             src="/contributorsPage/glitter_blue_right.png"
                             alt="Glitter decoration"
                             className="absolute -top-10 -right-10 w-16 h-16 dark:hidden"
                           />
                           <Image
-                          width={100}
-                          height={100}
+                            width={100}
+                            height={100}
                             src="/contributorsPage/glitter_blue_left.png"
                             alt="Glitter decoration"
                             className="absolute -top-10 -left-10 w-16 h-16 dark:hidden"
@@ -248,15 +245,14 @@ const ContributorsPage: React.FC = () => {
 
                           <div className="relative inline-block transform transition-transform duration-300 hover:scale-110 cursor-pointer">
                             <Image
-                            width={100}
-                            height={100}
+                              width={100}
+                              height={100}
                               alt="A person in a suit working on a laptop and holding a phone"
                               className="rounded-full border-8 border-customTeal dark:border-Green"
                               onClick={() =>
                                 window.open(contributors[1].html_url, '_blank')
                               }
                               src={contributors[1].avatar_url}
-                        
                             />
                             <div className="absolute bottom-0 right-0 bg-customTeal dark:bg-[#e9be1e] text-white rounded-full w-12 h-12 flex items-center justify-center text-xl">
                               1
@@ -293,16 +289,14 @@ const ContributorsPage: React.FC = () => {
                         <div className="text-center mt-5 w-64 mx-auto md:mx-3 md:w-48 md:mt-10 order-3 md:order-3">
                           <div className="relative inline-block transform transition-transform duration-300 hover:scale-110 cursor-pointer">
                             <Image
-                            width={100}
-                            height={100}
+                              width={100}
+                              height={100}
                               alt="A person in a suit working on a laptop and holding a phone"
                               className="rounded-full border-8 border-customTeal dark:border-Green"
                               onClick={() =>
                                 window.open(contributors[3].html_url, '_blank')
                               }
-                           
                               src={contributors[3].avatar_url}
-          
                             />
                             <div className="absolute bottom-0 right-0 bg-customTeal dark:bg-[#e9be1e] text-white rounded-full w-10 h-10 flex items-center justify-center text-xl">
                               3
@@ -336,10 +330,9 @@ const ContributorsPage: React.FC = () => {
                         </div>
                       </div>
                       <div className="flex md:h-auto md:w-1/4  md:block">
-                      
                         <Image
-                        width={100}
-                        height={100}
+                          width={100}
+                          height={100}
                           alt=""
                           src="/contributorsPage/right_blue.png"
                           className="dark:hidden"
@@ -390,7 +383,5 @@ const StatCard: React.FC<{ label: string; value: number }> = ({
     <p className="text-gray-600">{label}</p>
   </div>
 );
-
-
 
 export default ContributorsPage;

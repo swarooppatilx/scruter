@@ -1,12 +1,12 @@
-"use client";
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+'use client';
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
-interface graphData{
-    name:string,
-    total:number
+interface graphData {
+  name: string;
+  total: number;
 }
 interface OverviewProps {
-  data:graphData[]
+  data: graphData[];
 }
 
 const Overview: React.FC<OverviewProps> = ({ data }) => {
@@ -14,7 +14,7 @@ const Overview: React.FC<OverviewProps> = ({ data }) => {
     <ResponsiveContainer width="100%" height={350}>
       <BarChart data={data}>
         <XAxis
-          dataKey={"name"}
+          dataKey={'name'}
           stroke="#888888"
           fontSize={12}
           tickLine={false}
@@ -25,7 +25,7 @@ const Overview: React.FC<OverviewProps> = ({ data }) => {
           fontSize={12}
           tickLine={false}
           axisLine={false}
-          tickFormatter={(value) => `₹${value}`}
+          tickFormatter={value => `₹${value}`}
         />
         <Bar dataKey="total" fill="#ec4899" radius={[4, 4, 0, 0]} />
       </BarChart>

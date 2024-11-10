@@ -10,7 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'text-gradient': 'linear-gradient(157deg, rgba(244,245,246,1) 23%, rgba(20,114,255,0.6012605725884104) 30%, rgba(255,71,107,1) 49%)',
+        'text-gradient':
+          'linear-gradient(157deg, rgba(244,245,246,1) 23%, rgba(20,114,255,0.6012605725884104) 30%, rgba(255,71,107,1) 49%)',
       },
       keyframes: {
         'caret-blink': {

@@ -31,7 +31,9 @@ const TermsPage = () => {
         <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold mb-2 bg-clip-text text-transparent bg-text-gradient">
           Terms of Service
         </h1>
-        <p className="text-gray-200 text-sm md:text-lg">Published and effective on: April 30, {new Date().getFullYear()}</p>
+        <p className="text-gray-200 text-sm md:text-lg">
+          Published and effective on: April 30, {new Date().getFullYear()}
+        </p>
       </header>
 
       <div className="flex flex-col lg:flex-row w-full h-full">
@@ -46,14 +48,18 @@ const TermsPage = () => {
                 <FontAwesomeIcon icon={icon} className="mr-2 text-[#ff476b]" />
                 {title}
               </h3>
-              <p className="text-gray-500 text-justify text-sm md:text-base">{content}</p>
+              <p className="text-gray-500 text-justify text-sm md:text-base">
+                {content}
+              </p>
             </section>
           ))}
         </main>
 
         {/* Right Sidebar */}
         <aside className="hidden lg:block w-1/5 p-6 bg-white dark:bg-black text-gray-400 sticky top-0 h-[calc(100vh-160px)]">
-          <h2 className="text-gray-600 text-xs uppercase font-semibold mb-4">On This Page</h2>
+          <h2 className="text-gray-600 text-xs uppercase font-semibold mb-4">
+            On This Page
+          </h2>
           <ul>
             {TERMS_CONTENT.map(({ id, title }) => (
               <li key={id} className="mb-2">
@@ -76,15 +82,25 @@ const TermsPage = () => {
 
           {/* Contribute Section */}
           <div className="mt-8">
-            <h2 className="text-gray-600 text-xs uppercase font-semibold mb-2">Contribute</h2>
+            <h2 className="text-gray-600 text-xs uppercase font-semibold mb-2">
+              Contribute
+            </h2>
             <ul>
               <li>
-                <a href="https://github.com/swarooppatilx/scruter/issues/new?assignees=&labels=bug&projects=&template=bug.yml&title=%5BBUG%5D+" target='_blank' className="text-sm hover:text-black dark:hover:text-white transition-colors duration-200">
+                <a
+                  href="https://github.com/swarooppatilx/scruter/issues/new?assignees=&labels=bug&projects=&template=bug.yml&title=%5BBUG%5D+"
+                  target="_blank"
+                  className="text-sm hover:text-black dark:hover:text-white transition-colors duration-200"
+                >
                   Report an issue
                 </a>
               </li>
               <li>
-                <a href="https://github.com/swarooppatilx/scruter/issues/new?assignees=&labels=enhancement&projects=&template=feature.yml&title=%5BFeat%5D" target='_blank' className="text-sm hover:text-black dark:hover:text-white transition-colors duration-200">
+                <a
+                  href="https://github.com/swarooppatilx/scruter/issues/new?assignees=&labels=enhancement&projects=&template=feature.yml&title=%5BFeat%5D"
+                  target="_blank"
+                  className="text-sm hover:text-black dark:hover:text-white transition-colors duration-200"
+                >
                   Request a feature
                 </a>
               </li>

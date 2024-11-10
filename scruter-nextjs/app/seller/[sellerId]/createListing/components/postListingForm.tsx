@@ -21,7 +21,6 @@ import ImageUpload from '@/components/ui/imageUpload';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 
-
 const formSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   price: z.number().min(0, 'Price must be a positive number'),
@@ -58,14 +57,16 @@ export const CreateListingForm: React.FC = () => {
   const onSubmit = async (data: CreateListingFormValues) => {
     try {
       if (!params.sellerId) {
-        toast.error("sellerId is required!");
+        toast.error('sellerId is required!');
         return;
       }
 
-      const sellerId = Array.isArray(params.sellerId) ? params.sellerId[0] : params.sellerId;
+      const sellerId = Array.isArray(params.sellerId)
+        ? params.sellerId[0]
+        : params.sellerId;
 
       if (!sellerId) {
-        toast.error("Valid sellerId is required!");
+        toast.error('Valid sellerId is required!');
         return;
       }
 
@@ -86,15 +87,23 @@ export const CreateListingForm: React.FC = () => {
   };
 
   // Handle image change
-  const handleImageChange = useCallback((url: string) => {
-    form.setValue('images', [...form.getValues('images'), url]);
-  }, [form]);
+  const handleImageChange = useCallback(
+    (url: string) => {
+      form.setValue('images', [...form.getValues('images'), url]);
+    },
+    [form]
+  );
 
   // Handle image removal
-  const handleImageRemove = useCallback((url: string) => {
-    const updatedImages = form.getValues('images').filter(image => image !== url);
-    form.setValue('images', updatedImages);
-  }, [form]);
+  const handleImageRemove = useCallback(
+    (url: string) => {
+      const updatedImages = form
+        .getValues('images')
+        .filter(image => image !== url);
+      form.setValue('images', updatedImages);
+    },
+    [form]
+  );
 
   return (
     <>
@@ -104,7 +113,10 @@ export const CreateListingForm: React.FC = () => {
       <Separator />
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 w-full"
+        >
           <FormField
             control={form.control}
             name="images"
@@ -155,7 +167,7 @@ export const CreateListingForm: React.FC = () => {
                       placeholder="Price"
                       {...field}
                       // Ensure value is a number and valid for form submission
-                      onChange={(e) => {
+                      onChange={e => {
                         const value = parseFloat(e.target.value);
                         field.onChange(isNaN(value) ? 0 : value);
                       }}

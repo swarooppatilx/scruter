@@ -5,19 +5,15 @@ import {
 } from '@/actions/seller/listing';
 import { NextRequest, NextResponse } from 'next/server';
 
-export type Params = Promise<{ 
-  listingId?:string,
-  sellerId:string
-}>
+export type Params = Promise<{
+  listingId?: string;
+  sellerId: string;
+}>;
 
-export async function GET(
-  request: NextRequest,
-  paramData: {params:Params}
-) {
+export async function GET(request: NextRequest, paramData: { params: Params }) {
+  const params = await paramData.params;
 
-  const params= await paramData.params
-
-  const { listingId } =  params;
+  const { listingId } = params;
 
   if (!listingId) {
     return new NextResponse('Necessary params are required', { status: 400 });
@@ -38,11 +34,11 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  paramData: {params:Params}
+  paramData: { params: Params }
 ) {
-  const params= await paramData.params
+  const params = await paramData.params;
 
-  const { listingId, sellerId } =  params;
+  const { listingId, sellerId } = params;
 
   try {
     const body = await request.json();
@@ -50,11 +46,11 @@ export async function PATCH(
       return new NextResponse('Necessary params are required', { status: 400 });
     }
 
-    const { name, price, description, category , images } = body;
+    const { name, price, description, category, images } = body;
     const resp = await UpdateListing({
       sellerId,
       listingId,
-      listingData: { name, category, price, description , images },
+      listingData: { name, category, price, description, images },
     });
 
     if (resp.error) {
@@ -70,11 +66,11 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  paramData:{params:Params}
+  paramData: { params: Params }
 ) {
-  const params= await paramData.params
+  const params = await paramData.params;
 
-  const { listingId ,sellerId } =  params;
+  const { listingId, sellerId } = params;
 
   try {
     if (!sellerId || !listingId) {

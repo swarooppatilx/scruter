@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Modal } from "./modal";
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Modal } from './modal';
 
 interface AlertModalProps {
   isOpen: boolean;
@@ -39,11 +39,7 @@ export const AlertModal: React.FC<AlertModalProps> = ({
           cancel
         </Button>
 
-        <Button
-          disabled={loading}
-          variant="destructive"
-          onClick={onConfirm}
-        >
+        <Button disabled={loading} variant="destructive" onClick={onConfirm}>
           confirm
         </Button>
       </div>

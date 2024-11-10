@@ -12,9 +12,7 @@
         "price": 15,
         "description": "Delicious chocolate cake",
         "category": "Fooding",
-        "images": [
-          { "url": "https://example.com/images/chocolate-cake.jpg" }
-        ],
+        "images": [{ "url": "https://example.com/images/chocolate-cake.jpg" }],
         "listingLat": 40.7128,
         "listingLng": -74.006,
         "createdAt": "2024-11-09T10:00:00.000Z"
@@ -37,9 +35,7 @@
         "price": 10,
         "description": "Juicy burger with lettuce, tomato, and cheese",
         "category": "Fooding",
-        "images": [
-          { "url": "https://example.com/images/classic-burger.jpg" }
-        ],
+        "images": [{ "url": "https://example.com/images/classic-burger.jpg" }],
         "listingLat": 34.0522,
         "listingLng": -118.2437,
         "createdAt": "2024-11-09T10:00:00.000Z"
@@ -150,9 +146,7 @@
         "price": 30,
         "description": "Beautiful bouquet of red roses",
         "category": "For_Sale",
-        "images": [
-          { "url": "https://example.com/images/rose-bouquet.jpg" }
-        ],
+        "images": [{ "url": "https://example.com/images/rose-bouquet.jpg" }],
         "listingLat": 48.8566,
         "listingLng": 2.3522,
         "createdAt": "2024-11-09T10:00:00.000Z"
@@ -200,11 +194,9 @@
         "price": 12,
         "description": "Handmade lavender-scented candle",
         "category": "For_Sale",
-        "images": [
-          { "url": "https://example.com/images/handmade-candle.jpg" }
-        ],
-        "listingLat": 52.5200,
-        "listingLng": 13.4050,
+        "images": [{ "url": "https://example.com/images/handmade-candle.jpg" }],
+        "listingLat": 52.52,
+        "listingLng": 13.405,
         "createdAt": "2024-11-09T10:00:00.000Z"
       }
     ],

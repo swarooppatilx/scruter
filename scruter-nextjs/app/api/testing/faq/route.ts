@@ -1,22 +1,27 @@
-
-import { getAnsweredQuestions, getUnansweredQuestions } from "@/actions/forum/Question";
-import { NextRequest, NextResponse } from "next/server";
+import {
+  getAnsweredQuestions,
+  getUnansweredQuestions,
+} from '@/actions/forum/Question';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {
     // Extract the query parameter
     const url = new URL(request.url);
-    const questionStatus = url.searchParams.get("question");
+    const questionStatus = url.searchParams.get('question');
 
     // Check if the query parameter is 'answered' or 'unanswered'
     let resp;
 
-    if (questionStatus === "answered") {
+    if (questionStatus === 'answered') {
       resp = await getAnsweredQuestions();
-    } else if (questionStatus === "unanswered") {
+    } else if (questionStatus === 'unanswered') {
       resp = await getUnansweredQuestions();
     } else {
-      return new NextResponse("Invalid query parameter. Use '?question=answered' or '?question=unanswered'.", { status: 400 });
+      return new NextResponse(
+        "Invalid query parameter. Use '?question=answered' or '?question=unanswered'.",
+        { status: 400 }
+      );
     }
 
     if (resp.success) {

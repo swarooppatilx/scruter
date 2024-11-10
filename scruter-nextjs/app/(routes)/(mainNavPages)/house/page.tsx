@@ -117,7 +117,9 @@ const HousePage: React.FC = () => {
 
       {/* Houses Section */}
       <section className="py-16 bg-white">
-        <h2 className="text-2xl font-bold text-center mb-12">Available Houses</h2>
+        <h2 className="text-2xl font-bold text-center mb-12">
+          Available Houses
+        </h2>
 
         <div
           id="houses"

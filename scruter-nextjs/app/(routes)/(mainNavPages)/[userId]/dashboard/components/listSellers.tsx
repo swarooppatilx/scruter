@@ -27,7 +27,7 @@ const ListSellers = () => {
   const [isMounted, setIsMounted] = useState(false);
 
   const session = useSession();
-  const userId= session.data?.user.id
+  const userId = session.data?.user.id;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,9 +51,8 @@ const ListSellers = () => {
   );
 
   if (!isMounted || !sellers.length || !userId) {
-    return <Spinner />; 
+    return <Spinner />;
   }
-
 
   return (
     <div className="bg-gray-200 p-5 rounded-lg">
@@ -84,8 +83,12 @@ const ListSellers = () => {
                           <Utensils className="h-6 w-6 text-primary" />
                         </div>
                         <div>
-                          <div className="text-lg font-semibold">{seller.name}</div>
-                          <p className="text-sm text-gray-500">{seller.Listings.length} Listings</p>
+                          <div className="text-lg font-semibold">
+                            {seller.name}
+                          </div>
+                          <p className="text-sm text-gray-500">
+                            {seller.Listings.length} Listings
+                          </p>
                         </div>
                       </div>
                     </CardContent>
@@ -93,7 +96,9 @@ const ListSellers = () => {
                 </Link>
               ))
             ) : (
-              <p className="col-span-full text-center text-gray-500">No sellers found</p>
+              <p className="col-span-full text-center text-gray-500">
+                No sellers found
+              </p>
             )}
           </div>
         </>

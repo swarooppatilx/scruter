@@ -70,10 +70,14 @@ export function AdminLoginForm({
                 autoCorrect="off"
                 disabled={isLoading}
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
-            <Button type="submit" className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600" disabled={isLoading}>
+            <Button
+              type="submit"
+              className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600"
+              disabled={isLoading}
+            >
               {isLoading ? (
                 <Spinner className="mr-2" />
               ) : authType === 'signup' ? (
@@ -85,7 +89,9 @@ export function AdminLoginForm({
           </div>
         </form>
       )}
-      {otpOpen && <OtpForm email={email} setOtpOpen={setOtpOpen} roleType="admin" />}
+      {otpOpen && (
+        <OtpForm email={email} setOtpOpen={setOtpOpen} roleType="admin" />
+      )}
     </div>
   );
 }

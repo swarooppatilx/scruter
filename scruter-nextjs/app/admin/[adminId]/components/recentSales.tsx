@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 interface Listing {
   name: string;
@@ -11,44 +11,44 @@ interface Listing {
 
 const listingsData: Listing[] = [
   {
-    name: "Rahul Sethi",
-    email: "rahul.sethi@scruter.com",
-    avatarSrc: "/avatars/rahul.png",
-    avatarText: "RS",
+    name: 'Rahul Sethi',
+    email: 'rahul.sethi@scruter.com',
+    avatarSrc: '/avatars/rahul.png',
+    avatarText: 'RS',
     amount: 45000.0,
-    listingType: "Housing - 2 BHK Apartment",
+    listingType: 'Housing - 2 BHK Apartment',
   },
   {
-    name: "Ananya Mehta",
-    email: "ananya.mehta@scruter.com",
-    avatarSrc: "/avatars/ananya.png",
-    avatarText: "AM",
+    name: 'Ananya Mehta',
+    email: 'ananya.mehta@scruter.com',
+    avatarSrc: '/avatars/ananya.png',
+    avatarText: 'AM',
     amount: 1500.0,
-    listingType: "For Sale - Bicycle",
+    listingType: 'For Sale - Bicycle',
   },
   {
-    name: "Suresh Jain",
-    email: "suresh.jain@scruter.com",
-    avatarSrc: "/avatars/suresh.png",
-    avatarText: "SJ",
+    name: 'Suresh Jain',
+    email: 'suresh.jain@scruter.com',
+    avatarSrc: '/avatars/suresh.png',
+    avatarText: 'SJ',
     amount: 8500.0,
-    listingType: "For Sale - Sofa Set",
+    listingType: 'For Sale - Sofa Set',
   },
   {
-    name: "Meera Patel",
-    email: "meera.patel@scruter.com",
-    avatarSrc: "/avatars/meera.png",
-    avatarText: "MP",
+    name: 'Meera Patel',
+    email: 'meera.patel@scruter.com',
+    avatarSrc: '/avatars/meera.png',
+    avatarText: 'MP',
     amount: 30000.0,
-    listingType: "Housing - 1 BHK Apartment",
+    listingType: 'Housing - 1 BHK Apartment',
   },
   {
-    name: "Kunal Verma",
-    email: "kunal.verma@scruter.com",
-    avatarSrc: "/avatars/kunal.png",
-    avatarText: "KV",
+    name: 'Kunal Verma',
+    email: 'kunal.verma@scruter.com',
+    avatarSrc: '/avatars/kunal.png',
+    avatarText: 'KV',
     amount: 750.0,
-    listingType: "Rental - Room",
+    listingType: 'Rental - Room',
   },
 ];
 
@@ -56,7 +56,10 @@ export function RecentSales() {
   return (
     <div className="space-y-8 flex items-center justify-center flex-col">
       {listingsData.map((listing, index) => (
-        <div className="flex items-center w-full lg:w-3/4 bg-gray-200 dark:bg-gray-700 p-2 rounded-xl" key={index}>
+        <div
+          className="flex items-center w-full lg:w-3/4 bg-gray-200 dark:bg-gray-700 p-2 rounded-xl"
+          key={index}
+        >
           <Avatar className="h-9 w-9">
             <AvatarImage src={listing.avatarSrc} alt={listing.name} />
             <AvatarFallback>{listing.avatarText}</AvatarFallback>

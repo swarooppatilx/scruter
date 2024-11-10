@@ -1,8 +1,7 @@
-
 import { getBookmarksByUser } from '@/actions/user/bookmarks/GETBYUSER_bookmark';
 import { NextRequest, NextResponse } from 'next/server';
 
-export type Params = Promise<{ 
+export type Params = Promise<{
   userId: string;
 }>;
 

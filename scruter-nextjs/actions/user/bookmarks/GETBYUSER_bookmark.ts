@@ -14,7 +14,11 @@ export async function getBookmarksByUser({
   userId,
 }: {
   userId: string;
-}): Promise<{ success: boolean; error?: string; data?: BookmarkWithListing[] }> {
+}): Promise<{
+  success: boolean;
+  error?: string;
+  data?: BookmarkWithListing[];
+}> {
   try {
     // Fetch bookmarks including related listing data and images
     const bookmarks = await prismadb.bookmark.findMany({

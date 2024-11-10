@@ -1,6 +1,5 @@
 'use client';
 
-
 const PolicyPage: React.FC = () => {
   return (
     <div className="flex">

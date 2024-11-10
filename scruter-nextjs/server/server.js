@@ -7,11 +7,11 @@ const server = http.createServer((req, res) => {
 const { Server } = require('socket.io');
 const io = new Server(server);
 
-io.on('connection', (socket) => {
+io.on('connection', socket => {
   console.log('A user connected');
-  
+
   // Handle chat messages
-  socket.on('chat message', (message) => {
+  socket.on('chat message', message => {
     io.emit('chat message', message); // Broadcast the message to all connected clients
   });
 

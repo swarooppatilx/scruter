@@ -18,13 +18,10 @@ export async function GET(req: Request) {
   }
 }
 
-export async function POST(
-  req: Request,
-  paramData: {params:Params}
-) {
-  const params= await paramData.params
+export async function POST(req: Request, paramData: { params: Params }) {
+  const params = await paramData.params;
 
-  const { sellerId } =  params;
+  const { sellerId } = params;
 
   try {
     const body = await req.json();
@@ -33,7 +30,7 @@ export async function POST(
       return new NextResponse('Necessary params are required', { status: 400 });
     }
 
-    const { name, price, description, category , images } = body;
+    const { name, price, description, category, images } = body;
     const resp = await PostListing({
       sellerId,
       listingData: {
@@ -41,7 +38,7 @@ export async function POST(
         category,
         price,
         description,
-        images
+        images,
       },
     });
 

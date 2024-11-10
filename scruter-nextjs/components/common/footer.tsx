@@ -81,15 +81,17 @@ const Footer = () => {
             <Link href="/" className="inline-block">
               <div className="flex justify-center md:justify-start items-center gap-3 mb-6">
                 <div className="flex flex-col">
-                <span className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 via-blue-500 to-green-500 bg-clip-text text-transparent transition-all duration-500 hover:bg-gradient-to-r hover:from-gray-900 hover:via-gray-800 hover:to-gray-900">
-  Scruter
-</span>
-
+                  <span className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 via-blue-500 to-green-500 bg-clip-text text-transparent transition-all duration-500 hover:bg-gradient-to-r hover:from-gray-900 hover:via-gray-800 hover:to-gray-900">
+                    Scruter
+                  </span>
                 </div>
               </div>
             </Link>
             <p className="text-gray-600 max-w-md mx-auto md:mx-0 text-lg">
-              Scruter is your local platform for buying, selling, and discovering everything you need. Whether it&apos;s products, services, or community activities, we connect people for a better local experience.
+              Scruter is your local platform for buying, selling, and
+              discovering everything you need. Whether it&apos;s products,
+              services, or community activities, we connect people for a better
+              local experience.
             </p>
           </div>
 
@@ -119,20 +121,24 @@ const Footer = () => {
 
         <div className="mt-16 pt-8 border-t border-gray-200">
           <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-            
             <div className="flex items-center gap-2">
               <span className="text-sm text-gray-500">Made with </span>
               <HeartIcon color="red" />
               <span className="text-sm text-gray-500">Team Scruter</span>
             </div>
-            
           </div>
           <div className="flex flex-col md:flex-row justify-center items-center gap-4">
-
-          <span className="text-sm text-gray-600 text-center md:text-left">
-              Reserved under <a href='https://fossa.com/blog/open-source-software-licenses-101-gpl-v3' target='_blank'>GPLv3</a> {new Date().getFullYear()} 
+            <span className="text-sm text-gray-600 text-center md:text-left">
+              Reserved under{' '}
+              <a
+                href="https://fossa.com/blog/open-source-software-licenses-101-gpl-v3"
+                target="_blank"
+              >
+                GPLv3
+              </a>{' '}
+              {new Date().getFullYear()}
             </span>
-            </div>
+          </div>
         </div>
       </div>
     </footer>
@@ -149,7 +155,7 @@ const FooterSection = ({ title, links }: FooterSectionProps) => (
   <div className="flex flex-col items-start">
     <h2 className="text-lg font-semibold text-gray-800 mb-4">{title}</h2>
     <ul className="space-y-3">
-      {links.map((link) => (
+      {links.map(link => (
         <li key={link.id}>
           <Link
             href={link.href}
@@ -177,14 +183,9 @@ const SocialButton = ({ href, icon, color }: SocialButtonProps) => (
     className={`relative ${color} p-3 rounded-lg text-white transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center justify-center overflow-hidden group`}
   >
     <span className="text-lg sm:text-xl lg:text-2xl z-10">{icon}</span>
-    <span
-      className="absolute inset-0 rounded-lg bg-white opacity-0 transition duration-500 group-hover:opacity-20 group-hover:scale-125"
-    ></span>
-    <span
-      className="absolute inset-0 rounded-lg bg-white opacity-0 transition duration-500 group-hover:opacity-40 group-hover:scale-0"
-    ></span>
+    <span className="absolute inset-0 rounded-lg bg-white opacity-0 transition duration-500 group-hover:opacity-20 group-hover:scale-125"></span>
+    <span className="absolute inset-0 rounded-lg bg-white opacity-0 transition duration-500 group-hover:opacity-40 group-hover:scale-0"></span>
   </Link>
 );
-
 
 export default Footer;

@@ -1,6 +1,5 @@
-
-import { deleteQuestion } from "@/actions/forum/Question";
-import { NextRequest, NextResponse } from "next/server";
+import { deleteQuestion } from '@/actions/forum/Question';
+import { NextRequest, NextResponse } from 'next/server';
 
 export type Params = Promise<{
   adminId: string;

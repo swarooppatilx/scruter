@@ -131,7 +131,9 @@ const ChatPage = () => {
                 chat.messages.map((msg: any, index: number) => (
                   <div
                     key={index}
-                    className={msg.senderId === userId ? 'text-right' : 'text-left'}
+                    className={
+                      msg.senderId === userId ? 'text-right' : 'text-left'
+                    }
                   >
                     <div
                       className={`px-4 py-2 rounded-lg ${
@@ -178,7 +180,6 @@ const ChatPage = () => {
 };
 
 export default ChatPage;
-
 
 // useEffect(() => {
 //     if (!userId || !sellerId || !listingId) {

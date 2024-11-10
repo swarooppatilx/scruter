@@ -37,7 +37,9 @@ interface EditListingFormProps {
   initialData?: EditListingFormValues; // Accept initial data as props
 }
 
-export const EditListingForm: React.FC<EditListingFormProps> = ({ initialData }) => {
+export const EditListingForm: React.FC<EditListingFormProps> = ({
+  initialData,
+}) => {
   const params = useParams();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -49,7 +51,8 @@ export const EditListingForm: React.FC<EditListingFormProps> = ({ initialData })
 
   const form = useForm<EditListingFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData || { // Use initialData or empty object
+    defaultValues: initialData || {
+      // Use initialData or empty object
       name: '',
       price: 0,
       description: '',
@@ -60,23 +63,27 @@ export const EditListingForm: React.FC<EditListingFormProps> = ({ initialData })
 
   const onSubmit = async (data: EditListingFormValues) => {
     try {
-      const sellerId = Array.isArray(params.sellerId) ? params.sellerId[0] : params.sellerId;
+      const sellerId = Array.isArray(params.sellerId)
+        ? params.sellerId[0]
+        : params.sellerId;
 
       if (!sellerId) {
-        toast.error("Valid sellerId is required!");
+        toast.error('Valid sellerId is required!');
         return;
       }
 
-      const listingId = Array.isArray(params.listingId) ? params.listingId[0] : params.listingId;
+      const listingId = Array.isArray(params.listingId)
+        ? params.listingId[0]
+        : params.listingId;
 
       if (!listingId) {
-        toast.error("Listing ID is required!");
+        toast.error('Listing ID is required!');
         return;
       }
 
       setLoading(true);
       const resp = await UpdateListing({
-        listingId:listingId,
+        listingId: listingId,
         sellerId: sellerId,
         listingData: data,
       });
@@ -92,15 +99,23 @@ export const EditListingForm: React.FC<EditListingFormProps> = ({ initialData })
   };
 
   // Handle image change
-  const handleImageChange = useCallback((url: string) => {
-    form.setValue('images', [...form.getValues('images'), url]);
-  }, [form]);
+  const handleImageChange = useCallback(
+    (url: string) => {
+      form.setValue('images', [...form.getValues('images'), url]);
+    },
+    [form]
+  );
 
   // Handle image removal
-  const handleImageRemove = useCallback((url: string) => {
-    const updatedImages = form.getValues('images').filter(image => image !== url);
-    form.setValue('images', updatedImages);
-  }, [form]);
+  const handleImageRemove = useCallback(
+    (url: string) => {
+      const updatedImages = form
+        .getValues('images')
+        .filter(image => image !== url);
+      form.setValue('images', updatedImages);
+    },
+    [form]
+  );
 
   return (
     <>
@@ -110,7 +125,10 @@ export const EditListingForm: React.FC<EditListingFormProps> = ({ initialData })
       <Separator />
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 w-full"
+        >
           <FormField
             control={form.control}
             name="images"
@@ -160,7 +178,7 @@ export const EditListingForm: React.FC<EditListingFormProps> = ({ initialData })
                       disabled={loading}
                       placeholder="Price"
                       {...field}
-                      onChange={(e) => {
+                      onChange={e => {
                         const value = parseFloat(e.target.value);
                         field.onChange(isNaN(value) ? 0 : value);
                       }}
