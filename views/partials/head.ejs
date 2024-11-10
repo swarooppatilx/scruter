@@ -194,16 +194,24 @@ html {
 </button>
 <script>
   // Show the scroll-to-top button when scrolled down
-  window.onscroll = function() { toggleScrollTopButton() };
+  function toggleScrollButton() {
+                var scrollButton = document.getElementById('scrollTopButton');
+                var scrollThreshold = 200;  // Threshold in pixels to show button
 
-  function toggleScrollTopButton() {
-    const button = document.getElementById("scrollTopButton");
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-      button.classList.add("show-btn");
-    } else {
-      button.classList.remove("show-btn");
-    }
-  }
+                if (window.scrollY > scrollThreshold) {
+                  // Remove 'd-none' to show the button and ensure it remains invisible on small screens
+                  scrollButton.classList.remove('d-none');
+                  scrollButton.classList.add('d-md-block');
+                } else {
+                  // Add 'd-none' to hide the button and 'd-md-block' is only effective on medium screens and up
+                  scrollButton.classList.add('d-none');
+                  scrollButton.classList.remove('d-md-block');
+                }
+              }
+
+              // Call the function on page load and on scroll
+              window.addEventListener('load', toggleScrollButton);
+              window.addEventListener('scroll', toggleScrollButton);
 
   // Scroll to the top when button is clicked
   document.getElementById("scrollTopButton").onclick = function() {
