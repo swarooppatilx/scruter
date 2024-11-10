@@ -25,7 +25,6 @@ model Admin {
   updatedAt DateTime @updatedAt
 }
 
-
 model User {
   id        String   @id @default(uuid()) @map("_id")
   name      String
@@ -35,8 +34,11 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  chats Chat[] @relation("UserChats")
+
   // Many-to-many relationship with Listing via Bookmark
   bookmarks Bookmark[] @relation("UserBookmarks")
+  Message   Message[]
 }
 
 model Seller {
@@ -47,7 +49,10 @@ model Seller {
   role      String    @default("Seller")
   Listings  Listing[] @relation("SellerToListing")
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+
+  chats Chat[] @relation("SellerChats")
+
+  updatedAt DateTime @updatedAt
 }
 
 enum Category {
@@ -72,7 +77,8 @@ model Listing {
   listingLat Float? @default(28.61)
   listingLng Float? @default(77.23)
 
-  // Many-to-many relationship with User via Bookmark
+  chats Chat[] @relation("ListingChats")
+
   bookmarks Bookmark[] @relation("UserBookmarks")
 }
 
@@ -114,4 +120,34 @@ model Answer {
   updatedAt  DateTime @updatedAt
   questionId String
   question   Question @relation("QuestionAnswers", fields: [questionId], references: [id], onDelete: Cascade) // Moved onDelete: Cascade to this side
+}
+
+model Chat {
+  id        String    @id @default(uuid()) @map("_id")
+  userId    String
+  sellerId  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[] @relation("ChatMessages")
+
+  listingId String
+
+  user    User    @relation("UserChats", fields: [userId], references: [id])
+  seller  Seller  @relation("SellerChats", fields: [sellerId], references: [id])
+  listing Listing @relation("ListingChats", fields: [listingId], references: [id])
+
+  @@unique([userId, sellerId]) // Ensures a chat is unique between a user and seller
+}
+
+model Message {
+  id        String   @id @default(uuid()) @map("_id")
+  chatId    String
+  senderId  String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  chat Chat @relation("ChatMessages", fields: [chatId], references: [id])
+
+  sender User @relation(fields: [senderId], references: [id])
 }
