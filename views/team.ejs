@@ -1,47 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <%- include('partials/head') %> 
+  <%- include('partials/head') %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.0/gsap.min.js"></script>
+
     <style>
+      :root {
+        --text-color: #000;
+        --bg-hover: white;
+        --github-hover: #3a383c;
+        --linkedin-hover: #0a66c2;
+        --instagram-hover: #e1306c;
+        --twitter-hover: #14171A;
+        --card-bg: rgba(255, 255, 255, 0.1);
+        --hover-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      [data-theme="dark"] {
+        --text-color: #e5e7eb;
+        --bg-hover: black;
+        --github-hover: #3a3a3c;
+        --linkedin-hover: #0a66c2;
+        --instagram-hover: #e1306c;
+        --twitter-hover: #1da1f2;
+        --card-bg: rgb(0, 0, 0);
+        --hover-shadow: 0 4px 20px rgba(255, 111, 111, 0.774);
+      }
+
       .social-icons a {
-        transition: all .38s ease;
+        transition: all 0.38s ease;
         font-size: 25px;
         margin-left: 10px;
-        color: black;
+        color: var(--text-color);
       }
+
       .social-icons a:hover {
-        color: white;
+        color: var(--bg-hover);
         transform: scale(1.2);
         padding: 2px 6px;
         border-radius: 4px;
       }
+
+      .col-md-4 {
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+        position: relative;
+      }
+
+      .col-md-4:hover {
+        transform: scale(1.05);
+        box-shadow: var(--hover-shadow);
+      }
+
+      .col-md-4::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-radius: 10px;
+        width: 100%;
+        height: 2px;
+        background-color: var(--text-color);
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.4s ease-out;
+      }
+
+      .col-md-4:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+        border-radius: 10px;
+      }
+
       .github:hover {
-        background-color: #3a383c;
+        background-color: var(--github-hover);
       }
+
       .linkedin:hover {
-        background-color: #0a66c2;
+        background-color: var(--linkedin-hover);
       }
+
       .instagram:hover {
-        background-color: #e1306c;
+        background-color: var(--instagram-hover);
       }
+
       .twitter:hover {
-        background-color: #14171A;
+        background-color: var(--twitter-hover);
       }
     </style>
 </head>
-<body>
-    <%- include('partials/navbar') %>
-    
+
+<body data-theme="light">
+  <%- include('partials/navbar') %>
+
     <!-- Meet the Team Section -->
     <section class="team-section text-center mt-4 mb-5 pb-5">
       <div class="container">
-        <h2 class="mb-4">Meet the Team</h2>
-        <p class="lead">Get to know the amazing team behind Scruter.</p>
-        <div class="row">
+        <h2 class="mb-4" style="color: var(--text-color);">Meet the Team</h2>
+        <p class="lead" style="color: var(--text-color);">Get to know the amazing team behind Scruter.</p>
+        <div class="row pt-4">
           <div class="col-md-4 mb-4">
             <img src="/swaroop.jpg" class="rounded-circle img-fluid mb-3" alt="Team Member 1">
-            <h4>Swaroop Patil</h4>
-            <p>Full Stack Developer</p>
+            <h4 style="color: var(--text-color);">Swaroop Patil</h4>
+            <p style="color: var(--text-color);">Full Stack Developer</p>
             <div class="social-icons">
               <a href="https://instagram.com/swarooppatilx" class="instagram"><i class="fab fa-instagram"></i></a>
               <a href="https://x.com/swarooppatilx" class="twitter"><i class="fab fa-x-twitter"></i></a>
@@ -51,75 +115,92 @@
           </div>
           <div class="col-md-4 mb-4">
             <img src="/ashish.jpg" class="rounded-circle img-fluid mb-3" alt="Team Member 2">
-            <h4>Ashish Kharde</h4>
-            <p>Frontend Developer</p>
+            <h4 style="color: var(--text-color);">Ashish Kharde</h4>
+            <p style="color: var(--text-color);">Frontend Developer</p>
             <div class="social-icons">
               <a href="https://instagram.com/ashish_kharde1" class="instagram"><i class="fab fa-instagram"></i></a>
               <a href="https://x.com/ashkharde" class="twitter"><i class="fab fa-x-twitter"></i></a>
-              <a href="https://linkedin.com/in/ashish-kharde-b5a114288/" class="linkedin"><i class="fab fa-linkedin"></i></a>
+              <a href="https://linkedin.com/in/ashish-kharde-b5a114288/" class="linkedin"><i
+                  class="fab fa-linkedin"></i></a>
               <a href="https://github.com/Ashish-kharde1" class="github"><i class="fab fa-github"></i></a>
             </div>
           </div>
           <div class="col-md-4 mb-4">
             <img src="/chinmay.jpg" id="chinmay-photo" class="rounded-circle img-fluid mb-3" alt="Team Member 3">
-            <h4>Chinmay Nakwa</h4>
-            <p id="chinmay-role">AI & ML</p>
+            <h4 style="color: var(--text-color);">Chinmay Nakwa</h4>
+            <p id="chinmay-role" style="color: var(--text-color);">AI & ML</p>
             <div class="social-icons">
               <a href="https://instagram.com/chinmay._.29/" class="instagram"><i class="fab fa-instagram"></i></a>
               <a href="#" class="twitter"><i class="fab fa-x-twitter"></i></a>
-              <a href="https://linkedin.com/in/chinmay-nakwa-9a0836241" class="linkedin"><i class="fab fa-linkedin"></i></a>
+              <a href="https://linkedin.com/in/chinmay-nakwa-9a0836241" class="linkedin"><i
+                  class="fab fa-linkedin"></i></a>
               <a href="https://github.com/ChinmayNakwa" class="github"><i class="fab fa-github"></i></a>
             </div>
           </div>
           <div class="col-md-4 mb-4">
             <img src="/omkar.jpg" class="rounded-circle img-fluid mb-3" alt="Team Member 4">
-            <h4>Omkar Avasare</h4>
-            <p>UI/UX</p>
+            <h4 style="color: var(--text-color);">Omkar Avasare</h4>
+            <p style="color: var(--text-color);">UI/UX</p>
             <div class="social-icons">
               <a href="https://instagram.com/omkar_avasare_" class="instagram"><i class="fab fa-instagram"></i></a>
               <a href="https://x.com/omkar_avasare" class="twitter"><i class="fab fa-x-twitter"></i></a>
-              <a href="https://linkedin.com/in/omkar-avasare-302212279" class="linkedin"><i class="fab fa-linkedin"></i></a>
+              <a href="https://linkedin.com/in/omkar-avasare-302212279" class="linkedin"><i
+                  class="fab fa-linkedin"></i></a>
               <a href="https://github.com/Omkar-Avasare" class="github"><i class="fab fa-github"></i></a>
             </div>
           </div>
           <div class="col-md-4 mb-4">
             <img src="/hrikesh.jpg" class="rounded-circle img-fluid mb-3" alt="Team Member 5">
-            <h4>Hrishikesh Wadhile</h4>
-            <p>QA & Cross Platform</p>
+            <h4 style="color: var(--text-color);">Hrishikesh Wadhile</h4>
+            <p style="color: var(--text-color);">QA & Cross Platform</p>
             <div class="social-icons">
               <a href="https://instagram.com/hrishikesh_wadile" class="instagram"><i class="fab fa-instagram"></i></a>
               <a href="#" class="twitter"><i class="fab fa-x-twitter"></i></a>
-              <a href="https://linkedin.com/in/hrishikesh-wadile-5b8284292" class="linkedin"><i class="fab fa-linkedin"></i></a>
+              <a href="https://linkedin.com/in/hrishikesh-wadile-5b8284292" class="linkedin"><i
+                  class="fab fa-linkedin"></i></a>
               <a href="https://github.com/HrishikeshWadile" class="github"><i class="fab fa-github"></i></a>
             </div>
           </div>
           <div class="col-md-4 mb-4">
             <img src="/anushka.jpg" class="rounded-circle img-fluid mb-3" alt="Team Member 6">
-            <h4>Anushka Gaikwad</h4>
-            <p>Content Manager</p>
+            <h4 style="color: var(--text-color);">Anushka Gaikwad</h4>
+            <p style="color: var(--text-color);">Content Manager</p>
             <div class="social-icons">
               <a href="https://instagram.com/anushkagaikwad924" class="instagram"><i class="fab fa-instagram"></i></a>
               <a href="https://x.com/AnushkaGai32263" class="twitter"><i class="fab fa-x-twitter"></i></a>
-              <a href="https://in.linkedin.com/in/anushka-gaikwad-562981310" class="linkedin"><i class="fab fa-linkedin"></i></a>
+              <a href="https://in.linkedin.com/in/anushka-gaikwad-562981310" class="linkedin"><i
+                  class="fab fa-linkedin"></i></a>
               <a href="#" class="github"><i class="fab fa-github"></i></a>
             </div>
           </div>
         </div>
       </div>
     </section>
+
     <script>
+
       window.addEventListener("load", function () {
         let preloader = document.querySelector("#preloader");
         preloader.style.display = "none";
-        
+
         // Event listener for Chinmay's photo
-        document.querySelector("#chinmay-photo").addEventListener("click", function() {
+        document.querySelector("#chinmay-photo").addEventListener("click", function () {
           document.querySelector("#chinmay-photo").setAttribute("src", "/chinmay2.jpg");
           document.querySelector("#chinmay-role").innerText = "AI Jargon Expert";
         });
       });
+
+      gsap.from('.col-md-4', {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.out"
+      });
+
     </script>
-    <%- include('partials/footer.ejs') %>
-    <%- include('partials/bottom_nav') %>
+      <%- include('partials/footer.ejs') %>
+      <%- include('partials/bottom_nav') %>
 </body>
+
 </html>
