@@ -461,7 +461,7 @@ app.get('/house', async (req, res) => {
     res.render('display', {
       cards: houses,
       domain,
-      imagepath: '/house.jpg',
+      imagepath: '/house.webp',
       query,
       selectedType: 'house',
       searchAction: '/house',
@@ -614,7 +614,7 @@ app.get('/market', async (req, res) => {
     res.render('display', {
       cards: markets,
       domain,
-      imagepath: '/market.jpg',
+      imagepath: '/market.webp',
       query,
       selectedType: 'market',
       searchAction: '/market',
@@ -715,7 +715,7 @@ app.get('/food', async (req, res) => {
     res.render('display', {
       cards: foods,
       domain,
-      imagepath: '/food.jpg',
+      imagepath: '/food.webp',
       query,
       selectedType: 'food',
       searchAction: '/food',
