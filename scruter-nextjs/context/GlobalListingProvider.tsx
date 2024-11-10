@@ -26,6 +26,10 @@ interface GlobalContextType {
   setListingCategory: (category: Category) => void; // Ensure this matches your Category type
   imageUrl: string[];
   setImageUrl: (url: string[]) => void;
+  listingLat: number;
+  setListingLat: (lat: number) => void;
+  listingLng: number;
+  setListingLng: (lng: number) => void;
 
   handleImageChange: (url: string) => void;
   handleImageRemove: (url: string) => void;
@@ -69,7 +73,7 @@ export const GlobalListingProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(4);
   const [completed, setCompleted] = useState(false);
 
   const [listingName, setListingName] = useState('');
@@ -78,6 +82,9 @@ export const GlobalListingProvider = ({
   const [listingCategory, setListingCategory] = useState<Category>(
     Category.Housing
   ); // Ensure you set the default correctly
+  const [listingLat, setListingLat] = useState(28.61);
+  const [listingLng, setListingLng] = useState(77.23);
+
 
   const [validListingName, setValidListingName] = useState(false);
   const [validListingPrice, setValidListingPrice] = useState(false);
@@ -139,6 +146,17 @@ export const GlobalListingProvider = ({
       setValidImageUrls(true); // At least one image URL is present
     }
 
+    if (listingLat < -90 || listingLat > 90) {
+      toast.error('Latitude must be between -90 and 90.');
+      allValid = false;
+    }
+    
+    if (listingLng < -180 || listingLng > 180) {
+      toast.error('Longitude must be between -180 and 180.');
+      allValid = false;
+    }
+  
+
     // Check if all fields are valid
     if (allValid) {
       setFormCompleted(true); // Set form completed to true
@@ -159,6 +177,8 @@ export const GlobalListingProvider = ({
             description: listingDescription,
             category: listingCategory,
             images: imageUrl,
+            listingLat,
+            listingLng
           },
         });
 
@@ -196,6 +216,11 @@ export const GlobalListingProvider = ({
         setImageUrl,
         handleImageChange,
         handleImageRemove,
+
+        listingLat,
+        listingLng,
+        setListingLat,
+        setListingLng,
 
         validListingName,
         setValidListingName,
