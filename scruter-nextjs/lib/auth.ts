@@ -16,10 +16,16 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
         role: { label: "Role", type: "text" },
       },
       async authorize(credentials) {
+
+        console.log(credentials+"controlp0")
+
         if (!credentials?.email || !credentials?.otp || !credentials?.role) {
           throw new Error("Invalid credentials");
         }
 
+        console.log(credentials)
+
+        console.log(credentials+"control1")
         let account;
         if (credentials.role === "user") {
           account = await prismadb.user.findUnique({
@@ -37,6 +43,8 @@ export const NEXT_AUTH_CONFIG: NextAuthOptions = {
         else{
           return null
         }
+
+        console.log(account+"control2")
 
         if (!account) {
           return null;
