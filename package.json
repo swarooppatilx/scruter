@@ -39,7 +39,7 @@
   "keywords": [],
   "devDependencies": {
     "@eslint/js": "^9.16.0",
-    "eslint": "^9.14.0",
+    "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-ejs": "^0.0.2",
     "eslint-plugin-html": "^8.1.2",
