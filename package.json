@@ -44,7 +44,7 @@
     "eslint-plugin-ejs": "^0.0.2",
     "eslint-plugin-html": "^8.1.2",
     "globals": "^15.13.0",
-    "prettier": "^3.4.1",
+    "prettier": "^3.4.2",
     "webpack": "^5.96.1",
     "webpack-cli": "^6.0.1",
     "webpack-node-externals": "^3.0.0"
