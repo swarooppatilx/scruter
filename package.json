@@ -19,7 +19,7 @@
     "cloudinary": "^1.41.3",
     "connect-mongo": "^5.1.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "ejs-lint": "^2.0.1",
     "express": "^4.21.2",
