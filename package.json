@@ -28,7 +28,7 @@
     "express-validator": "^7.2.1",
     "helmet": "^8.0.0",
     "mongodb": "^6.15.0",
-    "mongoose": "^8.9.5",
+    "mongoose": "^8.13.2",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^3.1.9",
