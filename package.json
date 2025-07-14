@@ -32,7 +32,7 @@
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^3.1.9",
-    "react-toastify": "^10.0.6",
+    "react-toastify": "^11.0.5",
     "scruter": "file:"
   },
   "description": "Scruter is a local classifieds and community site designed to bring people together for buying, selling, and exchanging goods and services.",
